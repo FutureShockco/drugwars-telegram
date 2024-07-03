@@ -73,7 +73,6 @@ const Contracts = () =>
 const Shop = () => import(/* webpackChunkName: "shop" */ '@/views/Shop/Shop.vue');
 const Tokens = () => import(/* webpackChunkName: "tokens" */ '@/views/Shop/Tokens.vue');
 
-const Market = () => import(/* webpackChunkName: "market" */ '@/views/Market/Market.vue');
 const Withdraw = () => import(/* webpackChunkName: "withdraw" */ '@/views/Market/Withdraw.vue');
 
 const WMap = () => import(/* webpackChunkName: "map" */ '@/views/Map/Map.vue');
@@ -405,12 +404,6 @@ export default new Router({
       name: 'tokens',
       beforeEnter: requireAuth,
       component: Tokens,
-    },
-    {
-      path: '/market',
-      name: 'market',
-      beforeEnter: requireAuth,
-      component: Market,
     },
     {
       path: '/market/withdraw',

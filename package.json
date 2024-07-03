@@ -19,7 +19,6 @@
     },
     "dependencies": {
         "@vue/ui": "^0.5.2",
-        "apexcharts": "^3.8.5",
         "bluebird": "^3.5.3",
         "dom-to-image": "^2.6.0",
         "drugwars": "^0.1.72",
@@ -37,8 +36,6 @@
         "url-parse": "^1.4.3",
         "vue": "^2.5.17",
         "vue-analytics": "^5.16.2",
-        "vue-apexcharts": "^1.4.0",
-        "vue-cookie-law": "^1.11.0",
         "vue-i18n": "^8.0.0",
         "vue-router": "^3.0.1",
         "vue2-touch-events": "^2.0.0",
@@ -48,21 +45,12 @@
         "web3": "^1.5.2"
     },
     "devDependencies": {
-        "@types/jest": "^23.3.3",
         "@vue/cli-plugin-babel": "^3.4.1",
-        "@vue/cli-plugin-eslint": "^3.0.0",
-        "@vue/cli-plugin-unit-jest": "^3.5.0",
         "@vue/cli-service": "^3.10.0",
-        "@vue/eslint-config-airbnb": "^3.0.0",
-        "@vue/test-utils": "^1.0.0-beta.20",
         "babel-core": "7.0.0-bridge.0",
-        "babel-jest": "^24.3.1",
-        "eslint-config-prettier": "^3.1.0",
-        "eslint-plugin-prettier": "^3.0.0",
         "less": "^3.8.1",
         "less-loader": "^4.1.0",
         "node-sass": "^4.12.0",
-        "prettier": "1.14.3",
         "sass-loader": "^7.1.0",
         "vue-template-compiler": "^2.5.17"
     },
