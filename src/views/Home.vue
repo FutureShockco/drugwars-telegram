@@ -33,6 +33,8 @@
         </div>
         <button class="button button-blue button-large mt-2 mb-4">Play Now</button>
         {{ this.TWA }}
+
+        {{ TWA }}
       </div>
     </UiCenter>
   </div>
@@ -41,6 +43,7 @@
 <script>
 import { mapActions } from 'vuex';
 export default {
+
   data() {
     return {
       isAuthenticated: false,
@@ -70,6 +73,11 @@ export default {
     server() {
       return this.$store.state.game.server;
     },
+    TWA() {
+      if (window && window.Telegram && window.Telegram.WebApp)
+        return window.Telegram.WebApp
+      else return null
+    }
   },
   methods: {
     ...mapActions(['setServer']),
