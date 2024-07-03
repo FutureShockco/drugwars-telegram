@@ -9,8 +9,7 @@
 </template>
 
 <script>
-import dsteem from '@/helpers/dsteem';
-import steemMarkdown from 'steem-markdown-only';
+
 
 export default {
   props: ['inProgress'],
@@ -27,17 +26,7 @@ export default {
     const month = lastday.getUTCMonth() + 1;
     const year = lastday.getUTCFullYear();
     const date = `${day}-${month}-${year}`;
-    dsteem.database.getDiscussions('blog', { tag: 'drugwars', limit: 3 }).then(discussions => {
-      discussions.forEach(element => {
-        if (element.title.includes(date) && element.title.includes(this.$store.state.game.server.name)) {
-          let text = steemMarkdown(element.body);
-          text = text
-            .replace(/<img/g, '<img width="100%" class="image"')
-            .replace(/<table/g, '<table style="text-align: center;width:100%;"');
-          [self.news] = text.split('See you on');
-        }
-      });
-    });
+    
   },
 };
 </script>

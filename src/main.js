@@ -16,9 +16,7 @@ import router from '@/router';
 import store from '@/store';
 import messages from '@/translation.json';
 import numberFormats from '@/number.json';
-import AuthPlugin from './helpers/auth_plugin';
 import Vue2TouchEvents from 'vue2-touch-events';
-import VTooltip from 'v-tooltip';
 
 const requireComponent = require.context('./components', true, /[\w-]+\.vue$/);
 requireComponent.keys().forEach(fileName => {
@@ -54,11 +52,9 @@ Vue.directive('uppercase', {
   },
 });
 
-Vue.use(AuthPlugin);
 Vue.use(VueUi);
 Vue.use(VueI18n);
 Vue.use(Vue2TouchEvents);
-Vue.use(VTooltip)
 
 store.dispatch('loadSettings');
 

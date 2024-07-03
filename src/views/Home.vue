@@ -37,17 +37,9 @@
           class="button button-blue button-large mt-2 mb-4" :href="loginURL"
 
         >Steem login</a>
-        <div
-          class="button button-green button-large mb-4"
-          @click="socialLogin"
-        >Social login</div>
+
 
       </div>
-      <div class="mb-1">Powered by</div>
-      <Icon name="steem-logo" size="32" class="mr-1" />
-      <Icon name="dwd" size="32" class="mr-1" />
-
-      <img src="https://s3.amazonaws.com/steem-engine/images/steem_engine_logo_32.png" />
     </UiCenter>
   </div>
 </template>
@@ -84,10 +76,7 @@ export default {
   },
   methods: {
     ...mapActions(['setServer']),
-    socialLogin() {
-      localStorage.setItem('logintype','social')
-      this.$auth.login();
-    },
+
     logout() {
       this.$auth.logOut();
       this.$router.push({ path: '/' });

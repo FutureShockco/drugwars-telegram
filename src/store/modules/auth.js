@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import client from '@/helpers/client';
-import dsteem from '@/helpers/dsteem';
 import sc from '@/helpers/steemlogin';
 
 const state = {
@@ -21,7 +20,7 @@ const mutations = {
   },
 };
 async function loadaccount(commit, username) {
-  const account = await dsteem.database.getAccounts([username]);
+  const account = "test";
   commit('saveAccount', account[0]);
 }
 

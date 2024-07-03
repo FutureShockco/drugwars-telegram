@@ -9,7 +9,6 @@
     >
       <div class="mr-3">
         <img
-          v-tooltip="building.desc"
           class="preview"
           :src="`//img.drugwars.io/buildings/${building.id}.jpg`"
         />
