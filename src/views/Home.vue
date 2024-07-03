@@ -1,6 +1,6 @@
 <template>
   <div>
-    <UiCenter class="vue-ui-modal p-4 home">
+    <UiCenter class="vue-ui-modal home">
       <Icon name="logo" class="logo-large mt-4 mb-3" />
       <div class="columns rel">
         <div class="column det col-4">
@@ -34,9 +34,9 @@
           SERVER {{server.number}} : {{server.name.toString().toUpperCase()}}
         </div>
                  <a
-          class="button button-blue button-large mt-2 mb-4" :href="loginURL"
+          class="button button-blue button-large mt-2 mb-4" 
 
-        >Steem login</a>
+        >Play Now</a>
 
       </div>
     </UiCenter>
@@ -54,8 +54,7 @@ export default {
       profile: {},
       isOpen: false,
       servers: [
-        { api: process.env.VUE_APP_WS_API_URL_S1, name: 'Detroit', number: 1 },
-        { api: process.env.VUE_APP_WS_API_URL_S2, name: 'Los Angeles', number: 2 },
+        { api: "wss://dw-api-telegram-55801a35819b.herokuapp.com", name: 'Chigaco', number: 1 },
       ],
     };
   },
@@ -206,11 +205,11 @@ h5 {
 }
 
 .vue-ui-modal {
-  position: initial;
+  position: relative;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 10%;
-  max-width: 600px;
+  height: 100vh;
+  width: 90vw;
   background: rgb(0, 0, 0);
   border-radius: 6px;
   border: 1px solid #fbbd08;
