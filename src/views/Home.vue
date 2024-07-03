@@ -187,7 +187,7 @@ h4 {
 
 h5 {
   color: #FFC107;
-  font-size: 18px;
+  font-size: 15px;
   top: 5px;
   text-shadow: 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 3px 3px 5px #000000, -3px -3px 5px #000000;
   font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
