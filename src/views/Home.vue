@@ -19,6 +19,7 @@
       <h4 class="ui white header">{{ 'message.login_message' | translate}}</h4>
       <div class="d-inline-grid">
         <div class="ui blue header big">
+          <h1 v-if="TWA && TWA.initDataUnsafe">{{ TWA.initDataUnsafe.user.id }}</h1>
           <div class="btn-orange mb-2" @click="isOpen = !isOpen">CHANGE SERVER</div>
           <div :class="{ isOpen }" class="dropdown">
             <button
@@ -74,6 +75,7 @@ export default {
     localStorage.removeItem('loggedIn');
     if(!localStorage.getItem('logintype'))
     localStorage.setItem('logintype','steem')
+    this.TWA.ready();
   },
   computed: {
     server() {

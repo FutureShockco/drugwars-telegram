@@ -76,12 +76,6 @@ const Tokens = () => import(/* webpackChunkName: "tokens" */ '@/views/Shop/Token
 const Market = () => import(/* webpackChunkName: "market" */ '@/views/Market/Market.vue');
 const Withdraw = () => import(/* webpackChunkName: "withdraw" */ '@/views/Market/Withdraw.vue');
 
-const MyCollection = () =>
-  import(/* webpackChunkName: "mycollection" */ '@/views/Cards/MyCollection.vue');
-const CardsMarket = () => import(/* webpackChunkName: "cardsmarket" */ '@/views/Cards/Market.vue');
-
-const AllCards = () => import(/* webpackChunkName: "allcards" */ '@/views/Cards/AllCards.vue');
-
 const WMap = () => import(/* webpackChunkName: "map" */ '@/views/Map/Map.vue');
 const Territory = () => import(/* webpackChunkName: "territory" */ '@/views/Map/Territory.vue');
 const Leaderboards = () =>
@@ -423,24 +417,6 @@ export default new Router({
       name: 'withdraw',
       beforeEnter: requireAuth,
       component: Withdraw,
-    },
-    {
-      path: '/cards/mycollection',
-      name: 'mycollection',
-      beforeEnter: requireAuth,
-      component: MyCollection,
-    },
-    {
-      path: '/cards/market',
-      name: 'cardmarket',
-      beforeEnter: requireAuth,
-      component: CardsMarket,
-    },
-    {
-      path: '/cards/allcards',
-      name: 'allcards',
-      beforeEnter: requireAuth,
-      component: AllCards,
     },
     {
       path: '/gangs/create',
