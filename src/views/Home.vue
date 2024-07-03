@@ -31,10 +31,11 @@
           </div>
           SERVER {{ server.number }} : {{ server.name.toString().toUpperCase() }}
         </div>
-        <button class="button button-blue button-large mt-2 mb-4">Play Now</button>
+        <button @click="ok" class="button button-blue button-large mt-2 mb-4">Play Now</button>
         {{ this.TWA }}
 
         {{ TWA }}
+        {{ message }}
       </div>
     </UiCenter>
   </div>
@@ -49,6 +50,7 @@ export default {
       isAuthenticated: false,
       profile: {},
       isOpen: false,
+      message:'',
       servers: [
         { api: "wss://dw-api-telegram-55801a35819b.herokuapp.com", name: 'Chigaco', number: 1 },
       ],
@@ -63,10 +65,7 @@ export default {
       localStorage.setItem('logintype', 'steem')
     if (this.TWA)
       this.TWA.ready();
-    else {
-      if (window.Telegram && window.Telegram.WebApp)
-        Vue.prototype.TWA = window.Telegram.WebApp
-    }
+
 
   },
   computed: {
@@ -81,7 +80,9 @@ export default {
   },
   methods: {
     ...mapActions(['setServer']),
-
+    ok(){
+      this.message = window.Telegram.WebApp
+    },
     logout() {
       this.$auth.logOut();
       this.$router.push({ path: '/' });

@@ -4,8 +4,6 @@
     <template v-else>
       <TopNav v-if="username" />
       <Sidebars v-if="username && showSidebar" />
-      <!-- <BottomNav v-if="username"/> -->
-      <!-- <balloon v-if="username" title="DrugWars LiveChat" position="bottom-right" :zooming="false"></balloon> -->
       <router-view
         :class="{
               content: showSidebar,
@@ -14,21 +12,12 @@
       />
     </template>
     <Notifications />
-    <cookie-law style="z-index:99999">
-      <div slot="message">
-        <h3
-          class="text-center text-red"
-        >Don't forget to setup your airdrop wallet.  </h3>
-      </div>
-    </cookie-law>
+   
   </div>
 </template>
 
 <script>
-import store from '@/store';
-import client from '@/helpers/client';
-import { setTimeout } from 'timers';
-import CookieLaw from 'vue-cookie-law';
+
 
 export default {
   data() {
@@ -41,7 +30,6 @@ export default {
       firstLoad: true,
     };
   },
-  components: { CookieLaw },
   computed: {
     username() {
       return this.$store.state.auth.username;
