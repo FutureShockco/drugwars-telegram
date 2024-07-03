@@ -96,8 +96,8 @@ const mutations = {
 
 const authToken = function () {
   let accessToken = null;
-  if (localStorage.getItem('access_token')) {
-    accessToken = localStorage.getItem('access_token');
+  if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user) {
+    accessToken = this.TWA.initDataUnsafe.user;
   }
   return accessToken;
 };

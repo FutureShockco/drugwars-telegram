@@ -19,10 +19,7 @@ const mutations = {
     Vue.set(_state, 'username', null);
   },
 };
-async function loadaccount(commit, username) {
-  const account = "test";
-  commit('saveAccount', account[0]);
-}
+
 
 const actions = {
   login: async ({ commit }) =>
@@ -32,7 +29,6 @@ const actions = {
           .requestAsync('login', { user: this.TWA.initDataUnsafe.user })
           .then(result => {
             commit('saveUsername', result.name);
-            loadaccount(commit, result.name);
             resolve();
           })
           .catch(e => {
