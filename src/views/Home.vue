@@ -21,7 +21,8 @@
       <h4 class="ui white header">{{ 'message.login_message' | translate }}</h4>
       <div class="d-inline-grid">
         <div class="ui blue header big">
-          <h1 v-if="this.TWA && this.TWA.initDataUnsafe">{{ this.TWA.initDataUnsafe.user.id }}</h1>
+          <h1 v-if="this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user">{{
+            this.TWA.initDataUnsafe.user.id }}</h1>
           <div class="btn-orange mb-2" @click="isOpen = !isOpen">CHANGE SERVER</div>
           <div :class="{ isOpen }" class="dropdown">
             <button class="btn btn-yellow btn-sm rp mr-2 mb-2" v-for="server in servers" @click="chooseServer(server)"
@@ -50,7 +51,7 @@ export default {
       isAuthenticated: false,
       profile: {},
       isOpen: false,
-      message:'',
+      message: '',
       servers: [
         { api: "wss://dw-api-telegram-55801a35819b.herokuapp.com", name: 'Chigaco', number: 1 },
       ],
@@ -80,7 +81,7 @@ export default {
   },
   methods: {
     ...mapActions(['setServer']),
-    ok(){
+    ok() {
       this.message = window.Telegram.WebApp
     },
     logout() {

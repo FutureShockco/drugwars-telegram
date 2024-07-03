@@ -27,11 +27,9 @@ async function loadaccount(commit, username) {
 const actions = {
   login: async ({ commit }) =>
     new Promise(resolve => {
-      if (localStorage.getItem('access_token')) {
-        const token = localStorage.getItem('access_token');
-        sc.setAccessToken(token);
+      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user) {
         client
-          .requestAsync('login', { token })
+          .requestAsync('login', { user: this.TWA.initDataUnsafe.user })
           .then(result => {
             commit('saveUsername', result.name);
             loadaccount(commit, result.name);
