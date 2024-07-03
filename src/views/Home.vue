@@ -37,7 +37,7 @@
           class="button button-blue button-large mt-2 mb-4" :href="loginURL"
 
         >Steem login</a>
-
+      {{ this.TWA }}
 
       </div>
     </UiCenter>
