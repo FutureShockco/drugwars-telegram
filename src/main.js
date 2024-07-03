@@ -82,6 +82,8 @@ Vue.filter(
 Vue.config.productionTip = false;
 if(window.Telegram && window.Telegram.WebApp)
 Vue.prototype.TWA = window.Telegram.WebApp
+else  Vue.prototype.TWA = null
+
 new Vue({
   i18n,
   router,

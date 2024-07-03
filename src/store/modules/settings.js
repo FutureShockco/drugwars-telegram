@@ -33,7 +33,6 @@ const actions = {
   loadSettings: ({ dispatch, commit }) => {
     const settingsContent = localStorage.getItem(SETTINGS_KEY);
     if (!settingsContent) {
-      dispatch('getConfig');
       return;
     }
 
