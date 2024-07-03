@@ -4,7 +4,6 @@ import client from '@/helpers/client';
 import store from '@/store';
 import sc from '@/helpers/steemlogin';
 import dwsocial from '@/helpers/dwsocial';
-import SSC from 'sscjs';
 
 // import * as util from 'util';
 // import { inspect } from 'util';

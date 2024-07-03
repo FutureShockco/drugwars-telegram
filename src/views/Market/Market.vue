@@ -196,7 +196,6 @@
 <script>
 import { mapActions } from 'vuex';
 import VueApexCharts from 'vue-apexcharts';
-import SSC from 'sscjs';
 
 export default {
   components: {
@@ -325,25 +324,7 @@ export default {
   },
   created() {
     const self = this;
-    const ssc = new SSC('https://api.steem-engine.net/rpc/');
-
-    if (self.token === 'DWD') {
-      self.marketDepth = this.$store.state.game.prizeProps.seProps;
-      self.loadMarketDepth();
-    } else
-      ssc.find('tokens', 'tokens', { symbol: self.token }, 1000, 0, [], (err, result) => {
-        ssc
-          .find('market', 'metrics', { symbol: self.token }, 1000, 0, '', false)
-          .then(async metrics => {
-            const [stat] = metrics;
-            if (stat) {
-              self.marketDepth = stat;
-              self.marketDepth.supply = result[0].circulatingSupply;
-              self.marketDepth.maxSupply = Number(result[0].maxSupply);
-              self.loadMarketDepth();
-            }
-          });
-      });
+   
   },
   computed: {
     user() {
@@ -462,123 +443,7 @@ export default {
       });
     },
     loadMarketDepth() {
-      const ssc = new SSC('https://api.steem-engine.net/rpc/');
-      const self = this;
-      ssc
-        .find(
-          'market',
-          'tradesHistory',
-          {
-            symbol: `${self.token}`,
-          },
-          20,
-          0,
-          [{ index: 'timestamp', descending: false }],
-          false,
-        )
-        .then(async tradehistory => {
-          self.tradehistory = tradehistory;
-          ssc
-            .find(
-              'market',
-              'buyBook',
-              {
-                symbol: `${self.token}`,
-              },
-              20,
-              0,
-              [{ index: 'priceDec', descending: true }],
-              false,
-            )
-            .then(buyBook => {
-              self.buyBook = buyBook;
-              ssc
-                .find(
-                  'market',
-                  'sellBook',
-                  {
-                    symbol: `${self.token}`,
-                  },
-                  20,
-                  0,
-                  [{ index: 'priceDec', descending: false }],
-                  false,
-                )
-                .then(sellBook => {
-                  let totalBuy = 0;
-                  self.sellBook = sellBook;
-
-                  self.buyBook.forEach(element => {
-                    const buy = element;
-                    totalBuy += Number(buy.tokensLocked);
-                    buy.tokensTotal = totalBuy;
-                    if (buy.price > self.maxBuy) self.maxBuy = buy.price;
-                    self.series[0].data.push(buy.price);
-                  });
-                  self.sellBook.forEach(element => {
-                    self.series[0].data.push(0);
-                  });
-                  self.series[0].data.push(0);
-                  self.totalBuy = totalBuy;
-
-                  let totalSell = 0;
-                  self.buyBook.forEach(element => {
-                    self.series[1].data.push(0);
-                  });
-                  self.series[1].data.push(0);
-                  sellBook.forEach(element => {
-                    const sell = element;
-                    totalSell += Number(sell.quantity);
-                    sell.tokensTotal = totalSell;
-                    if (sell.price < self.limitMax) self.limitMax = sell.price;
-                    self.series[1].data.push(sell.price);
-                  });
-                  self.sellBook = sellBook;
-                  self.totalSell = totalSell;
-                  self.cat = [self.maxBuy, self.limitMax];
-                  ssc
-                    .find(
-                      'market',
-                      'sellBook',
-                      {
-                        symbol: `${self.token}`,
-                        account: this.user.username,
-                      },
-                      100,
-                      0,
-                      [{ index: 'timestamp', descending: true }],
-                      false,
-                    )
-                    .then(async personalSellBook => {
-                      ssc
-                        .find(
-                          'market',
-                          'buyBook',
-                          {
-                            symbol: `${self.token}`,
-                            account: this.user.username,
-                          },
-                          100,
-                          0,
-                          [{ index: 'timestamp', descending: true }],
-                          false,
-                        )
-                        .then(async personalBuyBook => {
-                          ssc
-                            .findOne('tokens', 'balances', {
-                              account: this.user.username,
-                              symbol: `${self.token}`,
-                            })
-                            .then(async mybalance => {
-                              if (mybalance)
-                                this.myDWDBalance =
-                                  Number(this.myBalance) + Number(mybalance.balance);
-                            });
-                        });
-                    });
-                });
-            });
-        });
+     
     },
   },
 };
