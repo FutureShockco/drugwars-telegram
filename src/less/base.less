@@ -1,0 +1,68 @@
+@import '../vars';
+
+* {
+  outline: none;
+}
+
+html {
+  height: 100%;
+  background: url('//img.drugwars.io/bg.jpg') fixed @bg-color;
+  background-size: cover;
+}
+
+body {
+  letter-spacing: 1px!important;
+  font-family: @font;
+  background-color: transparent;
+  height: 100%;
+  min-height: 100% !important;
+  display: flex;
+  color: @text-color;
+  font-size: 15px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+a {
+  text-decoration: none !important;
+  color: @link-color;
+  cursor: pointer;
+}
+
+p {
+  font-size: 18px;
+}
+
+ul {
+  list-style-position: inside;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: @heading-color;
+  font-family: @heading-font;
+}
+
+input {
+  background: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: black !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: @primary-color;
+  border-radius: 0;
+
+  &:hover {
+    background: white;
+  }
+}
