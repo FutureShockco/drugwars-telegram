@@ -134,7 +134,6 @@ const requireAuth = (to, from, next) => {
     });
   } else if (!store.state.auth.username) {
     store.dispatch('showLoading');
-
     store.dispatch('login').then(() => {
       if (store.state.auth.username) {
         store.dispatch('init').then(() => {

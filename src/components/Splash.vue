@@ -6,6 +6,8 @@
       <div class="left"></div>
       <div class="right"></div>
     </div>
+    <h1 v-if="this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user">{{
+      this.TWA.initDataUnsafe.user.id }}</h1>
     <ul class="forcelogout">
       <a @click.prevent="logout" class>{{'message.force_logout' | translate}}</a>
       -
