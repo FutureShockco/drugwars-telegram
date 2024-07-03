@@ -3,40 +3,35 @@
     <UiCenter class="vue-ui-modal home">
       <Icon name="logo" class="logo-large mt-4 mb-3" />
       <div class="columns rel">
+
         <div class="column det col-4">
-          <h5>Build your own virtual empire</h5>
+          <h5>Create your own virtual empire</h5>
           <img width="100%" class="rounded-2" :src="`//img.drugwars.io/home/home1.jpg`" />
         </div>
         <div class="column det col-4">
           <h5>Build up a gang with your mates</h5>
           <img width="100%" class="rounded-2" :src="`//img.drugwars.io/home/home2.jpg`" />
         </div>
+
         <div class="column det col-4">
           <h5>Fight with your opponents</h5>
           <img width="100%" class="rounded-2" :src="`//img.drugwars.io/home/home3.jpg`" />
         </div>
       </div>
-      <h4 class="ui white header">{{ 'message.login_message' | translate}}</h4>
+      <h4 class="ui white header">{{ 'message.login_message' | translate }}</h4>
       <div class="d-inline-grid">
         <div class="ui blue header big">
           <h1 v-if="this.TWA && this.TWA.initDataUnsafe">{{ this.TWA.initDataUnsafe.user.id }}</h1>
           <div class="btn-orange mb-2" @click="isOpen = !isOpen">CHANGE SERVER</div>
           <div :class="{ isOpen }" class="dropdown">
-            <button
-              class="btn btn-yellow btn-sm rp mr-2 mb-2"
-              v-for="server in servers"
-              @click="chooseServer(server)"
-              :key="server.number"
-            >{{server.number }}: {{server.name }}
-            <span v-if="server.number === 2">(Recommended)</span>
+            <button class="btn btn-yellow btn-sm rp mr-2 mb-2" v-for="server in servers" @click="chooseServer(server)"
+              :key="server.number">{{ server.number }}: {{ server.name }}
+              <span v-if="server.number === 1">(Recommended)</span>
             </button>
           </div>
-          SERVER {{server.number}} : {{server.name.toString().toUpperCase()}}
+          SERVER {{ server.number }} : {{ server.name.toString().toUpperCase() }}
         </div>
-                 <button
-          class="button button-blue button-large mt-2 mb-4" 
-
-        >Play Now</button>
+        <button class="button button-blue button-large mt-2 mb-4">Play Now</button>
         {{ this.TWA }}
       </div>
     </UiCenter>
@@ -61,14 +56,13 @@ export default {
     localStorage.removeItem('id_token');
     localStorage.removeItem('auth');
     localStorage.removeItem('loggedIn');
-    if(!localStorage.getItem('logintype'))
-    localStorage.setItem('logintype','steem')
-    if(this.TWA)
-    this.TWA.ready();
-    else
-    {
-      if(window.Telegram && window.Telegram.WebApp)
-      Vue.prototype.TWA = window.Telegram.WebApp
+    if (!localStorage.getItem('logintype'))
+      localStorage.setItem('logintype', 'steem')
+    if (this.TWA)
+      this.TWA.ready();
+    else {
+      if (window.Telegram && window.Telegram.WebApp)
+        Vue.prototype.TWA = window.Telegram.WebApp
     }
 
   },
@@ -104,6 +98,7 @@ export default {
   p {
     font-size: 24px;
   }
+
   // background-image: url('//img.drugwars.io/home/homecards.png')!important;
   // background-size: contain!important;
   // background-repeat: no-repeat!important;
@@ -134,6 +129,7 @@ h4 {
     3px 3px 5px black, -3px -3px 5px black;
   font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
 }
+
 .btn-orange {
   border-radius: 0.25em;
   box-shadow: 0px 3px 10px orangered;
@@ -141,6 +137,7 @@ h4 {
   font-weight: bold;
 
 }
+
 .btn-yellow {
   border-radius: 0.25em;
   background-color: #fbbd08;
@@ -149,10 +146,12 @@ h4 {
   box-shadow: 0px 3px 10px #c59400;
   background-size: cover;
   font-weight: bold;
+
   &:hover {
     background-image: linear-gradient(160deg, #fbe308 0%, #ffbb00 20%, #ffc21b 80%);
     opacity: 1;
   }
+
   &:disabled {
     color: white;
   }
@@ -166,21 +165,22 @@ h4 {
   box-shadow: 0px 3px 10px #0361cc;
   background-size: cover;
   font-weight: bold;
+
   &:hover {
     background-image: linear-gradient(-180deg, #0374f4 0%, #035cc2 90%);
     opacity: 1;
   }
+
   &:disabled {
     color: white;
   }
 }
 
 h5 {
-  color: #000000;
+  color: #FFC107;
   font-size: 18px;
   top: 5px;
-  text-shadow: 0px 0px 5px #fbbd08, 0px 0px 5px #fbbd08, 0px 0px 5px #fbbd08, 0px 0px 5px #fbbd08,
-    3px 3px 5px #fbbd08, -3px -3px 5px #fbbd08;
+  text-shadow: 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 3px 3px 5px #000000, -3px -3px 5px #000000;
   font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
   font-weight: 900;
   position: absolute;
@@ -214,6 +214,7 @@ h5 {
   margin-left: auto;
   margin-right: auto;
   height: 100vh;
+  padding: 0px 20px;
   width: 90vw;
   background: rgb(0, 0, 0);
   border-radius: 6px;
