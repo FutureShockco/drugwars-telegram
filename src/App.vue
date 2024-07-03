@@ -4,15 +4,13 @@
     <template v-else>
       <TopNav v-if="username" />
       <Sidebars v-if="username && showSidebar" />
-      <router-view
-        :class="{
-              content: showSidebar,
-              'content--nav-open': sidebarVisible,
-            }"
-      />
+      <router-view :class="{
+        content: showSidebar,
+        'content--nav-open': sidebarVisible,
+      }" />
     </template>
     <Notifications />
-   
+
   </div>
 </template>
 
@@ -42,35 +40,14 @@ export default {
     },
     showLoading() {
       return this.$store.state.ui.showLoading;
-    },
-    // checkTime() {
-    //   if (this.$store.state.game.prizeProps && this.$store.state.game.prizeProps.server_time && this.firstLoad) {
-    //     this.firstLoad = false;
-    //     const diff = Math.abs(this.$store.state.game.prizeProps.server_time - new Date().getTime());
-    //     if (diff > 1500000) {
-    //       this.timeIsopen = true;
-    //       return true;
-    //     }
-    //     return false;
-    //   }
-    //   return false;
-    // },
-  },
-
-  methods: {
-    closeModal() {
-      localStorage.setItem('firstime', true);
-      this.modalIsOpen = true;
-    },
-    closeTimeModal() {
-      this.timeIsopen = false;
-    },
+    }
   },
 };
 </script>
 
 <style scoped lang="less">
 @import './vars';
+
 #app {
   min-height: 100%;
   width: 100%;
@@ -98,6 +75,7 @@ export default {
 .vue-ui-modal {
   z-index: 102;
   background: #000000b5;
+
   a {
     padding: 8px;
   }
@@ -111,13 +89,16 @@ export default {
   background: #000000;
   background-image: linear-gradient(to top, #0e0e0e, #0c0c0c 74%) !important;
   min-height: 93vh;
+
   @media @bp-small {
     margin-left: @sidebar-width !important;
     margin-right: @sidebar-width !important;
     margin-top: @topnav-height;
   }
+
   &--nav-open {
     left: @sidebar-width;
+
     @media @bp-small {
       left: 0;
     }
