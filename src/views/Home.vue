@@ -44,12 +44,10 @@
 </template>
 
 <script>
-import sc from '@/helpers/steemlogin';
 import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      loginURL: sc.getLoginURL(),
       isAuthenticated: false,
       profile: {},
       isOpen: false,
@@ -67,6 +65,11 @@ export default {
     localStorage.setItem('logintype','steem')
     if(this.TWA)
     this.TWA.ready();
+    else
+    {
+      if(window.Telegram && window.Telegram.WebApp)
+      Vue.prototype.TWA = window.Telegram.WebApp
+    }
 
   },
   computed: {
