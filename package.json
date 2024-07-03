@@ -5,7 +5,6 @@
     "homepage": "https://drugwars.io",
     "description": "The drugs are virtual, but the money is real",
     "license": "MIT",
-    "main": "electron-entry.js",
     "engines": {
         "node": "12.x"
     },
