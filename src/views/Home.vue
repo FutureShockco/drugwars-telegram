@@ -33,10 +33,11 @@
           </div>
           SERVER {{server.number}} : {{server.name.toString().toUpperCase()}}
         </div>
-                 <a
+                 <button
           class="button button-blue button-large mt-2 mb-4" 
 
-        >Play Now</a>
+        >Play Now</button>
+        {{ this.TWA }}
       </div>
     </UiCenter>
   </div>
@@ -66,7 +67,7 @@ export default {
     localStorage.setItem('logintype','steem')
     if(this.TWA)
     this.TWA.ready();
-    
+
   },
   computed: {
     server() {
