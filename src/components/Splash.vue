@@ -6,10 +6,7 @@
       <div class="left"></div>
       <div class="right"></div>
     </div>
-    <button @click="ok" class="button button-blue button-large width-full mt-8 mb-4 " >Play</button>
-
-    <h1 v-if="this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user">{{
-      this.TWA.initDataUnsafe.user.id }}</h1>
+    <button @click="ok" class="button button-blue button-large width-full mt-4 mb-4 " >Play</button>
     <ul class="forcelogout">
       <a href="https://discord.me/drugwars">{{'message.contact_us' | translate}}</a>
     </ul>
@@ -53,16 +50,12 @@ export default {
   border-radius: 20px;
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
   transform: rotate(-35deg);
-  cursor: pointer;
   animation: bgmove 5s infinite linear;
   left: calc(50% - 33px);
   top: 50%;
-  position: absolute;
+  position: relative;
 }
 
-.wrapper:hover {
-  transform: rotate(35deg);
-}
 
 .wrapper:after {
   clear: both;
