@@ -8,6 +8,10 @@
                 will try to steal what you are producing! You should fulfill theses missions before getting some new ones.</p>
         </div>
         <ul class="missions list-style-none">
+          <li>
+                <Icon size="18" class="mr-2" :name="mission0 ? 'check' : 'dwd'" />
+                <router-link to="/map">Choose a location on the map</router-link>
+            </li>
             <li>
                 <Icon size="18" class="mr-2" :name="mission1 ? 'check' : 'dwd'" />
                 <router-link to="/buildings">Upgrade the headquarters</router-link>
@@ -51,6 +55,12 @@ export default {
     };
   },
   computed: {
+    mission0() {
+      const building = this.$store.state.game.user.buildings.find(
+        b => b.building === 'headquarters' && b.territory !== 0,
+      );
+      return !!(building && building.lvl > 0);
+    },
     mission1() {
       const building = this.$store.state.game.user.buildings.find(
         b => b.building === 'headquarters',

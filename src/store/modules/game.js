@@ -30,7 +30,7 @@ const state = {
   mainbase: null,
   steemengine: null,
   force_sent_fights_refresh: true,
-  server: JSON.parse(localStorage.getItem('server')) || { api: process.env.VUE_APP_WS_API_URL_S2, name: 'Los Angeles', number: 2 }
+  server: JSON.parse(localStorage.getItem('server')) || { api: process.env.VUE_APP_API, name: 'Chicago', number: 1 }
 };
 
 const mutations = {
