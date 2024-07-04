@@ -6,6 +6,8 @@
       <div class="left"></div>
       <div class="right"></div>
     </div>
+    <button @click="ok" class="button button-blue button-large mt-2 mb-4">Start</button>
+
     <h1 v-if="this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user">{{
       this.TWA.initDataUnsafe.user.id }}</h1>
     <ul class="forcelogout">
@@ -18,8 +20,13 @@
 
 
 <script>
+import { mapActions } from 'vuex';
 export default {
   methods: {
+    ...mapActions(['login']),
+    ok(){
+      this.login()
+    },
     logout() {
       this.$auth.logOut();
       this.$router.push({ path: '/' });

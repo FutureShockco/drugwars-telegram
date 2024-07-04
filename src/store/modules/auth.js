@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import client from '@/helpers/client';
-import sc from '@/helpers/steemlogin';
 
 const state = {
   username: null,
@@ -33,9 +32,6 @@ const actions = {
           })
           .catch(e => {
             console.log(e);
-            localStorage.removeItem('access_token');
-            localStorage.removeItem('id_token');
-            localStorage.removeItem('loggedIn');
             window.location = '/';
             resolve(e);
           });
@@ -46,9 +42,7 @@ const actions = {
     }),
 
   logout: () => {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('loggedIn');
+
     window.location = '/';
   },
 };

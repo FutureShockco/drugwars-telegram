@@ -66,8 +66,6 @@ export default {
       localStorage.setItem('logintype', 'steem')
     if (this.TWA)
       this.TWA.ready();
-
-
   },
   computed: {
     server() {
