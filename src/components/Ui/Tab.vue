@@ -28,14 +28,9 @@ export default {
     font-weight: normal;
 
     &.active {
-      background-image: linear-gradient(
-        to bottom,
-        #fabe00,
-        #ffc400 30%,
-        #ffc400 70%,
-        #ff8800
-      ) !important;
+      background: #fbbd08 !important;
       background-size: cover;
+      font-weight: 600;
       background-repeat: no-repeat;
       color: black !important;
     }

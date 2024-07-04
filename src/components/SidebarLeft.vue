@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar sidebar-left" :class="{ 'sidebar-open': sidebarVisible }">
     <div class="d-flex flex-column height-full">
-      <div class="text-center pt-3">
+      <!-- <div class="text-center pt-3">
         <Avatar
           v-if="user.nickname && rank"
           :size="100"
@@ -24,37 +24,37 @@
           {{ user.nickname }}
         </div>
         <div class="gang-label" v-if="user.ticker">[{{ user.ticker }}]</div>
-      </div>
+      </div> -->
       <div class="height-full">
-        <ul class="pt-1 border-bottom">
+        <!-- <ul class="pt-1 border-bottom">
           <li>
             <BaseDropdown class="pb-2 px-3 d-block" :config="config" />
           </li>
-        </ul>
+        </ul> -->
         <ul class="pt-1 pb-2 border-bottom">
           <li>
-            <router-link to="/tutorial" class="py-1 px-3 d-block" >
-              {{ 'sidebar.news' | translate }}
+            <router-link to="/tutorial" class="py-2 px-2 d-block">
+              <i class="fad fa-satellite-dish"></i>
             </router-link>
           </li>
           <li>
-            <router-link to="/overview" class="py-1 px-3 d-block" >
-              Stats
+            <router-link to="/overview" class="py-2 px-2 d-block">
+              <i class="fad fa-chart-area"></i>
             </router-link>
           </li>
           <li>
-            <router-link to="/buildings" class="py-1 px-3 d-block" >
-              Base
+            <router-link to="/buildings" class="py-2 px-2 d-block">
+              <i class="fad fa-house-chimney"></i>
             </router-link>
           </li>
           <li>
-            <router-link to="/units" class="py-1 px-3 d-block" >
-              Camp
+            <router-link to="/units" class="py-2 px-2 d-block">
+              <i class="fad fa-campground"></i>
             </router-link>
           </li>
           <li>
-            <router-link to="/actions" class="py-1 px-3 d-block" >
-             Action
+            <router-link to="/actions" class="py-2 px-2 d-block">
+              <i class="fad fa-explosion"></i>
               <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
                 {{ activeIncFightsCount }}<i class="iconfont icon-arrow-down"></i>
               </span>
@@ -70,90 +70,85 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/map/territory?location=8" class="py-1 px-3 d-block" >
-              {{ 'sidebar.map' | translate }}
+            <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
+              <i class="fad fa-map-location-dot"></i>
             </router-link>
           </li>
           <li>
-            <router-link to="/leaderboards" class="py-1 px-3 d-block" >
-              Board
+            <router-link to="/leaderboards" class="py-2 px-2 d-block">
+              <i class="fad fa-chalkboard-user"></i>
             </router-link>
           </li>
           <li>
-            <router-link to="/gangs" class="py-1 px-3 d-block" >
-              {{ 'sidebar.gangs' | translate }}
+            <router-link to="/gangs" class="py-2 px-2 d-block">
+              <i class="fad fa-people-group"></i>
             </router-link>
           </li>
           <!-- <li>
                 <router-link
                   to="/contracts"
-                  class="py-1 px-3 d-block"
+                  class="py-2 px-2 d-block"
                   
                 >
                   Contracts
                 </router-link>
               </li> -->
-          <li>
-            <router-link to="/jobs" class="py-1 px-3 d-block" >
+          <!-- <li>
+            <router-link to="/jobs" class="py-2 px-2 d-block" >
               {{ 'sidebar.jobs' | translate }}
               <span class="text-red" v-if="jobs > 0"> ({{ jobs }}) </span>
             </router-link>
-          </li>
+          </li> -->
           <li>
-            <router-link
-              to="/rewards"
-              class="py-1 px-3 d-block sidebar-rewards"
-              
-            >
-              {{ 'sidebar.heist' | translate }}
+            <router-link to="/rewards" class="py-2 px-2 d-block sidebar-rewards">
+              <i class="fad fa-vault"></i>
             </router-link>
           </li>
           <!-- <li>
             <router-link
               to="/market?token=dwd"
-              class="py-1 px-3 d-block"
+              class="py-2 px-2 d-block"
               
             >
               {{ 'sidebar.market' | translate }}
             </router-link>
           </li>
           <li>
-            <router-link to="/shop" class="py-1 px-3 d-block" >
+            <router-link to="/shop" class="py-2 px-2 d-block" >
               {{ 'sidebar.shop' | translate }}
             </router-link>
           </li> -->
           <!-- <li>
-                        <router-link to="/cards/mycollection" class="py-1 px-3 d-block" >
+                        <router-link to="/cards/mycollection" class="py-2 px-2 d-block" >
                             {{'sidebar.cards' | translate}}
                         </router-link>
                     </li> -->
-        </ul>
-        <ul class="pt-1 pb-2">
+
 
           <!-- <li>
-                        <router-link to="/referral" class="py-1 px-3 d-block " >
+                        <router-link to="/referral" class="py-2 px-2 d-block " >
                             {{'sidebar.referral' | translate}}
                         </router-link>
                     </li> -->
           <li>
-            <router-link to="/settings" class="py-1 px-3 d-block" >
-              Setup
+            <router-link to="/settings" class="py-2 px-2 d-block">
+              <i class="fad fa-gears"></i>
             </router-link>
           </li>
           <li>
-            <router-link to="/help" class="py-1 px-3 d-block" >
-              {{ 'sidebar.help' | translate }}
+            <router-link to="/help" class="py-2 px-2 d-block">
+              <i class="fad fa-hands-holding-circle"></i>
             </router-link>
           </li>
           <!-- <li>
-                        <a href="https://forum.drugwars.io/" target="_blank" class="py-1 px-3 d-block">
+                        <a href="https://forum.drugwars.io/" target="_blank" class="py-2 px-2 d-block">
                    {{'sidebar.forum' | translate}}
                 </a>
                     </li> -->
         </ul>
         <!-- <ul class="pt-1 pb-2 border-bottom">
                     <li>
-                        <a @click.prevent="logout" class="py-1 px-3 text-gray d-block">
+                        <a @click.prevent="logout" class="py-2 px-2 text-gray d-block">
                     {{'sidebar.logout' | translate}}
                 </a>
                     </li>
@@ -311,34 +306,52 @@ export default {
 
 .sidebar-left {
   left: -@sidebar-width;
+
   @media @bp-small {
     left: 0;
   }
+
   &.sidebar-open {
     left: 0;
   }
+
   ul {
     list-style: none;
     font-family: @heading-font;
     font-size: 20px;
+
     li {
       clear: both;
       font-family: @special-font;
+      border-bottom: 1px solid rgb(28, 28, 28);
       .router-link-active {
         opacity: 1;
         color: black;
-        background-image: radial-gradient(
-          ellipse farthest-corner at center 0px,
-          #ffc400 -150%,
-          #ffc400 45%,
-          #ff8800 85%
-        ) !important;
+        background-image: radial-gradient(ellipse farthest-corner at center 0px,
+            #2b2b2b -150%,
+            #272626 45%,
+            #000000 85%) !important;
         background-size: cover;
         background-repeat: no-repeat;
         color: black !important;
         background-size: cover;
         background-repeat: no-repeat;
+
+        i {
+          font-size: 30px;
+          --fa-primary-color: red;
+          --fa-secondary-color: white;
+          --fa-primary-opacity: 1.0;
+          --fa-secondary-opacity: 1.0;
+        }
       }
+
+      i {
+        font-size: 30px;
+        --fa-primary-opacity: 1.0;
+        --fa-secondary-opacity: 0.2;
+      }
+
       a {
         color: @white-darker;
         opacity: 0.8;
