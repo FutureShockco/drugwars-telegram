@@ -181,7 +181,7 @@ export default {
 }
 
 .ac {
-  font-family: 'American Captain', Verdana, Tahoma;
+  font-family: 'Blinker', Verdana, Tahoma;
 }
 
 .le {
@@ -200,7 +200,7 @@ export default {
 
 .cards {
   background-color: transparent;
-  font-family: 'American Captain', Verdana, Tahoma;
+  font-family: 'Blinker', Verdana, Tahoma;
 }
 
 .uppercase {
@@ -231,7 +231,7 @@ export default {
 
 .cards {
   background-color: transparent;
-  font-family: 'American Captain', Verdana, Tahoma;
+  font-family: 'Blinker', Verdana, Tahoma;
 }
 
 .uppercase {
@@ -799,7 +799,7 @@ input {
 
 .card .name {
   font-size: 16px;
-  font-family: 'American Captain';
+  font-family: 'Blinker';
   color: #fbbd08;
   text-shadow: 0px 0px 5px black, 0px 0px 5px black;
 }
@@ -807,7 +807,7 @@ input {
 .card .skill {
   background: black;
   font-size: 10px;
-  font-family: 'American Captain';
+  font-family: 'Blinker';
   color: #fbbd08;
   text-shadow: 0px 0px 5px black, 0px 0px 5px black;
   width: fit-content;
@@ -818,7 +818,7 @@ input {
 }
 
 .card .properties .skill_name {
-  font-family: 'American Captain';
+  font-family: 'Blinker';
   text-align: center;
   width: 100%;
   margin-left: 0px;

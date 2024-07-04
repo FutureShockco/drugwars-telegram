@@ -1,7 +1,7 @@
 import Vue from 'vue';
 
 const state = {
-  sidebarVisible: false,
+  sidebarVisible: true,
   showLoading: false,
   timestamp: new Date().getTime(),
   notifications: [],

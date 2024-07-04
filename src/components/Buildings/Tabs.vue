@@ -2,10 +2,10 @@
     <Header>
         <UiTabs>
             <UiTab to="/buildings">Office</UiTab>
-            <UiTab to="/buildings/drugs">Drugs</UiTab>
-            <UiTab to="/buildings/weapons">Weapons</UiTab>
+            <UiTab to="/buildings/drugs">Drug</UiTab>
+            <UiTab to="/buildings/weapons">Weapon</UiTab>
             <UiTab to="/buildings/alcohol">Alcohol</UiTab>
-            <UiTab to="/buildings/defense">Defense</UiTab>
+            <!-- <UiTab to="/buildings/defense">Defense</UiTab> -->
         </UiTabs>
         <div class="coordbase text-right" v-if="base">
             <div class="text text-blue tab name" v-if="main">

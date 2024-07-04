@@ -98,7 +98,7 @@ export default {
 
   &--nav-open {
     left: @sidebar-width;
-
+    width: calc(100% - 80px);
     @media @bp-small {
       left: 0;
     }

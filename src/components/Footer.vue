@@ -1,21 +1,21 @@
 <template>
     <footer class="footer">
-        <div class="px-2 mb-2">
+        <!-- <div class="px-2 mb-2">
             <a class="vote" target="_blank" href="https://steemlogin.com/sign/account-witness-vote?witness=future.witness&approve=1"></a>
-        </div>
+        </div> -->
         <ul class="columns mx-2 pb-2 list-style-none">
-            <li class="column col-3">
+            <!-- <li class="column col-3">
                 <a @click.prevent="audio.isPlaying ? pause(audio) : play(audio)" v-for="audio in audios" :key="audio.id">
                  <i v-if="audio.isPlaying" class="iconfont icon-unmute"></i>
                  <i v-else class="iconfont icon-mute"></i>
               </a>
-            </li>
-            <li class="column col-3">
+            </li> -->
+            <!-- <li class="column col-3">
                 <router-link to="/about" class="d-block text-center">
                     <i class="iconfont icon-question" />
                 </router-link>
-            </li>
-            <li class="column col-3">
+            </li> -->
+            <li class="column col-3 mr-2">
                 <a target="_blank" href="https://discord.me/drugwars" class="d-block text-center">
               <i class="iconfont icon-discord"/>
             </a>
@@ -85,6 +85,7 @@ export default {
   }
   .company {
     opacity: 0.5;
+    font-size: 12px;
     text-align: center;
     padding-left: 15px;
     padding-right: 15px;

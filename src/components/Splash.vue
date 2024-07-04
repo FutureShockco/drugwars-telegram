@@ -1,12 +1,12 @@
 <template>
-  <UiCenter class="vue-ui-modal pt-2 pb-7">
+  <UiCenter class="vue-ui-modal pb-7 p-5">
     <h5 class="text-center mb-0">Server ({{server.number}}) : {{server.name}}</h5>
     <Icon class="logo-large" name="logo" />
     <div class="wrapper">
       <div class="left"></div>
       <div class="right"></div>
     </div>
-    <button @click="ok" class="button button-blue button-large mt-6 mb-4" >Start</button>
+    <button @click="ok" class="button button-blue button-large width-full mt-8 mb-4 " >Play</button>
 
     <h1 v-if="this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user">{{
       this.TWA.initDataUnsafe.user.id }}</h1>
@@ -26,11 +26,11 @@ export default {
       console.log('jey',this.OWA)
       if(this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
       this.init(this.TWA.initDataUnsafe).then((result) => {
-        this.$router.push({ path: '/tutorial' });
+        this.$router.push({ path: '/buildings' });
       })
       else this.init(this.OWA.initDataUnsafe).then((result) => {
         console.log(result)
-        this.$router.push({ path: '/tutorial' });
+        this.$router.push({ path: '/buildings' });
       })
     },
     logout() {

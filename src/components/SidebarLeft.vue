@@ -20,7 +20,7 @@
           :reputation="reputation"
         />
         <div class="username text-xs">{{ rankname }}</div>
-        <div class="username" @click.native="toggleSidebar">
+        <div class="username" >
           {{ user.nickname }}
         </div>
         <div class="gang-label" v-if="user.ticker">[{{ user.ticker }}]</div>
@@ -33,28 +33,28 @@
         </ul>
         <ul class="pt-1 pb-2 border-bottom">
           <li>
-            <router-link to="/tutorial" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+            <router-link to="/tutorial" class="py-1 px-3 d-block" >
               {{ 'sidebar.news' | translate }}
             </router-link>
           </li>
           <li>
-            <router-link to="/overview" class="py-1 px-3 d-block" @click.native="toggleSidebar">
-              {{ 'sidebar.overview' | translate }}
+            <router-link to="/overview" class="py-1 px-3 d-block" >
+              Stats
             </router-link>
           </li>
           <li>
-            <router-link to="/buildings" class="py-1 px-3 d-block" @click.native="toggleSidebar">
-              {{ 'sidebar.buildings' | translate }}
+            <router-link to="/buildings" class="py-1 px-3 d-block" >
+              Base
             </router-link>
           </li>
           <li>
-            <router-link to="/units" class="py-1 px-3 d-block" @click.native="toggleSidebar">
-              {{ 'sidebar.bootcamp' | translate }}
+            <router-link to="/units" class="py-1 px-3 d-block" >
+              Camp
             </router-link>
           </li>
           <li>
-            <router-link to="/actions" class="py-1 px-3 d-block" @click.native="toggleSidebar">
-              {{ 'sidebar.actions' | translate }}
+            <router-link to="/actions" class="py-1 px-3 d-block" >
+             Action
               <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
                 {{ activeIncFightsCount }}<i class="iconfont icon-arrow-down"></i>
               </span>
@@ -70,17 +70,17 @@
             </router-link>
           </li>
           <li>
-            <router-link to="/map" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+            <router-link to="/map/territory?location=8" class="py-1 px-3 d-block" >
               {{ 'sidebar.map' | translate }}
             </router-link>
           </li>
           <li>
-            <router-link to="/leaderboards" class="py-1 px-3 d-block" @click.native="toggleSidebar">
-              {{ 'sidebar.leaderboards' | translate }}
+            <router-link to="/leaderboards" class="py-1 px-3 d-block" >
+              Board
             </router-link>
           </li>
           <li>
-            <router-link to="/gangs" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+            <router-link to="/gangs" class="py-1 px-3 d-block" >
               {{ 'sidebar.gangs' | translate }}
             </router-link>
           </li>
@@ -88,13 +88,13 @@
                 <router-link
                   to="/contracts"
                   class="py-1 px-3 d-block"
-                  @click.native="toggleSidebar"
+                  
                 >
                   Contracts
                 </router-link>
               </li> -->
           <li>
-            <router-link to="/jobs" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+            <router-link to="/jobs" class="py-1 px-3 d-block" >
               {{ 'sidebar.jobs' | translate }}
               <span class="text-red" v-if="jobs > 0"> ({{ jobs }}) </span>
             </router-link>
@@ -103,49 +103,45 @@
             <router-link
               to="/rewards"
               class="py-1 px-3 d-block sidebar-rewards"
-              @click.native="toggleSidebar"
+              
             >
               {{ 'sidebar.heist' | translate }}
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link
               to="/market?token=dwd"
               class="py-1 px-3 d-block"
-              @click.native="toggleSidebar"
+              
             >
               {{ 'sidebar.market' | translate }}
             </router-link>
           </li>
           <li>
-            <router-link to="/shop" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+            <router-link to="/shop" class="py-1 px-3 d-block" >
               {{ 'sidebar.shop' | translate }}
             </router-link>
-          </li>
+          </li> -->
           <!-- <li>
-                        <router-link to="/cards/mycollection" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+                        <router-link to="/cards/mycollection" class="py-1 px-3 d-block" >
                             {{'sidebar.cards' | translate}}
                         </router-link>
                     </li> -->
         </ul>
         <ul class="pt-1 pb-2">
-          <li>
-            <router-link to="/airdrop" class="py-1 px-3 d-block" style="color:red" @click.native="toggleSidebar">
-              Airdrop
-            </router-link>
-          </li>
+
           <!-- <li>
-                        <router-link to="/referral" class="py-1 px-3 d-block " @click.native="toggleSidebar">
+                        <router-link to="/referral" class="py-1 px-3 d-block " >
                             {{'sidebar.referral' | translate}}
                         </router-link>
                     </li> -->
           <li>
-            <router-link to="/settings" class="py-1 px-3 d-block" @click.native="toggleSidebar">
-              {{ 'sidebar.settings' | translate }}
+            <router-link to="/settings" class="py-1 px-3 d-block" >
+              Setup
             </router-link>
           </li>
           <li>
-            <router-link to="/help" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+            <router-link to="/help" class="py-1 px-3 d-block" >
               {{ 'sidebar.help' | translate }}
             </router-link>
           </li>

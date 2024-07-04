@@ -1,39 +1,41 @@
 <template>
-    <div class="checkout mb-4">
-        <div class="mb-2">
-            <span v-if="inProgress"><i class="iconfont icon-clock mr-2"  > </i>End: {{ timeToWaitString }}</span>
-            <span v-else><i class="iconfont icon-clock mr-2"> </i>Require: {{ updateTime | ms }}</span>
-        </div>
-        <button :class="{ progress: inProgress }" :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base" @click="handleSubmit()" class="button btn-block button-green mb-2">
+  <div class="d-flex">
+    <div class="col-6 mr-4">
+      <span v-if="inProgress"><i class="iconfont icon-clock mr-2"> </i>End: {{ timeToWaitString }}</span>
+      <span v-else><i class="iconfont icon-clock mr-2"> </i>Require: {{ updateTime | ms }}</span>
+      <button :class="{ progress: inProgress }"
+        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base"
+        @click="handleSubmit()" class="button btn-block button-green width-full mb-2">
         <template v-if="isLoading || waitingConfirmation">
-        <SmallLoading/>
-</template>
+          <SmallLoading />
+        </template>
 
-<template v-else>
-    <div class="progression" v-if="inProgress" :style="'margin-right:'+(100-percentage)+'%'"></div>
-    <i class="iconfont icon-arrow-up" />
-    <span>{{ upgradeLabel }}</span>
+        <template v-else>
+          <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
+          <i class="iconfont icon-arrow-up" />
+          <span>{{ upgradeLabel }}</span>
 
-</template>
-    </button>
-    <div class="mb-2">Instant upgrade</div>
-    <button
-      :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
-      @click="handleRequestPayment()" v-if="steemAccount"
-      class="button btn-block button-blue mb-2">
-      <i class="iconfont icon-zap"/>
-     <span> ${{ price | amount }} =
-      {{ priceInSteem }} STEEM</span>
-    </button>
-    <button v-if="dwdPrice"
-      :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
-      @click="handleSubmit('dwd')"
-      class="button btn-block button-yellow mb-2">
-    <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png"/>
-     <span v-if="dwdPrice"> ${{ dwdPrice | amount }} = 
-      {{ priceInDWD  }} DWD</span>
-    </button>
+        </template>
+      </button>
+
+    </div>
+    <div class="col-6">
+      <div><i class="iconfont icon-clock mr-2"> </i> Instant upgrade</div>
+      <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+        @click="handleRequestPayment()" class="button btn-block button-blue mb-2">
+        <i class="iconfont icon-zap" />
+        <span> ${{ price | amount }} =
+          {{ priceInSteem }} DWD</span>
+      </button>
+      <button v-if="dwdPrice" :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+        @click="handleSubmit('dwd')" class="button btn-block button-yellow mb-2">
+        <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
+        <span v-if="dwdPrice"> ${{ dwdPrice | amount }} =
+          {{ priceInDWD }} DWD</span>
+      </button>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -69,8 +71,8 @@ export default {
       return parseFloat(this.priceInSteem * 50).toFixed(3);
     },
     dwdPrice() {
-      if(!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
-      return false
+      if (!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
+        return false
       const price = this.$store.state.game.prizeProps.seProps.lastPrice || 0;
       return price * this.priceInDWD * this.$store.state.game.prizeProps.steemprice;
     },
