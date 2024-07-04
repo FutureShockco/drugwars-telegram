@@ -8,6 +8,7 @@
         content: showSidebar,
         'content--nav-open': sidebarVisible,
       }" />
+      <BottomNav v-if="username" />
     </template>
     <Notifications />
 

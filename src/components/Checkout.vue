@@ -24,7 +24,7 @@
       <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
         @click="handleRequestPayment()" class="button btn-block button-blue mb-2">
         <i class="iconfont icon-zap" />
-        <span> ${{ price | amount }} =
+        <span>
           {{ priceInSteem }} DWD</span>
       </button>
       <button v-if="dwdPrice" :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
@@ -126,7 +126,7 @@ export default {
     },
     upgradeLabel() {
       let label = 'Upgrade';
-      if (this.notEnough) label = 'Miss resources';
+      if (this.notEnough) label = 'Not enough';
       if (this.requireUpdate) label = 'Require HQ upgrade';
       if (this.inProgress) {
         label = `Upgrading [${parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(

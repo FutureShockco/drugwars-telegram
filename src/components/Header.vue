@@ -37,7 +37,7 @@ export default {
 
 @media screen and (min-width: 200px) and (max-width: 1119px) {
   .header {
-    top: 59px !important;
+    top: 50px !important;
     font-size: 16px;
   }
 }
