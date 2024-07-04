@@ -2,62 +2,61 @@
   <div v-if="building.id === 'strategic_center' && !main"></div>
   <div v-else-if="building.id === 'pantheon' && !main"></div>
   <div v-else class="d-flex flex-lg-row flex-column text-lg-left item"
-    :class="{ progress: inProgress, 'not-enough': hasNotEnough }">
-    <div class="d-flex flex-lg-row text-lg-left mt-0 pt-0">
-      <div class="col-2 mr-3">
+    :class="[inProgress ? 'progress' : '', hasNotEnough ? 'not-enough' : '']">
+    <div class="d-flex flex-lg-row text-lg-left content">
+      <div class="col-2">
         <img class="preview mt-2" :src="`//img.drugwars.io/buildings/${building.id}.jpg`" />
       </div>
-      <div class="level">{{ ownItem.lvl }}</div>
-      <div class="col-10 text-left">
-        <router-link :to="`/buildings/detail?name=${building.id}`">
-          <h5 class="mt-0">{{ building.name }}</h5>
+      <!-- <div class="level">{{ ownItem.lvl }}</div> -->
+      <div class="col-10 ml-3 text-left mt-0">
+        <router-link class="mt-0" :to="`/buildings/detail?name=${building.id}`">
+          <h5 class="mt-0">{{ building.name }} LVL. {{ ownItem.lvl }}</h5>
         </router-link>
-        <div class="mb-2" v-html="building.desc"></div>
+        <!-- <div class="mb-2" v-html="building.desc"></div> -->
+        <div v-if="building.feature">
+          <div>{{ building.feature }}</div>
+        </div>
+        <div v-if="building.production_type">
+          <BuildingProduction :compactview="0" :production_type="building.production_type" :level="ownItem.lvl"
+            :coeff="building.coeff" :production_rate="building.production_rate" />
+        </div>
+        <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
+          <div v-if="ownItem.lvl">
+            <b>Current capacity:</b>
+            {{ 10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl | amount }}
+          </div>
+          <div v-if="ownItem.lvl">
+            <b>Next capacity:</b>
+            {{ 10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) | amount
+            }}
+          </div>
+          <div v-else>
+            <b>Next capacity:</b>
+            {{ 10000 + (18000 * 1 * ((Math.sqrt(1)) / 100)) * 1 | amount }}
+          </div>
+          <div v-if="ownItem.lvl">
+            <b>Safe:</b>
+            {{ (10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl)) / 100) * ownItem.lvl) / 100 * 20 | amount }}
+          </div>
+          <div v-if="ownItem.lvl">
+            <b>Next Safe:</b>
+            {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1)) / 100 *
+              20 |
+              amount }}
+          </div>
+          <div v-else>
+            <b>Safe:</b>
+            {{ 10000 / 100 * 15 | amount }}
+          </div>
+        </div>
+        <Cost :drugsCost="drugsCost" :weaponsCost="weaponsCost" :alcoholsCost="alcoholsCost" :quantity="1" />
+
       </div>
     </div>
     <div class="item-content width-full mr-3">
 
-      <div v-if="(building.id === 'strategic_center' && ownItem.lvl > 204)"></div>
-      <Cost v-else :drugsCost="drugsCost" :weaponsCost="weaponsCost" :alcoholsCost="alcoholsCost" :quantity="1" />
-      <div v-if="building.feature" class="mb-2">
-        UNIQUE:
-        <span class="text-orange">{{ building.feature }}</span>
-      </div>
 
-      <div v-if="building.production_type" class="mb-2">
-        <BuildingProduction :compactview="0" :production_type="building.production_type" :level="ownItem.lvl"
-          :coeff="building.coeff" :production_rate="building.production_rate" />
-      </div>
 
-      <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
-        <div v-if="ownItem.lvl">
-          <b>Current capacity:</b>
-          {{ 10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl | amount }}
-        </div>
-        <div v-if="ownItem.lvl">
-          <b>Next capacity:</b>
-          {{ 10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) | amount
-          }}
-        </div>
-        <div v-else>
-          <b>Next capacity:</b>
-          {{ 10000 + (18000 * 1 * ((Math.sqrt(1)) / 100)) * 1 | amount }}
-        </div>
-        <div v-if="ownItem.lvl">
-          <b>Safe:</b>
-          {{ (10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl)) / 100) * ownItem.lvl) / 100 * 20 | amount }}
-        </div>
-        <div v-if="ownItem.lvl">
-          <b>Next Safe:</b>
-          {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1)) / 100 *
-            20 |
-            amount }}
-        </div>
-        <div v-else>
-          <b>Safe:</b>
-          {{ 10000 / 100 * 15 | amount }}
-        </div>
-      </div>
       <!-- <div  v-if="buildingupgrades" v-for="item in buildingupgrades" :key="item.id">
                 <BuildingUpgrade class="column col-6 p-0" :upgrade="item"/>
         </div>-->

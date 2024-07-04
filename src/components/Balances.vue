@@ -1,115 +1,115 @@
 <template>
-  <ul class="d-flex balances list-style-none">
-    <li v-if="booster" class="col-3 text-yellow">
-      <Icon name="drug" size="36" />
-      <div class="balance">
-        <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
-          {{ balances.drugs | amount }} <span class="mini"> {{ 'message.drugs' | translate }}</span>
-        </div>
-        <div class="detail">
+  <div>
+    <ul class="d-flex balances list-style-none">
+      <li v-if="booster" class="col-4 d-flex text-yellow item">
+        <Icon name="drug" size="36" />
+        <div class="balance">
+          <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
+            {{ balances.drugs | amount }} <span class="mini"> {{ 'message.drugs' | translate }}</span>
+          </div>
+          <!-- <div class="detail">
           {{ (HQ.drug_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange" v-if="drugBonus">
             {{ drugBonus * 2 | amount }}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.drug_storage / 100 * 20 | amount }}</span>/SAFE
+        </div> -->
         </div>
-      </div>
-    </li>
-    <li class="col-3" v-else>
-      <Icon name="drug" size="36" />
-      <div class="balance">
-        <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
-          {{ balances.drugs | amount }} <span class="mini"> {{ 'message.drugs' | translate }}</span>
-        </div>
-        <div class="detail">
+      </li>
+      <li class="col-4 d-flex item" v-else>
+        <Icon name="drug" size="36" />
+        <div class="balance">
+          <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
+            {{ balances.drugs | amount }} <span class="mini"> {{ 'message.drugs' | translate }}</span>
+          </div>
+          <!-- <div class="detail">
           {{ HQ.drug_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="drugBonus"> {{ drugBonus
             |
             amount}}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.drug_storage / 100 * 20 | amount }}</span>/SAFE
+        </div> -->
         </div>
-      </div>
-    </li>
-    <li v-if="booster" class="text-yellow col-3">
-      <Icon name="weapon" size="36" />
-      <div class="balance">
-        <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
-          {{ balances.weapons | amount }} <span class="mini"> {{ 'message.weapons' | translate }}</span>
-        </div>
-        <div class="detail ">
+      </li>
+      <li v-if="booster" class="text-yellow col-4 d-flex item">
+        <Icon name="weapon" size="36" />
+        <div class="balance">
+          <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
+            {{ balances.weapons | amount }} <span class="mini"> {{ 'message.weapons' | translate }}</span>
+          </div>
+          <!-- <div class="detail ">
           {{ (HQ.weapon_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange" v-if="weaponBonus">{{
             weaponBonus * 2 | amount }}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.weapon_storage / 100 * 20 | amount }}</span>/SAFE
+        </div> -->
         </div>
-      </div>
-    </li>
-    <li class="col-3" v-else>
-      <Icon name="weapon" size="36" />
-      <div class="balance">
-        <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
-          {{ balances.weapons | amount }} <span class="mini"> {{ 'message.weapons' | translate }}</span>
-        </div>
-        <div class="detail ">
+      </li>
+      <li class="col-4 d-flex item" v-else>
+        <Icon name="weapon" size="36" />
+        <div class="balance">
+          <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
+            {{ balances.weapons | amount }} <span class="mini"> {{ 'message.weapons' | translate }}</span>
+          </div>
+          <!-- <div class="detail ">
           {{ HQ.weapon_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="weaponBonus">{{
             weaponBonus | amount }}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.weapon_storage / 100 * 20 | amount }}</span>/SAFE
+        </div> -->
         </div>
-      </div>
-    </li>
-    <li v-if="booster" class="text-yellow col-3">
-      <Icon name="alcohol" size="36" />
-      <div class="balance">
-        <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
-          {{ balances.alcohols | amount }}<span class="mini"> {{ 'message.alcohol' | translate }}</span>
-        </div>
-        <div class="detail">
+      </li>
+      <li v-if="booster" class="text-yellow col-4 d-flex item">
+        <Icon name="alcohol" size="36" />
+        <div class="balance">
+          <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
+            {{ balances.alcohols | amount }}<span class="mini"> {{ 'message.alcohol' | translate }}</span>
+          </div>
+          <!-- <div class="detail">
           {{ (HQ.alcohol_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange"
             v-if="alcoholBonus">{{ alcoholBonus * 2 | amount }}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.alcohol_storage / 100 * 20 | amount }}</span>/SAFE
+        </div> -->
         </div>
-      </div>
-    </li>
-    <li class="col-3" v-else>
-      <Icon name="alcohol" size="36" />
-      <div class="balance">
-        <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
-          {{ balances.alcohols | amount }}<span class="mini"> {{ 'message.alcohol' | translate }}</span>
-        </div>
-        <div class="detail">
+      </li>
+      <li class="col-4 d-flex item" v-else>
+        <Icon name="alcohol" size="36" />
+        <div class="balance">
+          <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
+            {{ balances.alcohols | amount }}<span class="mini"> {{ 'message.alcohol' | translate }}</span>
+          </div>
+          <!-- <div class="detail">
           {{ HQ.alcohol_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="alcoholBonus">{{
             alcoholBonus | amount }}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.alcohol_storage / 100 * 20 | amount }}</span>/SAFE
+        </div> -->
         </div>
-      </div>
-    </li>
-    <li class="col-3">
-      <Icon name="dwd" size="36" />
-      <div class="balance">
-        <div>{{ user.dwd }} <span class="mini"> DWD</span></div>
+      </li>
+    </ul>
+    <ul class="d-flex balances list-style-none">
+
+      <li class="col-12 item">
+        <Icon name="dwd" size="36" />
         <div class="balance">
+          <div>{{ user.dwd }} <span class="mini"> DWD</span></div>
+          <!-- <div class="balance">
           <div class="detail"> DAILY: <span class="detail text-green">
               +{{ totalRewards.daily }} </span></div>
           <div class="detail"> HEIST: <span class="detail text-green">
               +{{ ownHeistReward.amount }} </span></div>
+        </div> -->
         </div>
-      </div>
-    </li>
-    <li class="steembalance" v-if="this.$store.state.auth.account">
-      <Icon name="steem" size="36" />
-      <div class="balance">
-        <div>{{ steemBalance | amount }} <span class="mini"> STEEM</span></div>
-      </div>
-    </li>
-  </ul>
+      </li>
+
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -337,6 +337,11 @@ export default {
 <style scoped lang="less">
 @import '../vars.less';
 
+.item{
+  border-radius: 5px 5px 0px 0px;
+  margin: 5px;
+}
+
 .sync {
   margin-top: -8px !important;
   font-size: 12px;
@@ -347,11 +352,12 @@ export default {
 }
 
 .balances {
+  padding: 10px;
   color: white;
-  font-size: 25px;
+  font-size: 24px;
   font-weight: 500;
   display: inline-flex;
-  line-height: 22px;
+  line-height: 24px;
   font-family: @heading-font;
   text-align: left !important;
 
@@ -359,12 +365,12 @@ export default {
     padding: 0px;
     margin-top: 5px;
     margin-left: 5px;
-
+    margin-right: 5px;
     .balance {
-      float: right;
-      text-align: right;
+      float: left;
+      text-align: left;
       font-size: 26px;
-      padding-top: 5px;
+      padding: 5px;
     }
 
     span {
@@ -396,16 +402,16 @@ export default {
   }
 
   .mini {
+    color:white;
+    line-height: 20px;
+    display: block;
     font-size: 20px;
-    margin-top: -20px;
     text-align: left;
   }
 }
 
 @media screen and (min-width: 200px) and (max-width: 669px) {
-  .steembalance {
-    display: none;
-  }
+
 
   .balances {
     display: flex;
@@ -417,14 +423,10 @@ export default {
       padding-left: 5px;
       padding-right: 5px;
       padding-top: 8px;
-      margin-left: 0px;
-      margin-right: 0px;
-
       .balance {
-
         float: right;
         text-align: left;
-        margin-left: 5px;
+ 
       }
 
       span {
@@ -446,70 +448,16 @@ export default {
 
     .mini {
       text-align: left;
-      position: absolute;
       font-size: 8px;
-      margin-top: -18px;
-    }
-
-    .icon {
-      display: none;
-      float: left;
-      width: 16px;
-      height: 16px;
-    }
-  }
-}
-
-@media screen and (min-width: 670px) and (max-width: 1119px) {
-  .steembalance {
-    display: none;
-  }
-
-  .balances {
-    display: inline-flex;
-    font-size: 20px !important;
-    line-height: 14px !important;
-    margin: 0px;
-
-    li {
-      padding: 0px;
-      margin-top: 15px;
-      margin-left: 5px;
-
-      .balance {
-        float: right;
-        text-align: left;
-      }
-
-      span {
-        float: right;
-        line-height: 42px;
-        min-width: 50px;
-      }
-
-      .text-gray {
-        font-size: 6px;
-      }
-
-      .detail {
-        font-size: 9px;
-      }
-    }
-
-    .mini {
-      font-size: 11px;
-      margin-top: -20px;
-      text-align: left;
-      position: absolute;
+      margin-top: -28px;
     }
 
     .icon {
       float: left;
-      font-weight: 100;
-      width: 24px;
-      height: 24px;
-      margin-right: 5px;
+      width: 32px;
+      height: 32px;
     }
   }
 }
+
 </style>

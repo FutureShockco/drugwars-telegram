@@ -21,12 +21,12 @@ export default {
   font-family: @heading-font;
   background:  #000000;
   color: @white-darker;
-  font-size: 20px;
+  font-size: 18px;
   z-index: 100;
-  top: 50px;
+  top: 120px;
   width: 100%;
-  height: @header-height;
-  line-height: @header-height;
+  height: 40px;
+  line-height: 40px;
   display: flex;
   align-items: center;
   transition: width 0.3s;

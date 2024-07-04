@@ -1,6 +1,5 @@
 <template>
   <div>
-    <div class="bottomnav" style="background: black;">
       <ul class="bottomnav d-flex list-style-none text-center">
         <li class="col-3">
           <router-link to="/buildings" class="py-2 px-2 d-block">
@@ -62,7 +61,6 @@
 
     </div>
 
-  </div>
 </template>
 
 <script>
@@ -155,6 +153,7 @@ export default {
 }
 
 .bottomnav {
+  background: #0c0c0c;
   color: @heading-color;
   position: fixed;
   z-index: 100;
@@ -170,15 +169,14 @@ export default {
   font-family: @heading-font;
   text-align: center !important;
   transition: width 0.3s;
-  box-shadow: -1px 5px 5px black;
   z-index: 1000;
-
   @media @bp-small {
     height: @bottomnav-height;
   }
   a{
     color:white;
     font-size: 16px;
+    border-top: 1px solid #efbf2c;
   }
   .logo {
     margin-top: 0px;
@@ -196,20 +194,19 @@ export default {
     }
   }
 
-  .bottomnav {
-
-    li {
-      border-right: 1px solid white;
+  li {
+    
+      border-right: 1px solid rgb(43, 43, 43);
     }
 
     li:last-of-type {
-      border-right: 0px solid white;
+      border-right: 0px solid rgb(43, 43, 43);
     }
     
     .router-link-active {
       opacity: 1;
       color: black;
-
+      border-top: 1px solid red;
       background-size: cover;
       background-repeat: no-repeat;
       color: white !important;
@@ -225,8 +222,6 @@ export default {
         --fa-secondary-opacity: 1.0;
       }
     }
-  }
-
   button {
     line-height: 22px;
     background: none;

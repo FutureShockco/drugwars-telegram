@@ -1,7 +1,7 @@
 <template>
   <Header>
     <UiTabs>
-      <UiTab to="/actions">Actions</UiTab>
+      <UiTab to="/actions">Start</UiTab>
       <UiTab to="/actions/outgoing">
         OUT
         <span>
@@ -20,12 +20,12 @@
           <span class="text-blue">({{ activeTransportsCount }})</span>
         </span>
       </UiTab>
-      <UiTab to="/actions/station">
+      <!-- <UiTab to="/actions/station">
         Station
         <span>
           <span class="text-orange">({{ activeStationsCount }})</span>
         </span>
-      </UiTab>
+      </UiTab> -->
     </UiTabs>
     <!-- <div class="coordbase text-right" v-if="base">
       <div class="text text-blue tab name" v-if="main">Primary</div>

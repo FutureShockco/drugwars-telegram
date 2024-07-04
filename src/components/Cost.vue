@@ -1,28 +1,28 @@
 <template>
-    <div class="cost">
-        <span class="mr-2">
-          Cost:
-        </span>
-        <span class="mr-2" :class="{ 'not-enough': drugsCost * this.quantity > balances.drugs }" v-if="drugsCost">
-          <Icon :size="18" name="drug"/>
-          {{ drugsCost * this.quantity | amount}}
-        </span>
-        <span class="mr-2" :class="{ 'not-enough': weaponsCost * this.quantity > balances.weapons }" v-if="weaponsCost">
-          <Icon :size="18" name="weapon"/>
-          {{ weaponsCost * this.quantity | amount}}
-        </span>
-        <span class="mr-2" :class="{ 'not-enough': alcoholsCost * this.quantity > balances.alcohols }" v-if="alcoholsCost">
-          <Icon :size="18" name="alcohol"/>
-          {{ alcoholsCost * this.quantity | amount}}
-        </span>
-        <!-- <div v-if="special.length>0 && quantity" v-for="cost in special" :key="cost.name">
+  <div class="cost mt-2">
+    <span class="mr-2">
+      Cost:
+    </span>
+    <span class="mr-2" :class="{ 'not-enough': drugsCost * this.quantity > balances.drugs }" v-if="drugsCost">
+      <Icon :size="18" name="drug" />
+      {{ drugsCost * this.quantity | amount }}
+    </span>
+    <span class="mr-2" :class="{ 'not-enough': weaponsCost * this.quantity > balances.weapons }" v-if="weaponsCost">
+      <Icon :size="18" name="weapon" />
+      {{ weaponsCost * this.quantity | amount }}
+    </span>
+    <span class="mr-2" :class="{ 'not-enough': alcoholsCost * this.quantity > balances.alcohols }" v-if="alcoholsCost">
+      <Icon :size="18" name="alcohol" />
+      {{ alcoholsCost * this.quantity | amount }}
+    </span>
+    <!-- <div v-if="special.length>0 && quantity" v-for="cost in special" :key="cost.name">
          <span class="mr-2">
           <Icon :size="18" :name="`${cost.name || cost.type}_icon`"/>
              {{ cost.cost || cost.amount * quantity | amount}}
         </span>
         </div> -->
 
-    </div>
+  </div>
 </template>
 
 <script>
@@ -97,6 +97,7 @@ export default {
 
 <style scoped lang="less">
 @import '../vars';
+
 .cost {
   font-weight: 500;
   font-size: 16px;
@@ -104,12 +105,15 @@ export default {
   display: inline-flex;
   line-height: 20px;
   font-family: @heading-font;
+
   span {
     display: inline-flex;
   }
+
   .icon {
     margin-right: 5px;
   }
+
   .not-enough {
     color: @error-color;
   }

@@ -1,27 +1,37 @@
 <template>
-    <div class="d-flex flex-lg-row flex-column text-center text-lg-left item" :class="{ progress: inProgress }">
-        <div class="item-content width-full mr-3 mb-4">
-            <div class="mr-2 left-floated">
-                <img class="preview unit" :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`" :src="`//img.drugwars.io/units/${unit.id}.png`">
-                <div class="skill-icons text-center">
-                </div>
-            </div>
-            <div class="level">{{ ownItem.amount }}</div>
-            <h5 class="mt-0 mb-0">{{ unit.name }} <span class="unit-type">{{ unit.type }}</span></h5>
-            <Cost :drugsCost="unit.drugs_cost" :weaponsCost="unit.weapons_cost" :alcoholsCost="unit.alcohols_cost" :quantity="quantity" :special="unit.special_cost" />Supply : {{unit.supply}} - Cluster : {{unit.group}}
-            <div class="mb-1 mt-1" v-html="unit.desc"></div>
-            <div class="mb-1 item-skill" v-if="unit.feature">
-                <span class="text-orange">
-                     {{ unit.feature }}
-            </span>
-            </div>
-            <UnitValues :unit="unit" :modifiedValues="modifiedValues" :speed="speed" />
+  <div class="d-flex flex-lg-row flex-column text-center text-lg-left item" :class="{ progress: inProgress }">
+    <div class="item-content width-full mr-3 mb-4 content">
+      <div class="col-2 mr-2 left-floated">
+        <img class="preview unit"
+          :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
+          :src="`//img.drugwars.io/units/${unit.id}.png`">
+        <div class="skill-icons text-center">
         </div>
-        <div class="mx-auto">
-            <input class="input form-control input-block mb-2" type="number" v-model="quantity" min="1">
-            <CheckoutRecruit :id="unit.id" :level="training_facility.lvl" :coeff="unit.coeff" :inProgress="inProgress" :price="unit.drugs_cost / 1400000  + unit.weapons_cost / 1400000 + unit.alcohols_cost / 1400000 " :notEnough="hasNotEnough" :quantity="quantity" />
+        <div class="level">{{ ownItem.amount }}</div>
+
+      </div>
+      <div class="col-10 ml-3 text-left mt-0">
+        <h5 class="mt-0 mb-0">{{ unit.name }} <span class="unit-type">{{ unit.type }}</span></h5>
+        <Cost :drugsCost="unit.drugs_cost" :weaponsCost="unit.weapons_cost" :alcoholsCost="unit.alcohols_cost"
+          :quantity="quantity" :special="unit.special_cost" />
+        <div>Supply : {{ unit.supply }} - Cluster : {{ unit.group }}</div>
+        <!-- <div class="mb-1 mt-1" v-html="unit.desc"></div> -->
+        <div class="mb-1 item-skill" v-if="unit.feature">
+          <span>
+            {{ unit.feature }}
+          </span>
         </div>
+      </div>
+
+      <UnitValues :unit="unit" :modifiedValues="modifiedValues" :speed="speed" />
     </div>
+    <div class="mx-auto">
+      <input class="input form-control input-block mb-2" type="number" v-model="quantity" min="1">
+      <CheckoutRecruit :id="unit.id" :level="training_facility.lvl" :coeff="unit.coeff" :inProgress="inProgress"
+        :price="unit.drugs_cost / 1400000 + unit.weapons_cost / 1400000 + unit.alcohols_cost / 1400000"
+        :notEnough="hasNotEnough" :quantity="quantity" />
+    </div>
+  </div>
 </template>
 
 <script>

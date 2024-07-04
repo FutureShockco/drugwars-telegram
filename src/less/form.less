@@ -34,17 +34,13 @@
   font-size: 15px;
   line-height: 34px;
   height: 34px;
-  color: @heading-color;
+  color: rgb(198, 198, 198);
   padding: 0 8px;
-  // box-shadow:inset 0 0 0 1px rgba(255, 255, 255, 0.05);
-  background-color: transparent;
   background-position: center;
   background-repeat: no-repeat;
-
+  background: #3c443c63!important;
   &:disabled {
-    //background-image: url('//img.drugwars.io/brush-gray.svg') !important;
-    background-color: #3c443c!important;
-    background-image: linear-gradient(160deg, #3a3a3a 0%, #181a18 74%)!important;
+    background: #3c443c63!important;
     box-shadow: 0px 3px 10px #181a18!important;
     background-size: cover;
     cursor: default;
@@ -83,9 +79,9 @@
   }
 
   &.button-green {
+    color:#1bc51b;
     background-color: #2a722a;
     background-image: linear-gradient(160deg, #00b31e 0%, #17700f 74%);
-    box-shadow: 0px 3px 10px #007413;
     background-size: cover;
     &:hover {
       background-image: linear-gradient(160deg, #00b31e 0%, #17700f 24%, #0da100 80%);
@@ -96,7 +92,6 @@
   &.button-blue {
     background-color: #2a2a72;
     background-image: linear-gradient(160deg, #0043fd 0%, #0f2970 74%);
-    box-shadow: 0px 3px 10px #00217c;
     background-size: cover;
     &:hover {
       background-image: linear-gradient(160deg, #0043fd 0%, #0f2970 24%,#0030b4 80%,);
@@ -107,7 +102,6 @@
   &.button-red {
     background-color: #722a2a;
     background-image: linear-gradient(160deg, #fd0000 0%, #700f0f 74%);
-    box-shadow: 0px 3px 10px #7c0000;
     background-size: cover;
     &:hover {
       background-image: linear-gradient(160deg, #fd0000 0%, #c20000 20%;#bb0000 80%,);
@@ -118,7 +112,6 @@
   &.button-orange {
     background-color: #723e2a;
     background-image: linear-gradient(160deg, #fd6500 0%, #70330f 74%);
-    box-shadow: 0px 3px 10px #7c3800;
     background-size: cover;
     &:hover {
       background-image: linear-gradient(160deg, #fd5000 0%, #c23700 20%;#bb4500 80%,);
@@ -128,9 +121,8 @@
 
   &.button-yellow {
     background-color: #fbbd08;
-    color: black;
+    color: #fbbd08;
     background-image: linear-gradient(160deg, #fbe308 0%, #ffbb00 74%);
-    box-shadow: 0px 3px 10px #c59400;
     background-size: cover;
     &:hover {
       background-image: linear-gradient(160deg, #fbe308 0%, #ffbb00 20%, #ffc21b 80%);
@@ -148,6 +140,22 @@
     min-width: 240px;
     height: 50px;
     line-height: 50px;
+  }
+  &.button-left{
+    border-radius: 0px 0px 0px 10px!important;
+    border-right: 1px #18181889 solid;
+  }
+
+  &.button-right{
+    border-radius: 0px 0px 10px 0px!important;
+
+    i {
+      float: right;
+      border-left: 1px solid rgba(0, 0, 0, 0.2);
+      padding-left: 8px;
+      padding-right: 0px;
+      border-right: 0px solid rgba(0, 0, 0, 0.2);
+    }
   }
 }
 

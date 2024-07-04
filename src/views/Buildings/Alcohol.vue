@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="anim-fade-in">
         <BuildingsTabs/>
-        <div class="anim-fade-in">
+        <div >
             <Building v-for="item in items" :building="item" :key="item.id" />
         </div>
     </div>
