@@ -5,36 +5,58 @@
         <li class="col-3">
           <router-link to="/buildings" class="py-2 px-2 d-block">
             <i class="fad fa-house-chimney"></i>
+            <div>
+              HQ
+            </div>
           </router-link>
         </li>
         <li class="col-3">
-            <router-link to="/units" class="py-2 px-2 d-block">
-              <i class="fad fa-campground"></i>
-            </router-link>
-          </li>
-          <li class="col-3">
-            <router-link to="/actions" class="py-2 px-2 d-block">
-              <i class="fad fa-explosion"></i>
-              <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
-                {{ activeIncFightsCount }}<i class="iconfont icon-arrow-down"></i>
-              </span>
-              <span class="text-green label p-0" v-if="activeFightsCount > 0">
-                {{ activeFightsCount }}<i class="iconfont icon-arrow-up"></i>
-              </span>
-              <span class="text-blue label p-0" v-if="activeTransportsCount > 0">
-                {{ activeTransportsCount }}<i class="iconfont icon-arrow-up"></i>
-              </span>
-              <span class="text-orange label p-0" v-if="activeStationsCount > 0">
-                {{ activeStationsCount }}<i class="iconfont icon-arrow-up"></i>
-              </span>
-            </router-link>
-          </li>
+          <router-link to="/units" class="py-2 px-2 d-block">
+            <i class="fad fa-campground"></i>
+            <div>
+              Camp
+            </div>
+          </router-link>
+        </li>
+        <li class="col-3">
+          <router-link to="/actions" class="py-2 px-2 d-block">
+            <i class="fad fa-explosion"></i>
+            <div>
+              Fight
+            </div>
+            <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
+              {{ activeIncFightsCount }}<i class="iconfont icon-arrow-down"></i>
+            </span>
+            <span class="text-green label p-0" v-if="activeFightsCount > 0">
+              {{ activeFightsCount }}<i class="iconfont icon-arrow-up"></i>
+            </span>
+            <span class="text-blue label p-0" v-if="activeTransportsCount > 0">
+              {{ activeTransportsCount }}<i class="iconfont icon-arrow-up"></i>
+            </span>
+            <span class="text-orange label p-0" v-if="activeStationsCount > 0">
+              {{ activeStationsCount }}<i class="iconfont icon-arrow-up"></i>
+            </span>
+          </router-link>
+        </li>
 
-          <li class="col-3">
-            <router-link to="/leaderboards" class="py-2 px-2 d-block">
-              <i class="fad fa-chalkboard-user"></i>
-            </router-link>
-          </li>
+        <li class="col-3">
+
+          <router-link to="/leaderboards" class="py-2 px-2 d-block">
+            <i class="fad fa-trophy"></i>
+            <div>
+              Board
+            </div>
+          </router-link>
+        </li>
+        <li class="col-3">
+ 
+          <router-link to="/gangs" class="py-2 px-2 d-block">
+            <i class="fad fa-people-group"></i>
+            <div>
+              Gang
+            </div>
+          </router-link>
+        </li>
 
       </ul>
 
@@ -136,10 +158,10 @@ export default {
   color: @heading-color;
   position: fixed;
   z-index: 100;
-  top: calc(100vh - 60px);
+  top: calc(100vh - 80px);
   left: 0;
   width: 100%;
-  height: 60px;
+  height: 80px;
   color: white;
   font-size: 26px;
   font-weight: 500;
@@ -154,7 +176,10 @@ export default {
   @media @bp-small {
     height: @bottomnav-height;
   }
-
+  a{
+    color:white;
+    font-size: 16px;
+  }
   .logo {
     margin-top: 0px;
     height: 45px;
@@ -173,35 +198,33 @@ export default {
 
   .bottomnav {
 
-    li{
+    li {
       border-right: 1px solid white;
     }
 
-    li:last-of-type{
+    li:last-of-type {
       border-right: 0px solid white;
     }
-
+    
     .router-link-active {
-        opacity: 1;
-        color: black;
-        background-image: radial-gradient(ellipse farthest-corner at center 0px,
-            #2b2b2b -150%,
-            #272626 45%,
-            #000000 85%) !important;
-        background-size: cover;
-        background-repeat: no-repeat;
-        color: black !important;
-        background-size: cover;
-        background-repeat: no-repeat;
+      opacity: 1;
+      color: black;
 
-        i {
-          font-size: 30px;
-          --fa-primary-color: red;
-          --fa-secondary-color: white;
-          --fa-primary-opacity: 1.0;
-          --fa-secondary-opacity: 1.0;
-        }
+      background-size: cover;
+      background-repeat: no-repeat;
+      color: white !important;
+      background-size: cover;
+      background-repeat: no-repeat;
+      
+      i {
+        margin-bottom: 5px;
+        font-size: 28px;
+        --fa-primary-color: red;
+        --fa-secondary-color: white;
+        --fa-primary-opacity: 1.0;
+        --fa-secondary-opacity: 1.0;
       }
+    }
   }
 
   button {
@@ -224,16 +247,6 @@ export default {
     min-width: 80px;
   }
 
-  @media screen and (min-width: 399px) and (max-width: 1119px) {
-    .shield {
-      min-width: 80px;
 
-      img {
-        width: 24px;
-        height: 24px;
-        margin-top: 10px;
-      }
-    }
-  }
 }
 </style>

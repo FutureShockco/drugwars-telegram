@@ -12,10 +12,10 @@
       <span v-if="rank && rank <4" :class="'avatar-border' + rank" />
       <span v-else class="avatar-border" />
       <span class="rank py-1 px-2" v-if="rank">Rank: {{ rank }}</span>
-      <span
+      <!-- <span
         class="cruelty py-1 px-2"
         v-if="reputation && reputation!=='none'"
-      >Cruelty: {{ reputation /1000 | amount }}</span>
+      >Cruelty: {{ reputation /1000 | amount }}</span> -->
       <span class="cruelty py-1 px-2" v-else-if="!reputation || reputation!=='none'">Cruelty: 0</span>
     </router-link>
   </div>

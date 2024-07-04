@@ -2,17 +2,17 @@
   <Header>
     <UiTabs>
       <UiTab to="/leaderboards">Prod</UiTab>
-      <UiTab to="/leaderboards/cruelty">Cruelty</UiTab>
+      <!-- <UiTab to="/leaderboards/cruelty">Cruelty</UiTab> -->
       <UiTab to="/leaderboards/heist">Heist</UiTab>
       <UiTab to="/leaderboards/fights">Fight</UiTab>
-      <UiTab to="/leaderboards/jobs">Job</UiTab>
-      <UiTab to="/leaderboards/lottery">Lottery</UiTab>
+      <!-- <UiTab to="/leaderboards/jobs">Job</UiTab> -->
+      <!-- <UiTab to="/leaderboards/lottery">Lottery</UiTab> -->
     </UiTabs>
-    <div class="coordbase text-right" v-if="base">
+    <!-- <div class="coordbase text-right" v-if="base">
       <div class="text text-blue tab name" v-if="main">Primary</div>
       <div class="text text-orange tab name" v-else-if="base.custom">{{base.custom}}</div>
       {{base.territory}}:{{base.base}}
-    </div>
+    </div> -->
   </Header>
 </template>
 

@@ -1,15 +1,18 @@
 <template>
+  <div>
+    <LeaderboardsTabs />
     <div>
-        <LeaderboardsTabs/>
-        <div >
-            <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"  :rank="key + currentRank + 1" :reward="50">
-            </Player>
-            <p v-if="!users || !users.length">
-                <Loading/>
-            </p>
-        </div>
-                <Paginate class="ml-6 mt-4 text-center width-full" :page-count="Math.ceil(count/50)" :page-range="3" :margin-pages="2" :click-handler="load_leaders" :prev-text="'Prev'" :next-text="'Next'" :container-class="'pagination'" :page-class="'leaders'"></Paginate>
+      <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+        :rank="key + currentRank + 1" :reward="50">
+      </Player>
+      <p v-if="!users || !users.length">
+        <Loading />
+      </p>
     </div>
+    <Paginate class="ml-6 mt-4 text-center width-full" :page-count="Math.ceil(count / 50)" :page-range="3"
+      :margin-pages="2" :click-handler="load_leaders" :prev-text="'Prev'" :next-text="'Next'"
+      :container-class="'pagination'" :page-class="'leaders'"></Paginate>
+  </div>
 </template>
 
 <script>
@@ -57,6 +60,7 @@ export default {
   margin-right: auto;
   display: -webkit-inline-box;
   list-style: none;
+  max-width: 90%;
   a,
   span,
   em {
@@ -67,6 +71,7 @@ export default {
 li .disabled {
   background-color: #8080803b !important;
   color: #000000 !important;
+
   .pagination a {
     color: #000000 !important;
   }

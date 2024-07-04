@@ -42,7 +42,7 @@
               <i class="fad fa-chart-area"></i>
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/buildings" class="py-2 px-2 d-block">
               <i class="fad fa-house-chimney"></i>
             </router-link>
@@ -51,8 +51,8 @@
             <router-link to="/units" class="py-2 px-2 d-block">
               <i class="fad fa-campground"></i>
             </router-link>
-          </li>
-          <li>
+          </li> -->
+          <!-- <li>
             <router-link to="/actions" class="py-2 px-2 d-block">
               <i class="fad fa-explosion"></i>
               <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
@@ -68,13 +68,13 @@
                 {{ activeStationsCount }}<i class="iconfont icon-arrow-up"></i>
               </span>
             </router-link>
-          </li>
+          </li> -->
           <li>
             <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
               <i class="fad fa-map-location-dot"></i>
             </router-link>
           </li>
-          <li>
+          <!-- <li>
             <router-link to="/leaderboards" class="py-2 px-2 d-block">
               <i class="fad fa-chalkboard-user"></i>
             </router-link>
@@ -83,7 +83,7 @@
             <router-link to="/gangs" class="py-2 px-2 d-block">
               <i class="fad fa-people-group"></i>
             </router-link>
-          </li>
+          </li> -->
           <!-- <li>
                 <router-link
                   to="/contracts"

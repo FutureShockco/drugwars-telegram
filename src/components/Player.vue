@@ -1,6 +1,6 @@
 <template>
-  <div class="py-3 px-0 m-1 columns text-center border-bottom">
-    <div class="column col-3 px-0">
+  <div class="py-3 px-0 m-1 columns text-center border-bottom leaderboard">
+    <div class="column col-2 px-0">
       <Avatar
         class="mx-2"
         :size="60"
@@ -298,5 +298,10 @@ export default {
 .production {
   display: inline-grid;
   color: #fbbd08;
+  font-size: 12px;
+}
+
+.leaderboard{
+  font-size: 14px;
 }
 </style>
