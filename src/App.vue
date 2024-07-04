@@ -86,6 +86,7 @@ export default {
   position: relative;
   left: 0;
   margin-top: @header-height;
+  margin-bottom: 60px;
   transition: left 0.3s;
   background: #000000;
   background-image: linear-gradient(to top, #0e0e0e, #0c0c0c 74%) !important;

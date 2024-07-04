@@ -21,16 +21,16 @@
     </div>
     <div class="col-6">
       <div><i class="iconfont icon-clock mr-2"> </i> Instant upgrade</div>
-      <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+      <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
         @click="handleRequestPayment()" class="button btn-block button-blue mb-2">
         <i class="iconfont icon-zap" />
         <span>
           {{ priceInSteem }} DWD</span>
-      </button>
-      <button v-if="dwdPrice" :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+      </button> -->
+      <button  :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
         @click="handleSubmit('dwd')" class="button btn-block button-yellow mb-2">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
-        <span v-if="dwdPrice"> ${{ dwdPrice | amount }} =
+        <span> 
           {{ priceInDWD }} DWD</span>
       </button>
     </div>

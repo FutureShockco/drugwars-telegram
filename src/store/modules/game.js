@@ -93,7 +93,7 @@ const mutations = {
   },
 };
 
-let registeredUser;
+let registeredUser = null;
 const authToken = function () {
   return registeredUser;
 };
@@ -101,6 +101,8 @@ const authToken = function () {
 const actions = {
   init: ({ commit, dispatch }, newUser) =>
     new Promise((resolve, reject) => {
+      if (!newUser && registeredUser)
+        newUser = registeredUser
       dispatch('login', newUser);
       registeredUser = newUser;
       let totalbases = 0;

@@ -1,47 +1,50 @@
 <template>
-    <div class="mb-6">
-        <div class="d-flex border-bottom mb-4 pb-4">
-            <div class="hide-sm hide-md">
-                <img width="100" height="100" class="mr-4 mb-4" src="//img.drugwars.io/me.jpg" />
-            </div>
-            <p>Hey <b>{{ username }}</b>! You seem to be just arrived in the city. You may try to make some friends but I rather suggest you to start to defend yourself before starting any friendship. Nobody knows how much time you will stand there, but everyone
-                will try to steal what you are producing! You should fulfill theses missions before getting some new ones.</p>
-        </div>
-        <ul class="missions list-style-none">
-          <li>
-                <Icon size="18" class="mr-2" :name="mission0 ? 'check' : 'dwd'" />
-                <router-link to="/map">Choose a location on the map</router-link>
-            </li>
-            <li>
-                <Icon size="18" class="mr-2" :name="mission1 ? 'check' : 'dwd'" />
-                <router-link to="/buildings">Upgrade the headquarters</router-link>
-            </li>
-            <li>
-                <Icon size="18" class="mr-2" :name="mission2 ? 'check' : 'dwd'" />
-                <router-link to="/buildings/drugs">Increase your DRUGS production</router-link>
-            </li>
-            <li>
-                <Icon size="18" class="mr-2" :name="mission3 ? 'check' : 'dwd'" />
-                <router-link to="/buildings/weapons">Increase your WEAPONS production</router-link>
-            </li>
-            <li>
-                <Icon size="18" class="mr-2" :name="mission4 ? 'check' : 'dwd'" />
-                <router-link to="/buildings/alcohol">Increase your ALCOHOL production</router-link>
-            </li>
-            <li>
-                <Icon size="18" class="mr-2" :name="mission5 ? 'check' : 'dwd'" />
-                <router-link to="/buildings">Build a training facility!</router-link>
-            </li>
-            <li>
-                <Icon size="18" class="mr-2" :name="mission6 ? 'check' : 'dwd'" />
-                <router-link to="/units">Recruit some units</router-link>
-            </li>
-            <li>
-                <Icon size="18" class="mr-2" :name="mission7 ? 'check' : 'dwd'" />
-                <router-link to="/actions">Start a fight</router-link>
-            </li>
-        </ul>
+  <div class="mb-6">
+    <div class="d-flex border-bottom mb-4 pb-4">
+      <div class="hide-sm hide-md">
+        <img width="100" height="100" class="mr-4 mb-4" src="//img.drugwars.io/me.jpg" />
+      </div>
+      <p>Welcome to the city, newcomer! It's a tough world out there, and before you start making friends, you'll want
+        to learn how to defend yourself. No one knows how long you'll last, but everyone will be trying to take what you
+        build! Focus on completing these missions first to strengthen your defenses, and then you can think about new
+        challenges. Good luck!</p>
     </div>
+    <ul class="missions list-style-none">
+      <li>
+        <i class="fa mr-2" :class="mission0 ? 'fa-check green' : 'fa-xmark red'"></i>
+        <router-link to="/map">1. Choose a location on the map</router-link>
+      </li>
+      <li>
+        <i class="fa mr-2" :class="mission1 ? 'fa-check green' : 'fa-xmark red'"></i>
+        <router-link to="/buildings">2. Upgrade the headquarters</router-link>
+      </li>
+      <li>
+        <i class="fa mr-2" :class="mission2 ? 'fa-check green' : 'fa-xmark red'"></i>
+        <router-link to="/buildings/drugs">3. Increase your DRUGS production</router-link>
+      </li>
+      <li>
+        <i class="fa mr-2" :class="mission3 ? 'fa-check green' : 'fa-xmark red'"></i>
+        <router-link to="/buildings/weapons">4. Increase your WEAPONS production</router-link>
+      </li>
+      <li>
+        <i class="fa mr-2" :class="mission4 ? 'fa-check green' : 'fa-xmark red'"></i>
+        <router-link to="/buildings/alcohol">5. Increase your ALCOHOL production</router-link>
+      </li>
+      <li>
+        <i class="fa mr-2" :class="mission5 ? 'fa-check green' : 'fa-xmark red'"></i>
+        <router-link to="/buildings">6. Build a training facility!</router-link>
+      </li>
+      <li>
+        <i class="fa mr-2" :class="mission6 ? 'fa-check green' : 'fa-xmark red'"></i>
+
+        <router-link to="/units">7. Recruit some units</router-link>
+      </li>
+      <li>
+        <i class="fa mr-2" :class="mission7 ? 'fa-check green' : 'fa-xmark red'"></i>
+        <router-link to="/actions">8. Start a fight</router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <script>
@@ -114,6 +117,7 @@ export default {
   li {
     font-size: 18px;
     margin-bottom: 12px;
+
     .iconfont {
       font-size: 18px;
     }

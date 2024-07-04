@@ -19,13 +19,11 @@ export default {
 @import '../vars';
 .header {
   font-family: @heading-font;
-  background-image: linear-gradient(to bottom, #1f1f1f, #000000 74%) !important;
-  box-shadow: 0px 5px 5px black;
+  background:  #000000;
   color: @white-darker;
   font-size: 20px;
   z-index: 100;
-  top: 63px;
-  margin-left: 1px;
+  top: 50px;
   width: 100%;
   height: @header-height;
   line-height: @header-height;
@@ -35,10 +33,5 @@ export default {
   position: sticky;
 }
 
-@media screen and (min-width: 200px) and (max-width: 1119px) {
-  .header {
-    top: 50px !important;
-    font-size: 16px;
-  }
-}
+
 </style>

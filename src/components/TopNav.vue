@@ -1,30 +1,23 @@
 <template>
-  <div>
-    <div class="topnav brush-black">
-      <div class="topnav-content d-flex mx-auto">
-        <div class="topnav-logo hide-sm hide-md hide-lg text-center">
-          <router-link to="/">
-            <Icon class="logo" name="logo" />
-          </router-link>
-        </div>
-        <!-- <button class="float-left px-3 py-3 border-right" @click="toggleSidebarVisibility">
+  <div class="topnav brush-black">
+    <div class="topnav-content d-flex mx-auto">
+      <div class="topnav-logo hide-sm hide-md hide-lg text-center">
+        <router-link to="/">
+          <Icon class="logo" name="logo" />
+        </router-link>
+      </div>
+      <!-- <button class="float-left px-3 py-3 border-right" @click="toggleSidebarVisibility">
             <span class="iconfont icon-three-bars"/>
           </button> -->
 
-        <Balances class="width-full text-center" />
-        <div class="shield text-center hide-sm hide-md hide-lg mt-2 d-flex">
-          <Icon v-if="shieldEnd" name="shield" size="26" class="text-gray" />
-          <div v-if="shieldEnd" class="text-gray">{{ shieldEnd | ms }}</div>
-          <Icon v-if="booster" name="machine_gun" size="26" class="text-gray" />
-          <div v-if="booster" class="text-gray">{{ boosterEnd | ms }}</div>
-        </div>
+      <Balances class="width-full text-center" />
+      <div class="shield text-center hide-sm hide-md hide-lg mt-2 d-flex">
+        <Icon v-if="shieldEnd" name="shield" size="26" class="text-gray" />
+        <div v-if="shieldEnd" class="text-gray">{{ shieldEnd | ms }}</div>
+        <Icon v-if="booster" name="machine_gun" size="26" class="text-gray" />
+        <div v-if="booster" class="text-gray">{{ boosterEnd | ms }}</div>
       </div>
     </div>
-    <!-- <div class="prize mx-auto">
-                    {{this.prizeProps.drug_production_rate * 60 * 60 * 24 | amount}} DRUGS are produced per day. You will receive <span
-                            id="earnings" style="color:#fbbd08;font-weight: 700;">{{totalRewards.daily | amount}}</span>
-                    DWD based on your production of {{this.user.drug_production_rate * 60 * 60 * 24 | amount}} DRUGS ({{overall}}%)
-            </div> -->
   </div>
 </template>
 
@@ -92,18 +85,18 @@ export default {
 }
 
 .topnav {
+  border-bottom: 1px solid #fbbd08;
   color: @heading-color;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
   width: 100%;
-  height: @header-height;
+  height: 50px;
   overflow: hidden;
   display: flex;
   align-items: center;
   transition: width 0.3s;
-  box-shadow: -1px 5px 5px black;
   z-index: 1000;
 
   @media @bp-small {

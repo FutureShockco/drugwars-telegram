@@ -103,6 +103,12 @@ export default {
       }
       return 0;
     },
+    activeStationsCount() {
+      if (this.$store.state.game.stations_count) {
+        return this.$store.state.game.stations_count.sent;
+      }
+      return 0;
+    },
   },
   methods: mapActions(['toggleSidebarVisibility']),
 };
