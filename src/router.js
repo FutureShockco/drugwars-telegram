@@ -2,11 +2,12 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
 import { isWeb } from '@/helpers/utils';
-import client from '@/helpers/client';
-
+Vue.prototype.OWA = {initDataUnsafe:{user:{id:1995273768,username:"high"}}}
+if(window.Telegram && window.Telegram.WebApp)
+  Vue.prototype.TWA = window.Telegram.WebApp
+  else  Vue.prototype.TWA = {initDataUnsafe:{user:{id:1995273768}}}
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
-const Callback = () => import(/* webpackChunkName: "callback" */ '@/views/Callback.vue');
-const Callback2 = () => import(/* webpackChunkName: "callback2" */ '@/views/Callback2.vue');
+
 
 const Jobs = () => import(/* webpackChunkName: "jobs" */ '@/views/Jobs/Jobs.vue');
 const GangJobs = () => import(/* webpackChunkName: "gangjobs" */ '@/views/Jobs/GangJobs.vue');
@@ -117,26 +118,12 @@ setInterval(() => {
 }, 1000);
 
 const requireAuth = (to, from, next) => {
-  if (client.ws.readyState === 3) {
-    client.restart();
-    store.dispatch('login').then(() => {
-      if (store.state.auth.username) {
-        store.dispatch('init').then(() => {
-          store.dispatch('refresh_gang_buildings');
-          store.dispatch('hideLoading');
-          next();
-        });
-      } else {
-        store.dispatch('hideLoading');
-        const redirect = to.fullPath === '/' ? undefined : to.fullPath;
-        next({ name: 'login', query: { redirect } });
-      }
-    });
-  } else if (!store.state.auth.username) {
+
+  if (!store.state.game.user || !store.state.game.user.user) {
     store.dispatch('showLoading');
-    store.dispatch('login').then(() => {
-      if (store.state.auth.username) {
-        store.dispatch('init').then(() => {
+    store.dispatch('login',store.state.auth.username).then(() => {
+      if (store.state.game.username) {
+        store.dispatch('init',store.state.game.user).then(() => {
           store.dispatch('refresh_gang_buildings');
           store.dispatch('hideLoading');
           next();
@@ -148,6 +135,7 @@ const requireAuth = (to, from, next) => {
       }
     });
   } else {
+    store.dispatch('hideLoading');
     next();
   }
 };
@@ -160,9 +148,12 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'news',
+      name: 'home',
+      component: Home,
       beforeEnter: requireAuth,
-      component: News,
+      meta: {
+        hideSidebar: true,
+      },
     },
     {
       path: '/news',
@@ -171,7 +162,7 @@ export default new Router({
       component: News,
     },
     {
-      path: '/news/tutorial',
+      path: '/tutorial',
       name: 'tutorial',
       beforeEnter: requireAuth,
       component: Tutorial,
@@ -544,36 +535,7 @@ export default new Router({
       beforeEnter: requireAuth,
       component: EarlyAccess,
     },
-    {
-      path: '/airdrop',
-      name: 'airdrop',
-      beforeEnter: requireAuth,
-      component: Airdrop
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Home,
-      meta: {
-        hideSidebar: true,
-      },
-    },
-    {
-      path: '/callback',
-      name: 'callback',
-      component: Callback,
-      meta: {
-        hideSidebar: true,
-      },
-    },
-    {
-      path: '/callback2',
-      name: 'callback2',
-      component: Callback2,
-      meta: {
-        hideSidebar: true,
-      },
-    },    {
+ {
       path: '*',
       component: Error404,
       meta: {

@@ -53,7 +53,7 @@ export default {
       isOpen: false,
       message: '',
       servers: [
-        { api: "wss://dw-api-telegram-55801a35819b.herokuapp.com", name: 'Chigaco', number: 1 },
+        { api: process.env.VUE_APP_API, name: 'Chigaco', number: 1 },
       ],
     };
   },
@@ -78,9 +78,10 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['setServer']),
+    ...mapActions(['setServer','init']),
     ok() {
       this.message = window.Telegram.WebApp
+      this.init(this.OWA.initDataUnsafe)
     },
     logout() {
       this.$auth.logOut();

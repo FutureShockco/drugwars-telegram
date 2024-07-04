@@ -2,17 +2,15 @@
   <UiCenter class="vue-ui-modal pt-2 pb-7">
     <h5 class="text-center mb-0">Server ({{server.number}}) : {{server.name}}</h5>
     <Icon class="logo-large" name="logo" />
-    <div class="wrapper mt-2">
+    <div class="wrapper">
       <div class="left"></div>
       <div class="right"></div>
     </div>
-    <button @click="ok" class="button button-blue button-large mt-2 mb-4">Start</button>
+    <button @click="ok" class="button button-blue button-large mt-6 mb-4" >Start</button>
 
     <h1 v-if="this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user">{{
       this.TWA.initDataUnsafe.user.id }}</h1>
     <ul class="forcelogout">
-      <a @click.prevent="logout" class>{{'message.force_logout' | translate}}</a>
-      -
       <a href="https://discord.me/drugwars">{{'message.contact_us' | translate}}</a>
     </ul>
   </UiCenter>
@@ -23,9 +21,17 @@
 import { mapActions } from 'vuex';
 export default {
   methods: {
-    ...mapActions(['login']),
+    ...mapActions(['init','login']),
     ok(){
-      this.login()
+      console.log('jey',this.OWA)
+      if(this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+      this.init(this.TWA.initDataUnsafe).then((result) => {
+        this.$router.push({ path: '/tutorial' });
+      })
+      else this.init(this.OWA.initDataUnsafe).then((result) => {
+        console.log(result)
+        this.$router.push({ path: '/tutorial' });
+      })
     },
     logout() {
       this.$auth.logOut();
@@ -50,7 +56,7 @@ export default {
   cursor: pointer;
   animation: bgmove 5s infinite linear;
   left: calc(50% - 33px);
-  top: 56%;
+  top: 50%;
   position: absolute;
 }
 
@@ -111,6 +117,6 @@ export default {
 .forcelogout {
   position: absolute;
   bottom: 0px;
-  left: calc(50% - 120px);
+  left: calc(50% - 37px);
 }
 </style>

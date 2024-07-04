@@ -33,7 +33,7 @@
         </ul>
         <ul class="pt-1 pb-2 border-bottom">
           <li>
-            <router-link to="/news" class="py-1 px-3 d-block" @click.native="toggleSidebar">
+            <router-link to="/tutorial" class="py-1 px-3 d-block" @click.native="toggleSidebar">
               {{ 'sidebar.news' | translate }}
             </router-link>
           </li>

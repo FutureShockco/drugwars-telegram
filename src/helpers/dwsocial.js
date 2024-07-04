@@ -1,9 +1,8 @@
 import client from '@/helpers/client';
 
 function dwsocial(username, payload, cb) {
-  const accessToken = localStorage.getItem('access_token');
   client
-    .requestAsync('custom_event', { username, token: accessToken, payload })
+    .requestAsync('custom_event', { username, payload })
     .then(result => {
       cb(result);
     })

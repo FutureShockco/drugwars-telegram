@@ -21,13 +21,17 @@ const mutations = {
 
 
 const actions = {
-  login: async ({ commit }) =>
+  login: async ({ commit },{user}) =>
     new Promise(resolve => {
-      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user) {
+      console.log(user)
+      user.id = user.id.toString()
+      if (user && user.id) {
         client
-          .requestAsync('login', { user: this.TWA.initDataUnsafe.user })
+          .requestAsync('login', { user })
           .then(result => {
-            commit('saveUsername', result.name);
+            commit('saveUsername', user.id.toString());
+
+            console.log(result)
             resolve();
           })
           .catch(e => {

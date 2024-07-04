@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     username() {
-      return this.$store.state.auth.username;
+      return this.$store.state.game.user;
     },
     showSidebar() {
       return !this.$route.meta.hideSidebar;

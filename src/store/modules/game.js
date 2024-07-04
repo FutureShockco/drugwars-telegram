@@ -5,8 +5,7 @@ import store from '@/store';
 import sc from '@/helpers/steemlogin';
 import dwsocial from '@/helpers/dwsocial';
 
-// import * as util from 'util';
-// import { inspect } from 'util';
+
 const dealerSteemUsername = process.env.VUE_APP_DEALER_STEEM_USERNAME;
 const defaultErrorMessage = 'Oops something went wrong';
 
@@ -94,18 +93,16 @@ const mutations = {
   },
 };
 
+let registeredUser;
 const authToken = function () {
-  let accessToken = null;
-  if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user) {
-    accessToken = this.TWA.initDataUnsafe.user;
-  }
-  return accessToken;
+  return registeredUser;
 };
 
 const actions = {
-  init: ({ commit, dispatch }) =>
+  init: ({ commit, dispatch }, newUser) =>
     new Promise((resolve, reject) => {
-      const token = authToken();
+      dispatch('login', newUser);
+      registeredUser = newUser;
       let totalbases = 0;
       if (
         state.user &&
@@ -114,10 +111,11 @@ const actions = {
       ) {
         totalbases = state.user.buildings.find(b => b.building === 'headquarters').length;
       }
-      if (token) {
+      if (registeredUser) {
         client
-          .requestAsync('get_user', { token })
+          .requestAsync('get_user', registeredUser)
           .then(user => {
+            console.log(user)
             if (user && user.user && user.user.username) {
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 commit('savePrizeProps', prizeProps);
@@ -143,12 +141,14 @@ const actions = {
                 dispatch('refresh_fights_count');
                 dispatch('refresh_transport_count');
                 dispatch('refresh_station_count');
-                resolve();
+                resolve("success");
               });
             } else {
+              console.log('signup')
               dispatch('signup').then(() => {
                 Promise.delay(2000).then(() => {
                   window.location = '/';
+                  resolve()
                 });
               });
             }
@@ -183,9 +183,10 @@ const actions = {
     }),
   refresh_fights_count: ({ commit, dispatch }) =>
     new Promise((resolve, reject) => {
-      const token = authToken();
+
+      const { username } = authToken();
       client
-        .requestAsync('get_fights_count', { token })
+        .requestAsync('get_fights_count', { username })
         .then(fights => {
           commit('saveFightsCount', fights);
           return resolve(fights);
@@ -198,7 +199,7 @@ const actions = {
     }),
   refresh_sent_fights: ({ commit, dispatch }, limit) =>
     new Promise((resolve, reject) => {
-      const token = authToken();
+      const { username } = authToken();
       let start = 0;
       let end = 25;
       if (limit) {
@@ -206,8 +207,9 @@ const actions = {
         end = limit.end;
       }
       client
-        .requestAsync('get_sent_fights', { token, start, end })
+        .requestAsync('get_sent_fights', { username, start, end })
         .then(fights => {
+          console.log(fights)
           commit('saveSentFights', fights);
           return resolve();
         })
@@ -222,9 +224,9 @@ const actions = {
   },
   refresh_transport_count: ({ commit, dispatch }) =>
     new Promise((resolve, reject) => {
-      const token = authToken();
+      const { username } = authToken();
       client
-        .requestAsync('get_transport_count', { token })
+        .requestAsync('get_transport_count', { username })
         .then(fights => {
           commit('saveTransportsCount', fights);
           return resolve();
@@ -287,10 +289,11 @@ const actions = {
 
   refresh_station_count: ({ commit, dispatch }) =>
     new Promise((resolve, reject) => {
-      const token = authToken();
+      const username = authToken();
       client
-        .requestAsync('get_station_count', { token })
+        .requestAsync('get_station_count', { username })
         .then(stations => {
+          console.log(stations)
           commit('saveStationsCount', stations);
           return resolve();
         })
@@ -324,17 +327,20 @@ const actions = {
   signup: ({ rootState }) =>
     new Promise((resolve, reject) => {
       const { username } = rootState.auth;
+      console.log(username)
       const payload = {};
-      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.username = username.toString(); // eslint-disable-line no-param-reassign
       payload.referrer = localStorage.getItem('drugwars_referrer') || null; // eslint-disable-line no-param-reassign
       payload.type = 'dw-chars'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          console.log(result);
           store.dispatch('init');
           store.dispatch('notify', {
             type: 'success',
             message: result,
+          });
+          Promise.delay(3000).then(() => {
+            store.dispatch('init');
           });
           return resolve(result);
         }

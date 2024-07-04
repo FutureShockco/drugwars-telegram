@@ -1,8 +1,8 @@
 <template>
     <div>
-        <NewsTabs/>
+        <NewsTabs />
         <div class="p-4 anim-fade-in">
-            <Quickstart/>
+            <Quickstart />
         </div>
     </div>
 </template>

@@ -16,6 +16,10 @@ import router from '@/router';
 import store from '@/store';
 import messages from '@/translation.json';
 import numberFormats from '@/number.json';
+Vue.prototype.OWA = {initDataUnsafe:{user:{id:1995273768,username:"high"}}}
+if(window.Telegram && window.Telegram.WebApp)
+  Vue.prototype.TWA = window.Telegram.WebApp
+  else  Vue.prototype.TWA = {initDataUnsafe:{user:{id:1995273768}}}
 
 const requireComponent = require.context('./components', true, /[\w-]+\.vue$/);
 requireComponent.keys().forEach(fileName => {
@@ -78,9 +82,7 @@ Vue.filter(
 );
 
 Vue.config.productionTip = false;
-if(window.Telegram && window.Telegram.WebApp)
-Vue.prototype.TWA = window.Telegram.WebApp
-else  Vue.prototype.TWA = null
+
 
 new Vue({
   i18n,

@@ -1,8 +1,7 @@
 <template>
   <Header>
     <UiTabs>
-        <UiTab to="/news">News</UiTab>
-        <UiTab to="/news/tutorial">Tutorial</UiTab>
+        <UiTab to="/tutorial">Tutorial</UiTab>
     </UiTabs>
         <div class="coordbase text-right" v-if="base">
             <div class="text text-blue tab name" v-if="main">
