@@ -1,6 +1,6 @@
 <template>
-  <div class="topnav brush-black">
-    <div class="topnav-content d-flex mx-auto">
+  <nav class="topnav brush-black" data-options="scrolltop: false">
+    <div class="topnav-content mx-auto">
       <div class="topnav-logo hide-sm hide-md hide-lg text-center">
         <router-link to="/">
           <Icon class="logo" name="logo" />
@@ -11,6 +11,46 @@
           </button> -->
 
       <Balances class="width-full text-center" />
+      <div class="bottomnav text-center">
+
+        <div class="d-flex pt-1 pb-2 border-bottom list-style-none ">
+          <div class="col-2">
+            <router-link to="/tutorial" class="py-2 px-2 d-block">
+              <i class="fad fa-satellite-dish"></i>
+            </router-link>
+          </div>
+          <div class="col-2">
+            <router-link to="/overview" class="py-2 px-2 d-block">
+              <i class="fad fa-chart-area"></i>
+            </router-link>
+          </div>
+
+          <div class="col-2">
+            <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
+              <i class="fad fa-map-location-dot"></i>
+            </router-link>
+          </div>
+
+          <div class="col-2">
+            <router-link to="/rewards" class="py-2 px-2 d-block sidebar-rewards">
+              <i class="fad fa-vault"></i>
+            </router-link>
+          </div>
+
+          <div class="col-2">
+            <router-link to="/settings" class="py-2 px-2 d-block">
+              <i class="fad fa-gears"></i>
+            </router-link>
+          </div>
+          <div class="col-2">
+            <router-link to="/help" class="py-2 px-2 d-block">
+              <i class="fad fa-hands-holding-circle"></i>
+            </router-link>
+          </div>
+
+        </div>
+
+      </div>
       <div class="shield text-center hide-sm hide-md hide-lg mt-2 d-flex">
         <Icon v-if="shieldEnd" name="shield" size="26" class="text-gray" />
         <div v-if="shieldEnd" class="text-gray">{{ shieldEnd | ms }}</div>
@@ -18,7 +58,7 @@
         <div v-if="booster" class="text-gray">{{ boosterEnd | ms }}</div>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <script>
@@ -85,18 +125,17 @@ export default {
 }
 
 .topnav {
-  border-bottom: 1px solid #fbbd08;
   color: @heading-color;
   position: fixed;
   z-index: 100;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 120px;
+  height: 160px;
   overflow: hidden;
   display: flex;
   align-items: center;
-  transition: width 0.3s;
+  transition: 0.5s;
   z-index: 1000;
 
   @media @bp-small {
@@ -122,7 +161,7 @@ export default {
   .topnav-content {
     max-width: @main-width;
     width: 100%;
-    height: 60px;
+    height: 120px;
 
     .prize {
       font-size: 22px;
@@ -166,5 +205,88 @@ export default {
       }
     }
   }
+}
+
+
+.bottomnav {
+  color: @heading-color;
+  width: 100%;
+  color: white;
+  font-size: 26px;
+  font-weight: 500;
+  line-height: 25px;
+  font-family: @heading-font;
+
+  a {
+    color: white;
+    font-size: 16px;
+    border-bottom: 1px solid #efbf2c;
+  }
+
+  .logo {
+    margin-top: 0px;
+    height: 45px;
+  }
+
+  .bottomnav-logo {
+    width: 100%;
+    max-width: 200px;
+
+    .iconfont {
+      margin-top: 10px;
+      font-size: 40px;
+      color: white;
+    }
+  }
+
+  li {
+
+    border-right: 1px solid rgb(25, 25, 25);
+  }
+
+  li:last-of-type {
+    border-right: 0px solid rgb(43, 43, 43);
+  }
+
+  .router-link-active {
+    opacity: 1;
+    color: black;
+    border-bottom: 1px solid red;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    i {
+      font-size: 28px;
+      --fa-primary-color: red;
+      --fa-secondary-color: white;
+      --fa-primary-opacity: 1.0;
+      --fa-secondary-opacity: 1.0;
+    }
+  }
+
+  button {
+    line-height: 22px;
+    background: none;
+    border: none;
+    outline: none;
+
+    @media @bp-small {
+      display: none;
+    }
+
+    .iconfont {
+      color: @border-color !important;
+      font-size: 20px;
+    }
+  }
+
+  .shield {
+    min-width: 80px;
+  }
+
+
 }
 </style>

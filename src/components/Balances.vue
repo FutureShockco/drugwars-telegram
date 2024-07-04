@@ -347,12 +347,11 @@ export default {
   font-size: 12px;
 }
 
-.steembalance {
-  display: initial;
+.item {
+ margin: 0px;
 }
 
 .balances {
-  padding: 10px;
   color: white;
   font-size: 24px;
   font-weight: 500;
@@ -363,14 +362,10 @@ export default {
 
   li {
     padding: 0px;
-    margin-top: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
     .balance {
       float: left;
       text-align: left;
       font-size: 26px;
-      padding: 5px;
     }
 
     span {
@@ -403,61 +398,12 @@ export default {
 
   .mini {
     color:white;
-    line-height: 20px;
+    line-height: 12px;
     display: block;
-    font-size: 20px;
+    font-size: 12px;
     text-align: left;
   }
 }
 
-@media screen and (min-width: 200px) and (max-width: 669px) {
-
-
-  .balances {
-    display: flex;
-    font-size: 16px !important;
-    margin-top: 0px !important;
-    line-height: 10px !important;
-
-    li {
-      padding-left: 5px;
-      padding-right: 5px;
-      padding-top: 8px;
-      .balance {
-        float: right;
-        text-align: left;
- 
-      }
-
-      span {
-        float: right;
-        line-height: 42px;
-      }
-
-      .text-gray {
-        font-size: 4px;
-      }
-
-      .detail {
-        margin: 0px;
-        display: -webkit-inline-box;
-        line-height: 4px !important;
-        font-size: 7px;
-      }
-    }
-
-    .mini {
-      text-align: left;
-      font-size: 8px;
-      margin-top: -28px;
-    }
-
-    .icon {
-      float: left;
-      width: 32px;
-      height: 32px;
-    }
-  }
-}
 
 </style>

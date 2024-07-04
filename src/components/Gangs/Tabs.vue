@@ -6,29 +6,29 @@
         Create gang
       </UiTab>
       <UiTab :to="`/gangs/gang/${user.gang}`" v-if="user.gang">
-        {{user.ticker}}
+        {{ user.ticker }}
       </UiTab>
-     <UiTab :to="`/gangs/gang/${user.gang}/buildings`" v-if="user.gang">
+      <UiTab :to="`/gangs/gang/${user.gang}/buildings`" v-if="user.gang">
         Office
       </UiTab>
-     <UiTab :to="`/gangs/gang/${user.gang}/diplomacy`" v-if="user.gang">
+      <UiTab :to="`/gangs/gang/${user.gang}/diplomacy`" v-if="user.gang">
         State
       </UiTab>
-           <UiTab :to="`/gangs/gang/${user.gang}/deposit`" v-if="user.gang">
+      <UiTab :to="`/gangs/gang/${user.gang}/deposit`" v-if="user.gang">
         Deposit
       </UiTab>
-       <UiTab :to="`/gangs/gang/${user.gang}/fights`" v-if="user.gang">
+      <UiTab :to="`/gangs/gang/${user.gang}/fights`" v-if="user.gang">
         Fights
       </UiTab>
     </UiTabs>
-            <div class="coordbase text-right" v-if="base">
-            <div class="text text-blue tab name" v-if="main">
-                       Primary
-                    </div>
-            <div class="text text-orange tab name" v-else-if="base.custom">
-                       {{base.custom}}
-                    </div> {{base.territory}}:{{base.base}}
-        </div>
+    <!-- <div class="coordbase text-right" v-if="base">
+      <div class="text text-blue tab name" v-if="main">
+        Primary
+      </div>
+      <div class="text text-orange tab name" v-else-if="base.custom">
+        {{ base.custom }}
+      </div> {{ base.territory }}:{{ base.base }}
+    </div> -->
   </Header>
 </template>
 

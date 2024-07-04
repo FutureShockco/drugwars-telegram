@@ -3,14 +3,14 @@
     <UiTabs>
       <UiTab to="/rewards">Heist</UiTab>
     </UiTabs>
-            <div class="coordbase text-right" v-if="base">
-            <div class="text text-blue tab name" v-if="main">
-                       Primary
-                    </div>
-            <div class="text text-orange tab name" v-else-if="base.custom">
-                       {{base.custom}}
-                    </div> {{base.territory}}:{{base.base}}
-        </div>
+    <!-- <div class="coordbase text-right" v-if="base">
+      <div class="text text-blue tab name" v-if="main">
+        Primary
+      </div>
+      <div class="text text-orange tab name" v-else-if="base.custom">
+        {{ base.custom }}
+      </div> {{ base.territory }}:{{ base.base }}
+    </div> -->
   </Header>
 </template>
 

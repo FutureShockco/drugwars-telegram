@@ -196,7 +196,7 @@ export default {
 
   li {
     
-      border-right: 1px solid rgb(43, 43, 43);
+      border-right: 1px solid rgb(25, 25, 25);
     }
 
     li:last-of-type {
