@@ -10,8 +10,8 @@
         <!-- <div class="level">{{ ownItem.lvl }}</div> -->
         <div class="d-flex">
           <div class="pt-1 ms-auto">
-            <img :src="`//img.drugwars.io/buildings/${building.id}.jpg`" class="img-fluid rounded-s" width="140"
-              height="120">
+            <img :src="`//img.drugwars.io/buildings/${building.id}.jpg`" class="img-fluid rounded-s" width="100"
+              height="100">
           </div>
           <div class="ps-3 me-auto" style="width: 100%;">
             <!-- <strong class="opacity-30 color-theme font-11">Level:{{ ownItem.lvl }}</strong> -->

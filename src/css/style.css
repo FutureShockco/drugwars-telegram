@@ -77,7 +77,7 @@
 /*Structural Dark Settings*/
 .theme-dark .header,
 .theme-dark #footer-bar {
-  background: rgba(0, 0, 0, 0.55);
+  background: transparent;
 }
 
 .theme-dark .card,
@@ -993,12 +993,7 @@ input[type=range]::-webkit-slider-thumb {
   color: #FFF !important;
 }
 
-#footer-bar .active-nav i {
-  background-image: linear-gradient(to bottom, #5D9CEC, #4A89DC) !important;
-  color: #FFF !important;
-}
-
-#footer-bar .active-nav i::after {
+#footer-bar .router-link-exact-active::after {
   transform: scale(0.8) translateY(5px) translateZ(0px);
   content: "";
   position: absolute;
@@ -1338,7 +1333,7 @@ p {
   top: 0px;
   min-height: 55px;
   padding: 0px 0px;
-  box-shadow: 0 8px 24px 0 rgba(0, 0, 0, 0.08);
+  box-shadow: 0 2px 24px rgba(0, 0, 0, 0.5);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding-top: calc(constant(safe-area-inset-top)) !important;
@@ -1455,9 +1450,13 @@ p {
 }
 
 .header-clear-medium {
-  padding-top: calc(55px + 150px);
-  padding-top: calc((55px + 150px) + constant(safe-area-inset-top) * 0.8) !important;
-  padding-top: calc((55px + 150px) + env(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc(55px + 100px);
+  padding-top: calc((55px + 100px) + constant(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc((55px + 100px) + env(safe-area-inset-top) * 0.8) !important;
+
+  padding-bottom: calc(55px + 80px);
+  padding-bottom: calc((55px + 80px) + constant(safe-area-inset-top) * 0.8) !important;
+  padding-bottom: calc((55px + 80px) + env(safe-area-inset-top) * 0.8) !important;
 }
 
 .header-clear-large {
@@ -1536,15 +1535,10 @@ p {
 
 /*-Footer Menu-*/
 #footer-bar {
-  padding: 0px 10px;
-  position: fixed;
-  bottom: 0px;
-  left: 0px;
-  right: 0px;
   z-index: 98;
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.55);
+  background: transparent;
   box-shadow: 0 -5px 5px 0 rgba(0, 0, 0, 0.04);
   height: 60px;
   height: calc(60px + (env(safe-area-inset-bottom))*1.1);
@@ -1644,7 +1638,7 @@ p {
 }
 
 .theme-dark #footer-bar {
-  background-color: rgba(0, 0, 0, 0.75);
+  background-color: #0f1117;
 }
 
 .theme-dark #footer-bar a {

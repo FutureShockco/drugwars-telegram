@@ -240,13 +240,9 @@ export default {
 
 .router-link-active {
     opacity: 1;
-    color: black;
-    border-top: 1px solid red;
-    background-size: cover;
-    background-repeat: no-repeat;
+
     color: white !important;
-    background-size: cover;
-    background-repeat: no-repeat;
+
 
     i {
       margin-bottom: 5px;

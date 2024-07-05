@@ -1,7 +1,9 @@
 <template>
-  <ul class="tabs">
-    <slot></slot>
-  </ul>
+  <div class="tabs tabs-borders" id="tab-group-1">
+    <div class="tab-controls">
+      <slot></slot>
+    </div>
+  </div>
 </template>
 
 <style scoped lang="less">

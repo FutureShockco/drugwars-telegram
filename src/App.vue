@@ -8,7 +8,7 @@
         content: showSidebar,
         'content--nav-open': sidebarVisible,
       }" />
-      <BottomNav v-if="username" />
+      <!-- <BottomNav v-if="username" /> -->
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade"></div>
     </template>
     <Notifications />

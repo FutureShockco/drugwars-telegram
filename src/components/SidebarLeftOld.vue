@@ -325,13 +325,10 @@ export default {
       clear: both;
       font-family: @special-font;
       border-bottom: 1px solid rgb(28, 28, 28);
+
       .router-link-active {
         opacity: 1;
         color: black;
-        background-image: radial-gradient(ellipse farthest-corner at center 0px,
-            #2b2b2b -150%,
-            #272626 45%,
-            #000000 85%) !important;
         background-size: cover;
         background-repeat: no-repeat;
         color: black !important;

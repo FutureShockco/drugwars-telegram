@@ -319,16 +319,6 @@ export default {
       .router-link-active {
         opacity: 1;
         color: black;
-        background-image: radial-gradient(ellipse farthest-corner at center 0px,
-            #2b2b2b -150%,
-            #272626 45%,
-            #000000 85%) !important;
-        background-size: cover;
-        background-repeat: no-repeat;
-        color: black !important;
-        background-size: cover;
-        background-repeat: no-repeat;
-
         i {
           font-size: 30px;
           --fa-primary-color: red;

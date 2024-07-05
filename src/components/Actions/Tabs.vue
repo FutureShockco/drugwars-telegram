@@ -3,23 +3,23 @@
     <UiTabs>
       <UiTab to="/actions">Start</UiTab>
       <UiTab to="/actions/outgoing">
-        OUT
+        Out
         <span>
           <span class="text-green">({{ activeFightsCount }})</span>
         </span>
       </UiTab>
       <UiTab to="/actions/incoming">
-        IN
+        In
         <span>
           <span class="text-red">({{ activeIncFightsCount }})</span>
         </span>
       </UiTab>
-      <UiTab to="/actions/transport">
+      <!-- <UiTab to="/actions/transport">
         Transport
         <span>
           <span class="text-blue">({{ activeTransportsCount }})</span>
         </span>
-      </UiTab>
+      </UiTab> -->
       <!-- <UiTab to="/actions/station">
         Station
         <span>
