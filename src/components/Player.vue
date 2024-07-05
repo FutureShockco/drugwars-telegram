@@ -1,147 +1,114 @@
 <template>
-  <div class="py-3 px-0 m-1 columns text-center border-bottom leaderboard">
-    <div class="column col-2 px-0">
-      <Avatar
-        class="mx-2"
-        :size="60"
-        :username="player.nickname"
-        :rank="rank"
-        :rankname="rankname"
-        :picture="player.picture"
-        :reputation="player.reputation"
-        :xp="player.xp"
-      />
-      <span>
-        <div class="username text-xs">{{rankname}}</div>
-      </span>
-      <div
-        v-if="player.gang"
-        class="username"
-        :class="{ 'text-blue' : player.gang === user.gang }"
-      >{{ player.nickname }}</div>
-      <div v-else class="username text-purple">{{ player.nickname }}</div>
-      <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
-    </div>
-    <div class="column px-0 col-2">
-      <h5 class="production mt-0">
-        <router-link v-if="player.gang" :to="`/gangs/gang/${player.gang}`">
-          <span>
-            {{player.name}}'s {{player.role}}
-            <div>[{{ player.ticker }}]</div>
-          </span>
-        </router-link>
-        <div class="text-green">Wins :{{ player.wins }}</div>
-        <div class="text-red">Loses :{{ player.loses }}</div>
-      </h5>
+  <tr>
+    <td class="col">
+      <div class="d-flex">
+        <Avatar :size="24" :username="player.nickname" :rank="rank" :rankname="rankname"
+          picture="https://www.enableds.com/products/duo/v30/images/avatars/2s.png" :reputation="player.reputation"
+          :xp="player.xp" />
+        <!-- <span>
+          <div class="username text-xs">{{ rankname }}</div>
+        </span> -->
+        <div v-if="player.gang" class="username ms-2" :class="{ 'text-blue': player.gang === user.gang }">{{
+          player.nickname
+        }}</div>
+        <div v-else class="username text-purple ms-2">{{ player.nickname }}</div>
+        <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
+      </div>
+    </td>
+    <!-- <td class="col">
+      <router-link v-if="player.gang" :to="`/gangs/gang/${player.gang}`">
+        <span>
+          {{ player.name }}'s {{ player.role }}
+          <div>[{{ player.ticker }}]</div>
+        </span>
+      </router-link>
+      <div class="text-green">Wins :{{ player.wins }}</div>
+      <div class="text-red">Loses :{{ player.loses }}</div>
       <div class="shield mb-2" v-if="shieldEnd">
         <Icon name="shield" size="36" class="text-gray" />
         <div class="text-gray">{{ shieldEnd | ms }}</div>
       </div>
-    </div>
-    <div v-if="player.drug_production_rate" class="column col-3">
-      <h5 class="production">
-        <span class="mr-3">
+    </td> -->
+    <td v-if="player.drug_production_rate" class="col">
+      <div>
+        <Icon name="drug" size="22" />
+        {{ player.drug_production_rate * 60 * 60 * 24 | amount }}/day
+      </div>
+      <div>
+        <Icon name="weapon" size="22" />
+        {{ player.weapon_production_rate * 60 * 60 * 24 | amount }}/day
+      </div>
+      <div>
+        <Icon name="alcohol" size="22" />
+        {{ player.alcohol_production_rate * 60 * 60 * 24 | amount }}/day
+      </div>
+    </td>
+    <td v-else-if="player.drugs && !cruelty" class="col">
+      <div>
+        <div>
           <Icon name="drug" size="22" />
-          {{ player.drug_production_rate * 60 * 60 * 24 | amount}} / day
-        </span>
-        <span class="mr-3">
-          <Icon name="weapon" size="22" />
-          {{ player.weapon_production_rate * 60 * 60 * 24 | amount}} / day
-        </span>
-        <span class="mr-3">
-          <Icon name="alcohol" size="22" />
-          {{ player.alcohol_production_rate * 60 * 60 * 24 | amount}} / day
-        </span>
-      </h5>
-    </div>
-    <div v-else-if="player.drugs && !cruelty" class="column col-3">
-      <h5 class="production">
-        <span class="mr-3">
-          DEPOSIT :
-          <div>
-            <Icon name="drug" size="22" />
-            {{ player.drugs | amount}}
-          </div>
-        </span>
-      </h5>
-    </div>
-    <div v-else-if="player && player.amount" class="column col-5">
-      <h5 class="production">
-        <span class="mr-3">
-          REWARDS :
-          <div>
-            +{{ player.amount }}
-            <Icon name="dwd" size="22" />
-          </div>
-        </span>
-      </h5>
-    </div>
-    <div v-else-if="player && player.ticket" class="column col-7">
-      <h5 class="production float-right">
-        <span class="mr-3">
-          TICKETS :
-          <div>{{ player.ticket }}</div>
-        </span>
-      </h5>
-    </div>
-    <div v-if="cruelty" class="column col-3">
-      <h5 class="production"></h5>
-    </div>
-    <div v-if="player.drug_production_rate && totalRewards" class="column px-0 col-2">
-      <h5 class="production">
-        <span class="mr-3">
-          REWARDS :
-          <div>
-            <Icon name="dwd" size="22" />
-            +{{totalRewards.daily | amount }}
-          </div>
-        </span>
-      </h5>
-    </div>
-    <div v-if="player.drugs && !cruelty" class="column px-0 col-2">
-      <h5 class="production">
-        <span class="mr-3">
-          REWARDS :
+          {{ player.drugs | amount }}
+        </div>
+      </div>
+    </td>
+    <td v-else-if="player && player.amount" class="col">
+      <div class="mr-3">
+        <div>
+          +{{ player.amount }}
+          <Icon name="dwd" size="22" />
+        </div>
+      </div>
+    </td>
+    <td v-else-if="player && player.ticket" class="col">
+      <div>
+        <div>{{ player.ticket }}</div>
+      </div>
+    </td>
+    <td v-if="player.drug_production_rate && totalRewards" class="col">
+      <div>
+        <div>
+          <Icon name="dwd" size="22" />
+          +{{ totalRewards.daily | amount }}
+        </div>
+      </div>
+    </td>
+    <td v-if="player.drugs && !cruelty" class="col">
+      <div class="production">
+        <div class="mr-3">
           <div>
             <Icon name="dwd" size="22" />
             +{{ ownHeistReward.amount | amount }}
           </div>
-        </span>
-      </h5>
-    </div>
-    <div v-if="cruelty" class="column px-0 col-2">
-      <h5 class="production" v-if="player && rank && rank <11">SEASON 6 PRIZE END SEPTEMBER 2021</h5>
-    </div>
-    <div class="column col-2">
-      <h5 v-if="reward && !cruelty" class="production">
-        <span class="mr-3" v-if="player && rank && rank <26">
-          BONUS :
+        </div>
+      </div>
+    </td>
+    <td class="col">
+      <div v-if="reward && !cruelty">
+        <div v-if="player && rank && rank < 26">
           <div>
-            {{ Math.round(reward/rank) | amount}}
+            <Icon name="dwd" size="22" />
+            +{{ Math.round(reward / rank) | amount }}
+          </div>
+        </div>
+      </div>
+      <h5 v-else-if="cruelty">
+        <span class="mr-3" v-if="player && rank && rank < 11">
+          <div>
+            +{{ Math.round(10000 / rank) | amount }}
             <Icon name="dwd" size="22" />
           </div>
         </span>
       </h5>
-      <h5 v-else-if="cruelty" class="production">
-        <span class="mr-3" v-if="player && rank && rank <11">
-          BONUS :
+      <h5 v-else-if="!cruelty">
+        <span class="mr-3" v-if="player && rank && rank < 26">
           <div>
-            {{ Math.round(10000/rank) | amount}}
+            {{ Math.round(10 / rank) | amount }}
             <Icon name="dwd" size="22" />
           </div>
         </span>
       </h5>
-      <h5 v-else-if="!cruelty" class="production">
-        <span class="mr-3" v-if="player && rank && rank <26">
-          BONUS :
-          <div>
-            {{ Math.round(10/rank) | amount}}
-            <Icon name="dwd" size="22" />
-          </div>
-        </span>
-      </h5>
-    </div>
-  </div>
+    </td>
+  </tr>
 </template>
 
 <script>
@@ -222,7 +189,7 @@ export default {
     totalRewards() {
       const daily = parseFloat(
         (this.player.drug_production_rate / this.prizeProps.drug_production_rate) *
-          this.totalDailyDWD,
+        this.totalDailyDWD,
       ).toFixed(3);
       return { daily };
     },
@@ -291,17 +258,12 @@ export default {
 
 <style scoped lang="less">
 @import '../vars.less';
+
 .icon {
   margin-bottom: -5px;
 }
 
 .production {
-  display: inline-grid;
   color: #fbbd08;
-  font-size: 12px;
-}
-
-.leaderboard{
-  font-size: 14px;
 }
 </style>

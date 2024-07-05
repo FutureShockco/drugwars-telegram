@@ -265,13 +265,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     inside_header ? hideHeader() : null
                     passed_header ? showHeader() : null
                 }
-				if(passed_header){
-					document.querySelectorAll('.header-bar')[0].classList.remove('header-bar-detached');
-					document.querySelectorAll('#footer-bar')[0].classList.remove('footer-bar-detached');
-				} else {
-					document.querySelectorAll('.header-bar')[0].classList.add('header-bar-detached');
-					document.querySelectorAll('#footer-bar')[0].classList.add('footer-bar-detached');
-				}
+
             }
         });
 

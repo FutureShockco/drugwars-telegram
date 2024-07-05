@@ -1,6 +1,6 @@
 <template>
-  <div class="tabi card card-style">
-    <div class="content mt-3">
+  <div class="tabi card mb-0">
+    <div class="content mt-1 mb-2">
       <div class="tabs tabs-box" id="tab-group-1">
         <div class="tab-controls rounded-s border-highlight">
           <router-link to="/buildings" class="font-13 color-highlight" active-class="active" exact>Office</router-link>
@@ -76,26 +76,3 @@ export default {
 };
 </script>
 
-<style lang="less" scoped>
-.tabi {
-  position: fixed;
-  width: calc(100% - 30px);
-
-  top: 60px;
-  z-index: 410;
-}
-
-.coordbase {
-  position: absolute;
-  right: 10px;
-}
-
-.content {
-  margin: 20px;
-}
-
-.router-link-exact-active {
-  background-color: #FFCE54 !important;
-  color: black !important;
-}
-</style>

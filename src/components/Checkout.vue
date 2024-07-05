@@ -1,12 +1,11 @@
 <template>
   <div class="d-flex">
-    <div :class="inProgress? 'col-12':'col-6'">
-      <span class="ml-2" v-if="inProgress">End: {{ timeToWaitString }}</span>
-      <span class="ml-2" v-else>Require: {{ updateTime | ms }}</span>
-      <button 
-        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base"
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? '':'button-green']"
-        @click="handleSubmit()" class="button btn-block  button-left width-full">
+    <div :class="inProgress ? 'col-12 pe-0' : 'col-6 pe-0'">
+      <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
+      <div class="text-center w-100" v-else>Require: {{ updateTime | ms }}</div>
+      <button :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base"
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? '' : 'button-green']"
+        @click="handleSubmit()" class="button btn-block  button-left w-100">
         <template v-if="isLoading || waitingConfirmation">
           <SmallLoading />
         </template>
@@ -20,20 +19,20 @@
       </button>
 
     </div>
-    <div v-if="!inProgress" class="col-6">
-      <div class="text-right mr-2">Instant upgrade</div>
+    <div v-if="!inProgress" class="col-6 p-0">
+      <div class="text-center w-100">Instant upgrade</div>
       <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
         @click="handleRequestPayment()" class="button btn-block button-blue">
         <i class="iconfont icon-zap" />
         <span>
           {{ priceInSteem }} DWD</span>
       </button> -->
-      <button  :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+      <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
         :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
-        @click="handleSubmit('dwd')" class="button btn-block button-right">
-        <span> 
+        @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
+        <span>
           {{ priceInDWD }} DWD</span>
-          <i class="iconfont icon-arrow-up" />
+        <i class="iconfont icon-arrow-up" />
       </button>
     </div>
   </div>

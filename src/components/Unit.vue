@@ -25,8 +25,8 @@
 
       <UnitValues :unit="unit" :modifiedValues="modifiedValues" :speed="speed" />
     </div>
-    <div class="mx-auto">
-      <input class="input form-control input-block mb-2" type="number" v-model="quantity" min="1">
+    <div class="mx-auto form-field form-name">
+      <input class="round-small" type="number" v-model="quantity" min="1">
       <CheckoutRecruit :id="unit.id" :level="training_facility.lvl" :coeff="unit.coeff" :inProgress="inProgress"
         :price="unit.drugs_cost / 1400000 + unit.weapons_cost / 1400000 + unit.alcohols_cost / 1400000"
         :notEnough="hasNotEnough" :quantity="quantity" />

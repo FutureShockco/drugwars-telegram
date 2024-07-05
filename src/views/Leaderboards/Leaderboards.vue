@@ -1,13 +1,33 @@
 <template>
   <div>
     <LeaderboardsTabs />
-    <div>
-      <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
-        :rank="key + currentRank + 1" :reward="50">
-      </Player>
-      <p v-if="!users || !users.length">
-        <Loading />
-      </p>
+    <div class="card overflow-visible card-style">
+      <div class="content mb-0">
+        <h4>Production Board</h4>
+        <p>
+          Yearly reset.
+        </p>
+        <div class="table-responsive">
+          <table class="table color-theme mb-2">
+            <thead>
+              <tr>
+                <th scope="col">Player</th>
+                <th scope="col">Prod</th>
+                <th scope="col">Reward</th>
+                <th scope="col">Bonus</th>
+              </tr>
+            </thead>
+            <tbody>
+              <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+                :rank="key + currentRank + 1" :reward="50">
+              </Player>
+              <p v-if="!users || !users.length">
+                <Loading />
+              </p>
+            </tbody>
+          </table>
+        </div>
+      </div>
     </div>
     <Paginate class="ml-6 mt-4 text-center width-full" :page-count="Math.ceil(count / 50)" :page-range="3"
       :margin-pages="2" :click-handler="load_leaders" :prev-text="'Prev'" :next-text="'Next'"
@@ -61,6 +81,7 @@ export default {
   display: -webkit-inline-box;
   list-style: none;
   max-width: 90%;
+
   a,
   span,
   em {

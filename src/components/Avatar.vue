@@ -5,18 +5,12 @@
       class="avatar"
       :style="{'width': `${size}px`,'height': `${size}px`,}"
     >
-      <span
+      <div
         class="avatar-img"
         :style="{'background-image': `url(${picture}`,'background-size':`contain!important`,'width': `${size}px`,'height': `${size}px`,}"
       />
       <span v-if="rank && rank <4" :class="'avatar-border' + rank" />
       <span v-else class="avatar-border" />
-      <span class="rank py-1 px-2" v-if="rank">Rank: {{ rank }}</span>
-      <!-- <span
-        class="cruelty py-1 px-2"
-        v-if="reputation && reputation!=='none'"
-      >Cruelty: {{ reputation /1000 | amount }}</span> -->
-      <span class="cruelty py-1 px-2" v-else-if="!reputation || reputation!=='none'">Cruelty: 0</span>
     </router-link>
   </div>
 </template>
@@ -56,9 +50,6 @@ export default {
   position: relative;
   overflow: visible;
   .avatar-img {
-    position: absolute;
-    left: 0;
-    top: 0;
     width: 100%;
     height: 100%;
     background-size: contain;
@@ -79,7 +70,7 @@ export default {
     display: inline-block;
     position: absolute;
     top: -5%;
-    left: -12%;
+    left: 0%;
     bottom: -18%;
     right: -10%;
     background-image: url('//img.drugwars.io/avatar-border-black.png');

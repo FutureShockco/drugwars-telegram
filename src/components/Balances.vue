@@ -1,11 +1,11 @@
 <template>
   <div>
-    <ul class="d-flex balances list-style-none">
-      <li v-if="booster" class="col-4 d-flex text-yellow item">
-        <Icon name="drug" size="36" />
+    <ul class="d-flex balances list-style-none p-0 m-0">
+      <li v-if="booster" class="col-3 card d-flex pt-2 text-yellow">
+        <Icon name="drug" size="24" />
         <div class="balance">
           <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
-            {{ balances.drugs | amount }} <span class="mini"> {{ 'message.drugs' | translate }}</span>
+            {{ balances.drugs | amount }}
           </div>
           <!-- <div class="detail">
           {{ (HQ.drug_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange" v-if="drugBonus">
@@ -16,11 +16,11 @@
         </div> -->
         </div>
       </li>
-      <li class="col-4 d-flex item" v-else>
-        <Icon name="drug" size="36" />
+      <li class="col-3 card d-flex pt-2" v-else>
+        <Icon name="drug" size="24" />
         <div class="balance">
           <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
-            {{ balances.drugs | amount }} <span class="mini"> {{ 'message.drugs' | translate }}</span>
+            {{ balances.drugs | amount }}
           </div>
           <!-- <div class="detail">
           {{ HQ.drug_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="drugBonus"> {{ drugBonus
@@ -32,11 +32,11 @@
         </div> -->
         </div>
       </li>
-      <li v-if="booster" class="text-yellow col-4 d-flex item">
-        <Icon name="weapon" size="36" />
+      <li v-if="booster" class="text-yellow col-3 card d-flex pt-2">
+        <Icon name="weapon" size="24" />
         <div class="balance">
           <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
-            {{ balances.weapons | amount }} <span class="mini"> {{ 'message.weapons' | translate }}</span>
+            {{ balances.weapons | amount }}
           </div>
           <!-- <div class="detail ">
           {{ (HQ.weapon_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange" v-if="weaponBonus">{{
@@ -47,11 +47,11 @@
         </div> -->
         </div>
       </li>
-      <li class="col-4 d-flex item" v-else>
-        <Icon name="weapon" size="36" />
+      <li class="col-3 card d-flex pt-2" v-else>
+        <Icon name="weapon" size="24" />
         <div class="balance">
           <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
-            {{ balances.weapons | amount }} <span class="mini"> {{ 'message.weapons' | translate }}</span>
+            {{ balances.weapons | amount }}
           </div>
           <!-- <div class="detail ">
           {{ HQ.weapon_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="weaponBonus">{{
@@ -62,11 +62,11 @@
         </div> -->
         </div>
       </li>
-      <li v-if="booster" class="text-yellow col-4 d-flex item">
-        <Icon name="alcohol" size="36" />
+      <li v-if="booster" class="text-yellow col-3 card d-flex pt-2">
+        <Icon name="alcohol" size="24" />
         <div class="balance">
           <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
-            {{ balances.alcohols | amount }}<span class="mini"> {{ 'message.alcohol' | translate }}</span>
+            {{ balances.alcohols | amount }}
           </div>
           <!-- <div class="detail">
           {{ (HQ.alcohol_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange"
@@ -77,11 +77,11 @@
         </div> -->
         </div>
       </li>
-      <li class="col-4 d-flex item" v-else>
-        <Icon name="alcohol" size="36" />
+      <li class="col-3 card d-flex pt-2" v-else>
+        <Icon name="alcohol" size="24" />
         <div class="balance">
           <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
-            {{ balances.alcohols | amount }}<span class="mini"> {{ 'message.alcohol' | translate }}</span>
+            {{ balances.alcohols | amount }}
           </div>
           <!-- <div class="detail">
           {{ HQ.alcohol_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="alcoholBonus">{{
@@ -92,13 +92,10 @@
         </div> -->
         </div>
       </li>
-    </ul>
-    <ul class="d-flex balances list-style-none">
-
-      <li class="col-12 item">
-        <Icon name="dwd" size="36" />
+      <li class="col-3 card d-flex pt-2">
+        <Icon name="dwd" size="24" />
         <div class="balance">
-          <div>{{ user.dwd }} <span class="mini"> DWD</span></div>
+          <div>{{ user.dwd | amount }}</div>
           <!-- <div class="balance">
           <div class="detail"> DAILY: <span class="detail text-green">
               +{{ totalRewards.daily }} </span></div>
@@ -107,8 +104,8 @@
         </div> -->
         </div>
       </li>
-
     </ul>
+
   </div>
 </template>
 
@@ -337,7 +334,7 @@ export default {
 <style scoped lang="less">
 @import '../vars.less';
 
-.item{
+.item {
   border-radius: 5px 5px 0px 0px;
   margin: 5px;
 }
@@ -348,7 +345,7 @@ export default {
 }
 
 .item {
- margin: 0px;
+  margin: 0px;
 }
 
 .balances {
@@ -362,10 +359,13 @@ export default {
 
   li {
     padding: 0px;
+
     .balance {
       float: left;
       text-align: left;
-      font-size: 26px;
+      font-size: 24px;
+      line-height: 24px!important;;
+
     }
 
     span {
@@ -397,13 +397,11 @@ export default {
   }
 
   .mini {
-    color:white;
+    color: white;
     line-height: 12px;
     display: block;
     font-size: 12px;
     text-align: left;
   }
 }
-
-
 </style>

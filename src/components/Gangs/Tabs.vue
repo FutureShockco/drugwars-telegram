@@ -1,5 +1,18 @@
 <template>
-  <Header>
+  <div class="tabi card mb-0">
+    <div class="content mt-1 mb-2">
+      <div class="tabs tabs-box" id="tab-group-1">
+        <div class="tab-controls rounded-s border-highlight">
+          <router-link to="/gangs" class="font-13 color-highlight" active-class="active" exact>Gangs</router-link>
+          <router-link :to="`/gangs/gang/${user.gang}`" v-if="user.gang" class="font-13 color-highlight"
+            active-class="active" exact>{{ user.ticker }}</router-link>
+          <router-link v-if="!user.gang" to="/gangs/create" class="font-13 color-highlight" active-class="active"
+            exact>Create gang</router-link>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <Header>
     <UiTabs>
       <UiTab to="/gangs">Gangs</UiTab>
       <UiTab v-if="!user.gang" to="/gangs/create">
@@ -21,15 +34,8 @@
         Fights
       </UiTab>
     </UiTabs>
-    <!-- <div class="coordbase text-right" v-if="base">
-      <div class="text text-blue tab name" v-if="main">
-        Primary
-      </div>
-      <div class="text text-orange tab name" v-else-if="base.custom">
-        {{ base.custom }}
-      </div> {{ base.territory }}:{{ base.base }}
-    </div> -->
-  </Header>
+
+  </Header> -->
 </template>
 
 <script>

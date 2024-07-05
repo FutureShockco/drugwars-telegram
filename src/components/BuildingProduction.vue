@@ -1,17 +1,17 @@
 <template>
-    <div class="production">
-        <div v-if="production_rate">
-            <span v-if="!compactview"><b>Current:</b></span> +{{ current | amount }}
-            <span>/ DAY</span>
-        </div>
-        <div v-if="production_rate && compactview">
-            +{{ perhour | amount }} / HOUR
-        </div>
-        <div v-if="!compactview">
-            <span><b>Next:</b></span> +{{ next | amount }}
-            <span>/ DAY</span>
-        </div>
+  <div class="production">
+    <div v-if="production_rate">
+      <span v-if="!compactview">Current:</span> +{{ current | amount }}
+      <span>/ DAY</span>
     </div>
+    <div v-if="production_rate && compactview">
+      +{{ perhour | amount }} / HOUR
+    </div>
+    <div v-if="!compactview">
+      <span>Next:</span> +{{ next | amount }}
+      <span>/ DAY</span>
+    </div>
+  </div>
 </template>
 
 <script>

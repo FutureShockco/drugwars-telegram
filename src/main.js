@@ -1,7 +1,7 @@
 // import 'primer/index.scss';
 //import '@vue/ui/dist/vue-ui.css';
 import '@/styles.less';
-
+import '@/less/form.less';
 
 
 

@@ -1,16 +1,51 @@
 <template>
   <!-- Header -->
-  <div class="header-bar header-fixed header-app header-bar-detached">
-    <a @click="toggleSidebarVisibility" data-bs-toggle="offcanvas" data-bs-target="#menu-main" href="#"><i
-        class="fad fa-bars color-theme"></i></a>
-    <a href="#" class="header-title color-theme">DrugWars</a>
-    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-color"><i
-        class="bi bi-palette-fill font-13 color-highlight"></i></a>
-    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-bell"><em class="badge bg-highlight ms-1">3</em><i
-        class="font-14 bi bi-bell-fill"></i></a>
-    <a href="#" class="show-on-theme-light" data-toggle-theme><i class="bi bi-moon-fill font-13"></i></a>
-    <a href="#" class="show-on-theme-dark" data-toggle-theme><i
-        class="bi bi-lightbulb-fill color-yellow-dark font-13"></i></a>
+  <div class="header-bar header-fixed header-app header-bar-attached d-block">
+    <!-- <div style="width: 40px;height:50px;margin:10px;" @click="toggleSidebarVisibility" ><i
+        class="card fad fa-bars color-theme"></i></div> -->
+    <!-- <a href="#" class="header-title color-theme">DrugWars</a> -->
+
+
+    <div class="d-block card w-100">
+      <div class="d-flex list-style-none ">
+        <div class="col-2 card">
+          <router-link to="/tutorial" class="py-2 px-2 d-block">
+            <i class="fad fa-satellite-dish"></i>
+          </router-link>
+        </div>
+        <div class="col-2 card">
+          <router-link to="/overview" class="py-2 px-2 d-block">
+            <i class="fad fa-chart-area"></i>
+          </router-link>
+        </div>
+
+        <div class="col-2 card">
+          <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
+            <i class="fad fa-map-location-dot"></i>
+          </router-link>
+        </div>
+
+        <div class="col-2 card">
+          <router-link to="/rewards" class="py-2 px-2 d-block sidebar-rewards">
+            <i class="fad fa-vault"></i>
+          </router-link>
+        </div>
+
+        <div class="col-2 card">
+          <router-link to="/settings" class="py-2 px-2 d-block">
+            <i class="fad fa-gears"></i>
+          </router-link>
+        </div>
+        <div class="col-2 card">
+          <router-link to="/help" class="py-2 px-2 d-block">
+            <i class="fad fa-hands-holding-circle"></i>
+          </router-link>
+        </div>
+
+      </div>
+    </div>
+    <Balances class="w-100 text-center d-block" />
+
   </div>
   <!-- <nav class="topnav topnav-detached brush-black" data-options="scrolltop: false">
     <div class="topnav-content mx-auto">

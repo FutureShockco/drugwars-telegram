@@ -84,6 +84,10 @@ export default {
   }
 }
 
+.content{
+  margin: 0px;
+}
+
 // .content {
 //   position: relative;
 //   left: 0;

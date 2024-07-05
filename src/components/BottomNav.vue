@@ -4,7 +4,7 @@
     <router-link to="/units"><i class="fad fa-campground font-15"></i><span>Camp</span></router-link>
     <router-link to="/actions" ><i class="fad fa-explosion font-16"></i><span>Fight</span></router-link>
     <router-link to="/leaderboards"><i class="fad fa-trophy font-16"></i><span>Board</span></router-link>
-    <router-link to="/gangs" data-bs-toggle="offcanvas" data-bs-target="#menu-main"><i class="fad fa-people-group"></i><span>Gang</span></router-link>
+    <router-link to="/gangs"><i class="fad fa-people-group"></i><span>Gang</span></router-link>
   </div>
   <!-- <div>
     <ul class="bottomnav d-flex list-style-none text-center">

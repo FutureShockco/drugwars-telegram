@@ -1,28 +1,5 @@
 @import '../vars';
 
-.form {
-  max-width: 260px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.input {
-  background-color: white;
-  border: 1px solid @border-color;
-  min-height: 34px;
-  padding: 6px 8px;
-  font-size: 16px;
-  line-height: 20px;
-
-  &.input-primary {
-    width: 100%;
-    min-height: 40px;
-    padding: 8px 12px;
-    font-size: 20px;
-    line-height: 34px;
-  }
-}
-
 
 
 .button {
@@ -32,8 +9,8 @@
   border-radius: 3px;
   border: none;
   font-size: 15px;
-  line-height: 34px;
-  height: 34px;
+  line-height: 34px!important;
+  height: 34px!important;
   color: rgb(198, 198, 198);
   padding: 0 8px;
   background-position: center;
@@ -69,6 +46,12 @@
     background-repeat: round;
     animation: move 3s linear infinite;
     overflow: hidden;
+
+    span{
+      width: 100%;
+      text-align: center;
+      z-index: 10;
+    }
   }
  
 
@@ -172,4 +155,13 @@
   &:focus {
     opacity: 1;
   }
+}
+
+.text-right{
+  text-align: right;
+}
+
+
+.text-left{
+  text-align: left;
 }

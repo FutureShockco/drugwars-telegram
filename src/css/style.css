@@ -1138,7 +1138,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .bg-23 {
-  background-image: url(/images/pictures/23.jpg);
+  background-image: url(https://www.enableds.com/products/duo/v30/images/pictures/23.jpg);
 }
 
 /*Typography 1 Settings*/
@@ -1227,10 +1227,10 @@ p {
 }
 
 /*Content Boxes*/
-/* .content {
+.content {
   position: relative;
   margin: 20px 20px 20px 20px;
-} */
+} 
 .content p:last-child {
   margin-bottom: 0px;
 }
@@ -1455,9 +1455,9 @@ p {
 }
 
 .header-clear-medium {
-  padding-top: calc(55px + 30px);
-  padding-top: calc((55px + 30px) + constant(safe-area-inset-top) * 0.8) !important;
-  padding-top: calc((55px + 30px) + env(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc(55px + 150px);
+  padding-top: calc((55px + 150px) + constant(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc((55px + 150px) + env(safe-area-inset-top) * 0.8) !important;
 }
 
 .header-clear-large {
