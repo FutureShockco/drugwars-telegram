@@ -6,8 +6,8 @@
       <div class="content">
         <div class="d-flex">
           <div class="pt-1 ms-auto">
-            <img :src="`//img.drugwars.io/buildings/${building.id}.jpg`" class="img-fluid rounded-s" width="100"
-              height="100">
+            <img style="border: 1px solid #392828;" :src="`/img/buildings/${building.id}.png`" class="img-fluid rounded-s"
+              width="100" height="100">
           </div>
           <div class="ps-3 me-auto" style="width: 100%;">
             <router-link class="mt-n2 pb-2" :to="`/buildings/detail?name=${building.id}`">
