@@ -1,18 +1,18 @@
 <template>
   <div class="cost mt-2">
-    <span class="mr-2">
+    <span class="me-2">
       Cost:
     </span>
-    <span class="mr-2" :class="{ 'not-enough': drugsCost * this.quantity > balances.drugs }" v-if="drugsCost">
-      <Icon :size="18" name="drug" />
+    <span class="me-2" :class="{ 'not-enough': drugsCost * this.quantity > balances.drugs }" v-if="drugsCost">
+      <Icon class="me-1" :size="18" name="drug" />
       {{ drugsCost * this.quantity | amount }}
     </span>
-    <span class="mr-2" :class="{ 'not-enough': weaponsCost * this.quantity > balances.weapons }" v-if="weaponsCost">
-      <Icon :size="18" name="weapon" />
+    <span class="me-2" :class="{ 'not-enough': weaponsCost * this.quantity > balances.weapons }" v-if="weaponsCost">
+      <Icon class="me-1" :size="18" name="weapon" />
       {{ weaponsCost * this.quantity | amount }}
     </span>
-    <span class="mr-2" :class="{ 'not-enough': alcoholsCost * this.quantity > balances.alcohols }" v-if="alcoholsCost">
-      <Icon :size="18" name="alcohol" />
+    <span class="me-2" :class="{ 'not-enough': alcoholsCost * this.quantity > balances.alcohols }" v-if="alcoholsCost">
+      <Icon class="me-1" :size="18" name="alcohol" />
       {{ alcoholsCost * this.quantity | amount }}
     </span>
     <!-- <div v-if="special.length>0 && quantity" v-for="cost in special" :key="cost.name">
