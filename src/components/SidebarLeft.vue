@@ -1,162 +1,153 @@
 <template>
-  <div class="sidebar sidebar-left" :class="{ 'sidebar-open': sidebarVisible }">
-    <div class="d-flex flex-column height-full">
-      <!-- <div class="text-center pt-3">
-        <Avatar
-          v-if="user.nickname && rank"
-          :size="100"
-          :username="user.nickname"
-          :xp="xp"
-          :rank="rank"
-          :picture="user.picture"
-          :reputation="reputation"
-        />
-        <Avatar
-          v-else
-          :size="100"
-          :username="user.nickname"
-          :xp="xp"
-          :picture="user.picture"
-          :reputation="reputation"
-        />
-        <div class="username text-xs">{{ rankname }}</div>
-        <div class="username" >
-          {{ user.nickname }}
-        </div>
-        <div class="gang-label" v-if="user.ticker">[{{ user.ticker }}]</div>
-      </div> -->
-      <div class="height-full">
-        <!-- <ul class="pt-1 border-bottom">
-          <li>
-            <BaseDropdown class="pb-2 px-3 d-block" :config="config" />
-          </li>
-        </ul> -->
-        <ul class="pt-1 pb-2 border-bottom">
-          <li>
-            <router-link to="/tutorial" class="py-2 px-2 d-block">
-              <i class="fad fa-satellite-dish"></i>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/overview" class="py-2 px-2 d-block">
-              <i class="fad fa-chart-area"></i>
-            </router-link>
-          </li>
-          <!-- <li>
-            <router-link to="/buildings" class="py-2 px-2 d-block">
-              <i class="fad fa-house-chimney"></i>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/units" class="py-2 px-2 d-block">
-              <i class="fad fa-campground"></i>
-            </router-link>
-          </li> -->
-          <!-- <li>
-            <router-link to="/actions" class="py-2 px-2 d-block">
-              <i class="fad fa-explosion"></i>
-              <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
-                {{ activeIncFightsCount }}<i class="iconfont icon-arrow-down"></i>
-              </span>
-              <span class="text-green label p-0" v-if="activeFightsCount > 0">
-                {{ activeFightsCount }}<i class="iconfont icon-arrow-up"></i>
-              </span>
-              <span class="text-blue label p-0" v-if="activeTransportsCount > 0">
-                {{ activeTransportsCount }}<i class="iconfont icon-arrow-up"></i>
-              </span>
-              <span class="text-orange label p-0" v-if="activeStationsCount > 0">
-                {{ activeStationsCount }}<i class="iconfont icon-arrow-up"></i>
-              </span>
-            </router-link>
-          </li> -->
-          <li>
-            <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
-              <i class="fad fa-map-location-dot"></i>
-            </router-link>
-          </li>
-          <!-- <li>
-            <router-link to="/leaderboards" class="py-2 px-2 d-block">
-              <i class="fad fa-chalkboard-user"></i>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/gangs" class="py-2 px-2 d-block">
-              <i class="fad fa-people-group"></i>
-            </router-link>
-          </li> -->
-          <!-- <li>
-                <router-link
-                  to="/contracts"
-                  class="py-2 px-2 d-block"
-                  
-                >
-                  Contracts
-                </router-link>
-              </li> -->
-          <!-- <li>
-            <router-link to="/jobs" class="py-2 px-2 d-block" >
-              {{ 'sidebar.jobs' | translate }}
-              <span class="text-red" v-if="jobs > 0"> ({{ jobs }}) </span>
-            </router-link>
-          </li> -->
-          <li>
-            <router-link to="/rewards" class="py-2 px-2 d-block sidebar-rewards">
-              <i class="fad fa-vault"></i>
-            </router-link>
-          </li>
-          <!-- <li>
-            <router-link
-              to="/market?token=dwd"
-              class="py-2 px-2 d-block"
-              
-            >
-              {{ 'sidebar.market' | translate }}
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/shop" class="py-2 px-2 d-block" >
-              {{ 'sidebar.shop' | translate }}
-            </router-link>
-          </li> -->
-          <!-- <li>
-                        <router-link to="/cards/mycollection" class="py-2 px-2 d-block" >
-                            {{'sidebar.cards' | translate}}
-                        </router-link>
-                    </li> -->
-
-
-          <!-- <li>
-                        <router-link to="/referral" class="py-2 px-2 d-block " >
-                            {{'sidebar.referral' | translate}}
-                        </router-link>
-                    </li> -->
-          <li>
-            <router-link to="/settings" class="py-2 px-2 d-block">
-              <i class="fad fa-gears"></i>
-            </router-link>
-          </li>
-          <li>
-            <router-link to="/help" class="py-2 px-2 d-block">
-              <i class="fad fa-hands-holding-circle"></i>
-            </router-link>
-          </li>
-          <!-- <li>
-                        <a href="https://forum.drugwars.io/" target="_blank" class="py-2 px-2 d-block">
-                   {{'sidebar.forum' | translate}}
-                </a>
-                    </li> -->
-        </ul>
-        <!-- <ul class="pt-1 pb-2 border-bottom">
-                    <li>
-                        <a @click.prevent="logout" class="py-2 px-2 text-gray d-block">
-                    {{'sidebar.logout' | translate}}
-                </a>
-                    </li>
-                </ul> -->
+  <div :style="sidebarVisible ? 'visibility:visible;' : 'visibility:hidden;'" :class="sidebarVisible ? 'show' : ''"
+    id="menu-start-attached" style="width:280px;" class="offcanvas offcanvas-start">
+    <div class="card card-style bg-23 mb-3 rounded-m mt-3" data-card-height="150">
+      <div class="card-top m-3">
+        <a href="#" data-bs-dismiss="offcanvas" class="icon icon-xs bg-theme rounded-s color-theme float-end"><i
+            class="bi bi-caret-left-fill"></i></a>
       </div>
-      <Footer />
+      <div class="card-bottom p-3">
+        <h1 class="color-white font-20 font-700 mb-n2">Duo Mobile</h1>
+        <p class="color-white font-12 opacity-70 mb-n1">Bootstrap 5 Mobile PWA</p>
+      </div>
+      <div class="card-overlay bg-gradient-fade rounded-0"></div>
     </div>
+
+    <div class="bg-theme mx-3 rounded-m shadow-m mt-3 mb-3">
+      <div class="d-flex px-2 pb-2 pt-2">
+        <div>
+          <a href="#"><img src="images/pictures/7s.jpg" width="45" class="rounded-s" alt="img"></a>
+        </div>
+        <div class="ps-2 align-self-center">
+          <h5 class="ps-1 mb-0 line-height-xs pt-1">Karla Black</h5>
+          <h6 class="ps-1 mb-0 font-400 opacity-40">Front End Designer</h6>
+        </div>
+        <div class="ms-auto">
+          <a href="#" data-bs-toggle="dropdown" class="icon icon-m ps-3"><i
+              class="bi bi-three-dots-vertical font-18 color-theme"></i></a>
+          <div class="dropdown-menu  bg-transparent border-0 mt-n1 ms-3">
+            <div class="card card-style rounded-m shadow-xl mt-1 me-1">
+              <div class="list-group list-custom list-group-s list-group-flush rounded-xs px-3 py-1">
+                <a href="page-profile-admin.html" class="color-theme opacity-70 list-group-item py-1"><strong
+                    class="font-500 font-12">Your Profile</strong><i class="bi bi-chevron-right"></i></a>
+                <a href="page-activity.html" class="color-theme opacity-70 list-group-item py-1"><strong
+                    class="font-500 font-12">Notifications</strong><i class="bi bi-chevron-right"></i></a>
+                <a href="page-login-2.html" class="color-theme opacity-70 list-group-item py-1"><strong
+                    class="font-500 font-12">Log Out</strong><i class="bi bi-chevron-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <span class="menu-divider">NAVIGATION</span>
+    <div class="menu-list">
+      <div class="card card-style rounded-m p-3 py-2 mb-0">
+        <a href="index.html" id="nav-homes"><i
+            class="gradient-blue shadow-bg shadow-bg-xs bi bi-house-fill"></i><span>Homepage</span><i
+            class="bi bi-chevron-right"></i></a>
+        <a href="index-components.html" id="nav-comps"><i
+            class="gradient-red shadow-bg shadow-bg-xs bi bi-gear-fill"></i><span>Components</span><i
+            class="bi bi-chevron-right"></i></a>
+        <a href="index-pages.html" id="nav-pages"><i
+            class="gradient-green shadow-bg shadow-bg-xs bi bi-heart-fill"></i><span>Site Pages</span><i
+            class="bi bi-chevron-right"></i></a>
+        <a href="index-media.html" id="nav-media"><i
+            class="gradient-yellow shadow-bg shadow-bg-xs bi bi-image-fill"></i><span>Media Styles</span><i
+            class="bi bi-chevron-right"></i></a>
+        <a href="index-contact.html" id="nav-mails"><i
+            class="gradient-magenta shadow-bg shadow-bg-xs bi bi-envelope-fill"></i><span>Contact</span><i
+            class="bi bi-chevron-right"></i></a>
+      </div>
+    </div>
+
+    <span class="menu-divider mt-4">SETTINGS</span>
+    <div class="menu-list">
+      <div class="card card-style rounded-m p-3 py-2 mb-0">
+        <a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-color">
+          <i class="gradient-highlight shadow-bg shadow-bg-xs bi bi-palette-fill"></i>
+          <span>Highlights</span>
+          <i class="bi bi-chevron-right"></i>
+        </a>
+        <a href="#" data-toggle-theme data-trigger-switch="switch-1">
+          <i class="gradient-dark shadow-bg shadow-bg-xs bi bi-moon-fill font-13"></i>
+          <span>Dark Mode</span>
+          <div class="form-switch ios-switch switch-green switch-s me-2">
+            <input type="checkbox" data-toggle-theme class="ios-input" id="switch-1">
+            <label class="custom-control-label" for="switch-1"></label>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <span class="menu-divider mt-4">Messages</span>
+    <div class="menu-content px-3">
+      <div class="card card-style rounded-m p-2 mx-0 bg-theme mb-0">
+        <div class="menu-list">
+          <a href="#"><img src="images/avatars/6s.png" alt="img" class="gradient-orange"><span
+              class="font-500 color-theme">Olivia Orange</span><em class="badge badge-s bg-red-dark">3</em></a>
+          <a href="#"><img src="images/avatars/2s.png" alt="img" class="gradient-green"><span
+              class="font-500 color-theme">Marcus Green</span><em class="badge badge-s bg-red-dark">5</em></a>
+          <a href="#"><img src="images/avatars/5s.png" alt="img" class="gradient-blue"><span
+              class="font-500 color-theme">Danny Blueish</span><em class="badge badge-s bg-red-dark">1</em></a>
+        </div>
+      </div>
+    </div>
+
+    <span class="menu-divider mt-4">Latest Updates</span>
+    <div class="menu-content px-3">
+      <div class="card card-style rounded-m p-2 mx-0 bg-theme">
+        <a href="#">
+          <div class="d-flex">
+            <div class="align-self-center">
+              <img src="images/pictures/14s.jpg" class="rounded-s me-2" width="60" alt="img">
+            </div>
+            <div class="align-self-center">
+              <h5 class="font-14 mb-0 ps-1 pt-1">Duo 3.0 Released</h5>
+              <p class="ps-1 pb-1 mb-0 font-11 line-height-s opacity-70">
+                New design, more components. Bootstrap 5 and Vanilla JS.
+              </p>
+            </div>
+          </div>
+        </a>
+        <div class="mb-2"></div>
+        <a href="#">
+          <div class="d-flex">
+            <div class="align-self-center">
+              <img src="images/pictures/5s.jpg" class="rounded-s me-2" width="60" alt="img">
+            </div>
+            <div class="align-self-center">
+              <h5 class="font-14 mb-0 ps-1 pt-1">PWA Ready</h5>
+              <p class="ps-1 pb-1 mb-0 font-11 line-height-s opacity-70">
+                Add Duo to your home screen and enjoy it as you would a native app.
+              </p>
+            </div>
+          </div>
+        </a>
+        <div class="mb-2"></div>
+        <a href="#">
+          <div class="d-flex">
+            <div class="align-self-center">
+              <img src="images/pictures/11s.jpg" class="rounded-s me-2" width="60" alt="img">
+            </div>
+            <div class="align-self-center">
+              <h5 class="font-14 mb-0 ps-1 pt-1">Care & Quality</h5>
+              <p class="ps-1 pb-1 mb-0 font-11 line-height-s opacity-70">
+                We love all our customers, and we're always here to help out.
+              </p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <p class="text-center mb-0 mt-n3 pb-3 font-9 text-uppercase font-600 color-theme">Made with <i
+        class=" font-9 px-1 bi bi-heart-fill color-red-dark"></i> by Enabled in <span class="copyright-year"></span>.
+    </p>
+
   </div>
+
 </template>
 
 <script>
@@ -324,6 +315,7 @@ export default {
       clear: both;
       font-family: @special-font;
       border-bottom: 1px solid rgb(28, 28, 28);
+
       .router-link-active {
         opacity: 1;
         color: black;

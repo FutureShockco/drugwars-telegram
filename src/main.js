@@ -1,6 +1,13 @@
-import 'primer/index.scss';
-import '@vue/ui/dist/vue-ui.css';
+// import 'primer/index.scss';
+//import '@vue/ui/dist/vue-ui.css';
 import '@/styles.less';
+
+
+
+
+import '@/css/bootstrap.css';
+import '@/css/style.css';
+import '@/css/highlights/yellow.css';
 import Vue from 'vue';
 import VueI18n from 'vue-i18n';
 import VueUi from '@vue/ui';

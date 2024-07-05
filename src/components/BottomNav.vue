@@ -1,65 +1,72 @@
 <template>
-  <div>
-      <ul class="bottomnav d-flex list-style-none text-center">
-        <li class="col-3">
-          <router-link to="/buildings" class="py-2 px-2 d-block">
-            <i class="fad fa-house-chimney"></i>
-            <div>
-              HQ
-            </div>
-          </router-link>
-        </li>
-        <li class="col-3">
-          <router-link to="/units" class="py-2 px-2 d-block">
-            <i class="fad fa-campground"></i>
-            <div>
-              Camp
-            </div>
-          </router-link>
-        </li>
-        <li class="col-3">
-          <router-link to="/actions" class="py-2 px-2 d-block">
-            <i class="fad fa-explosion"></i>
-            <div>
-              Fight
-            </div>
-            <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
-              {{ activeIncFightsCount }}<i class="iconfont icon-arrow-down"></i>
-            </span>
-            <span class="text-green label p-0" v-if="activeFightsCount > 0">
-              {{ activeFightsCount }}<i class="iconfont icon-arrow-up"></i>
-            </span>
-            <span class="text-blue label p-0" v-if="activeTransportsCount > 0">
-              {{ activeTransportsCount }}<i class="iconfont icon-arrow-up"></i>
-            </span>
-            <span class="text-orange label p-0" v-if="activeStationsCount > 0">
-              {{ activeStationsCount }}<i class="iconfont icon-arrow-up"></i>
-            </span>
-          </router-link>
-        </li>
+  <div id="footer-bar" class="footer-bar footer-bar-detached">
+    <router-link to="/buildings"><i class="fad fa-house-chimney font-15"></i><span>HQ</span></router-link>
+    <router-link to="/units"><i class="fad fa-campground font-15"></i><span>Camp</span></router-link>
+    <router-link to="/actions" ><i class="fad fa-explosion font-16"></i><span>Fight</span></router-link>
+    <router-link to="/leaderboards"><i class="fad fa-trophy font-16"></i><span>Board</span></router-link>
+    <router-link to="/gangs" data-bs-toggle="offcanvas" data-bs-target="#menu-main"><i class="fad fa-people-group"></i><span>Gang</span></router-link>
+  </div>
+  <!-- <div>
+    <ul class="bottomnav d-flex list-style-none text-center">
+      <li class="col-3">
+        <router-link to="/buildings" class="py-2 px-2 d-block">
+          <i class="fad fa-house-chimney"></i>
+          <div>
+            HQ
+          </div>
+        </router-link>
+      </li>
+      <li class="col-3">
+        <router-link to="/units" class="py-2 px-2 d-block">
+          <i class="fad fa-campground"></i>
+          <div>
+            Camp
+          </div>
+        </router-link>
+      </li>
+      <li class="col-3">
+        <router-link to="/actions" class="py-2 px-2 d-block">
+          <i class="fad fa-explosion"></i>
+          <div>
+            Fight
+          </div>
+          <span class="text-red label p-0" v-if="activeIncFightsCount > 0">
+            {{ activeIncFightsCount }}<i class="iconfont icon-arrow-down"></i>
+          </span>
+          <span class="text-green label p-0" v-if="activeFightsCount > 0">
+            {{ activeFightsCount }}<i class="iconfont icon-arrow-up"></i>
+          </span>
+          <span class="text-blue label p-0" v-if="activeTransportsCount > 0">
+            {{ activeTransportsCount }}<i class="iconfont icon-arrow-up"></i>
+          </span>
+          <span class="text-orange label p-0" v-if="activeStationsCount > 0">
+            {{ activeStationsCount }}<i class="iconfont icon-arrow-up"></i>
+          </span>
+        </router-link>
+      </li>
 
-        <li class="col-3">
+      <li class="col-3">
 
-          <router-link to="/leaderboards" class="py-2 px-2 d-block">
-            <i class="fad fa-trophy"></i>
-            <div>
-              Board
-            </div>
-          </router-link>
-        </li>
-        <li class="col-3">
- 
-          <router-link to="/gangs" class="py-2 px-2 d-block">
-            <i class="fad fa-people-group"></i>
-            <div>
-              Gang
-            </div>
-          </router-link>
-        </li>
+        <router-link to="/leaderboards" class="py-2 px-2 d-block">
+          <i class="fad fa-trophy"></i>
+          <div>
+            Board
+          </div>
+        </router-link>
+      </li>
+      <li class="col-3">
 
-      </ul>
+        <router-link to="/gangs" class="py-2 px-2 d-block">
+          <i class="fad fa-people-group"></i>
+          <div>
+            Gang
+          </div>
+        </router-link>
+      </li>
 
-    </div>
+    </ul>
+
+  </div> -->
 
 </template>
 
@@ -170,14 +177,17 @@ export default {
   text-align: center !important;
   transition: width 0.3s;
   z-index: 1000;
+
   @media @bp-small {
     height: @bottomnav-height;
   }
-  a{
-    color:white;
+
+  a {
+    color: white;
     font-size: 16px;
     border-top: 1px solid #efbf2c;
   }
+
   .logo {
     margin-top: 0px;
     height: 45px;
@@ -195,33 +205,16 @@ export default {
   }
 
   li {
-    
-      border-right: 1px solid rgb(25, 25, 25);
-    }
 
-    li:last-of-type {
-      border-right: 0px solid rgb(43, 43, 43);
-    }
-    
-    .router-link-active {
-      opacity: 1;
-      color: black;
-      border-top: 1px solid red;
-      background-size: cover;
-      background-repeat: no-repeat;
-      color: white !important;
-      background-size: cover;
-      background-repeat: no-repeat;
-      
-      i {
-        margin-bottom: 5px;
-        font-size: 28px;
-        --fa-primary-color: red;
-        --fa-secondary-color: white;
-        --fa-primary-opacity: 1.0;
-        --fa-secondary-opacity: 1.0;
-      }
-    }
+    border-right: 1px solid rgb(25, 25, 25);
+  }
+
+  li:last-of-type {
+    border-right: 0px solid rgb(43, 43, 43);
+  }
+
+ 
+
   button {
     line-height: 22px;
     background: none;
@@ -244,4 +237,24 @@ export default {
 
 
 }
+
+.router-link-active {
+    opacity: 1;
+    color: black;
+    border-top: 1px solid red;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white !important;
+    background-size: cover;
+    background-repeat: no-repeat;
+
+    i {
+      margin-bottom: 5px;
+      font-size: 28px;
+      --fa-primary-color: red;
+      --fa-secondary-color: white;
+      --fa-primary-opacity: 1.0;
+      --fa-secondary-opacity: 1.0;
+    }
+  }
 </style>

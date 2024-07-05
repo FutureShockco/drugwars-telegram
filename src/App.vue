@@ -1,14 +1,15 @@
 <template>
   <div id="app">
     <Splash v-if="showLoading" />
-    <template v-else>
+    <template v-else >
       <TopNav v-if="username" />
-      <Sidebars v-if="username && showSidebar" />
-      <router-view :class="{
+      <SidebarLeft v-if="username && showSidebar" />
+      <router-view class="page-content header-clear-medium" :class="{
         content: showSidebar,
         'content--nav-open': sidebarVisible,
       }" />
       <BottomNav v-if="username" />
+      <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade"></div>
     </template>
     <Notifications />
 
@@ -17,6 +18,7 @@
 
 <script>
 
+import { mapActions } from 'vuex';
 
 export default {
   data() {
@@ -29,7 +31,12 @@ export default {
       firstLoad: true,
     };
   },
+  methods: {
+    ...mapActions(['toggleSidebarVisibility']),
+  },
+
   computed: {
+
     username() {
       return this.$store.state.game.user;
     },
@@ -50,14 +57,9 @@ export default {
 @import './vars';
 
 #app {
-  min-height: 100%;
-  width: 100%;
-  max-width: @main-width;
-  margin: 0 auto;
-  overflow-x: hidden;
-  display: table;
-  color: @text-color;
-  text-align: left !important;
+  min-height: 60vh;
+  z-index: 1;
+  position: relative;
 }
 
 .video {
@@ -75,35 +77,34 @@ export default {
 
 .vue-ui-modal {
   z-index: 102;
-  background: #000000b5;
+  background: #0000005e;
 
   a {
     padding: 8px;
   }
 }
 
-.content {
-  position: relative;
-  left: 0;
-  margin-top: @header-height;
-  margin-bottom: 90px;
-  transition: left 0.3s;
-  background: #000000;
-  background-image: linear-gradient(to top, #0e0e0e, #0c0c0c 74%) !important;
-  min-height: 93vh;
+// .content {
+//   position: relative;
+//   left: 0;
+//   transition: left 0.3s;
+//   background: #000000;
+//   background-image: linear-gradient(to top, #0e0e0e, #0c0c0c 74%) !important;
+//   min-height: 93vh;
 
-  @media @bp-small {
-    margin-left: @sidebar-width !important;
-    margin-right: @sidebar-width !important;
-    margin-top: @topnav-height;
-  }
+//   @media @bp-small {
+//     margin-left: @sidebar-width !important;
+//     margin-right: @sidebar-width !important;
+//     margin-top: @topnav-height;
+//   }
 
-  &--nav-open {
-    left: @sidebar-width;
-    width: calc(100% - 60px);
-    @media @bp-small {
-      left: 0;
-    }
-  }
-}
+//   &--nav-open {
+//     left: @sidebar-width;
+//     width: calc(100% - 60px);
+
+//     @media @bp-small {
+//       left: 0;
+//     }
+//   }
+// }
 </style>

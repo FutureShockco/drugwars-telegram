@@ -1,5 +1,18 @@
 <template>
-  <nav class="topnav brush-black" data-options="scrolltop: false">
+  <!-- Header -->
+  <div class="header-bar header-fixed header-app header-bar-detached">
+    <a @click="toggleSidebarVisibility" data-bs-toggle="offcanvas" data-bs-target="#menu-main" href="#"><i
+        class="fad fa-bars color-theme"></i></a>
+    <a href="#" class="header-title color-theme">DrugWars</a>
+    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-color"><i
+        class="bi bi-palette-fill font-13 color-highlight"></i></a>
+    <a href="#" data-bs-toggle="offcanvas" data-bs-target="#menu-bell"><em class="badge bg-highlight ms-1">3</em><i
+        class="font-14 bi bi-bell-fill"></i></a>
+    <a href="#" class="show-on-theme-light" data-toggle-theme><i class="bi bi-moon-fill font-13"></i></a>
+    <a href="#" class="show-on-theme-dark" data-toggle-theme><i
+        class="bi bi-lightbulb-fill color-yellow-dark font-13"></i></a>
+  </div>
+  <!-- <nav class="topnav topnav-detached brush-black" data-options="scrolltop: false">
     <div class="topnav-content mx-auto">
       <div class="topnav-logo hide-sm hide-md hide-lg text-center">
         <router-link to="/">
@@ -10,7 +23,7 @@
             <span class="iconfont icon-three-bars"/>
           </button> -->
 
-      <Balances class="width-full text-center" />
+  <!-- <Balances class="width-full text-center" />
       <div class="bottomnav text-center">
 
         <div class="d-flex pt-1 pb-2 border-bottom list-style-none ">
@@ -58,7 +71,7 @@
         <div v-if="booster" class="text-gray">{{ boosterEnd | ms }}</div>
       </div>
     </div>
-  </nav>
+  </nav> -->
 </template>
 
 <script>
@@ -137,9 +150,20 @@ export default {
   align-items: center;
   transition: 0.5s;
   z-index: 1000;
+  background-color: rgba(0, 0, 0, .55);
 
   @media @bp-small {
     height: @topnav-height;
+  }
+
+  &-detached {
+    border-radius: 20px;
+    left: 10px !important;
+    right: 10px !important;
+    top: 8px !important;
+    padding-top: 0 !important;
+    margin-top: calc(env(safe-area-inset-top)* .8) !important;
+    box-shadow: 0 0 15px 0 rgba(0, 0, 0, .1) !important;
   }
 
   .logo {

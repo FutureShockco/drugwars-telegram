@@ -1,16 +1,86 @@
 <template>
-  <UiCenter class="vue-ui-modal pb-7 p-5">
-    <h5 class="text-center mb-0">Server ({{server.number}}) : {{server.name}}</h5>
-    <Icon class="logo-large" name="logo" />
+  <div class="page-content pb-0 overflow-hidden bg-dark-dark">
+    <!-- <h5 class="text-center mb-0">Server ({{ server.number }}) : {{ server.name }}</h5>
+    <Icon class="logo-large" name="logo" /> 
     <div class="wrapper">
       <div class="left"></div>
       <div class="right"></div>
     </div>
-    <button @click="ok" class="button button-blue button-large width-full mt-4 mb-4 " >Play</button>
+    <button @click="ok"
+      class="default-link btn btn-m rounded-s gradient-highlight shadow-bg shadow-bg-s px-5 mb-0 mt-2">Play</button>
     <ul class="forcelogout">
-      <a href="https://discord.me/drugwars">{{'message.contact_us' | translate}}</a>
-    </ul>
-  </UiCenter>
+      <a href="https://discord.me/drugwars">{{ 'message.contact_us' | translate }}</a>
+    </ul> -->
+
+    <div class="splide single-slider slider-no-dots slider-no-arrows" id="single-slider-walkthrough"
+      data-splide='{"interval":5000}'>
+      <div class="splide__track">
+        <div class="splide__list">
+          <div class="splide__slide">
+            <div class="card bg-dark-dark rounded-0"
+              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmTANDuvnozN63z5Qr1UXFY17zzMH9mA7SLGrz6AoezfAT/bam.png); background-size:cover;" data-card-height="cover">
+              <div class="card-center">
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
+                <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
+                <p class="color-white font-16 text-center boxed-text-xl">
+                  Take the role of a gangster who must build up his empire by producing and selling drugs, fighting rival gangs, and completing missions.
+                </p>
+              </div>
+              <div class="card-overlay bg-black opacity-40 rounded-0"></div>
+              <div class="card-overlay bg-gradient-fade rounded-0"></div>
+            </div>
+          </div>
+          <div class="splide__slide">
+            <div class="card bg-dark-dark rounded-0"
+              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmZxKom9qQxPxgCTBHFqY2nGt2CGxET9h677YaXszVE9We/wp1.png); background-size:cover;" data-card-height="cover">
+              <div class="card-center">
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
+                <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
+                <p class="color-white font-16 text-center boxed-text-xl">
+                  Many players find the core gameplay loop of building a drug empire, battling rivals, and completing missions to be addictive and enjoyable.
+                </p>
+              </div>
+              <div class="card-overlay bg-black opacity-40 rounded-0"></div>
+              <div class="card-overlay bg-gradient-fade rounded-0"></div>
+            </div>
+          </div>
+          <div class="splide__slide">
+            <div class="card bg-dark-dark rounded-0"
+              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;" data-card-height="cover">
+              <div class="card-center">
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
+                <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
+                <p class="color-white font-16 text-center boxed-text-xl">
+                  Drugwars.io has a dedicated player base, with forums and social media groups where players discuss strategies, share tips, and socialize.
+                </p>
+              </div>
+              <div class="card-overlay bg-black opacity-40 rounded-0"></div>
+              <div class="card-overlay bg-gradient-fade rounded-0"></div>
+            </div>
+          </div>
+          <div class="splide__slide">
+            <div class="card bg-dark-dark rounded-0"
+              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;" data-card-height="cover">
+              <div class="card-center">
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
+                <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
+                <p class="color-white font-16 text-center boxed-text-xl">
+                  The developers regularly release updates with new content, features, and bug fixes.
+                </p>
+              </div>
+              <div class="card-overlay bg-black opacity-60 rounded-0"></div>
+              <div class="card-overlay bg-gradient-fade rounded-0"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card-bottom">
+      <a  href="#" @click="ok"
+        class="btn btn-full gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s">Play Now</a>
+    </div>
+  </div>
 </template>
 
 
@@ -18,13 +88,13 @@
 import { mapActions } from 'vuex';
 export default {
   methods: {
-    ...mapActions(['init','login']),
-    ok(){
-      console.log('jey',this.OWA)
-      if(this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
-      this.init(this.TWA.initDataUnsafe).then((result) => {
-        this.$router.push({ path: '/buildings' });
-      })
+    ...mapActions(['init', 'login']),
+    ok() {
+      console.log('jey', this.OWA)
+      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+        this.init(this.TWA.initDataUnsafe).then((result) => {
+          this.$router.push({ path: '/buildings' });
+        })
       else this.init(this.OWA.initDataUnsafe).then((result) => {
         console.log(result)
         this.$router.push({ path: '/buildings' });
@@ -102,6 +172,7 @@ export default {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }

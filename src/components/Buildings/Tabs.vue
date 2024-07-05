@@ -1,21 +1,37 @@
 <template>
-    <Header>
-        <UiTabs>
-            <UiTab to="/buildings">Office</UiTab>
-            <UiTab to="/buildings/drugs">Drug</UiTab>
-            <UiTab to="/buildings/weapons">Weapon</UiTab>
-            <UiTab to="/buildings/alcohol">Alcohol</UiTab>
-            <!-- <UiTab to="/buildings/defense">Defense</UiTab> -->
-        </UiTabs>
-        <!-- <div class="coordbase text-right" v-if="base">
+  <div class="tabi card card-style">
+    <div class="content mt-3">
+      <div class="tabs tabs-box" id="tab-group-1">
+        <div class="tab-controls rounded-s border-highlight">
+          <router-link to="/buildings" class="font-13 color-highlight" active-class="active" exact>Office</router-link>
+          <router-link to="/buildings/drugs" class="font-13 color-highlight" active-class="active"
+            exact>Drug</router-link>
+          <router-link to="/buildings/weapons" class="font-13 color-highlight" active-class="active"
+            exact>Weapon</router-link>
+          <router-link to="/buildings/alcohol" class="font-13 color-highlight" active-class="active"
+            exact>Alcohol</router-link>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <Header>
+
+    <UiTabs>
+      <UiTab to="/buildings">Office</UiTab>
+      <UiTab to="/buildings/drugs">Drug</UiTab>
+      <UiTab to="/buildings/weapons">Weapon</UiTab>
+      <UiTab to="/buildings/alcohol">Alcohol</UiTab>
+    </UiTabs>
+    <div class="coordbase text-right" v-if="base">
             <div class="text text-blue tab name" v-if="main">
                 Primary
             </div>
             <div class="text text-orange tab name" v-else-if="base.custom">
                 {{base.custom}}
             </div> {{base.territory}}:{{base.base}}
-        </div> --> 
-    </Header>
+        </div>
+  </Header> -->
 </template>
 
 
@@ -61,8 +77,25 @@ export default {
 </script>
 
 <style lang="less" scoped>
+.tabi {
+  position: fixed;
+  width: calc(100% - 30px);
+
+  top: 60px;
+  z-index: 410;
+}
+
 .coordbase {
   position: absolute;
   right: 10px;
+}
+
+.content {
+  margin: 20px;
+}
+
+.router-link-exact-active {
+  background-color: #FFCE54 !important;
+  color: black !important;
 }
 </style>
