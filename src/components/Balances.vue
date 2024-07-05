@@ -359,7 +359,7 @@ export default {
 
   li {
     padding: 0px;
-
+    font-weight: 700;
     .balance {
       float: left;
       text-align: left;

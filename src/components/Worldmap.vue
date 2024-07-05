@@ -1097,7 +1097,7 @@ export default {
 }
 
 .spot {
-  font-family: 'Bebas Neue';
+  font-family: 'Inter';
   position: absolute;
   font-weight: 700;
   padding: 0px 5px;
@@ -1112,7 +1112,7 @@ export default {
 
 .drug {
   display: none;
-  font-family: 'Bebas Neue';
+  font-family: 'Inter';
   position: absolute;
   color: #ffc508;
   font-size: 26px;

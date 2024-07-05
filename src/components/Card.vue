@@ -181,11 +181,11 @@ export default {
 }
 
 .ac {
-  font-family: 'Blinker', Verdana, Tahoma;
+  font-family: 'Inter', Verdana, Tahoma;
 }
 
 .le {
-  font-family: 'Legend', Verdana, Tahoma;
+  font-family: 'Inter', Verdana, Tahoma;
 }
 
 .card {
@@ -200,7 +200,7 @@ export default {
 
 .cards {
   background-color: transparent;
-  font-family: 'Blinker', Verdana, Tahoma;
+  font-family: 'Inter', Verdana, Tahoma;
 }
 
 .uppercase {
@@ -231,7 +231,7 @@ export default {
 
 .cards {
   background-color: transparent;
-  font-family: 'Blinker', Verdana, Tahoma;
+  font-family: 'Inter', Verdana, Tahoma;
 }
 
 .uppercase {
@@ -782,7 +782,7 @@ input {
   position: relative;
   top: 156px !important;
   right: 15px !important;
-  font-family: 'Legend';
+  font-family: 'Inter';
   text-align: center;
   line-height: 8px;
   text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black;
@@ -799,7 +799,7 @@ input {
 
 .card .name {
   font-size: 16px;
-  font-family: 'Blinker';
+  font-family: 'Inter';
   color: #fbbd08;
   text-shadow: 0px 0px 5px black, 0px 0px 5px black;
 }
@@ -807,7 +807,7 @@ input {
 .card .skill {
   background: black;
   font-size: 10px;
-  font-family: 'Blinker';
+  font-family: 'Inter';
   color: #fbbd08;
   text-shadow: 0px 0px 5px black, 0px 0px 5px black;
   width: fit-content;
@@ -818,7 +818,7 @@ input {
 }
 
 .card .properties .skill_name {
-  font-family: 'Blinker';
+  font-family: 'Inter';
   text-align: center;
   width: 100%;
   margin-left: 0px;
@@ -827,7 +827,7 @@ input {
 .card .skill_name {
   margin-left: 2px;
   font-size: 11px;
-  font-family: 'Legend';
+  font-family: 'Inter';
   color: #fff;
   text-shadow: 0px 0px 5px black, 0px 0px 5px black;
   width: fit-content;

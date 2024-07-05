@@ -208,7 +208,7 @@ export default {
 @import '../vars.less';
 .input {
   width: 70px;
-  font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
   font-weight: 500;
   letter-spacing: 1px;
   border-radius: 3px;

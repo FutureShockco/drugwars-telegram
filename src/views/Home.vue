@@ -136,7 +136,7 @@ h4 {
   font-size: 20px;
   text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black,
     3px 3px 5px black, -3px -3px 5px black;
-  font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
 }
 
 .btn-orange {
@@ -190,7 +190,7 @@ h5 {
   font-size: 15px;
   top: 5px;
   text-shadow: 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 3px 3px 5px #000000, -3px -3px 5px #000000;
-  font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Inter', Helvetica, Arial, sans-serif;
   font-weight: 900;
   position: absolute;
   text-align: center;

@@ -124,7 +124,7 @@ export default {
   text-align: center;
   line-height: 40px;
   .dwd {
-    font-family: 'Bebas Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Inter', Helvetica, Arial, sans-serif;
     font-size: 16px;
     text-transform: uppercase;
     top: -22px;

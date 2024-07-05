@@ -91,8 +91,6 @@ export default {
     padding-right: 15px;
     padding-bottom: 15px;
   }
-  .vote {
-    font-family: 'Legend', Courier, monospace;
-  }
+
 }
 </style>
