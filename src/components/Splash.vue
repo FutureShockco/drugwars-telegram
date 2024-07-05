@@ -32,9 +32,9 @@
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
             </div>
           </div>
-          <!-- <div class="splide__slide">
+          <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
-              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmZxKom9qQxPxgCTBHFqY2nGt2CGxET9h677YaXszVE9We/wp1.png); background-size:cover;" data-card-height="cover">
+              style="background-image:url(./img/ban5.png); background-size:cover;" data-card-height="cover">
               <div class="card-center">
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
@@ -45,10 +45,10 @@
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
             </div>
-          </div> -->
+          </div>
           <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
-              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;"
+              style="background-image:url(./img/ban6.png); background-size:cover;"
               data-card-height="cover">
               <div class="card-center">
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
@@ -65,7 +65,7 @@
           </div>
           <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
-              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;"
+              style="background-image:url(./img/ban7.png); background-size:cover;"
               data-card-height="cover">
               <div class="card-center">
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
