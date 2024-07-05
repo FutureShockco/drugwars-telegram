@@ -20,10 +20,12 @@
             <div class="card bg-dark-dark rounded-0"
               style="background-image:url(./img/ban4.png); background-size:cover;" data-card-height="cover">
               <div class="card-center">
-                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
+                    style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
                 <p class="color-white font-16 text-center boxed-text-xl">
-                  Take the role of a gangster, build up your empire by producing and selling drugs, fighting rival gangs, and completing missions.
+                  Take the role of a gangster, build up your empire by producing and selling drugs, fighting rival
+                  gangs, and completing missions.
                 </p>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
@@ -46,12 +48,15 @@
           </div> -->
           <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
-              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;" data-card-height="cover">
+              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;"
+              data-card-height="cover">
               <div class="card-center">
-                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
+                    style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
                 <p class="color-white font-16 text-center boxed-text-xl">
-                  Drugwars.io has a dedicated player base, with forums and social media groups where players discuss strategies, share tips, and socialize.
+                  Drugwars.io has a dedicated player base, with forums and social media groups where players discuss
+                  strategies, share tips, and socialize.
                 </p>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
@@ -60,9 +65,11 @@
           </div>
           <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
-              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;" data-card-height="cover">
+              style="background-image:url(https://steemitimages.com/640x0/https://cdn.steemitimages.com/DQmQWKQ3cfkXDDx7csJQ378TqDjxdTLKwVowhHP3QDrjyhd/cover.png); background-size:cover;"
+              data-card-height="cover">
               <div class="card-center">
-                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png" style="width: 100%;"  name="logo" /> </h1>
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
+                    style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
                 <p class="color-white font-16 text-center boxed-text-xl">
                   The developers regularly release updates with new content, features, and bug fixes.
@@ -77,8 +84,12 @@
     </div>
 
     <div class="card-bottom">
-      <a  href="#" @click="ok"
-        class="btn btn-full gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s" style="color:black">Play Now</a>
+      <a href="#" @click="ok" class="btn btn-full gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s"
+        style="color:black">Play Now</a>
+      <div class="btn-full text-center mb-4">
+        <div id="bloat" class="btn"></div>
+        <div id="winfo" class="btn"></div>
+      </div>
     </div>
   </div>
 </template>
@@ -86,6 +97,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+
 export default {
   methods: {
     ...mapActions(['init', 'login']),

@@ -17,6 +17,7 @@
         "test:unit": "vue-cli-service test:unit"
     },
     "dependencies": {
+        "@tonconnect/ui": "^2.0.5",
         "@vue/ui": "^0.5.2",
         "bluebird": "^3.5.3",
         "bootstrap": "^5.1.3",
