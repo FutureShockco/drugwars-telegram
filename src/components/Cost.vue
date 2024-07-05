@@ -1,18 +1,16 @@
 <template>
   <div class="cost mt-2">
-    <span class="me-2">
-      Cost:
-    </span>
+
     <span class="me-2" :class="{ 'not-enough': drugsCost * this.quantity > balances.drugs }" v-if="drugsCost">
-      <Icon class="me-1" :size="18" name="drug" />
+      <Icon class="me-1" :size="16" name="drug" />
       {{ drugsCost * this.quantity | amount }}
     </span>
     <span class="me-2" :class="{ 'not-enough': weaponsCost * this.quantity > balances.weapons }" v-if="weaponsCost">
-      <Icon class="me-1" :size="18" name="weapon" />
+      <Icon class="me-1" :size="16" name="weapon" />
       {{ weaponsCost * this.quantity | amount }}
     </span>
     <span class="me-2" :class="{ 'not-enough': alcoholsCost * this.quantity > balances.alcohols }" v-if="alcoholsCost">
-      <Icon class="me-1" :size="18" name="alcohol" />
+      <Icon class="me-1" :size="16" name="alcohol" />
       {{ alcoholsCost * this.quantity | amount }}
     </span>
     <!-- <div v-if="special.length>0 && quantity" v-for="cost in special" :key="cost.name">
@@ -99,8 +97,8 @@ export default {
 @import '../vars';
 
 .cost {
-  font-weight: 500;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 14px;
   color: #c7c7c7;
   display: inline-flex;
   line-height: 20px;

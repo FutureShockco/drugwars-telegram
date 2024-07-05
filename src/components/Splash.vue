@@ -78,7 +78,7 @@
 
     <div class="card-bottom">
       <a  href="#" @click="ok"
-        class="btn btn-full gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s">Play Now</a>
+        class="btn btn-full gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s" style="color:black">Play Now</a>
     </div>
   </div>
 </template>

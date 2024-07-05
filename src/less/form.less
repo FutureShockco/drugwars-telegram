@@ -37,16 +37,19 @@
 
   &.progress {
     position: relative;
+    background-color: red!important;
+
     background-image: repeating-linear-gradient(
       -45deg, #1f1f1f,
-      #222222 8px,
+      #222222 16px,
       transparent 8px,
       transparent 16px
     ) !important;
     background-repeat: round;
     animation: move 3s linear infinite;
     overflow: hidden;
-
+    line-height: 7px!important;
+    height: 7px!important;
     span{
       width: 100%;
       text-align: center;
