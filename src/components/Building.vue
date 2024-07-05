@@ -4,17 +4,12 @@
   <div v-else>
     <div class="card card-style mb-3" :class="[hasNotEnough ? 'not-enough' : '']">
       <div class="content">
-        <!-- <div class="col-2">
-        <img class="preview mt-2" :src="`//img.drugwars.io/buildings/${building.id}.jpg`" />
-      </div> -->
-        <!-- <div class="level">{{ ownItem.lvl }}</div> -->
         <div class="d-flex">
           <div class="pt-1 ms-auto">
             <img :src="`//img.drugwars.io/buildings/${building.id}.jpg`" class="img-fluid rounded-s" width="100"
               height="100">
           </div>
           <div class="ps-3 me-auto" style="width: 100%;">
-            <!-- <strong class="opacity-30 color-theme font-11">Level:{{ ownItem.lvl }}</strong> -->
             <router-link class="mt-n2 pb-2" :to="`/buildings/detail?name=${building.id}`">
               <h3 class="mt-0">{{ building.name }} lvl.{{ ownItem.lvl }}</h3>
             </router-link>
@@ -62,9 +57,7 @@
           </div>
 
         </div>
-        <div>
 
-        </div>
 
       </div>
       <div v-if="(building.id === 'strategic_center' && ownItem.lvl > 204)">Max level reached</div>

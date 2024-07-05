@@ -2,10 +2,7 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
 import { isWeb } from '@/helpers/utils';
-Vue.prototype.OWA = {initDataUnsafe:{user:{id:1995273768,username:"high"}}}
-if(window.Telegram && window.Telegram.WebApp)
-  Vue.prototype.TWA = window.Telegram.WebApp
-  else  Vue.prototype.TWA = {initDataUnsafe:{user:{id:1995273768}}}
+
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
 
 

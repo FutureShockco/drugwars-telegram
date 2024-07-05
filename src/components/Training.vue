@@ -1,63 +1,59 @@
 <template>
-  <div
-    class="d-flex flex-lg-row flex-column text-center text-lg-left item"
-    :class="{ progress: inProgress, 'not-enough': hasNotEnough }"
-  >
-    <div class="mr-3">
-      <img class="preview" :src="`//img.drugwars.io/trainings/${training.id}.jpg`" />
-    </div>
-    <div class="level">{{ ownItem.lvl }}</div>
-    <div class="item-content width-full mr-3 mb-4">
-      <h5>{{ training.name }}</h5>
-      <Cost
-        :drugsCost="drugsCost"
-        :weaponsCost="weaponsCost"
-        :alcoholsCost="alcoholsCost"
-        :quantity="1"
-      />
-      <div class="mb-2" v-html="training.desc"></div>
-      <div v-if="training.feature" class="mb-2">
-        <span class="text-orange">{{ training.feature }}</span>
-      </div>
-      <div v-for="unit in training_modificator[training.id]" :key="unit"  class="d-inline">
-        <div v-if="unit==='all'">
-            <div v-for="u in units" :key="u.id" class="d-inline">
-                <img v-if="u.id && !u.npc" class="preview unit mini" :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`" width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
-            </div>
+  <div class="card card-style mb-3">
+    <div class="content">
+      <div class="d-flex">
+        <div class="pt-1 ms-auto">
+          <img class="img-fluid rounded-s" width="100" height="100"
+            :src="`//img.drugwars.io/trainings/${training.id}.jpg`" />
         </div>
-        <div v-else-if="unit==='melee'">
-            <div v-for="u in units" :key="u.id" class="d-inline">
-                <img v-if="u.id && u.type ==='Melee' && !u.npc" class="preview unit mini" :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`" width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
-            </div>       
-             </div>
-            <div v-else-if="unit==='range'">
-            <div v-for="u in units" :key="u.id" class="d-inline">
-                <img v-if="u.id && u.type ==='Range' && !u.npc" class="preview unit mini" :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`" width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
-            </div>       
-             </div>
-             <div v-else class="d-inline">
-              <div v-for="u in units" :key="u.id" class="d-inline" v-if="unit === u.id  && !u.npc">
-                  <img  class="preview unit mini" :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`" width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
-              </div>   
-             </div>
-         
+        <div class="ps-3 me-auto" style="width: 100%;">
+          <!-- <div class="level">{{ ownItem.lvl }}</div> -->
+          <div class="item-content width-full mr-3 mb-4">
+            <h3 class="mt-0">{{ training.name }} lvl.{{ ownItem.lvl }}</h3>
+            <div v-if="training.feature" class="mb-2">
+              <div>{{ training.feature }}</div>
+            </div>
+            <Cost :drugsCost="drugsCost" :weaponsCost="weaponsCost" :alcoholsCost="alcoholsCost" :quantity="1" />
+          </div>
+        </div>
+      </div>
+      <!-- <div class="mb-2" v-html="training.desc"></div> -->
+
+      <div v-for="unit in training_modificator[training.id]" :key="unit" class="d-inline">
+        <div v-if="unit === 'all'">
+          <div v-for="u in units" :key="u.id" class="d-inline">
+            <img v-if="u.id && !u.npc" class="preview unit mini"
+              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
+              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+          </div>
+        </div>
+        <div v-else-if="unit === 'melee'">
+          <div v-for="u in units" :key="u.id" class="d-inline">
+            <img v-if="u.id && u.type === 'Melee' && !u.npc" class="preview unit mini"
+              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
+              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+          </div>
+        </div>
+        <div v-else-if="unit === 'range'">
+          <div v-for="u in units" :key="u.id" class="d-inline">
+            <img v-if="u.id && u.type === 'Range' && !u.npc" class="preview unit mini"
+              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
+              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+          </div>
+        </div>
+        <div v-else class="d-inline">
+          <div v-for="u in units" :key="u.id" class="d-inline" v-if="unit === u.id && !u.npc">
+            <img class="preview unit mini"
+              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
+              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+          </div>
+        </div>
       </div>
     </div>
-
-    <div></div>
-    <div class="mx-auto">
-      <div v-if="(training.id === 'routing' && ownItem.lvl > 209)">Max level reached</div>
-      <CheckoutTraining
-        v-else
-        :id="training.id"
-        :level="ownItem.lvl + 1"
-        :coeff="training.coeff"
-        :researchCenterLvl="ownResearchCenter.lvl"
-        :inProgress="inProgress"
-        :price="drugsCost / 80000"
-        :notEnough="hasNotEnough"
-      />
-    </div>
+    <div v-if="(training.id === 'routing' && ownItem.lvl > 209)">Max level reached</div>
+    <CheckoutTraining v-else :id="training.id" :level="ownItem.lvl + 1" :coeff="training.coeff"
+      :researchCenterLvl="ownResearchCenter.lvl" :inProgress="inProgress" :price="drugsCost / 80000"
+      :notEnough="hasNotEnough" />
   </div>
 </template>
 

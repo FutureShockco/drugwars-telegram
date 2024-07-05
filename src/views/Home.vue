@@ -81,7 +81,6 @@ export default {
     ...mapActions(['setServer','init']),
     ok() {
       this.message = window.Telegram.WebApp
-      this.init(this.OWA.initDataUnsafe)
     },
     logout() {
       this.$auth.logOut();

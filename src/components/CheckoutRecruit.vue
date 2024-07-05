@@ -1,47 +1,44 @@
 <template>
-    <div class="checkout mb-4">
-        <div class="mb-2">
-            <span v-if="pendingAmount"><i class="iconfont icon-clock mr-2"  > </i>End: {{ timeToWaitString }}</span>
-            <span v-else><i class="iconfont icon-clock mr-2"> </i>Require: {{ updateTime | ms }}</span>
-        </div>
-        <button :class="{ progress: pendingAmount }" :disabled="isLoading || pendingAmount || notEnough || inProgress || !base" @click="handleSubmit()" class="button btn-block button-green mb-2">
-            <template v-if="isLoading || waitingConfirmation">
-          <SmallLoading/>
-</template>
-
-<template v-else>
-      <div class="progression" v-if="inProgress"  :style="'margin-right:'+(100-percentage)+'%'"></div>
-    <i class="iconfont icon-person" />
-    <span v-if="!isLoading && pendingAmount === 0">
-                    {{ notEnough ? 'Miss resources' : 'Recruit' }}  </span>
-    <span v-if="pendingAmount >0">Recruiting {{pendingAmount}} [{{percentage}}%]</span>
-    <div v-else-if="isLoading">
-        <div class="pt-2">
-            <SmallLoading/>
-        </div>
+  <div class="d-flex">
+    <div :class="pendingAmount ? 'col-12 pe-0' : 'col-6 pe-0'">
+      <div class="text-center w-100" v-if="pendingAmount">End: {{ timeToWaitString }}</div>
+      <div class="text-center w-100" v-else>Require: {{ updateTime | ms }}</div>
+      <button
+        :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base ? '' : 'button-green']"
+        :disabled="isLoading || pendingAmount || notEnough || inProgress || !base" @click="handleSubmit()"
+        class="button btn-block button-left w-100">
+        <template v-if="isLoading || waitingConfirmation">
+          <SmallLoading />
+        </template>
+        <template v-else>
+          <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
+          <i class="iconfont icon-person" />
+          <span v-if="!isLoading && pendingAmount === 0">
+            {{ notEnough ? 'Miss resources' : 'Recruit' }} </span>
+          <span v-if="pendingAmount > 0">Recruiting {{ pendingAmount }} [{{ percentage }}%]</span>
+          <div v-else-if="isLoading">
+            <div class="pt-2">
+              <SmallLoading />
+            </div>
+          </div>
+        </template>
+      </button>
     </div>
-</template>
-    </button>
-
-    <div class="mb-2">Instant recruit</div>
-    <button
-      :disabled="isLoading || !base" v-if="steemAccount"
-      @click="handleRequestPayment()"
-      class="button btn-block button-blue mb-2"
-    >
-      <i class="iconfont icon-zap"/>
-     <span> ${{ price * quantity | amount }} =
-      {{ this.priceInSteem  }} STEEM</span>
-    </button> 
-    <button v-if="dwdPrice"
-      :disabled="isLoading || notEnoughDWD  || !base"
-      @click="handleSubmit('dwd')"
-      class="button btn-block button-yellow mb-2"
-    >
-    <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png"/>
-    <span> ${{ dwdPrice | amount }} =
-      {{ this.priceInDWD }} DWD</span>
-    </button>
+    <div v-if="!pendingAmount" class="col-6 p-0">
+      <div class="text-center w-100">Instant recruit</div>
+      <!-- <button :disabled="isLoading || !base" v-if="steemAccount" @click="handleRequestPayment()"
+        class="button btn-block button-blue mb-2">
+        <i class="iconfont icon-zap" />
+        <span> ${{ price * quantity | amount }} =
+          {{ this.priceInSteem }} STEEM</span>
+      </button> -->
+      <button :disabled="isLoading || notEnoughDWD || !base" @click="handleSubmit('dwd')"
+        class="button btn-block button-yellow button-right w-100">
+        <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
+        <span>
+          {{ this.priceInDWD }} DWD</span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -107,8 +104,8 @@ export default {
       return parseFloat(this.priceInSteem * 50).toFixed(3);
     },
     dwdPrice() {
-      if(!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
-      return false
+      if (!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
+        return false
       const price = this.$store.state.game.prizeProps.seProps.lastPrice || 0;
       return price * this.priceInDWD * this.$store.state.game.prizeProps.steemprice;
     },

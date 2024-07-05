@@ -12,7 +12,7 @@
     <ul class="missions list-style-none">
       <li>
         <i class="fa mr-2" :class="mission0 ? 'fa-check green' : 'fa-xmark red'"></i>
-        <router-link to="/map">1. Choose a location on the map</router-link>
+        <router-link :to="'/map/territory?location=' + rnd">1. Choose a location on the map</router-link>
       </li>
       <li>
         <i class="fa mr-2" :class="mission1 ? 'fa-check green' : 'fa-xmark red'"></i>
@@ -55,6 +55,8 @@ export default {
     return {
       username: this.$store.state.auth.username,
       nickname: this.$store.state.game.user.user.nickname,
+      rnd: Math.floor(Math.random() * Math.floor(250)) + 1
+
     };
   },
   computed: {

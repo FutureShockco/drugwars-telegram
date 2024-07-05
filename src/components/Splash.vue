@@ -90,15 +90,11 @@ export default {
   methods: {
     ...mapActions(['init', 'login']),
     ok() {
-      console.log('jey', this.OWA)
       if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
         this.init(this.TWA.initDataUnsafe).then((result) => {
           this.$router.push({ path: '/buildings' });
         })
-      else this.init(this.OWA.initDataUnsafe).then((result) => {
-        console.log(result)
-        this.$router.push({ path: '/buildings' });
-      })
+
     },
     logout() {
       this.$auth.logOut();
