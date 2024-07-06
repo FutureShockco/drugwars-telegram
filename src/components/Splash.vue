@@ -88,7 +88,7 @@
         style="color:black">Play Now</button>
       <div class="btn-full text-center mb-4">
         <div id="bloat" class="btn"></div>
-        <div id="winfo" class="btn"></div>
+        <div id="winfo"></div>
       </div>
     </div>
   </div>
