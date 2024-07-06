@@ -1,13 +1,12 @@
 <template>
-    <div class="column px-0 col-4 mb-6 sunit text-center">
-        <div class="sunit" @click="handleClick">
-            <div class="smalltitle">{{unit.name}}</div>
-    
-            <img class="preview unit small" :src="`/img/units/${unit.id}.png`" />
-            <i class="iconfont icon-plus"></i>
-        </div>
-        <input class="input" type="number" min="1" :max="item.amount" v-model="amount">
+  <div class="sunit text-center">
+    <div class="sunit" @click="handleClick">
+      <div class="smalltitle">{{ unit.name }}</div>
+      <img class="preview unit small" :src="`/img/units/${unit.id}.png`" />
+      <i class="fad fa-plus"></i>
+      <input class="input" type="number" min="1" :max="item.amount" v-model="amount">
     </div>
+  </div>
 </template>
 
 <script>
@@ -48,11 +47,6 @@ export default {
   border-radius: 5px;
 }
 
-.sunit {
-  height: 95px;
-  width: 66px;
-  margin-right: 10px;
-}
 
 input {
   width: 72px;

@@ -102,7 +102,7 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
-      canLogin: false,
+      canLogin: process.env.VUE_APP_DEV || false,
     };
   },
   watch: {
