@@ -36,7 +36,10 @@ export default {
   methods: {
     ...mapActions(['toggleSidebarVisibility']),
   },
-
+  mounted() {
+    // What is the best? mounted or created??
+    this.TWA.ready();
+  },
   computed: {
 
     username() {
