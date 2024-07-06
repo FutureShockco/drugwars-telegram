@@ -52,8 +52,8 @@
               <button class="button button-blue">TRANSPORT</button>
             </router-link>
           </div> -->
-          <button v-if="!main" class="button button-blue" @click="handleSubmit()">
-            CHOOSE AS PRIMARY BASE
+          <button v-if="!main" class="btn gradient-highlight" @click="handleSubmit()">
+            CHOOSE AS MAIN BASE
           </button>
         </div>
       </div>

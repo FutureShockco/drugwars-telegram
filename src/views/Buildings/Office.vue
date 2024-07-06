@@ -1,8 +1,7 @@
 <template>
-  <div v-if="ownBase">
+  <div>
     <BuildingsTabs />
-    
-    <div class="anim-fade-in">
+    <div class="anim-fade-in" v-if="hasBase">
       <!-- <div class="card card-style shadow-card shadow-card-m bg-2" data-card-height="230" style="height: 230px;">
         <div class="card-bottom pb-3 px-3">
           <h3 class="color-white mb-1">PWA Ready</h3>
@@ -99,10 +98,11 @@
       </div> -->
       <Building v-for="item in items" :building="item" :key="item.id" />
     </div>
+    <div v-else class="p-2 text-center">
+      <router-link :to="'/map/territory?location=' + rnd"> You must choose a location on the map first.</router-link>
+    </div>
   </div>
-  <div v-else class="p-2 text-center">
-    <h2> You must choose a location on the map first.</h2>
-  </div>
+
 </template>
 
 <script>
@@ -113,11 +113,18 @@ export default {
   data() {
     return {
       items: pickBy(buildings, b => b.type === 'main'),
+      rnd: Math.floor(Math.random() * Math.floor(250)) + 1,
     };
   },
   computed: {
-    ownBase() {
+    base() {
       return this.$store.state.game.mainbase;
+    },
+    hasBase() {
+      const building = this.$store.state.game.user.buildings.find(
+        b => b.building === 'headquarters' && b.territory !== 0,
+      );
+      return !!(building && building.lvl > 0);
     },
   },
 };
