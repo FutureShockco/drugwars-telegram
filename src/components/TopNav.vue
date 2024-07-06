@@ -9,35 +9,35 @@
 
     <div class="d-block card w-100">
       <div class="d-flex list-style-none ">
-        <div class="col-2 card">
+        <!-- <div class="col card">
           <router-link to="/tutorial" class="py-2 px-2 d-block">
             <i class="fad fa-satellite-dish"></i>
           </router-link>
-        </div>
-        <div class="col-2 card">
+        </div> -->
+        <!-- <div class="col card">
           <router-link to="/overview" class="py-2 px-2 d-block">
             <i class="fad fa-chart-area"></i>
           </router-link>
-        </div>
+        </div> -->
 
-        <div class="col-2 card">
+        <div class="col card">
           <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
             <i class="fad fa-map-location-dot"></i>
           </router-link>
         </div>
 
-        <div class="col-2 card">
+        <div class="col card">
           <router-link to="/rewards" class="py-2 px-2 d-block sidebar-rewards">
             <i class="fad fa-vault"></i>
           </router-link>
         </div>
 
-        <div class="col-2 card">
+        <div class="col card">
           <router-link to="/settings" class="py-2 px-2 d-block">
             <i class="fad fa-gears"></i>
           </router-link>
         </div>
-        <div class="col-2 card">
+        <div class="col card">
           <router-link to="/help" class="py-2 px-2 d-block">
             <i class="fad fa-hands-holding-circle"></i>
           </router-link>
@@ -62,12 +62,12 @@
       <div class="bottomnav text-center">
 
         <div class="d-flex pt-1 pb-2 border-bottom list-style-none ">
-          <div class="col-2">
+          <div class="col">
             <router-link to="/tutorial" class="py-2 px-2 d-block">
               <i class="fad fa-satellite-dish"></i>
             </router-link>
           </div>
-          <div class="col-2">
+          <div class="col">
             <router-link to="/overview" class="py-2 px-2 d-block">
               <i class="fad fa-chart-area"></i>
             </router-link>

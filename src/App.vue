@@ -8,6 +8,7 @@
         content: showSidebar,
         'content--nav-open': sidebarVisible,
       }" />
+      <!-- <Quickstart/> -->
       <!-- <BottomNav v-if="username" /> -->
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade"></div>
     </template>
@@ -19,6 +20,7 @@
 <script>
 
 import { mapActions } from 'vuex';
+import Quickstart from './components/Quickstart.vue';
 
 export default {
   data() {
