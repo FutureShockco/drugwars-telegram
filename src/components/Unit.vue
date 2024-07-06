@@ -3,9 +3,8 @@
     <div class="content">
       <div class="d-flex " style="position: relative;">
         <div class="pt-1 ms-auto">
-          <img class="img-fluid rounded-s" width="100" height="100"
-            :style="`background-size: contain;background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
-            :src="`//img.drugwars.io/units/${unit.id}.png`">
+          <img class="img-fluid rounded-s" width="100" height="100" style="border: 1px solid #392828;"
+            :src="`/img/units/${unit.id}.png`">
         </div>
         <div class="ps-3 me-auto" style="width: 100%;">
           <h3 class="mt-0 mb-0">{{ unit.name }} <span class="unit-type">{{ unit.type }}</span></h3>

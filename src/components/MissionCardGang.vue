@@ -29,7 +29,7 @@
             {{ (unit.amount.max + production / 3 + 30) | round }}
           </div>
 
-          <img class="preview unit" :src="`//img.drugwars.io/units/${unit.id}.png`" />
+          <img class="preview unit" :src="`/img/units/${unit.id}.png`" />
 
           <div class="unitname">{{ unit.id }}</div>
         </div>
@@ -47,7 +47,7 @@
           <img
             class="preview unit width-full"
             width="50"
-            :src="`//img.drugwars.io/units/${unit.key}.png`"
+            :src="`/img/units/${unit.key}.png`"
           />
 
           <div class="unitname">{{ unit.key }}</div>

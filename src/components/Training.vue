@@ -4,7 +4,7 @@
       <div class="d-flex">
         <div class="pt-1 ms-auto">
           <img class="img-fluid rounded-s" width="100" height="100"
-            :src="`//img.drugwars.io/trainings/${training.id}.jpg`" />
+            :src="`/img/trainings/${training.id}.png`" />
         </div>
         <div class="ps-3 me-auto" style="width: 100%;">
           <!-- <div class="level">{{ ownItem.lvl }}</div> -->
@@ -23,29 +23,25 @@
         <div v-if="unit === 'all'">
           <div v-for="u in units" :key="u.id" class="d-inline">
             <img v-if="u.id && !u.npc" class="preview unit mini"
-              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
-              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+              width="50" :src="`/img/units/${u.id}.png`">
           </div>
         </div>
         <div v-else-if="unit === 'melee'">
           <div v-for="u in units" :key="u.id" class="d-inline">
             <img v-if="u.id && u.type === 'Melee' && !u.npc" class="preview unit mini"
-              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
-              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+              width="50" :src="`/img/units/${u.id}.png`">
           </div>
         </div>
         <div v-else-if="unit === 'range'">
           <div v-for="u in units" :key="u.id" class="d-inline">
             <img v-if="u.id && u.type === 'Range' && !u.npc" class="preview unit mini"
-              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
-              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+              width="50" :src="`/img/units/${u.id}.png`">
           </div>
         </div>
         <div v-else class="d-inline">
           <div v-for="u in units" :key="u.id" class="d-inline" v-if="unit === u.id && !u.npc">
             <img class="preview unit mini"
-              :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
-              width="50" :src="`//img.drugwars.io/units/${u.id}.png`">
+              width="50" :src="`/img/units/${u.id}.png`">
           </div>
         </div>
       </div>

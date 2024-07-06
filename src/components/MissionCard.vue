@@ -3,7 +3,7 @@
     <div class="mr-3">
       <img
         class="preview"
-        :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
+        style="border: 1px solid #392828;"
         :src="`//img.drugwars.io/missions/${item.img}.jpg`"
       />
     </div>
@@ -30,8 +30,8 @@
           </div>
           <img
             class="preview unit"
-            :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`"
-            :src="`//img.drugwars.io/units/${unit.id}.png`"
+            style="border: 1px solid #392828;"
+            :src="`/img/units/${unit.id}.png`"
           />
 
           <div class="unitname">{{ unit.id }}</div>
@@ -49,7 +49,7 @@
           <img
             class="preview unit width-full"
             width="50"
-            :src="`//img.drugwars.io/units/${unit.key}.png`"
+            :src="`/img/units/${unit.key}.png`"
           />
           <div class="unitname">{{ unit.key }}</div>
         </div>

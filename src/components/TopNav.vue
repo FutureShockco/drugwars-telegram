@@ -5,6 +5,7 @@
         class="card fad fa-bars color-theme"></i></div> -->
     <!-- <a href="#" class="header-title color-theme">DrugWars</a> -->
 
+    <Balances class="w-100 text-center d-block" />
 
     <div class="d-block card w-100">
       <div class="d-flex list-style-none ">
@@ -44,7 +45,6 @@
 
       </div>
     </div>
-    <Balances class="w-100 text-center d-block" />
 
   </div>
   <!-- <nav class="topnav topnav-detached brush-black" data-options="scrolltop: false">

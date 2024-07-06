@@ -1,13 +1,17 @@
 <template>
-    <div v-if="units">
-        <div v-for="(unit, index) in units" v-if="unit.amount !== 0" :key="unit.key" class="d-inline-block mx-1 my-1 text-center all" @click="handleClick(unit.key)">
-            <img  class="preview unit mini" :style="`background-image: url('//img.drugwars.io/cards/background/classic_unit${randomPickBkg}.png');`" width="50" :src="`//img.drugwars.io/units/${unit.key}.png`">
-            <span class="inde"> {{index+1}}</span>
-            <i v-if="index+1 !== units.length" class="iconfont icon-arrow-right text-green"></i>
-        </div>
+  <div v-if="units">
+    <div v-for="(unit, index) in units" v-if="unit.amount !== 0" :key="unit.key"
+      class="d-inline-block mx-1 my-1 text-center all" @click="handleClick(unit.key)">
+      <img class="preview unit mini" style="border: 1px solid #392828;" width="50" :src="`/img/units/${unit.key}.png`">
+      <span class="inde"> {{ index + 1 }}</span>
+      <i v-if="index + 1 !== units.length" class="fad fa-right " style="--fa-primary-color: green;
+      --fa-secondary-color: green;
+      --fa-primary-opacity: 1.0;
+      --fa-secondary-opacity: 1.0;"></i>
     </div>
+  </div>
 </template>
-
+.small
 <script>
 export default {
   props: ['units', 'withDead', 'disableicon'],
@@ -30,6 +34,7 @@ export default {
 .all {
   position: relative;
 }
+
 .inde {
   text-shadow: 3px 3px 5px black;
   position: absolute !important;
