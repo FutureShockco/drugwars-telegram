@@ -1,75 +1,68 @@
 <template>
-  <div
-    id="territorybg"
-    class="territorybg anim-scale-in"
-  >    <h3 class="title" id="title" style="display: none">
-      <div v-if="selectedTile">BASE {{ selectedTile }}</div>
-      <h5 class="mt-0">
-        UNDER THE CONTROL OF :
-        <div v-if="currentNickname">{{ currentNickname }}</div>
-        <span v-else>Nobody </span>
-        <div v-if="currentGang && currentGang.role !== null">
-          {{ currentGang.role }} of {{ currentGang.name }} [{{ currentGang.ticker }}]
-        </div>
-      </h5>
-      <div>INFORMATIONS</div>
-      <h5 class="mt-0">HQ LEVEL : {{ currentHq }}</h5>
-      <h5 class="mt-0">DETAIL : {{ customName }}</h5>
-      <div class="map-title text-left" id="visit">
-        <router-link
-          v-if="selectedTile && currentNickname && currentNickname != nickname"
-          :to="`/actions?type=attack&target=${location}&base=${selectedTile}`"
-        >
-          <button class="button button-red">ATTACK</button>
-        </router-link>
-        <router-link
-          v-if="selectedTile && currentNickname && currentNickname != nickname"
-          :to="`/actions?type=transport&target=${location}&base=${selectedTile}`"
-        >
-          <button class="button button-blue">TRANSPORT</button>
-        </router-link>
-        <router-link
-          v-else-if="currentNickname != nickname && base"
-          :to="`/actions?type=occupy&target=${location}&base=${selectedTile}`"
-        >
-          <button class="button button-blue">CREATE NEW BASE</button>
-        </router-link>
-        <button
-          v-if="
-            currentNickname === nickname && location == base.territory && selectedTile == base.base
-          "
-          class="button button-blue"
-        >
-          ALREADY SELECTED
-        </button>
-        <div v-else-if="currentNickname === nickname">
-          <button class="button button-blue" @click="selectBase()">SELECT</button>
-          <router-link :to="`/actions?type=transport&target=${location}&base=${selectedTile}`">
-            <button class="button button-blue">TRANSPORT</button>
-          </router-link>
-        </div>
-        <button v-if="!main" class="button button-blue" @click="handleSubmit()">
-          CHOOSE AS PRIMARY BASE
+  <div>
+    <MapTabs />
+    <div class="card card-style">
+      <div class="content d-flex m-0">
+        <button class="button button-yellow" @click="decreaseLocation()">
+          <div class="iconfont icon-arrow-left"></div>
+        </button><input type="number" v-model="currentLocation" placeholder="25" class="mt-1 input"
+          @change="updateLocation(currentLocation)" />
+        <button class="button button-yellow" @click="increaseLocation()">
+          <div class="iconfont icon-arrow-right"></div>
         </button>
       </div>
-    </h3>
-    <table id="table">
-      <canvas id="canvas" class="mt-1" style="cursor: pointer"></canvas>
-    </table>
+    </div>
+    <div id="territorybg" class="territorybg" style="height:100vw;width: 100vw;">
+      <div class="title" id="title" style="display: none">
+        <h5 v-if="selectedTile">BASE {{ selectedTile }}</h5>
+        <div class="mt-0">
+          <div v-if="currentNickname"> Under the control of : <h5>{{ currentNickname }}</h5>
+          </div>
+          <span v-else>Nobody lives here </span>
+          <div v-if="currentGang && currentGang.role !== null && currentGang.ticker">
+            {{ currentGang.role }} of {{ currentGang.name }} [{{ currentGang.ticker }}]
+          </div>
+        </div>
+        <div v-if="selectedTile && nickname">
+          <!-- <h6>INFORMATIONS</h6> -->
+          <div class="mt-0">HQ LEVEL : {{ currentHq }}</div>
+          <!-- <div class="mt-0">DETAIL : {{ customName }}</div> -->
+        </div>
+        <div class="map-title text-left" id="visit">
+          <router-link v-if="selectedTile && currentNickname && currentNickname != nickname"
+            :to="`/actions?type=attack&target=${location}&base=${selectedTile}`">
+            <button class="button button-red">ATTACK</button>
+          </router-link>
+          <!-- <router-link v-if="selectedTile && currentNickname && currentNickname != nickname"
+            :to="`/actions?type=transport&target=${location}&base=${selectedTile}`">
+            <button class="button button-blue">TRANSPORT</button>
+          </router-link> -->
+          <!-- <router-link v-else-if="currentNickname != nickname && base"
+            :to="`/actions?type=occupy&target=${location}&base=${selectedTile}`">
+            <button class="button button-blue">CREATE NEW BASE</button>
+          </router-link> -->
+          <!-- <button v-if="
+            currentNickname === nickname && location == base.territory && selectedTile == base.base
+          " class="button button-blue">
+            ALREADY SELECTED
+          </button>
+          <div v-else-if="currentNickname === nickname">
+            <button class="button button-blue" @click="selectBase()">SELECT</button>
+            <router-link :to="`/actions?type=transport&target=${location}&base=${selectedTile}`">
+              <button class="button button-blue">TRANSPORT</button>
+            </router-link>
+          </div> -->
+          <button v-if="!main" class="button button-blue" @click="handleSubmit()">
+            CHOOSE AS PRIMARY BASE
+          </button>
+        </div>
+      </div>
+      <table id="table" style="position: relative;">
+      <div class="overlay"></div>
+        <canvas id="canvas"  style="cursor: pointer;height:100vw;width: 100vw;"></canvas>
+      </table>
 
-    <div class="text-center">
-      <button class="button button-yellow" @click="decreaseLocation()">
-        <div class="iconfont icon-arrow-left"></div></button
-      ><input
-        type="number"
-        v-model="currentLocation"
-        placeholder="25"
-        class="mt-1 input"
-        @change="updateLocation(currentLocation)"
-      />
-      <button class="button button-yellow" @click="increaseLocation()">
-        <div class="iconfont icon-arrow-right"></div>
-      </button>
+
     </div>
   </div>
 </template>
@@ -129,23 +122,7 @@ export default {
     },
   },
   methods: {
-    testIso() {
-      if (!this.iso) {
-        const tb = document.getElementById('table');
-        tb.style.position = 'absolute';
-        tb.style.borderSpacing = '0px';
-        tb.style.padding = '5px';
-        tb.style.transform = 'rotateX(60deg) rotateZ(-45deg)';
-      } else {
-        const tb = document.getElementById('table');
-        tb.style.position = 'initial';
-        tb.style.borderSpacing = '0px';
-        tb.style.padding = '5px';
-        tb.style.transform = 'rotateX(0deg) rotateZ(0deg)';
-      }
-      this.iso = !this.iso;
-      start();
-    },
+
     increaseLocation() {
       this.$router.push({ path: `/map/territory?location=${Number(this.location) + 1}` });
     },
@@ -156,24 +133,18 @@ export default {
       const self = this;
       const bg = document.getElementById('territorybg');
       const canvas_element = document.getElementById('canvas');
-      const tb = document.getElementById('table');
 
       const context = canvas_element.getContext('2d');
       let tiles_array = [];
 
       let width = 0;
       let height = 0;
-      if (self.iso) {
-        width = bg.offsetWidth * 2;
-        height = (bg.offsetHeight - 150) * 2;
-        canvas_element.width = width * 2;
-        canvas_element.height = height * 2;
-      } else {
-        width = bg.offsetWidth;
-        height = bg.offsetHeight - 150;
-        canvas_element.width = width;
-        canvas_element.height = height;
-      }
+
+      width = bg.offsetWidth;
+      height = bg.offsetHeight;
+      canvas_element.width = width;
+      canvas_element.height = height;
+
 
       function clearCanvas() {
         const ctx = canvas_element.getContext('2d');
@@ -198,7 +169,7 @@ export default {
         gang,
         job,
         fillColor,
-        strokeStyle,
+        strokeStyle
       ) {
         this.id = id;
         this.nickname = nickname || null;
@@ -209,8 +180,8 @@ export default {
         this.main = main || null;
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = 50;
+        this.height = 50;
         this.workWidth = {
           start: x,
           end: x + width,
@@ -220,14 +191,14 @@ export default {
           end: y + height,
         };
         this.fillColor = fillColor;
-        this.strokeStyle = 'black';
+        this.strokeStyle = 'red';
       }
 
       const visitTitle = document.getElementById('title');
-      const visitButton = document.getElementById('visit');
       canvas_element.onclick = function (e) {
         event = e;
-        const elementClickedId = checkClick(event);
+        console.log(e)
+        const elementClickedId = checkClick(event, canvas_element);
         if (self.selectedTile != null && self.nickname === self.currentNickname) {
           tiles_array[self.selectedTile - 1].fillColor = 'green';
           clearCanvas();
@@ -243,17 +214,17 @@ export default {
         } else if (self.selectedTile != null) {
           tiles_array[self.selectedTile - 1].fillColor = null;
         }
-        if (elementClickedId.id === 225) {
-          if (elementClickedId.job === self.job) {
-            tiles_array[224].fillColor = '#ffc508';
-          } else if (elementClickedId.nickname === self.nickname) {
-            tiles_array[224].fillColor = 'green';
-          } else if (elementClickedId.nickname !== self.nickname) {
-            tiles_array[224].fillColor = 'blue';
-          } else {
-            tiles_array[224].fillColor = 'gray';
-          }
-        }
+        // if (elementClickedId.job === self.job) {
+        //   tiles_array[224].fillColor = '#ffc508';
+        // } else 
+        // if (elementClickedId.nickname === self.nickname) {
+        //   tiles_array[224].fillColor = 'green';
+        // } else if (elementClickedId.nickname !== self.nickname) {
+        //   tiles_array[224].fillColor = 'blue';
+        // } else {
+        //   tiles_array[224].fillColor = 'gray';
+        // }
+
         self.selectedTile = elementClickedId.id;
         self.currentNickname = elementClickedId.nickname;
         self.currentHq = elementClickedId.hq;
@@ -283,9 +254,8 @@ export default {
           ) {
             visitTitle.style.top = `${tiles_array[elementClickedId.id].y + 54}px`;
             visitTitle.style.left = `initial`;
-            visitTitle.style.right = `${
-              canvas_element.width - tiles_array[elementClickedId.id].x + 48
-            }px`;
+            visitTitle.style.right = `${canvas_element.width - tiles_array[elementClickedId.id].x + 48
+              }px`;
           } else {
             visitTitle.style.top = `${tiles_array[elementClickedId.id].y + 54}px`;
             visitTitle.style.right = `initial`;
@@ -297,13 +267,21 @@ export default {
         drawTiles();
       };
 
-      function checkClick(event) {
-        const clickX = event.layerX;
-        const clickY = event.layerY;
+      function checkClick(event, canvas_element) {
+        const canvasRect = canvas_element.getBoundingClientRect();
+        console.log(canvasRect)
+        const clickX = event.clientX - canvasRect.left;
+        const clickY = event.clientY - canvasRect.top + window.scrollY;
+        console.log(clickX, clickY)
+
+        // const clickX = event.layerX;
+        // const clickY = event.layerY - 135;
 
         let element;
 
         tiles_array.forEach((tile) => {
+          console.log(tile)
+
           if (
             clickX > tile.workWidth.start &&
             clickX < tile.workWidth.end &&
@@ -326,16 +304,15 @@ export default {
 
       function createTiles(quantityX, quantityY) {
         tiles_array = [];
-        const quantityAll = quantityX * quantityY + 1;
+        const quantityAll = quantityX * quantityY;
         const tileWidth = canvas_element.width / quantityX;
         const tileHeight = canvas_element.height / quantityY;
-
+        console.log(tileWidth, tileHeight)
         const drawPosition = {
           x: 0,
           y: 0,
         };
-        let i = 1;
-        for (i = 1; i < quantityAll; i++) {
+        for (let i = 0; i < quantityAll; i++) {
           let fillColor = TILE_TYPES.land.color;
           let nickname = '';
           let level = '';
@@ -372,7 +349,7 @@ export default {
             drawPosition.y,
             tileWidth,
             tileHeight,
-            i,
+            i + 1,
             nickname,
             level,
             custom_name,
@@ -406,7 +383,7 @@ export default {
       heliport.src = '//img.drugwars.io/map/first.png';
       home.src = '//img.drugwars.io/map/home.png';
       tree.src = '//img.drugwars.io/map/tree.png';
-      buildingtop.src = '//img.drugwars.io/map/buildingtop.png'; 
+      buildingtop.src = '//img.drugwars.io/map/buildingtop.png';
       buildingbottom.src = '//img.drugwars.io/map/buildingbottom.png';
       fountain.src = '//img.drugwars.io/map/fountain.png';
       pool.src = '//img.drugwars.io/map/pool.png';
@@ -417,43 +394,42 @@ export default {
       function drawTiles() {
         const background = new Image();
 
-        background.src = `//img.drugwars.io/map/newmap.jpg`;
+        background.src = `/img/mapbg.png`;
         background.onload = () => {
           context.imageSmoothingEnabled = true;
           context.drawImage(background, 0, 0, canvas.width, canvas.height);
           tiles_array.forEach((tile) => {
             context.beginPath();
             if (tile.fillColor) context.fillStyle = tile.fillColor;
-            else context.fillStyle = 'rgba(255, 255, 255, 0.0)';
-            context.rect(tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 12);
-            // context.lineWidth = '0';
-            // context.strokeStyle = tile.strokeStyle;
+            else context.fillStyle = 'rgba(255, 50, 50, 0.0)';
+            context.rect(tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 12);
+
+
             // context.strokeStyle = '#000';
 
             context.fill();
 
             if (tile.fillColor) {
-              if(tile.level > 99)
-              {
-                context.drawImage(heliport, tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 11);
+              if (tile.level > 99) {
+                context.drawImage(heliport, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
               else if (tile.level > 49) {
-                 context.drawImage(pool, tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 11);
+                context.drawImage(pool, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
               else if (tile.level > 29) {
-                 context.drawImage(fountain, tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 11);
+                context.drawImage(fountain, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
               if (tile.level < 10) {
-                context.drawImage(home, tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 11);
-                if (tile.fillColor === 'green'){
-                  context.drawImage(tree, tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 11);
-                } 
+                context.drawImage(home, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
+                if (tile.fillColor === 'green') {
+                  context.drawImage(tree, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
+                }
               }
               if (tile.level > 9) {
-                context.drawImage(buildingtop, tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 11);
+                context.drawImage(buildingtop, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
               if (tile.level > 19) {
-                context.drawImage(buildingbottom, tile.x + 6, tile.y + 9, tile.width - 12, tile.height - 11);
+                context.drawImage(buildingbottom, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
 
             }
@@ -462,13 +438,12 @@ export default {
             context.textAlign = 'center';
             context.lineWidth = 5;
 
-            context.font = '12px American Captain';
             context.fillStyle = '#fff';
-            context.fillText(tile.id, tile.x + 15, tile.y + 42);
+            context.fillText(tile.id, tile.x + 22, tile.y + 42, tile.width);
           });
         };
       }
-      createTiles(15, 15);
+      createTiles(10, 10);
       drawTiles();
 
       // const limit = (document.body.clientWidth)-bg.offsetWidth;
@@ -571,8 +546,8 @@ export default {
       const self = this;
       self.bases = null;
       if (self.currentLocation !== self.location) {
-        if(value)
-        self.currentLocation = value;
+        if (value)
+          self.currentLocation = value;
         else self.currentLocation = self.location;
         client.requestAsync('get_bases', self.currentLocation).then((result) => {
           [self.bases] = result;
@@ -622,6 +597,16 @@ export default {
   overflow: hidden;
 }
 
+.overlay {
+  position:absolute;
+  background-image: url(/img/map.png);
+  top:0px;
+  width: 100%;
+  height: 100%;
+  background-size: 100%;
+  pointer-events: none;
+}
+
 .title {
   position: absolute;
   z-index: 10;
@@ -664,22 +649,14 @@ td {
   transition: all 1s cubic-bezier(0.7, -0.4, 0.88, 0.51);
 }
 
-.tile > div {
-  transform: rotateZ(-45deg) rotateY(-60deg) translate3d(-1.1em, -4.8em, 0em);
-  width: 11.5em;
-  height: 10em;
-  background-size: 1600% 100%;
-  background-position: -6px 0px;
-  background-repeat: no-repeat;
-  background-image: url(http://img14.deviantart.net/f99b/i/2011/354/d/5/isometric_new_tiles_by_spasquini-d4jnp2i.png);
-  image-rendering: pixelated;
-}
+
 
 @keyframes showTile {
   from {
     transform: translate3d(12em, 12em, 0em);
     opacity: 0;
   }
+
   to {
     transform: translate3d(0em, 0em, 0em);
     opacity: 1;
@@ -691,73 +668,11 @@ td {
     transform: translate3d(0em, 0em, 0em);
     opacity: 1;
   }
+
   to {
     transform: translate3d(12em, 12em, 0em);
     opacity: 0;
   }
 }
 
-.tile > div.tile-0 {
-  background-position: calc(-6px + (-183.5px * 0)) 0px;
-}
-
-.tile > div.tile-1 {
-  background-position: calc(-6px + (-183.5px * 1)) 0px;
-}
-
-.tile > div.tile-2 {
-  background-position: calc(-6px + (-183.5px * 2)) 0px;
-}
-
-.tile > div.tile-3 {
-  background-position: calc(-6px + (-183.5px * 3)) 0px;
-}
-
-.tile > div.tile-4 {
-  background-position: calc(-6px + (-183.5px * 4)) 0px;
-}
-
-.tile > div.tile-5 {
-  background-position: calc(-6px + (-183.5px * 5)) 0px;
-}
-
-.tile > div.tile-6 {
-  background-position: calc(-6px + (-183.5px * 6)) 0px;
-}
-
-.tile > div.tile-7 {
-  background-position: calc(-6px + (-183.5px * 7)) 0px;
-}
-
-.tile > div.tile-8 {
-  background-position: calc(-6px + (-183.5px * 8)) 0px;
-}
-
-.tile > div.tile-9 {
-  background-position: calc(-6px + (-183.5px * 9)) 0px;
-}
-
-.tile > div.tile-10 {
-  background-position: calc(-6px + (-183.5px * 10)) 0px;
-}
-
-.tile > div.tile-11 {
-  background-position: calc(-6px + (-183.5px * 11)) 0px;
-}
-
-.tile > div.tile-12 {
-  background-position: calc(-6px + (-183.5px * 12)) 0px;
-}
-
-.tile > div.tile-13 {
-  background-position: calc(-6px + (-183.5px * 13)) 0px;
-}
-
-.tile > div.tile-14 {
-  background-position: calc(-6px + (-183.5px * 14)) 0px;
-}
-
-.tile > div.tile-15 {
-  background-position: calc(-6px + (-183.5px * 15)) 0px;
-}
 </style>

@@ -19,7 +19,7 @@
             <i class="fad fa-chart-area"></i>
           </router-link>
         </div> -->
-
+<!-- 
         <div class="col card">
           <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
             <i class="fad fa-map-location-dot"></i>
@@ -41,7 +41,7 @@
           <router-link to="/help" class="py-2 px-2 d-block">
             <i class="fad fa-hands-holding-circle"></i>
           </router-link>
-        </div>
+        </div> -->
 
       </div>
     </div>

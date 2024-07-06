@@ -1,10 +1,18 @@
 <template>
   <div id="footer-bar" class="footer-bar footer-bar-detached">
-    <router-link to="/buildings"><i class="fad fa-building font-20"></i><span>HQ</span></router-link>
+    <router-link to="/buildings"><i class="fad fa-home font-20"></i><span>HQ</span></router-link>
     <router-link to="/units"><i class="fad fa-campground font-20"></i><span>Camp</span></router-link>
-    <router-link to="/actions" ><i class="fad fa-explosion font-20"></i><span>Fight</span></router-link>
+    <router-link to="/actions"><i class="fad fa-explosion font-20"></i><span>Fight</span></router-link>
+
+    <router-link v-if="hasBase" :to="'/map/territory?location=' + base.territory"><i
+        class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link>
+
+    <router-link v-else :to="'/map/territory?location=' + rnd"><i
+        class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link>
+    <router-link to="/rewards"><i class="fad fa-award font-20"></i><span>Prize</span></router-link>
     <router-link to="/leaderboards"><i class="fad fa-trophy font-20"></i><span>Board</span></router-link>
-    <router-link to="/gangs"><i class="fad fa-people-group font-20"></i><span>Gang</span></router-link>
+
+    <!-- <router-link to="/gangs"><i class="fad fa-people-group font-20"></i><span>Gang</span></router-link> -->
   </div>
   <!-- <div>
     <ul class="bottomnav d-flex list-style-none text-center">
@@ -75,9 +83,21 @@ import { mapActions } from 'vuex';
 
 export default {
   data() {
-    return {};
+    return {
+      rnd: Math.floor(Math.random() * Math.floor(250)) + 1,
+
+    };
   },
   computed: {
+    base() {
+      return this.$store.state.game.mainbase;
+    },
+    hasBase() {
+      const building = this.$store.state.game.user.buildings.find(
+        b => b.building === 'headquarters' && b.territory !== 0,
+      );
+      return !!(building && building.lvl > 0);
+    },
     config() {
       return {
         options: [
@@ -213,7 +233,7 @@ export default {
     border-right: 0px solid rgb(43, 43, 43);
   }
 
- 
+
 
   button {
     line-height: 22px;
@@ -239,18 +259,18 @@ export default {
 }
 
 .router-link-active {
-    opacity: 1;
+  opacity: 1;
 
-    color: white !important;
+  color: white !important;
 
 
-    i {
-      margin-bottom: 5px;
-      font-size: 28px;
-      --fa-primary-color: red;
-      --fa-secondary-color: white;
-      --fa-primary-opacity: 1.0;
-      --fa-secondary-opacity: 1.0;
-    }
+  i {
+    margin-bottom: 5px;
+    font-size: 28px;
+    --fa-primary-color: red;
+    --fa-secondary-color: white;
+    --fa-primary-opacity: 1.0;
+    --fa-secondary-opacity: 1.0;
   }
+}
 </style>
