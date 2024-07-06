@@ -35,7 +35,7 @@
   const unsubscribe = tonConnectUI.onStatusChange(
     walletAndwalletInfo => {
       const currentWallet = tonConnectUI.wallet;
-      document.getElementById("winfo").innerHTML = currentWallet
+      document.getElementById("winfo").innerHTML = JSON.stringify(currentWallet)
     }
   );
   document.getElementById("winfo").innerHTML ="hreaoio"
