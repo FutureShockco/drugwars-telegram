@@ -83,13 +83,14 @@
       </div>
     </div>
 
-    <div class="card-bottom text-center">
-      <button :disabled="!canLogin" @click="ok" class="btn w-50 gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s"
-        style="color:black">Play Now</button>
-      <div class="btn-full text-center mb-4">
+    <div class="card-bottom text-center mb-4">
+      <div class="btn-full text-center">
         <div id="bloat" class="btn"></div>
         <div id="winfo"></div>
       </div>
+      <button :disabled="!canLogin" @click="ok" class="btn w-50 gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s"
+        style="color:black">Play Now</button>
+      
     </div>
   </div>
 </template>
