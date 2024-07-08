@@ -34,11 +34,15 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['toggleSidebarVisibility']),
+    ...mapActions(['toggleSidebarVisibility','init']),
   },
+
   mounted() {
     // What is the best? mounted or created??
+    if(this.TWA)
     this.TWA.ready();
+    if(this.TWA&&this.TWA.initDataUnsafe&&this.TWA.initDataUnsafe.user)
+    this.init(this.TWA.initDataUnsafe)
   },
   computed: {
 
