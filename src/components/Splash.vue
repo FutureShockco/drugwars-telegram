@@ -18,14 +18,13 @@
         <div class="splide__list">
           <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
-              style="background-image:url(./img/ban4.png); background-size:cover;" data-card-height="cover">
+              style="background-image:url(./img/ban7.png); background-size:cover;" data-card-height="cover">
               <div class="card-center">
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
                     style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
                 <p class="color-white font-16 text-center boxed-text-xl">
-                  Take the role of a gangster, build up your empire by producing and selling drugs, fighting rival
-                  gangs, and completing missions.
+                  Create your own virtual empire
                 </p>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
@@ -34,14 +33,13 @@
           </div>
           <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
-              style="background-image:url(./img/ban5.png); background-size:cover;" data-card-height="cover">
+              style="background-image:url(./img/ban4.png); background-size:cover;" data-card-height="cover">
               <div class="card-center">
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
                     style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
                 <p class="color-white font-16 text-center boxed-text-xl">
-                  Many players find the core gameplay loop of building a drug empire, battling rivals, and completing
-                  missions to be addictive and enjoyable.
+                  Build up a gang with your mates
                 </p>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
@@ -56,15 +54,14 @@
                     style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
                 <p class="color-white font-16 text-center boxed-text-xl">
-                  Drugwars.io has a dedicated player base, with forums and social media groups where players discuss
-                  strategies, share tips, and socialize.
+                  Fight with your opponents
                 </p>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
             </div>
           </div>
-          <div class="splide__slide">
+          <!-- <div class="splide__slide">
             <div class="card bg-dark-dark rounded-0"
               style="background-image:url(./img/ban7.png); background-size:cover;" data-card-height="cover">
               <div class="card-center">
@@ -78,16 +75,17 @@
               <div class="card-overlay bg-black opacity-60 rounded-0"></div>
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
 
     <div class="card-bottom text-center mb-4">
-    
-      <button :disabled="!canLogin" @click="ok" class="btn w-50 gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s"
-        style="color:black">Play Now</button>
-        <div class="btn-full text-center">
+
+      <button :disabled="!canLogin" @click="ok"
+        class="btn w-50 gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s" style="color:black">Play
+        Now</button>
+      <div class="btn-full text-center">
         <div id="bloat" class="btn"></div>
         <div id="winfo"></div>
       </div>
@@ -107,8 +105,8 @@ export default {
   },
   watch: {
     ready() {
-      if(this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
-      this.canLogin = true
+      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+        this.canLogin = true
     },
   },
   methods: {
@@ -116,7 +114,8 @@ export default {
     ok() {
       if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
         this.init(this.TWA.initDataUnsafe).then((result) => {
-          this.$router.push({ path: '/buildings' });
+          console.log(result)
+          this.$router.push({ path: '/home' });
         })
 
     },

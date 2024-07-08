@@ -2,8 +2,10 @@ import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
 import { isWeb } from '@/helpers/utils';
+import client from '@/helpers/client';
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
+const Landing = () => import(/* webpackChunkName: "landing" */ '@/views/Landing.vue');
 
 
 const Jobs = () => import(/* webpackChunkName: "jobs" */ '@/views/Jobs/Jobs.vue');
@@ -63,6 +65,9 @@ const GangDeposits = () =>
 const GangFights = () => import(/* webpackChunkName: "gang-fights" */ '@/views/Gangs/Fights.vue');
 const Rewards = () => import(/* webpackChunkName: "rewards" */ '@/views/Rewards.vue');
 
+const Pablo = () => import(/* webpackChunkName: "pablo" */ '@/views/Pablo.vue');
+const Tasks = () => import(/* webpackChunkName: "tasks" */ '@/views/Tasks.vue');
+
 const NewContract = () =>
   import(/* webpackChunkName: "newcontract" */ '@/views/Contracts/Create.vue');
 const Contracts = () =>
@@ -104,7 +109,6 @@ const About = () => import(/* webpackChunkName: "about" */ '@/views/About.vue');
 const Help = () => import(/* webpackChunkName: "help" */ '@/views/Help/Help.vue');
 const GetStarted = () => import(/* webpackChunkName: "getstarted" */ '@/views/Help/GetStarted.vue');
 const Guides = () => import(/* webpackChunkName: "guides" */ '@/views/Help/Guides.vue');
-const Airdrop = () => import(/* webpackChunkName: "airdrop" */ '@/views/Airdrop.vue');
 
 const Error404 = () => import(/* webpachChunkName: "error404" */ '@/views/404.vue');
 
@@ -113,6 +117,7 @@ Vue.use(Router);
 setInterval(() => {
   store.dispatch('updateTimestamp');
 }, 1000);
+
 
 const requireAuth = (to, from, next) => {
 
@@ -137,6 +142,7 @@ const requireAuth = (to, from, next) => {
   }
 };
 
+
 export default new Router({
   mode: isWeb() ? 'history' : 'hash',
   scrollBehavior() {
@@ -153,10 +159,40 @@ export default new Router({
       },
     },
     {
+      path: '/home',
+      name: 'rewards',
+      component: Rewards,
+      beforeEnter: requireAuth,
+      meta: {
+        hideSidebar: true,
+      },
+    },
+    {
+      path: '/pablo',
+      name: 'pablo',
+      component: Pablo,
+      beforeEnter: requireAuth,
+      meta: {
+        hideSidebar: true,
+      },
+    },
+    {
+      path: '/tasks',
+      name: 'tasks',
+      component: Tasks,
+      beforeEnter: requireAuth,
+      meta: {
+        hideSidebar: true,
+      },
+    },
+    {
       path: '/news',
       name: 'news',
       beforeEnter: requireAuth,
       component: News,
+      meta: {
+        hideSidebar: true,
+      },
     },
     {
       path: '/tutorial',
@@ -532,12 +568,10 @@ export default new Router({
       beforeEnter: requireAuth,
       component: EarlyAccess,
     },
- {
+    {
       path: '*',
       component: Error404,
-      meta: {
-        hideSidebar: true,
-      },
+
     },
   ],
 });

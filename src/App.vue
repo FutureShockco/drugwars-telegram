@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <Splash v-if="showLoading" />
-    <template v-else >
+    <template v-else>
       <TopNav v-if="username" />
       <SidebarLeft v-if="username && showSidebar" />
       <router-view class="page-content header-clear-medium" :class="{
@@ -10,7 +10,8 @@
       }" />
       <!-- <Quickstart/> -->
       <!-- <BottomNav v-if="username" /> -->
-      <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade"></div>
+      <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
+      </div>
     </template>
     <Notifications />
 
@@ -34,18 +35,17 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['toggleSidebarVisibility','init']),
+    ...mapActions(['toggleSidebarVisibility', 'init']),
   },
 
   mounted() {
     // What is the best? mounted or created??
-    if(this.TWA)
-    this.TWA.ready();
-    if(this.TWA&&this.TWA.initDataUnsafe&&this.TWA.initDataUnsafe.user)
-    this.init(this.TWA.initDataUnsafe)
+    if (this.TWA && this.TWA.ready)
+      this.TWA.ready();
+    if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+      this.init(this.TWA.initDataUnsafe)
   },
   computed: {
-
     username() {
       return this.$store.state.game.user;
     },
@@ -93,7 +93,7 @@ export default {
   }
 }
 
-.content{
+.content {
   margin: 0px;
 }
 
@@ -119,5 +119,4 @@ export default {
 //       left: 0;
 //     }
 //   }
-// }
-</style>
+// }</style>

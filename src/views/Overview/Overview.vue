@@ -1,6 +1,6 @@
 <template>
   <div>
-    <OverviewTabs />
+    <BuildingsTabs />
     <div class="anim-fade-in" v-if="HQ && drugProductionRate">
       <div class="card card-style">
         <div class="content">

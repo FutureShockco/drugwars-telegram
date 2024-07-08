@@ -1,15 +1,15 @@
 <template>
-    <div class="countdown">
-        <div v-show="statusType !== 'expired'">
-            <div class="hour">
+    <div class="countdown row">
+        <div class="d-flex" v-show="statusType !== 'expired'">
+            <div class="col hour">
                 <div class="format">Hours</div>
                 <span class="number">{{ hours }}</span>
             </div>
-            <div class="min">
+            <div class="col min">
                 <div class="format">Minutes</div>
                 <span class="number">{{ minutes }}</span>
             </div>
-            <div class="sec">
+            <div class="col sec">
                 <div class="format">Seconds</div>
                 <span class="number">{{ seconds }}</span>
             </div>
@@ -115,7 +115,7 @@ export default {
   background: #fbbd08;
   border-radius: 5px;
   display: inline-block;
-  width: 50px;
+  width: 100%;
   text-align: center;
 }
 

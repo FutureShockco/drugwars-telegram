@@ -30,9 +30,7 @@ const actions = {
           .requestAsync('login', { user })
           .then(result => {
             commit('saveUsername', user.id.toString());
-
-            console.log(result)
-            resolve();
+            resolve(result);
           })
           .catch(e => {
             console.log(e);

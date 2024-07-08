@@ -1,6 +1,7 @@
 <template>
-  <div id="footer-bar" class="footer-bar footer-bar-detached">
-    <router-link to="/buildings"><i class="fad fa-home font-20"></i><span>HQ</span></router-link>
+  <div id="footer-bar" class="footer-bar footer-bar-detached" v-if="username && !showLoading && this.$store.state.game.user.buildings">
+    <router-link to="/home"><i class="fad fa-trophy font-20"></i><span>Home</span></router-link>
+    <router-link to="/buildings"><i class="fad fa-building font-20"></i><span>HQ</span></router-link>
     <router-link to="/units"><i class="fad fa-campground font-20"></i><span>Camp</span></router-link>
     <router-link to="/actions"><i class="fad fa-explosion font-20"></i><span>Fight</span></router-link>
 
@@ -9,7 +10,7 @@
 
     <router-link v-else :to="'/map/territory?location=' + rnd"><i
         class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link>
-    <router-link to="/rewards"><i class="fad fa-award font-20"></i><span>Rewards</span></router-link>
+    <!-- <router-link to="/rewards"><i class="fad fa-award font-20"></i><span>Rewards</span></router-link> -->
     <!-- <router-link to="/leaderboards"><i class="fad fa-trophy font-20"></i><span>Board</span></router-link> -->
 
     <!-- <router-link to="/gangs"><i class="fad fa-people-group font-20"></i><span>Gang</span></router-link> -->
@@ -89,6 +90,12 @@ export default {
     };
   },
   computed: {
+    showLoading() {
+      return this.$store.state.ui.showLoading;
+    },
+    username() {
+      return this.$store.state.game.user;
+    },
     base() {
       return this.$store.state.game.mainbase;
     },

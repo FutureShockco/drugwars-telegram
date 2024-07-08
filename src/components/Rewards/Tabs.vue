@@ -1,7 +1,9 @@
 <template>
   <Header>
     <UiTabs>
-      <UiTab to="/rewards">Heist</UiTab>
+      <UiTab to="/home">Rewards</UiTab>
+      <UiTab to="/pablo">Pablo</UiTab>
+      <UiTab to="/tasks">Tasks</UiTab>
     </UiTabs>
     <!-- <div class="coordbase text-right" v-if="base">
       <div class="text text-blue tab name" v-if="main">

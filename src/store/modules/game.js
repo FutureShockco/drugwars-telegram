@@ -141,9 +141,9 @@ const actions = {
                     ),
                   );
                 dispatch('refresh_fights_count');
-                dispatch('refresh_transport_count');
-                dispatch('refresh_station_count');
-                resolve("success");
+                //dispatch('refresh_transport_count');
+                //dispatch('refresh_station_count');
+                return resolve("success");
               });
             } else {
               console.log('signup')
@@ -350,36 +350,7 @@ const actions = {
         return reject();
       });
     }),
-  setAirdrop: ({ rootState }, payload) =>
-    new Promise((resolve, reject) => {
-      const { username } = rootState.auth;
-      payload.username = username; // eslint-disable-line no-param-reassign
-      payload.type = 'set_airdrop'; // eslint-disable-line no-param-reassign
-      if (localStorage.getItem('access_token')) {
-        const token = localStorage.getItem('access_token');
-        sc.setAccessToken(token);
-        client
-          .requestAsync('set_airdrop', { username, token, payload })
-          .then(result => {
-            store.dispatch('notify', {
-              type: 'success',
-              message: result,
-            });
-            resolve();
-          })
-          .catch(e => {
-            console.log(e);
-            store.dispatch('notify', {
-              type: 'error',
-              message: 'Airdrop wallet already set!',
-            });
-            resolve(e);
-          });
-      } else {
-        console.log('no access token');
-        resolve();
-      }
-    }),
+  
   upgradeBuilding: ({ rootState }, payload) =>
     new Promise((resolve, reject) => {
       const { username } = rootState.auth;
@@ -526,21 +497,7 @@ const actions = {
         return reject();
       });
     }),
-  shareFight: ({ dispatch }, post) =>
-    new Promise((resolve, reject) => {
-      sc.broadcast(post, (err, result) => {
-        console.log(err, result)
-        if (err) {
-          handleError(dispatch, err, 'Share fight failed');
-          return reject(err);
-        }
-        dispatch('notify', {
-          type: 'success',
-          message: 'You have successfully shared your fight on Steem',
-        });
-        return resolve(result);
-      }).catch(e => reject(e));
-    }),
+
   send: ({ rootState }, payload) =>
     new Promise((resolve, reject) => {
       const { username } = rootState.auth;

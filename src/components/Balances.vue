@@ -398,8 +398,9 @@ export default {
     }
 
     h6 {
-      font-size: 10px;
-      line-height: 10px;
+      margin-bottom: 0px;
+      font-size: 8px;
+      line-height: 8px;
     }
 
 

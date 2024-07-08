@@ -360,20 +360,20 @@
 }
 
 .color-yellow-dark {
-  color: #F6BB42 !important;
+  color: #fbbd08 !important;
 }
 
 .color-icon-yellow {
-  stroke: #F6BB42 !important;
+  stroke: #fbbd08 !important;
   fill: rgba(246, 187, 66, 0.25) !important;
 }
 
 .text-yellow {
-  color: #F6BB42 !important;
+  color: #fbbd08 !important;
 }
 
 .bg-yellow-dark {
-  background-color: #F6BB42 !important;
+  background-color: #fbbd08 !important;
   color: #FFF !important;
 }
 
@@ -382,7 +382,7 @@
 }
 
 .border-yellow-dark {
-  border-color: #F6BB42 !important;
+  border-color: #fbbd08 !important;
 }
 
 .border-fade-yellow {
@@ -390,12 +390,12 @@
 }
 
 .focus-yellow:focus {
-  border-color: #F6BB42 !important;
+  border-color: #fbbd08 !important;
 }
 
 .gradient-yellow {
   border: none;
-  background-image: linear-gradient(to bottom, #FFCE54, #F6BB42);
+  background-image: linear-gradient(to bottom, #FFCE54, #fbbd08);
 }
 
 .bg-fade2-blue {
@@ -1157,7 +1157,15 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .bg-23 {
-  background-image: url(https://www.enableds.com/products/duo/v30/images/pictures/23.jpg);
+  background-image: url(/img/pablo.png);
+}
+
+.bg-24 {
+  background-image: url(/img/bibi.png);
+}
+
+.bg-25 {
+  background-image: url(/img/ban9.png);
 }
 
 /*Typography 1 Settings*/

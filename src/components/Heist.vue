@@ -1,21 +1,34 @@
 <template>
-    <div class="pt-2 heist">
-        <h4>Heist</h4>
-        <img width="150px" :src="`//img.drugwars.io/heist.jpg`">
-        <div class="heist-text text-center">
-             <div class="pt-2">Total {{ prizeProps.heist_pool | amount }}</div>
-        <div class="text-green">Vest: {{ totalVest | amount }} </div>
-        <div class="text-yellow">+{{ ownHeistReward.amount }} ({{ownHeistReward.percent | amount}}%)</div>
+  <div class="card card-style">
+    <div class="content">
+      <h3>Pablito</h3>
+      <p>Sell your DRUGS to Pablito, and convert them into tokens with a daily payment.</p>
+      <div class="text-center">
+        <div class="pt-2">Total {{ prizeProps.heist_pool | amount }}</div>
+        <div class="text-green">You: {{ totalVest | amount }} </div>
+        <div class="text-yellow">+{{ ownHeistReward.amount }} ({{ ownHeistReward.percent | amount }}%)</div>
+      </div>
+      <form @submit.prevent="handleSubmit" class="mb-2">
+        <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
+        <div class="row">
+          <div class="col">
+            <div :disabled="isLoading || Number(balances.drugs) < Number(amount)" type="submit"
+              class="btn-full btn border border-green-dark color-green-dark">
+              <span v-if="!isLoading">Sell</span>
+              <SmallLoading v-else />
+            </div>
+          </div>
+          <div class="col">
+            <div :disabled="isLoading" @click="handleFullSubmit()"
+              class="btn-full btn border-mint-dark color-mint-dark">Sell
+              all</div>
+          </div>
         </div>
-        <form @submit.prevent="handleSubmit" class="mb-2">
-            <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
-            <button :disabled="isLoading || Number(balances.drugs) < Number(amount)" type="submit" class="button button-red btn-block">
-    				<span v-if="!isLoading">Deposit</span>
-    				<SmallLoading v-else/>
-    			</button>
-        </form>
-        <button :disabled="isLoading" @click="handleFullSubmit()" class="button button-blue btn-block">Deposit all</button>
+
+      </form>
+
     </div>
+  </div>
 </template>
 
 <script>

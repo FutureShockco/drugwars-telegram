@@ -43,7 +43,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['shareFight', 'notify']),
+    ...mapActions(['notify']),
     handleShareFight(where) {
       const self = this;
       self.share = true;
@@ -160,15 +160,7 @@ export default {
                         },
                       ],
                     ];
-                    self
-                      .shareFight(post)
-                      .then(result => {
-                        if (result) self.share = false;
-                      })
-                      .catch(e => {
-                        console.error('Failed to share a fight=', e);
-                        self.share = false;
-                      });
+                  
                   }
 
                   break;
