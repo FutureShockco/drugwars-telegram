@@ -8,7 +8,7 @@
         content: showSidebar,
         'content--nav-open': sidebarVisible,
       }" />
-      <!-- <Quickstart/> -->
+      <Quickstart v-if="showTutorial"/>
       <!-- <BottomNav v-if="username" /> -->
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
       </div>
@@ -57,6 +57,9 @@ export default {
     },
     showLoading() {
       return this.$store.state.ui.showLoading;
+    },
+    showTutorial() {
+      return this.$store.state.ui.showTutorial;
     }
   },
 };

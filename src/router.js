@@ -547,7 +547,6 @@ export default new Router({
     {
       path: '/help',
       name: 'help',
-      beforeEnter: requireAuth,
       component: Help,
     },
     {

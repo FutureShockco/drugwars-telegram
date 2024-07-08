@@ -205,7 +205,7 @@ export default {
     return {
       isLoading: false,
       action_type: this.$route.query.type || 'attack',
-      target: this.$route.query.target || null,
+      target: query.target || null,
       target_type: this.$route.query.target_type || null,
       selectedUnits: [],
       message: null,

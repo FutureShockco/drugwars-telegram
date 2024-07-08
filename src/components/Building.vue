@@ -2,7 +2,7 @@
   <div v-if="building.id === 'strategic_center' && !main"></div>
   <div v-else-if="building.id === 'pantheon' && !main"></div>
   <div v-else>
-    <div class="card card-style mb-3" :class="[hasNotEnough ? 'not-enough' : '']">
+    <div class="card card-style mb-3" :class="[hasNotEnough ? 'not-enough' : '', tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox':'']">
       <div class="content">
         <div class="d-flex">
           <div class="pt-1 ms-auto">
@@ -122,6 +122,9 @@ export default {
     },
   },
   computed: {
+    tutorialStep() {
+      return this.$store.state.game.user.user.tutorial
+    },
     base() {
       return this.$store.state.game.mainbase;
     },

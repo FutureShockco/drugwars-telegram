@@ -1,39 +1,60 @@
 <template>
-  <div class="d-flex">
-    <div :class="inProgress ? 'col-12 pe-0' : 'col-6 pe-0'">
+  <div class="d-flex w-100 pb-2">
+    <div :class="inProgress ? 'col-12 pe-0' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>Require: {{ updateTime | ms }}</div>
       <button :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base"
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? '' : 'button-green']"
-        @click="handleSubmit()" class="button btn-block  button-left w-100">
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red' : '']"
+        @click="handleSubmit()" class="btn-full btn-xxs btn border-green-dark color-green-dark w-100">
         <template v-if="isLoading || waitingConfirmation">
           <SmallLoading />
         </template>
 
         <template v-else>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
-          <i class="iconfont icon-arrow-up" />
+          <i class="fad fa-arrow-up me-2" />
           <span>{{ upgradeLabel }}</span>
 
         </template>
       </button>
 
     </div>
-    <div v-if="!inProgress" class="col-6 p-0">
-      <div class="text-center w-100">Instant upgrade</div>
-      <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+    <div class="col-8">
+      <div class="text-center w-100">Instant upgrade with TON or DWD</div>
+      <div class="d-flex">
+        <div v-if="!inProgress" class="col-6">
+          <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
         @click="handleRequestPayment()" class="button btn-block button-blue">
         <i class="iconfont icon-zap" />
         <span>
           {{ priceInSteem }} DWD</span>
       </button> -->
-      <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
-        :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
-        @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
+          <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+            :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
+            @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
+            <i class="fad fa-arrow-up me-2" />
+            <span>
+              {{ (priceInDWD / 25).toFixed(4) }} TON</span>
+
+          </button>
+        </div>
+        <div v-if="!inProgress" class="col-5 mx-2">
+          <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+        @click="handleRequestPayment()" class="button btn-block button-blue">
+        <i class="iconfont icon-zap" />
         <span>
-          {{ priceInDWD }} DWD</span>
-        <i class="iconfont icon-arrow-up" />
-      </button>
+          {{ priceInSteem }} DWD</span>
+      </button> -->
+          <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+            :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
+            @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
+            <i class="fad fa-arrow-up me-2" />
+            <span>
+              {{ priceInDWD }} DWD</span>
+
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -59,6 +80,9 @@ export default {
     },
   },
   computed: {
+    tutorialStep() {
+      return this.$store.state.game.user.user.tutorial
+    },
     base() {
       return this.$store.state.game.mainbase;
     },
@@ -127,7 +151,7 @@ export default {
     },
     upgradeLabel() {
       let label = 'Upgrade';
-      if (this.notEnough) label = 'Not enough';
+      if (this.notEnough) label = 'Miss resources';
       if (this.requireUpdate) label = 'Require HQ upgrade';
       if (this.inProgress) {
         label = `Upgrading [${parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(

@@ -2,7 +2,6 @@ import Vue from 'vue';
 import Promise from 'bluebird';
 import client from '@/helpers/client';
 import store from '@/store';
-import sc from '@/helpers/steemlogin';
 import dwsocial from '@/helpers/dwsocial';
 
 
@@ -119,6 +118,9 @@ const actions = {
           .then(user => {
             console.log(user)
             if (user && user.user && user.user.username) {
+              if (user.user.tutorial < 15)
+                console.log(store)
+                store.dispatch('showTutorial')
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 commit('savePrizeProps', prizeProps);
                 commit('saveUser', user);
@@ -149,7 +151,7 @@ const actions = {
               console.log('signup')
               dispatch('signup').then(() => {
                 Promise.delay(2000).then(() => {
-                  window.location = '/';
+                  // window.location = '/home';
                   resolve()
                 });
               });
@@ -350,7 +352,7 @@ const actions = {
         return reject();
       });
     }),
-  
+
   upgradeBuilding: ({ rootState }, payload) =>
     new Promise((resolve, reject) => {
       const { username } = rootState.auth;
