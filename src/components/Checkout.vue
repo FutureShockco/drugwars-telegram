@@ -1,11 +1,12 @@
 <template>
   <div class="d-flex w-100 pb-2">
-    <div :class="inProgress ? 'col-12 pe-0' : 'col-4 pe-0  mx-2 '">
+    <div :class="inProgress ? 'd-none' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>Require: {{ updateTime | ms }}</div>
-      <button :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base"
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red' : '']"
-        @click="handleSubmit()" class="btn-full btn-xxs btn border-green-dark color-green-dark w-100">
+      <button
+        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep < 10 && id !== 'headquarters')"
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red text-white' : 'border-green-dark border-green-dark color-green-dark ']"
+        @click="handleSubmit()" class="btn-full btn-xxs btn  w-100">
         <template v-if="isLoading || waitingConfirmation">
           <SmallLoading />
         </template>
@@ -19,18 +20,19 @@
       </button>
 
     </div>
-    <div class="col-8">
-      <div class="text-center w-100">Instant upgrade with TON or DWD</div>
+    <div v-if="!inProgress" class="col-8">
+      <div class="text-center w-100">Instant upgrade with TON or DW</div>
       <div class="d-flex">
-        <div v-if="!inProgress" class="col-6">
+        <div class="col-6">
           <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
         @click="handleRequestPayment()" class="button btn-block button-blue">
         <i class="iconfont icon-zap" />
         <span>
           {{ priceInSteem }} DWD</span>
       </button> -->
-          <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
-            :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
+          <button
+            :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || tutorialStep < 10"
+            :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-blue'"
             @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
             <i class="fad fa-arrow-up me-2" />
             <span>
@@ -45,7 +47,8 @@
         <span>
           {{ priceInSteem }} DWD</span>
       </button> -->
-          <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+          <button
+            :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 3 && id !== 'ammunition') || (tutorialStep === 4 && id !== 't_distillery') || (tutorialStep === 5 && id !== 'training_facility')"
             :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
             @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
             <i class="fad fa-arrow-up me-2" />

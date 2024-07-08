@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-style mb-3">
+  <div class="card card-style mb-3" :class="unit.id === 'spy' && tutorialStep === 6 ? 'tutobox':''">
     <div class="content">
       <div class="d-flex " style="position: relative;">
         <div class="pt-1 ms-auto">
@@ -53,6 +53,9 @@ export default {
     };
   },
   computed: {
+    tutorialStep() {
+      return this.$store.state.game.user.user.tutorial
+    },
     user() {
       return this.$store.state.game.user.user;
     },

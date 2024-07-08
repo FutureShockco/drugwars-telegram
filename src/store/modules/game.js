@@ -119,8 +119,7 @@ const actions = {
             console.log(user)
             if (user && user.user && user.user.username) {
               if (user.user.tutorial < 15)
-                console.log(store)
-                store.dispatch('showTutorial')
+              store.dispatch('showTutorial')
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 commit('savePrizeProps', prizeProps);
                 commit('saveUser', user);

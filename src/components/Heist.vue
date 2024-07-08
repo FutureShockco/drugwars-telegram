@@ -1,8 +1,8 @@
 <template>
   <div class="card card-style">
     <div class="content">
-      <h3>Pablito</h3>
-      <p>Sell your DRUGS to Pablito, and convert them into tokens with a daily payment.</p>
+      <h3>Pablo</h3>
+      <p>Sell your DRUGS to Pablo, and convert them into tokens with a daily payment.</p>
       <div class="text-center">
         <div class="pt-2">Total {{ prizeProps.heist_pool | amount }}</div>
         <div class="text-green">You: {{ totalVest | amount }} </div>

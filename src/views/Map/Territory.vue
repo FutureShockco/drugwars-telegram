@@ -52,14 +52,14 @@
               <button class="button button-blue">TRANSPORT</button>
             </router-link>
           </div> -->
-          <button v-if="!main" class="btn gradient-highlight" @click="handleSubmit()">
+          <button v-if="!main" class="btn gradient-highlight text-black" @click="handleSubmit()">
             CHOOSE AS MAIN BASE
           </button>
         </div>
       </div>
       <table id="table" style="position: relative;">
-      <div class="overlay"></div>
-        <canvas id="canvas"  style="cursor: pointer;height:100vw;width: 100vw;"></canvas>
+        <div class="overlay"></div>
+        <canvas id="canvas" style="cursor: pointer;height:100vw;width: 100vw;"></canvas>
       </table>
 
 
@@ -462,10 +462,7 @@ export default {
         };
         this.send(payload)
           .then(() => {
-            setTimeout(() => {
-              self.init();
-            }, 5000);
-            Promise.delay(3000).then(() => {
+            Promise.delay(2000).then(() => {
               client.requestAsync('get_bases', this.location).then((result) => {
                 [self.bases] = result;
                 this.setMainBase({
@@ -598,9 +595,9 @@ export default {
 }
 
 .overlay {
-  position:absolute;
+  position: absolute;
   background-image: url(/img/map.png);
-  top:0px;
+  top: 0px;
   width: 100%;
   height: 100%;
   background-size: 100%;
@@ -674,5 +671,4 @@ td {
     opacity: 0;
   }
 }
-
 </style>

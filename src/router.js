@@ -120,7 +120,6 @@ setInterval(() => {
 
 
 const requireAuth = (to, from, next) => {
-
   if (!store.state.auth.username || !store.state.game.user.user) {
     store.dispatch('showLoading');
     store.dispatch('login',store.state.auth.username).then(() => {

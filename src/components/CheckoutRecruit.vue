@@ -1,12 +1,12 @@
 <template>
-  <div class="d-flex">
-    <div :class="pendingAmount ? 'col-12 pe-0' : 'col-6 pe-0'">
+  <div class="d-flex w-100 pb-2">
+    <div :class="pendingAmount ? 'd-none' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="pendingAmount">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>Require: {{ updateTime | ms }}</div>
       <button
-        :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base ? '' : 'button-green']"
+        :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base ? 'gradient-red text-white' : 'border-green-dark border-green-dark color-green-dark']"
         :disabled="isLoading || pendingAmount || notEnough || inProgress || !base" @click="handleSubmit()"
-        class="button btn-block button-left w-100">
+        class="btn-full btn-xxs btn  w-100">
         <template v-if="isLoading || waitingConfirmation">
           <SmallLoading />
         </template>
@@ -24,20 +24,25 @@
         </template>
       </button>
     </div>
-    <div v-if="!pendingAmount" class="col-6 p-0">
-      <div class="text-center w-100">Instant recruit</div>
-      <!-- <button :disabled="isLoading || !base" v-if="steemAccount" @click="handleRequestPayment()"
-        class="button btn-block button-blue mb-2">
-        <i class="iconfont icon-zap" />
-        <span> ${{ price * quantity | amount }} =
-          {{ this.priceInSteem }} STEEM</span>
-      </button> -->
-      <button :disabled="isLoading || notEnoughDWD || !base" @click="handleSubmit('dwd')"
-        class="button btn-block button-yellow button-right w-100">
-        <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
-        <span>
-          {{ this.priceInDWD }} DWD</span>
-      </button>
+    <div v-if="!pendingAmount" class="col-8">
+      <div class="text-center w-100">Instant upgrade with TON or DW</div>
+      <div class="d-flex">
+        <div class="col-6">
+          <button :disabled="isLoading || !base" @click="handleRequestPayment()"
+            class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
+            <i class="iconfont icon-zap" />
+            <span>
+              {{ this.priceInSteem }} TON</span>
+          </button>
+        </div>
+        <div v-if="!inProgress" class="col-5 mx-2">
+          <button :disabled="isLoading || notEnoughDWD || !base" @click="handleSubmit('dwd')"
+            class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
+            <span>
+              {{ this.priceInDWD }} DWD</span>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </template>
