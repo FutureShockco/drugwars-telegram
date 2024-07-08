@@ -213,12 +213,12 @@
           </button> -->
           <div class="text-red text-left" v-if="errorMessage">{{ errorMessage }}</div>
         </div>
-        <h2 class="text-center" v-else>
+        <h4 class="text-center" v-else>
           You don't have any unit.
-          <div>
+          <h2>
             <router-link :to="`/units`" class="text-yellow">Click here to start to recruit</router-link>
-          </div>
-        </h2>
+          </h2>
+        </h4>
       </div>
     </div>
     <UiCenter class="vue-ui-modal pt-2 pb-7" v-if="popupOn">

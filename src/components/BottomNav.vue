@@ -9,8 +9,8 @@
 
     <router-link v-else :to="'/map/territory?location=' + rnd"><i
         class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link>
-    <router-link to="/rewards"><i class="fad fa-award font-20"></i><span>Prize</span></router-link>
-    <router-link to="/leaderboards"><i class="fad fa-trophy font-20"></i><span>Board</span></router-link>
+    <router-link to="/rewards"><i class="fad fa-award font-20"></i><span>Rewards</span></router-link>
+    <!-- <router-link to="/leaderboards"><i class="fad fa-trophy font-20"></i><span>Board</span></router-link> -->
 
     <!-- <router-link to="/gangs"><i class="fad fa-people-group font-20"></i><span>Gang</span></router-link> -->
   </div>

@@ -1,39 +1,41 @@
 <template>
   <div>
-    <ul class="d-flex balances list-style-none p-0 m-0">
-      <li v-if="booster" class="col-3 card d-flex pt-2 text-yellow">
-        <Icon name="drug" size="24" />
+    <ul class="d-flex balances list-style-none p-0 m-0 ">
+      <li v-if="booster" class="col-3 card d-flex pt-2 text-yellow ">
+        <Icon name="drug" size="20" />
         <div class="balance">
           <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
             {{ balances.drugs | amount }}
           </div>
+          <div class="detail">
+            {{ (HQ.drug_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange" v-if="drugBonus">
+              {{ drugBonus * 2 | amount }}</span>/DAY
+          </div>
           <!-- <div class="detail">
-          {{ (HQ.drug_production_rate * 60 * 60 * 24) * 2 | amount }}+<span class="text-orange" v-if="drugBonus">
-            {{ drugBonus * 2 | amount }}</span>/DAY
-        </div>
-        <div class="detail">
           <span class="text-green">{{ HQ.drug_storage / 100 * 20 | amount }}</span>/SAFE
         </div> -->
         </div>
       </li>
-      <li class="col-3 card d-flex pt-2" v-else>
-        <Icon name="drug" size="24" />
-        <div class="balance">
-          <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
-            {{ balances.drugs | amount }}
+      <li class="col-3 card d-flex pt-2 align-self-stretch" v-else>
+        <div class="d-flex justify-content-start align-items-start">
+          <Icon name="drug" size="20" class="me-2 mb-1 align-self-start" />
+          <div>
+            <h6 class="align-self-start">DRUGS</h6>
+            <div class="detail">
+              <span class="text-yellow"> +{{ HQ.drug_production_rate * 60 * 60 * 24 | amount }}</span>/DAY
+            </div>
           </div>
-          <!-- <div class="detail">
-          {{ HQ.drug_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="drugBonus"> {{ drugBonus
-            |
-            amount}}</span>/DAY
         </div>
-        <div class="detail">
+        <div class="balance py-2" :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
+          {{ balances.drugs | amount }}
+        </div>
+
+        <!-- <div class="detail">
           <span class="text-green">{{ HQ.drug_storage / 100 * 20 | amount }}</span>/SAFE
         </div> -->
-        </div>
       </li>
       <li v-if="booster" class="text-yellow col-3 card d-flex pt-2">
-        <Icon name="weapon" size="24" />
+        <Icon name="weapon" size="20" />
         <div class="balance">
           <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
             {{ balances.weapons | amount }}
@@ -47,23 +49,30 @@
         </div> -->
         </div>
       </li>
-      <li class="col-3 card d-flex pt-2" v-else>
-        <Icon name="weapon" size="24" />
-        <div class="balance">
-          <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
-            {{ balances.weapons | amount }}
+      <li class="col-3 card d-flex pt-2 align-self-stretch" v-else>
+        <div class="d-flex justify-content-start align-items-start">
+          <Icon name="weapon" size="20" class="me-2 mb-1 align-self-start" />
+          <div>
+            <h6 class="align-self-start">WEAPONS</h6>
+            <div class="detail">
+              <span class="text-yellow"> +{{ HQ.weapon_production_rate * 60 * 60 * 24 | amount }}</span>/DAY
+            </div>
           </div>
-          <!-- <div class="detail ">
+        </div>
+        <div class="balance py-2" :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
+          {{ balances.weapons | amount }}
+        </div>
+        <!-- <div class="detail ">
           {{ HQ.weapon_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="weaponBonus">{{
             weaponBonus | amount }}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.weapon_storage / 100 * 20 | amount }}</span>/SAFE
         </div> -->
-        </div>
+
       </li>
       <li v-if="booster" class="text-yellow col-3 card d-flex pt-2">
-        <Icon name="alcohol" size="24" />
+        <Icon name="alcohol" size="20" />
         <div class="balance">
           <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
             {{ balances.alcohols | amount }}
@@ -77,23 +86,40 @@
         </div> -->
         </div>
       </li>
-      <li class="col-3 card d-flex pt-2" v-else>
-        <Icon name="alcohol" size="24" />
+      <li class="col-3 card d-flex pt-2 align-self-stretch" v-else>
+        <div class="d-flex justify-content-start align-items-start">
+          <Icon name="alcohol" size="20" class="me-2 mb-1 align-self-start" />
+          <div>
+            <h6 class="align-self-start">ALCOHOL</h6>
+            <div class="detail">
+              <span class="text-yellow"> +{{ HQ.alcohol_production_rate * 60 * 60 * 24 | amount }}</span>/DAY
+            </div>
+          </div>
+        </div>
         <div class="balance">
           <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
             {{ balances.alcohols | amount }}
           </div>
-          <!-- <div class="detail">
+        </div>
+        <!-- <div class="detail">
           {{ HQ.alcohol_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="alcoholBonus">{{
             alcoholBonus | amount }}</span>/DAY
         </div>
         <div class="detail">
           <span class="text-green">{{ HQ.alcohol_storage / 100 * 20 | amount }}</span>/SAFE
         </div> -->
-        </div>
+
       </li>
-      <li class="col-3 card d-flex pt-2">
-        <Icon name="dwd" size="24" />
+      <li class="col-3 card d-flex pt-2 align-self-stretch">
+        <div class="d-flex justify-content-start align-items-start ">
+          <Icon class="me-2 mb-1 align-self-start" name="dwd" size="20" />
+          <div>
+            <h6 class="align-self-start">DWTOKEN</h6>
+            <div class="detail">
+              <span class="text-yellow"> +0</span>/TODAY
+            </div>
+          </div>
+        </div>
         <div class="balance">
           <div>{{ user.dwd | amount }}</div>
           <!-- <div class="balance">
@@ -360,13 +386,22 @@ export default {
   li {
     padding: 0px;
     font-weight: 700;
+    height: 100%;
+
     .balance {
       float: left;
       text-align: left;
       font-size: 24px;
-      line-height: 24px!important;;
+      line-height: 24px !important;
+      ;
 
     }
+
+    h6 {
+      font-size: 10px;
+      line-height: 10px;
+    }
+
 
     span {
       float: right;
@@ -378,8 +413,8 @@ export default {
     }
 
     .detail {
-      font-size: 12px;
-      line-height: 12px !important;
+      font-size: 8px;
+      line-height: 10px !important;
       text-align: left;
 
       span {
@@ -388,12 +423,7 @@ export default {
       }
     }
 
-    .icon {
-      font-size: 32px;
-      line-height: 32px;
-      margin-right: 10px;
-      font-weight: 100;
-    }
+
   }
 
   .mini {
