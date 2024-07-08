@@ -2,11 +2,13 @@
   <div v-if="building.id === 'strategic_center' && !main"></div>
   <div v-else-if="building.id === 'pantheon' && !main"></div>
   <div v-else>
-    <div class="card card-style mb-3" :class="[hasNotEnough ? 'not-enough' : '', tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox':'', tutorialStep === 2 && building.id === 'crackhouse' ? 'tutobox':'', tutorialStep === 3 && building.id === 'ammunition' ? 'tutobox':'', tutorialStep === 4 && building.id === 't_distillery' ? 'tutobox':'', tutorialStep === 5 && building.id === 'training_facility' ? 'tutobox':'']">
+    <div class="card card-style mb-3"
+      :class="[hasNotEnough ? 'not-enough' : '', tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox' : '', tutorialStep === 2 && building.id === 'crackhouse' ? 'tutobox' : '', tutorialStep === 3 && building.id === 'ammunition' ? 'tutobox' : '', tutorialStep === 4 && building.id === 't_distillery' ? 'tutobox' : '', tutorialStep === 5 && building.id === 'training_facility' ? 'tutobox' : '']">
       <div class="content">
         <div class="d-flex">
           <div class="pt-1 ms-auto">
-            <div style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;" class="rounded-s">
+            <div style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;"
+              class="rounded-s">
               <img :style="inProgress ? 'filter: grayscale(1);' : ''" style="border: 1px solid #392828;    "
                 :src="`/img/buildings/${building.id}.png`" class="img-fluid rounded-s" width="100" height="100">
               <div v-if="inProgress" style="text-align:center;position: absolute; top:0px; width:100%;z-index:10;">
@@ -36,11 +38,8 @@
     background-size: cover;
 
     " :style="`top:${100 - progress}%;background-size:100%; height:${progress}%!important;background-image:url(/img/buildings/${building.id}.png)`">
-
               </div>
-
             </div>
-
           </div>
           <div class="ps-3 me-auto" style="width: 100%;">
             <router-link class="mt-n2 pb-2" :to="`/buildings/detail?name=${building.id}`">
@@ -286,7 +285,7 @@ export default {
       return 0;
     },
     updateTime() {
-      return utils.calculateTimeToBuild(this.building.id, this.building.coeff, this.ownItem.lvl+1, this.ownHq.lvl);
+      return utils.calculateTimeToBuild(this.building.id, this.building.coeff, this.ownItem.lvl + 1, this.ownHq.lvl);
     },
     progress() {
       if (this.timeToWait || this.updateTime)
