@@ -1,233 +1,231 @@
 <template>
-  <div>
-    <div class="d-flex flex-lg-row text-center text-lg-left item">
-      <div class="mr-3">
-        <img class="preview" :src="`//img.drugwars.io/buildings/${building.id}.jpg`" />
-      </div>
-      <div class="level">{{ ownItem.lvl }}</div>
-      <div class="item-content width-full">
-        <h5>{{ building.name }}</h5>
-        <div class="mb-2" v-html="building.desc"></div>
-        <div v-if="building.feature" class="mb-2">
-          UNIQUE:
-          <span class="text-orange">{{ building.feature }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="item-content width-full">
-      <div v-for="level in nextLevels" :key="level" class="border-bottom mx-3">
-        <h5 class="mb-0 mt-0">Level {{level}}</h5>
-        <Cost
-          :drugsCost="drugsCost(level)"
-          :weaponsCost="weaponsCost(level)"
-          :alcoholsCost="alcoholsCost(level)"
-          :quantity="1"
-        />
-        <div v-if="building.production_type" class="mb-2">
-          <BuildingProduction
-            :compactview="1"
-            :production_type="building.production_type"
-            :level="level"
-            :coeff="building.coeff"
-            :production_rate="building.production_rate"
-          />
-        </div>
-        <div
-          v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)"
-          class="mb-2"
-        >
-          <div v-if="level">
-            <b>Storage:</b>
-            {{ 10000+ (18000 * level * (Math.sqrt(level) / 100)) * level | amount }}
-          </div>
-          <div v-if="level">
-            <b>Safe:</b>
-            {{ ( 10000+(18000 * level * (Math.sqrt(level)) / 100) * level ) /100*20 | amount }}
-          </div>
-          <div v-else>
-            <b>Safe:</b>
-            {{ 10000 /100*25 | amount }}
+
+  <div class="card card-style">
+    <BuildingsTabs />
+    <div class="content">
+      <div class="d-flex">
+        <div class="pt-1 ms-auto">
+          <div style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;"
+            class="rounded-s">
+            <img :src="`/img/buildings/${building.id}.png`" class="img-fluid rounded-s" width="100" height="100" />
           </div>
         </div>
-        <div v-if="['headquarters'].includes(building.id)" class="mb-2">
-          <div class="columns">
-            <div class="column col-1">
-              <div v-if="level">
-                <b>Lvl 10</b>
-              </div>
-              <div v-if="level">
-                <b>Lvl 20</b>
-              </div>
-              <div v-if="level">
-                <b>Lvl 50</b>
-              </div>
-              <div v-if="level">
-                <b>Lvl 100</b>
-              </div>
+        <div class="ps-3 me-auto" style="width: 100%;">
+          <div class="level">Level {{ ownItem.lvl }}</div>
+          <div class="item-content width-full">
+            <h5>{{ building.name }}</h5>
+            <div class="mb-2" v-html="building.desc"></div>
+            <div v-if="building.feature" class="mb-2">
+              UNIQUE:
+              <span class="text-orange">{{ building.feature }}</span>
             </div>
-            <div class="column col-1">
-              Building
-              Timer
-            </div>
-            <div class="column col-2">
-              <div v-if="level">
-                <b>Training Fac.</b>
-                {{updateTime('training_facility',level,10) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Training Fac.</b>
-                {{updateTime('training_facility',level,20) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Training Fac.</b>
-                {{updateTime('training_facility',level,50) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Training Fac.</b>
-                {{updateTime('training_facility',level,100) | ms}}
-              </div>
-            </div>
-            <div class="column col-2">
-              <div v-if="level">
-                <b>Crack House</b>
-                {{updateTime('crackhouse',level,10) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Crack House</b>
-                {{updateTime('crackhouse',level,20) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Crack House</b>
-                {{updateTime('crackhouse',level,50) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Crack House</b>
-                {{updateTime('crackhouse',level,100) | ms}}
-              </div>
-            </div>
-            <div class="column col-2">
-              <div v-if="level">
-                <b>Pharma. Lab</b>
-                {{updateTime('pharma_lab',level,10) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Pharma. Lab</b>
-                {{updateTime('pharma_lab',level,20) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Pharma. Lab</b>
-                {{updateTime('pharma_lab',level,50) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Pharma. Lab</b>
-                {{updateTime('pharma_lab',level,100) | ms}}
-              </div>
-            </div>
-            <div class="column col-2">
-              <div v-if="level">
-                <b>Research C.</b>
-                {{updateTime('research_center',level,10) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Research C.</b>
-                {{updateTime('research_center',level,20) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Research C.</b>
-                {{updateTime('research_center',level,50) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Research C.</b>
-                {{updateTime('research_center',level,100) | ms}}
-              </div>
-            </div>
-            <div class="column col-2">
-              <div v-if="level">
-                <b>Drug Storage</b>
-                {{updateTime('drug_storage',level,10) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Drug Storage</b>
-                {{updateTime('drug_storage',level,20) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Drug Storage</b>
-                {{updateTime('drug_storage',level,50) | ms}}
-              </div>
-              <div v-if="level">
-                <b>Drug Storage</b>
-                {{updateTime('drug_storage',level,100) | ms}}
-              </div>
-            </div>
-          </div>
-        </div>
-        <div v-if="['training_facility'].includes(building.id)" class="mb-2">
-          <div v-if="level">
-            <b>Super Bouncer:</b>
-            {{(0.84 * 1500/ (level)) * ( 1000) | ms}}
-          </div>
-          <div v-if="level">
-            <b>Big Mama:</b>
-            {{(4.72 * 1500/ level ) * (1000) | ms}}
-          </div>
-          <div v-if="level">
-            <b>Spy :</b>
-            {{(0.65 * 1500/ level ) * (1000) | ms}}
-          </div>
-          <div v-if="level">
-            <b>Mercenary:</b>
-            {{(8 * 1500/ level)* (1000) | ms}}
           </div>
         </div>
 
-        <div v-if="['strategic_center'].includes(building.id)" class="mb-2">
-          <div v-if="level">
-            <b>Solo Job1:</b>
-              {{new Date((((1*10) * 620000)) - (level *30000*1)) | ms }}
+      </div>
+      <div class="item-content width-full">
+        <div v-for="level in nextLevels" :key="level" class="border-bottom mx-3">
+          <h5 class="mb-0 mt-0">Level {{ level }}</h5>
+          <Cost :drugsCost="drugsCost(level)" :weaponsCost="weaponsCost(level)" :alcoholsCost="alcoholsCost(level)"
+            :quantity="1" />
+          <div v-if="building.production_type" class="mb-2">
+            <BuildingProduction :compactview="1" :production_type="building.production_type" :level="level"
+              :coeff="building.coeff" :production_rate="building.production_rate" />
           </div>
-          <div v-if="level">
-            <b>Solo Job5:</b>
-               {{new Date((((5*10) * 620000)) - (level *30000*5)) | ms }}
+          <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
+            <div v-if="level">
+              <b>Storage:</b>
+              {{ 10000 + (18000 * level * (Math.sqrt(level) / 100)) * level | amount }}
+            </div>
+            <div v-if="level">
+              <b>Safe:</b>
+              {{ (10000 + (18000 * level * (Math.sqrt(level)) / 100) * level) / 100 * 20 | amount }}
+            </div>
+            <div v-else>
+              <b>Safe:</b>
+              {{ 10000 / 100 * 25 | amount }}
+            </div>
           </div>
-          <div v-if="level">
-            <b>Solo Job10:</b>
-              {{new Date((((10*10) * 620000)) - (level *30000*10)) | ms }}
+          <div v-if="['headquarters'].includes(building.id)" class="mb-2">
+            <div class="d-flex">
+              <div class="col">
+                <div v-if="level">
+                  <b>Lvl 10</b>
+                </div>
+                <div v-if="level">
+                  <b>Lvl 20</b>
+                </div>
+                <div v-if="level">
+                  <b>Lvl 50</b>
+                </div>
+                <div v-if="level">
+                  <b>Lvl 100</b>
+                </div>
+              </div>
+              <div class="col">
+                Building
+                Timer
+              </div>
+              <div class="column col-2">
+                <div v-if="level">
+                  <b>Training Fac.</b>
+                  {{ updateTime('training_facility', level, 10) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Training Fac.</b>
+                  {{ updateTime('training_facility', level, 20) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Training Fac.</b>
+                  {{ updateTime('training_facility', level, 50) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Training Fac.</b>
+                  {{ updateTime('training_facility', level, 100) | ms }}
+                </div>
+              </div>
+              <div class="column col-2">
+                <div v-if="level">
+                  <b>Crack House</b>
+                  {{ updateTime('crackhouse', level, 10) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Crack House</b>
+                  {{ updateTime('crackhouse', level, 20) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Crack House</b>
+                  {{ updateTime('crackhouse', level, 50) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Crack House</b>
+                  {{ updateTime('crackhouse', level, 100) | ms }}
+                </div>
+              </div>
+              <div class="column col-2">
+                <div v-if="level">
+                  <b>Pharma. Lab</b>
+                  {{ updateTime('pharma_lab', level, 10) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Pharma. Lab</b>
+                  {{ updateTime('pharma_lab', level, 20) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Pharma. Lab</b>
+                  {{ updateTime('pharma_lab', level, 50) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Pharma. Lab</b>
+                  {{ updateTime('pharma_lab', level, 100) | ms }}
+                </div>
+              </div>
+              <div class="column col-2">
+                <div v-if="level">
+                  <b>Research C.</b>
+                  {{ updateTime('research_center', level, 10) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Research C.</b>
+                  {{ updateTime('research_center', level, 20) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Research C.</b>
+                  {{ updateTime('research_center', level, 50) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Research C.</b>
+                  {{ updateTime('research_center', level, 100) | ms }}
+                </div>
+              </div>
+              <div class="column col-2">
+                <div v-if="level">
+                  <b>Drug Storage</b>
+                  {{ updateTime('drug_storage', level, 10) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Drug Storage</b>
+                  {{ updateTime('drug_storage', level, 20) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Drug Storage</b>
+                  {{ updateTime('drug_storage', level, 50) | ms }}
+                </div>
+                <div v-if="level">
+                  <b>Drug Storage</b>
+                  {{ updateTime('drug_storage', level, 100) | ms }}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div v-if="['operation_center'].includes(building.id)" class="mb-2">
-          <div v-if="level">
-            <b>Drug Bonus</b>
-            +{{drugBonus(level) ||amount}} per day
+          <div v-if="['training_facility'].includes(building.id)" class="mb-2">
+            <div v-if="level">
+              <b>Super Bouncer:</b>
+              {{ (0.84 * 1500 / (level)) * (1000) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Big Mama:</b>
+              {{ (4.72 * 1500 / level) * (1000) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Spy :</b>
+              {{ (0.65 * 1500 / level) * (1000) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Mercenary:</b>
+              {{ (8 * 1500 / level) * (1000) | ms }}
+            </div>
           </div>
-          <div v-if="level">
-            <b>Weapon Bonus</b>
-            +{{weaponBonus(level) ||amount}} per day
+
+          <div v-if="['strategic_center'].includes(building.id)" class="mb-2">
+            <div v-if="level">
+              <b>Solo Job1:</b>
+              {{ new Date((((1 * 10) * 620000)) - (level * 30000 * 1)) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Solo Job5:</b>
+              {{ new Date((((5 * 10) * 620000)) - (level * 30000 * 5)) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Solo Job10:</b>
+              {{ new Date((((10 * 10) * 620000)) - (level * 30000 * 10)) | ms }}
+            </div>
           </div>
-          <div v-if="level">
-            <b>Alcohol Bonus</b>
-            +{{alcoholBonus(level) ||amount}} per day
+          <div v-if="['operation_center'].includes(building.id)" class="mb-2">
+            <div v-if="level">
+              <b>Drug Bonus</b>
+              +{{ drugBonus(level) || amount }} per day
+            </div>
+            <div v-if="level">
+              <b>Weapon Bonus</b>
+              +{{ weaponBonus(level) || amount }} per day
+            </div>
+            <div v-if="level">
+              <b>Alcohol Bonus</b>
+              +{{ alcoholBonus(level) || amount }} per day
+            </div>
           </div>
-        </div>
-        <div v-if="['research_center'].includes(building.id)" class="mb-2">
-          <div v-if="level">
-            <b>Routing</b>
-            {{updateTimeTrainings('routing',level,10) | ms}}
-          </div>
-          <div v-if="level">
-            <b>Close Combat</b>
-            {{updateTimeTrainings('closecombat',level,20) | ms}}
-          </div>
-          <div v-if="level">
-            <b>FireArms</b>
-            {{updateTimeTrainings('firearms',level,50) | ms}}
-          </div>
-          <div v-if="level">
-            <b>Protection</b>
-            {{updateTimeTrainings('protection',level,100) | ms}}
-          </div>
-          <div v-if="level">
-            <b>Psychological Training</b>
-            {{updateTimeTrainings('psychological',level,100) | ms}}
+          <div v-if="['research_center'].includes(building.id)" class="mb-2">
+            <div v-if="level">
+              <b>Routing</b>
+              {{ updateTimeTrainings('routing', level, 10) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Close Combat</b>
+              {{ updateTimeTrainings('closecombat', level, 20) | ms }}
+            </div>
+            <div v-if="level">
+              <b>FireArms</b>
+              {{ updateTimeTrainings('firearms', level, 50) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Protection</b>
+              {{ updateTimeTrainings('protection', level, 100) | ms }}
+            </div>
+            <div v-if="level">
+              <b>Psychological Training</b>
+              {{ updateTimeTrainings('psychological', level, 100) | ms }}
+            </div>
           </div>
         </div>
       </div>

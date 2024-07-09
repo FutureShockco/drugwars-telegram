@@ -153,7 +153,7 @@ export default {
     },
     upgradeLabel() {
       let label = 'Upgrade';
-      if (this.notEnough) label = 'Miss resources';
+      if (this.notEnough) label = 'No resources';
       if (this.requireUpdate) label = 'Require HQ+';
       if (this.inProgress) {
         label = `Upgrading [${parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(
