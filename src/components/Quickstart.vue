@@ -1,12 +1,8 @@
 <template>
-  <div id="notification-bar-3" class="notification-bar glass-effect detached rounded-m shadow-l fade show"
+  <div id="notification-bar-3" class="notification-bar glass-effect detached rounded-m shadow-l fade show pb-3"
     data-bs-delay="7000">
     <div v-if="tutorialStep === 0">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Selecting Your Base of Operations</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
+
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/home'" src="/img/sofia14.png" width="112" class="rounded-s" alt="img">
@@ -20,9 +16,9 @@
             for your little empire. Find a neighborhood that makes you feel all powerful and safe.
             Fewer enemies... means less problems, exactly what we want. Choose wisely, baby."</h3>
 
-          <h3 v-if="this.$route.path === '/map/territory'">"Alright, now you can see the map in
-            front of you. Use the buttons to navigate through different neighborhoods. When ready <span
-              class="text-yellow">select a square and choose it as your main base</span>. This is
+          <h3 v-if="this.$route.path === '/map/territory'">"Alright, now you can see the map. Use the buttons to
+            navigate through different neighborhoods. When ready <span class="text-yellow">select a square and choose it
+              as your main base</span>. This is
             where you'll start
             building
             your empire, so make it count."</h3>
@@ -31,7 +27,7 @@
           </p>
           <router-link v-if="this.$route.path === '/home'" :to="'/map/territory?location=' + rnd"
             class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Choose a location</router-link>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/map/territory'"
+          <div @click="hideTutorial" v-if="this.$route.path === '/map/territory'"
             :to="'/map/territory?location=' + rnd"
             class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
             Close and choose</div>
@@ -40,11 +36,7 @@
 
     </div>
     <div v-if="tutorialStep === 1">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Upgrading Your HeadQuarters</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
+
       <div class="d-flex p-3 pb-0" v-if="tutorialStep === 1">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/buildings'" src="/img/sofia14.png" width="112" class="rounded-s" alt="img">
@@ -62,21 +54,15 @@
             TIP: A solid HQ is the heart of your empire,
             where all the big decisions are made and operations are controlled. Let's get to it.
           </p>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/buildings'"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and choose</div>
-          <router-link v-else to="/buildings" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
+          <router-link v-if="this.$route.path !== '/buildings'" to="/buildings"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
             to
             your base</router-link>
         </div>
       </div>
     </div>
     <div v-if="tutorialStep === 2">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Increasing Drug Production</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
+
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/buildings'" src="/img/sofia1.png" width="112" class="rounded-s" alt="img">
@@ -99,22 +85,13 @@
             TIP: When you're expanding your empire, it's crucial to manage multiple drug production buildings
             efficiently.
           </p>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/buildings/drugs'"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and upgrade</div>
-          <router-link v-else to="/buildings/drugs"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
-            to
-            your buildings</router-link>
+          <router-link v-if="this.$route.path !== '/buildings/drugs'" to="/buildings/drugs"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
     <div v-if="tutorialStep === 3">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Strengthening Your Arsenal</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
+
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/buildings/weapons'" src="/img/sofia12.png" width="112" class="rounded-s"
@@ -135,27 +112,18 @@
             TIP: When you're expanding your empire, it's crucial to manage multiple weapon production buildings
             efficiently.
           </p>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/buildings/weapons'"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and upgrade</div>
-          <router-link v-else to="/buildings/weapons"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
-            to
-            your buildings</router-link>
+          <router-link v-if="this.$route.path !== '/buildings/weapons'" to="/buildings/weapons"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
     <div v-if="tutorialStep === 4">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Expanding Alcohol Production</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
+
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/buildings/alcohol'" src="/img/sofia13.png" width="112" class="rounded-s"
             alt="img">
-          <img v-else src="/img/7.png" width="112" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia8.png" width="112" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -172,25 +140,16 @@
             TIP: When you're expanding your empire, it's crucial to manage multiple alcohol production buildings
             efficiently.
           </p>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/buildings/alcohol'"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and upgrade</div>
-          <router-link v-else to="/buildings/alcohol"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
-            to
-            your buildings</router-link>
+          <router-link v-if="this.$route.path !== '/buildings/alcohol'" to="/buildings/alcohol"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
     <div v-if="tutorialStep === 5">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Establishing Your Training Grounds</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
+
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img src="/img/latina.png" width="112" class="rounded-s" alt="img">
+          <img src="/img/sofia4.png" width="112" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -205,21 +164,13 @@
             TIP: Each unit you recruit should serve a purpose. Thugs for defense, mercenaries for offense, and spies for
             intelligence gathering.
           </p>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/buildings'"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and upgrade</div>
-          <router-link v-else to="/buildings" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
-            to
-            your buildings</router-link>
+          <router-link v-if="this.$route.path !== '/buildings'" to="/buildings"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
     <div v-if="tutorialStep === 6">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Gathering Intelligence</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
+
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/units'" src="/img/sofia20.png" width="112" class="rounded-s" alt="img">
@@ -227,61 +178,117 @@
 
         </div>
         <div class="ps-4">
-          {{ this.$route.path }}
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
           <h3 v-if="this.$route.path !== '/units'"> "Now, my love, let’s get some bodies in here. Go to the training
             facility and <span class="text-yellow">start the
               recruitment</span>.
           </h3>
           <h3 v-if="this.$route.path === '/units'"> "Alright, it's time to bring in the eyes and ears of our
-            operation. Recruit a <span class="text-yellow">Spy</span> to gather crucial intelligence on our rivals."
+            operation. Click on the yellow button to recruit a <span class="text-yellow">Spy</span> to gather crucial
+            intelligence on our rivals."
           </h3>
           <p class="mb-0">
             TIP: Remember,
             good information can be more valuable than gold.
           </p>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/units'"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and upgrade</div>
-          <router-link v-else to="/units" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
-            to
-            your training facility</router-link>
+          <router-link v-if="this.$route.path !== '/units'" to="/units"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
     <div v-if="tutorialStep === 7">
-      <div class="toast-header px-3 py-3">
-        <i class="bi bi-bell-fill pe-2 color-yellow-dark"></i>
-        <strong class="me-auto color-theme">Attacking a Player with a Spy</strong>
-        <small>Masterclass {{ tutorialStep + 1 }}</small>
-      </div>
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/actions'" src="/img/sofia21.png" width="112" class="rounded-s" alt="img">
           <img v-else src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
-
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h3 v-if="this.$route.path !== '/actions'"> "Alright, sexy, now it's time to get a little dirty. We've got
+          <h3 v-if="this.$route.path !== '/actions' && tutoDetail === 0"> "Alright, sexy, now it's time to get a little
+            dirty. We've got
             our spy ready, so let's put them to work for a little fight.
           </h3>
-          <h3 v-if="this.$route.path === '/actions'"> "Click on the <span class="text-yellow">Spy</span> to add it to
+          {{ tutoDetail }} {{ tutorialStep }}
+          <h3 v-if="this.$route.path === '/actions' && tutoDetail === 0"> "Click on the <span
+              class="text-yellow">Spy</span> to add it to
             the selected army list. Send your
             spy to gather intel on this rival player. Knowledge is
             power, and we need to know everything about our enemies before we make a move. Let's dig up some dirt, shall
             we?"
           </h3>
+          <h3 v-if="this.$route.path === '/actions' && tutoDetail === 1"> "Ok I already entered the informations of our
+            rival. Next step for you is to click on the <span class="text-yellow">attack!</span> button"
+          </h3>
           <p class="mb-0">
             TIP: Remember,
             good information can be more valuable than gold.
           </p>
-          <div @click="this.hideTutorial" v-if="this.$route.path === '/actions'"
+
+          <router-link  to="/actions?type=attack&nickname=WorstRival&message=tuto"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+        </div>
+      </div>
+    </div>
+    <div v-if="tutorialStep === 8 && tutoDetail === 2">
+      <div class="d-flex p-3 pb-0">
+        <div class="ms-auto">
+          <img v-if="this.$route.path === '/actions?type=attack&nickname=WorstRival&message=tuto'"
+            src="/img/sofia21.png" width="112" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
+        </div>
+        <div class="ps-4">
+          <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
+          <h3 v-if="this.$route.path !== '/actions'"> "See there your <span class="text-yellow">Spy</span> is on the way
+            to attack our rival! Come back after the fight is done to see the result."
+          </h3>
+
+          <h3 v-if="this.$route.path === '/actions'"> "Perfect your <span class="text-yellow">Spy</span> is now
+            on the way! Let take a look at it.
+          </h3>
+          <p class="mb-0">
+            TIP: Remember,
+            good information can be more valuable than gold.
+          </p>
+          <router-link v-if="this.$route.path === '/actions'" to="/actions/outgoing"
+            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+          <div @click="setTutoDetail(0)" v-else
             class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and send units</div>
-          <router-link v-else to="/actions" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
-            to
-            your training facility</router-link>
+            Continue</div>
+        </div>
+      </div>
+    </div>
+    <div v-if="tutorialStep === 8 && tutoDetail === 0">
+      <div class="d-flex p-3 pb-0">
+        <div class="ms-auto">
+          <img v-if="this.$route.path === '/actions'" src="/img/sofia21.png" width="112" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
+        </div>
+        <div class="ps-4">
+          <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
+          <h3> "Ok, babe, last but not least, you need to connect your TON wallet to DrugWars.
+          </h3>
+
+
+          <div @click="toggleModalAccount" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
+            Open Wallet</div>
+
+        </div>
+      </div>
+    </div>
+    <div v-if="tutorialStep === 9 && tutoDetail === 3">
+      <div class="d-flex p-3 pb-0">
+        <div class="ms-auto">
+          <img src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
+        </div>
+        <div class="ps-4">
+          <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
+          <h3> "Wow, you are very impressive, it's time for you now to continue alone, I'll be back soon.
+          </h3>
+
+
+          <div @click="hideTutorial, setTutoDetail(0)" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
+            Continue</div>
+
         </div>
       </div>
     </div>
@@ -381,12 +388,18 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['showTutorial', 'hideTutorial']),
+    ...mapActions(['showTutoriahideTutorial', 'setTutoDetail', 'toggleModalAccount']),
+    goToSettings() {
+      this.$router.push({ path: 'settings' })
+    }
   },
   computed: {
 
     tutorialStep() {
       return this.$store.state.game.user.user.tutorial
+    },
+    tutoDetail() {
+      return this.$store.state.game.tutoDetail
     },
     mission0() {
       const building = this.$store.state.game.user.buildings.find(

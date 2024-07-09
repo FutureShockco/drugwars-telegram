@@ -370,6 +370,7 @@
 
 .text-yellow {
   color: #fbbd08 !important;
+  --fa-primary-color: #fbbd08;
 }
 
 .bg-yellow-dark {
@@ -423,6 +424,7 @@
 
 .text-blue {
   color: #4A89DC !important;
+  --fa-primary-color: #4A89DC;
 }
 
 .color-icon-blue {

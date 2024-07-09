@@ -1,30 +1,35 @@
 <template>
-    <div>
-        <SettingsTabs/>
-        <div class="p-4 text-center anim-fade-in">
-            <h2>Change your settings</h2>
-            <h5 class="text-yellow">Server : {{server}} Name : {{name}}</h5>
-            <!-- <h5>Be carefull, you can not change your nickname more than one time per month and/or 2 days after starting a fight</h5> -->
-            <form class="form container-xxs" @submit.prevent="handleSubmit">
-                <p>Nickname</p>
-                <input class="input input-primary mb-2" v-model="nickname" maxlength="32" :placeholder="user.nickname" v-lowercase />
-                <p>Profile picture</p>
-                <input class="input input-primary mb-4" v-model="picture" type="url" :placeholder="user.picture" />
-                <button class="button input-block button-large button-green mb-2" type="submit" :disabled="isLoading">   
-                            <SmallLoading v-if="isLoading"/>    
-                            <span v-else>Edit</span>   
-                          </button>
-            </form>
-            <a @click.prevent="alert.isActive ? stop_alerts(alert) : activate_alerts(alert)" v-for="alert in alerts" :key="alert.id">
-                <div v-if="alert.isActive" class="iconfont icon-mute">Stop alerts on incoming Attacks</div>
-                <div v-else class="iconfont icon-unmute">Activate alerts on incoming Attacks</div>
-            </a>
-            <div class="mt-3">
-            Use this button if you have any issue with loading, deleting squads.
-            <button class="btn button button-large button-red mt-2" @click="deleteFavCompo()">Delete Favorite Squads</button>
-            </div>
+  <div>
+    <SettingsTabs />
+    <div class="card card-style anim-fade-in">
+      <div class="content">
+        <h2>Change your settings</h2>
+        <h5 class="text-yellow">Server : {{ server }} Name : {{ name }}</h5>
+        <!-- <h5>Be carefull, you can not change your nickname more than one time per month and/or 2 days after starting a fight</h5> -->
+        <form class="form" @submit.prevent="handleSubmit">
+          <p>Nickname</p>
+          <input class="input input-primary mb-2" v-model="nickname" maxlength="32" :placeholder="user.nickname"
+            v-lowercase />
+          <p>Profile picture</p>
+          <input class="input input-primary mb-4" v-model="picture" type="url" :placeholder="user.picture" />
+          <button class="btn btn-xxs gradient-highlight" type="submit" :disabled="isLoading">
+            <SmallLoading v-if="isLoading" />
+            <span v-else>Edit</span>
+          </button>
+        </form>
+        <a @click.prevent="alert.isActive ? stop_alerts(alert) : activate_alerts(alert)" v-for="alert in alerts"
+          :key="alert.id">
+          <div v-if="alert.isActive" class="iconfont icon-mute">Stop alerts on incoming Attacks</div>
+          <div v-else class="iconfont icon-unmute">Activate alerts on incoming Attacks</div>
+        </a>
+        <div class="mt-3">
+          Use this button if you have any issue with loading, deleting squads.
+          <button class="btn btn-xxs gradient-red" @click="deleteFavCompo()">Delete Fav
+            Squads</button>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>
@@ -33,9 +38,11 @@ import { mapActions } from 'vuex';
 export default {
   data() {
     return {
+      tonConnectUI: null,
       isLoading: false,
       nickname: null,
       picture: null,
+      wallet: null,
       alerts: [
         {
           id: 'alert',
@@ -45,6 +52,7 @@ export default {
       ],
     };
   },
+ 
   computed: {
     server() {
       return this.$store.state.game.server.number;
@@ -60,6 +68,7 @@ export default {
         Date.parse(this.$store.state.game.user.user.last_profile_update),
       ).toLocaleString();
     },
+
   },
   methods: {
     ...mapActions(['send', 'notify']),
@@ -92,12 +101,11 @@ export default {
       localStorage.setItem('attack_alert', false);
       alert.isActive = false; // eslint-disable-line no-param-reassign
     },
-    deleteFavCompo(){
+    deleteFavCompo() {
       localStorage.removeItem('fav_combi');
     }
   },
 };
 </script>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

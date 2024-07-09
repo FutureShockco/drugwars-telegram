@@ -86,6 +86,8 @@
               </div>
             </div>
             <Cost :drugsCost="drugsCost" :weaponsCost="weaponsCost" :alcoholsCost="alcoholsCost" :quantity="1" />
+            <div class="w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
+
           </div>
 
         </div>
@@ -261,6 +263,19 @@ export default {
       const nextUpdate = new Date(this.ownItem.next_update).getTime();
       const now = new Date().getTime();
       return nextUpdate >= now;
+    },
+    timeToWaitString() {
+      const building = this.$store.state.game.user.buildings.find(
+        b =>
+          b.building === this.building.id &&
+          b.territory === this.base.territory &&
+          b.base === this.base.base,
+      );
+      if (building) {
+        const nextUpdate = new Date(building.next_update).toLocaleString();
+        return nextUpdate.replace('/2019', '');
+      }
+      return 0;
     },
     timeToWait() {
       const building = this.$store.state.game.user.buildings.find(

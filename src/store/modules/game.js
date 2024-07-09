@@ -29,7 +29,8 @@ const state = {
   mainbase: null,
   steemengine: null,
   force_sent_fights_refresh: true,
-  server: JSON.parse(localStorage.getItem('server')) || { api: process.env.VUE_APP_API, name: 'Chicago', number: 1 }
+  server: JSON.parse(localStorage.getItem('server')) || { api: process.env.VUE_APP_API, name: 'Chicago', number: 1 },
+  tutoDetail:0
 };
 
 const mutations = {
@@ -89,6 +90,9 @@ const mutations = {
   },
   saveSE(_state, payload) {
     Vue.set(_state, 'steemengine', payload);
+  },
+  setTutoDetail(_state, payload) {
+    Vue.set(_state, 'tutoDetail', payload);
   },
 };
 
@@ -716,6 +720,10 @@ const actions = {
   setBase: ({ commit }, payload) => {
     // console.log(payload);
     commit('saveBase', payload);
+  },
+  setTutoDetail: ({ commit }, payload) => {
+    // console.log(payload);
+    commit('setTutoDetail', payload);
   },
   setMainBase: ({ commit }, payload) => {
     // console.log(payload);

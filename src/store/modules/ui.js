@@ -2,6 +2,7 @@ import Vue from 'vue';
 
 const state = {
   sidebarVisible: false,
+  modalAccountVisible:false,
   showLoading: false,
   showTutorial: false,
   timestamp: new Date().getTime(),
@@ -11,6 +12,9 @@ const state = {
 const mutations = {
   toggleSidebarVisibility(_state) {
     Vue.set(_state, 'sidebarVisible', !_state.sidebarVisible);
+  },
+  toggleModalAccount(_state) {
+    Vue.set(_state, 'modalAccountVisible', !_state.modalAccountVisible);
   },
   showLoading(_state) {
     Vue.set(_state, 'showLoading', true);
@@ -36,6 +40,9 @@ const mutations = {
 const actions = {
   toggleSidebarVisibility({ commit }) {
     commit('toggleSidebarVisibility');
+  },
+  toggleModalAccount({ commit }) {
+    commit('toggleModalAccount');
   },
   showLoading({ commit }) {
     commit('showLoading');

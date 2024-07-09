@@ -3,42 +3,37 @@
     <div v-if="ownBase">
       <BootcampTabs />
       <div v-if="ownBase && !bunker || !bunker.lvl" class="p-4 container-lg clearfix anim-fade-in text-center">
-        <h2>  You must build a bunker first.</h2>
+        <h2> You must build a bunker first.</h2>
       </div>
-      <div v-else  class="p-4 container-lg clearfix anim-fade-in text-center">
-        <div
-            v-if="ownUnits.length > 0 && !defenders || defenders.length <1"
-            class="p-2 text-center"
-          >Your bunker is empty.
-          </div>
-          <div v-else class="mt-4 mb-2">
-            <h3>Units in the bunker</h3>
-            <ArmyToSend :units="defenders" :disableicon="true" />
-            <h5 class="mt-0">Army Value</h5>
-            <h5
-              class="mt-0"
-            >Drugs: {{defendercost.drugs |amount}} - Weapons: {{defendercost.weapons |amount}} - Alcohol: {{defendercost.alcohol |amount}}</h5>
-            <h5 class="mt-0">Power: {{defenderOffensivePower}}%</h5>
-            <h5 class="mt-0">Supply: {{defendersupply |amount}} / {{maxSupply | amount}}</h5>
-                      <button
-            :disabled="!defenders || isLoading"
-            class="button button-large button-red mb-5 "
-            @click="handleRelease()"
-          >
+      <div v-else class="p-4 container-lg clearfix anim-fade-in text-center">
+        <div v-if="ownUnits.length > 0 && !defenders || defenders.length < 1" class="p-2 text-center">Your bunker is
+          empty.
+        </div>
+        <div v-else class="mt-4 mb-2">
+          <h3>Units in the bunker</h3>
+          <ArmyToSend :units="defenders" :disableicon="true" />
+          <h5 class="mt-0">Army Value</h5>
+          <h5 class="mt-0">Drugs: {{ defendercost.drugs | amount }} - Weapons: {{ defendercost.weapons | amount }} - Alcohol:
+            {{ defendercost.alcohol | amount }}</h5>
+          <h5 class="mt-0">Power: {{ defenderOffensivePower }}%</h5>
+          <h5 class="mt-0">Supply: {{ defendersupply | amount }} / {{ maxSupply | amount }}</h5>
+          <button :disabled="!defenders || isLoading" class="button button-large button-red mb-5 "
+            @click="handleRelease()">
             <SmallLoading v-if="isLoading" />
             <span v-else>Release units</span>
           </button>
-          </div>
+        </div>
         <div v-if="ownUnits.length > 0" class="column col-12 flex-md-items-start mt-0">
           <h3 class="mb-0 mt-0">Select units to hide</h3>
           <div v-if="showUnits && ownUnits && ownUnits.length > 0">
-            <div v-for="ownUnit in ownUnits" :key="ownUnit.key+ownBase.territory+ownBase.base">
+            <div v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
               <UnitSelect v-if="ownUnit.amount > 0" :item="ownUnit" @click="addUnit" />
             </div>
           </div>
           <div v-else>You must buy troops</div>
         </div>
-           <button v-if="ownUnits.length > 0" class="button button-green mt-2 mb-2" :disabled="ownUnits.length === 0" @click="autoFill()">AutoFill</button>
+        <button v-if="ownUnits.length > 0" class="button button-green mt-2 mb-2" :disabled="ownUnits.length === 0"
+          @click="autoFill()">AutoFill</button>
 
         <div v-if="ownUnits.length > 0" class="column col-12">
           <div class="mb-2">
@@ -51,21 +46,17 @@
             </div>
             <div v-else>
               <h5 class="mt-0">Defenders Value</h5>
-              <h5
-                class="mt-0"
-                
-              >Drugs: {{cost.drugs |amount}} - Weapons: {{cost.weapons |amount}} - Alcohol: {{cost.alcohol |amount}}</h5>
-              <h5 class="mt-0">Power: {{offensivePower}}%</h5>
-              <h5 class="mt-0">Supply: {{supply |amount}} / {{maxSupply | amount}}</h5>
+              <h5 class="mt-0">Drugs: {{ cost.drugs | amount }} - Weapons: {{ cost.weapons | amount }} - Alcohol:
+                {{ cost.alcohol | amount }}</h5>
+              <h5 class="mt-0">Power: {{ offensivePower }}%</h5>
+              <h5 class="mt-0">Supply: {{ supply | amount }} / {{ maxSupply | amount }}</h5>
               <button class="button button-blue mb-2" @click="removeUnits()">Remove all</button>
             </div>
           </div>
-          <div v-if="defenders && defenders.length>0" class="mb-3">Please release your units before adding new units.</div>
-          <button
-            :disabled="defenders.length>0 || tooMuchSupply || selectedUnits.length === 0 || isLoading"
-            class="button button-large button-red mb-5 "
-            @click="handleSave()"
-          >
+          <div v-if="defenders && defenders.length > 0" class="mb-3">Please release your units before adding new units.
+          </div>
+          <button :disabled="defenders.length > 0 || tooMuchSupply || selectedUnits.length === 0 || isLoading"
+            class="button button-large button-red mb-5 " @click="handleSave()">
             <SmallLoading v-if="isLoading" />
             <span v-else>Save</span>
           </button>
@@ -80,8 +71,16 @@
         </h2>
       </div>
     </div>
-    <div v-else class="p-2 text-center">
-      <h2>You must choose a location on the map first.</h2>
+    <div v-else class="card card-style anim-fade-in">
+      <div class="content">
+        <h4 class="text-center">
+          You must choose a location on the map first.
+          <h2>
+            <router-link :to="'/map/territory?location=' + rnd" class="text-yellow">Click here to choose a
+              location.</router-link>
+          </h2>
+        </h4>
+      </div>
     </div>
   </div>
 </template>

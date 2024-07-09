@@ -13,6 +13,8 @@
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
       </div>
     </template>
+    <Account v-if="username && tutorialStep > 7" :open="modalWalletVisible" @close="toggleModalAccount()"/>
+
     <Notifications />
 
   </div>
@@ -35,7 +37,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['toggleSidebarVisibility', 'init']),
+    ...mapActions(['toggleSidebarVisibility', 'init', 'toggleModalAccount']),
   },
 
   mounted() {
@@ -46,8 +48,19 @@ export default {
       this.init(this.TWA.initDataUnsafe)
   },
   computed: {
+    modalWalletVisible() {
+      return this.$store.state.ui.modalAccountVisible;
+    },
     username() {
       return this.$store.state.game.user;
+    },
+    tutorialStep() {
+      return this.$store.state.game.user.user.tutorial
+    },
+    wallet() {
+      if(this.$store.state.game.user.user.wallet)
+      return false
+      else return true
     },
     showSidebar() {
       return !this.$route.meta.hideSidebar;

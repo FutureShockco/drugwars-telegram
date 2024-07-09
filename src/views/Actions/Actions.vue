@@ -53,13 +53,15 @@
             :class="{ 'button-orange' : action_type ==='station' }"
           >STATION</button> -->
           </div>
-          <h3>Select your army composition</h3>
-          <div class="d-flex" v-if="ownUnits.length > 0">
-            <div class="col" v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
-              <UnitSelect v-if="ownUnit.amount > 0" :item="ownUnit" @click="addUnit" />
+          <div v-if="tutorialStep === 7 && tutoDetail !== 1">
+            <h3>Select your army composition</h3>
+            <div class="d-flex" v-if="ownUnits.length > 0">
+              <div class="col" v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
+                <UnitSelect v-if="ownUnit.amount > 0" :item="ownUnit" @click="addUnit" />
+              </div>
             </div>
+            <div v-else>You must buy troops</div>
           </div>
-          <div v-else>You must buy troops</div>
           <!--  <div v-if="action_type !== 'occupy'" class="row d-flex mt-3">
             <input class="input form-control col" :disabled="selectedUnits.length === 0" placeholder="New Squad name"
               v-model="combination_name" maxlength="24" />
@@ -157,14 +159,17 @@
               :key="(base.territory + '' + base.base)">
               {{ base.custom }}</button>
           </div>
-          <h3 class="mt-1">Select your target coordinates</h3>
-          <div>
-            <input class="input form-control mb-4" type="number" placeholder="Territory" v-model="target" />
+          <h3 class="mt-1">Or your target coordinates</h3>
+          <div class="d-flex">
+            <div class="col">
+              <input class="input form-control mb-4" type="number" placeholder="Territory" v-model="target" />
+            </div>
+            <div class="col">
+              <input class="input form-control mb-4" type="number" placeholder="Base" v-model="base" />
+            </div>
           </div>
-          <div>
-            <input class="input form-control mb-4" type="number" placeholder="Base" v-model="base" />
-          </div>
-          <div v-if="target_type !== 'npc' && (action_type === 'attack' || action_type === 'transport')">
+          <div :class=" tutorialStep === 7 ? 'd-none':''"
+            v-if="target_type !== 'npc' && (action_type === 'attack' || action_type === 'transport')">
             <h3>Add a fight message*</h3>
             <div>* optional</div>
             <input class="input form-control btn-block mb-4" placeholder="I'm coming for you" v-model="message"
@@ -172,11 +177,11 @@
           </div>
           <div v-if="action_type === 'occupy'">
             <h3>Choose Base Name (max 10 bases)</h3>
-            <input class="input form-control btn-block mb-4" placeholder="Eg : Saint Street" v-model="baseName"
+            <input class="input form-control btn-block mb-2" placeholder="Eg : Saint Street" v-model="baseName"
               maxlength="280" />
           </div>
           <button v-if="action_type === 'attack'" :disabled="selectedUnits.length === 0 || !target || isLoading"
-            class="button button-large button-red mb-2 d-block" @click="handleSubmit">
+            class="btn w-100 gradient-red font-700 text-uppercase" @click="handleSubmit">
             <SmallLoading v-if="isLoading" />
             <span v-else>{{ action_type }}</span>
           </button>
@@ -230,9 +235,16 @@
       </div>
     </UiCenter>
   </div>
-
-  <div v-else class="p-2 text-center">
-    <h2>You must choose a location on the map first.</h2>
+  <div v-else class="card card-style anim-fade-in">
+    <div class="content">
+      <h4 class="text-center">
+        You must choose a location on the map first.
+        <h2>
+          <router-link :to="'/map/territory?location=' + rnd" class="text-yellow">Click here to choose a
+            location.</router-link>
+        </h2>
+      </h4>
+    </div>
   </div>
 </template>
 
@@ -252,7 +264,7 @@ export default {
       target_type: this.$route.query.target_type || null,
       base: this.$route.query.base || null,
       selectedUnits: [],
-      message: null,
+      message: this.$route.query.message || null,
       targetNickname: this.$route.query.nickname || null,
       username: this.$store.state.auth.username,
       errorMessage: null,
@@ -282,6 +294,12 @@ export default {
     }
   },
   computed: {
+    tutorialStep() {
+      return this.$store.state.game.user.user.tutorial
+    },
+    tutoDetail() {
+      return this.$store.state.game.tutoDetail
+    },
     ownBase() {
       return this.$store.state.game.mainbase;
     },
@@ -455,7 +473,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['missions', 'init', 'get_bases', 'setBase']),
+    ...mapActions(['missions', 'init', 'get_bases', 'setBase', 'setTutoDetail']),
     resetForm() {
       this.target = null;
       this.base = null;
@@ -480,11 +498,11 @@ export default {
     getUserBase() {
       const self = this;
       self.bases = null;
-      
+
       client.requestAsync('get_user_bases', self.targetNickname).then(result => {
         self.bases = result[0];
         console.log(self.bases[0])
-        self.chooseBase(self.bases[0].territory,self.bases[0].base,self.bases[0].custom)
+        self.chooseBase(self.bases[0].territory, self.bases[0].base, self.bases[0].custom)
         self.enemyProd = result[1][0].prod_rate;
         self.isLoading = false;
       });
@@ -529,6 +547,7 @@ export default {
       this.selectedUnits = [];
     },
     async handleSubmit() {
+      this.setTutoDetail(2)
       this.isLoading = true;
       const self = this;
       let payload = {};
@@ -664,6 +683,7 @@ export default {
       return !this.errorMessage;
     },
     addUnit(payload) {
+      this.setTutoDetail(1)
       const amount = parseInt(payload.amount);
       const selectedUnitsObj = {};
       const ownUnit = this.ownUnits.find(unit => unit.key === payload.key);

@@ -1,26 +1,34 @@
 <template>
-	<div v-if="ownBase">
+  <div v-if="ownBase">
     <JobsTabs />
-		<div class="text-center anim-fade-in">
-      <h5 class="mt-2" v-if="jobleft>0">  You can still start {{jobleft}} job(s) today.</h5>
-      <h5 class="mt-2 text-red" v-else>  You have reached your daily limit of jobs.</h5>
-			<div class="columns m-0" v-for="item in items" :key="item.id">
-				<MissionCard :item="item" />
-				<div class="columns m-0" v-for="job in ownJobs" :key="job.job+job.base">
-					<div v-if="job.job === item.id">
-						<div class="columns m-0" v-for="fight in fights" :key="fight.fight_key">
-							<div v-if="job.territory === fight.target_territory && job.base === fight.target_base">
-								<JobsFight :fight="fight" :job="item" />
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-       <div v-else class="p-2 text-center">
-                <h2> You must choose a location on the map first.</h2>
+    <div class="text-center anim-fade-in">
+      <h5 class="mt-2" v-if="jobleft > 0"> You can still start {{ jobleft }} job(s) today.</h5>
+      <h5 class="mt-2 text-red" v-else> You have reached your daily limit of jobs.</h5>
+      <div class="columns m-0" v-for="item in items" :key="item.id">
+        <MissionCard :item="item" />
+        <div class="columns m-0" v-for="job in ownJobs" :key="job.job + job.base">
+          <div v-if="job.job === item.id">
+            <div class="columns m-0" v-for="fight in fights" :key="fight.fight_key">
+              <div v-if="job.territory === fight.target_territory && job.base === fight.target_base">
+                <JobsFight :fight="fight" :job="item" />
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else class="card card-style anim-fade-in">
+    <div class="content">
+      <h4 class="text-center">
+        You must choose a location on the map first.
+        <h2>
+          <router-link :to="'/map/territory?location=' + rnd" class="text-yellow">Click here to choose a
+            location.</router-link>
+        </h2>
+      </h4>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -70,5 +78,4 @@ export default {
 };
 </script>
 
-<style scoped lang="less">
-</style>
+<style scoped lang="less"></style>

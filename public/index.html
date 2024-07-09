@@ -27,18 +27,5 @@
 </body>
 <script src="./bootstrap.min.js"></script>
 <script src="./custom.js"></script>
-<script>
-  const tonConnectUI = new TON_CONNECT_UI.TonConnectUI({
-    manifestUrl: 'https://dw-telegram-84740bd92ce1.herokuapp.com/tonconnect-manifest.json',
-    buttonRootId: 'bloat'
-  });
-  const unsubscribe = tonConnectUI.onStatusChange(
-    walletAndwalletInfo => {
-      const currentWallet = tonConnectUI.wallet;
-      if(currentWallet)
-      document.getElementById("winfo").innerHTML = currentWallet.account.address.toString()
-    }
-  );
-</script>
 
 </html>

@@ -4,21 +4,29 @@
     <div class="anim-fade-in" v-if="HQ && drugProductionRate">
       <div class="columns m-0 pt-4">
         <div class="row text-center">
-             <h2>Resource inventory</h2>
+          <h2>Resource inventory</h2>
         </div>
         <div class="column p-3 col-4 text-center" v-for="drug in drugs" :key="drug.id">
           <img :src="`//img.drugwars.io/icons/${drug.icon}`" width="36" height="36" />
           <div>
-            <router-link v-if="drug.id" :to="`/market?token=DW${drug.name.substring(0,4).toUpperCase()}`">
-          <h5 class="mt-0 mb-0"><span class="text-orange">{{drug.name}} </span></h5>
-        </router-link>
+            <router-link v-if="drug.id" :to="`/market?token=DW${drug.name.substring(0, 4).toUpperCase()}`">
+              <h5 class="mt-0 mb-0"><span class="text-orange">{{ drug.name }} </span></h5>
+            </router-link>
           </div>
-          <div>DW{{drug.name.substring(0,4).toUpperCase()}} : 0</div>
+          <div>DW{{ drug.name.substring(0, 4).toUpperCase() }} : 0</div>
         </div>
       </div>
     </div>
-    <div v-else class="p-2 text-center">
-      <h2>You must choose a location on the map first.</h2>
+    <div v-else class="card card-style anim-fade-in">
+      <div class="content">
+        <h4 class="text-center">
+          You must choose a location on the map first.
+          <h2>
+            <router-link :to="'/map/territory?location=' + rnd" class="text-yellow">Click here to choose a
+              location.</router-link>
+          </h2>
+        </h4>
+      </div>
     </div>
   </div>
 </template>
@@ -213,7 +221,7 @@ export default {
           this.$store.state.game.gang_buildings.find(b => b.building === 'scientific_lab').lvl || 0;
       return parseFloat(
         this.drugProductionRate * 60 * 60 * 24 * oc * 0.005 +
-          this.drugProductionRate * 60 * 60 * 24 * labLvl * 0.0025,
+        this.drugProductionRate * 60 * 60 * 24 * labLvl * 0.0025,
       ).toFixed(2);
     },
     weaponBonus() {
@@ -240,7 +248,7 @@ export default {
           this.$store.state.game.gang_buildings.find(b => b.building === 'weapon_center').lvl || 0;
       return parseFloat(
         this.weaponProductionRate * 60 * 60 * 24 * oc * 0.005 +
-          this.weaponProductionRate * 60 * 60 * 24 * weaponLvl * 0.005,
+        this.weaponProductionRate * 60 * 60 * 24 * weaponLvl * 0.005,
       ).toFixed(2);
     },
     alcoholBonus() {
@@ -268,7 +276,7 @@ export default {
           0;
       return parseFloat(
         this.alcoholProductionRate * 60 * 60 * 24 * oc * 0.005 +
-          this.alcoholProductionRate * 60 * 60 * 24 * distilleryLvl * 0.005,
+        this.alcoholProductionRate * 60 * 60 * 24 * distilleryLvl * 0.005,
       ).toFixed(2);
     },
   },

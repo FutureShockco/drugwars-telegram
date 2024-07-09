@@ -98,8 +98,16 @@
       </div> -->
       <Building v-for="item in items" :building="item" :key="item.id" />
     </div>
-    <div v-else class="p-2 text-center">
-      <router-link :to="'/map/territory?location=' + rnd"> You must choose a location on the map first.</router-link>
+    <div v-else class="card card-style anim-fade-in">
+      <div class="content">
+        <h4 class="text-center">
+          You must choose a location on the map first.
+          <h2>
+            <router-link :to="'/map/territory?location=' + rnd" class="text-yellow">Click here to choose a
+              location.</router-link>
+          </h2>
+        </h4>
+      </div>
     </div>
   </div>
 

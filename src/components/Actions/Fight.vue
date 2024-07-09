@@ -1,7 +1,7 @@
 <template>
-  <div class="border-bottom pt-2 pb-2 columns" :id="fight.fight_key.slice(0, 10)">
-    <div class="columns text-center">
-      <div class="column col-5">
+  <div class="border-bottom pt-2 pb-2" :id="fight.fight_key.slice(0, 10)">
+    <div class="d-flex text-center">
+      <div class="col-5">
         <div
           v-if="fight.attacker_nickname != user.nickname"
           :to="`/actions?type=attack&target=${fight.attacker_territory}&base=${fight.attacker_base}`"
@@ -40,7 +40,7 @@
           <p class="message mb-4">{{ fight.message }}</p>
         </div>
       </div>
-      <div class="column col-2">
+      <div class="col-2">
         <div class="mt-2" v-if="result">
           <div class="button button-green result" v-if="result === 'win'">Win</div>
           <div class="button result" v-if="result === 'draw'">Draw</div>
@@ -63,7 +63,7 @@
         <Icon v-if="share" class="logo" name="logo" />
         <h4 v-if="share">JOIN US!</h4>
       </div>
-      <div class="column col-5">
+      <div class="col-5">
         <div
           v-if="fight.target_nickname != user.nickname"
           :to="`/actions?type=attack&target=${fight.attacker_territory}&base=${fight.attacker_base}`"

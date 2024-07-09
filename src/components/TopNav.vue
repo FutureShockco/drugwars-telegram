@@ -19,7 +19,7 @@
             <i class="fad fa-chart-area"></i>
           </router-link>
         </div> -->
-<!-- 
+        <!-- 
         <div class="col card">
           <router-link to="/map/territory?location=8" class="py-2 px-2 d-block">
             <i class="fad fa-map-location-dot"></i>
@@ -45,7 +45,6 @@
 
       </div>
     </div>
-
   </div>
   <!-- <nav class="topnav topnav-detached brush-black" data-options="scrolltop: false">
     <div class="topnav-content mx-auto">
@@ -107,6 +106,7 @@
       </div>
     </div>
   </nav> -->
+
 </template>
 
 <script>
@@ -114,6 +114,9 @@ import { mapActions } from 'vuex';
 
 export default {
   computed: {
+    modalAccountOpen() {
+      return true
+    },
     shieldEnd() {
       const diff =
         this.$store.state.game.user.user.shield_end * 1000 - this.$store.state.ui.timestamp;
@@ -150,7 +153,7 @@ export default {
       return { daily };
     },
   },
-  methods: mapActions(['toggleSidebarVisibility']),
+  methods: mapActions(['toggleSidebarVisibility', 'toggleModalAccount']),
 };
 </script>
 

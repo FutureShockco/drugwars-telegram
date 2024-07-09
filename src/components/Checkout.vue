@@ -2,9 +2,9 @@
   <div class="d-flex w-100 pb-2">
     <div :class="inProgress ? 'd-none' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
-      <div class="text-center w-100" v-else>Require: {{ updateTime | ms }}</div>
+      <div class="text-center w-100" v-else>Takes: {{ updateTime | ms }}</div>
       <button
-        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep < 10 && id !== 'headquarters')"
+        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep < 8 && id !== 'headquarters')"
         :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red text-white' : 'border-green-dark border-green-dark color-green-dark ']"
         @click="handleSubmit()" class="btn-full btn-xxs btn  w-100">
         <template v-if="isLoading || waitingConfirmation">
@@ -13,7 +13,7 @@
 
         <template v-else>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
-          <i class="fad fa-arrow-up me-2" />
+          <i class="fad fa-arrow-up me-1 text-green" />
           <span>{{ upgradeLabel }}</span>
 
         </template>
@@ -21,7 +21,7 @@
 
     </div>
     <div v-if="!inProgress" class="col-8">
-      <div class="text-center w-100">Instant upgrade with TON or DW</div>
+      <div class="text-center w-100">Instant upgrade TON or DW</div>
       <div class="d-flex">
         <div class="col-6">
           <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
@@ -30,11 +30,10 @@
         <span>
           {{ priceInSteem }} DWD</span>
       </button> -->
-          <button
-            :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || tutorialStep < 10"
-            :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-blue'"
-            @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
-            <i class="fad fa-arrow-up me-2" />
+          <button :disabled="isLoading || waitingConfirmation || requireUpdate || !base || tutorialStep < 8"
+            :class="isLoading || waitingConfirmation || requireUpdate || !base ? '' : 'button-blue'"
+            @click="handleRequestPayment()" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
+            <i class="fad fa-arrow-up me-1 text-blue" />
             <span>
               {{ (priceInDWD / 25).toFixed(4) }} TON</span>
 
@@ -42,18 +41,18 @@
         </div>
         <div v-if="!inProgress" class="col-5 mx-2">
           <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
-        @click="handleRequestPayment()" class="button btn-block button-blue">
-        <i class="iconfont icon-zap" />
-        <span>
-          {{ priceInSteem }} DWD</span>
-      </button> -->
+            @click="handleRequestPayment()" class="button btn-block button-blue">
+            <i class="iconfont icon-zap" />
+            <span>
+              {{ priceInSteem }} DWD</span>
+          </button> -->
           <button
             :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 3 && id !== 'ammunition') || (tutorialStep === 4 && id !== 't_distillery') || (tutorialStep === 5 && id !== 'training_facility')"
             :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
             @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
-            <i class="fad fa-arrow-up me-2" />
+            <i class="fad fa-arrow-up me-1" />
             <span>
-              {{ priceInDWD }} DWD</span>
+              {{ priceInDWD }} DW</span>
 
           </button>
         </div>
@@ -205,7 +204,18 @@ export default {
           this.isLoading = false;
         });
     },
-    handleRequestPayment() {
+    async handleRequestPayment() {
+      const transaction = {
+        messages: [
+          {
+            address: "0:412410771DA82CBA306A55FA9E0D43C9D245E38133CB58F1457DFB8D5CD8892F", // destination address
+            amount: "20000000" //Toncoin in nanotons
+          }
+        ]
+      }
+
+      const result = await window.tonConnectUI.sendTransaction(transaction)
+      console.log(result)
       this.requestPayment({
         memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,

@@ -25,8 +25,8 @@ import messages from '@/translation.json';
 import numberFormats from '@/number.json';
 if(window.Telegram && window.Telegram.WebApp)
   Vue.prototype.TWA = window.Telegram.WebApp
-//if(process.env.VUE_APP_DEV)
-  //Vue.prototype.TWA = {initDataUnsafe:{user:{id:1941111111}}}
+if(process.env.VUE_APP_DEV)
+Vue.prototype.TWA = {initDataUnsafe:{user:{id:71127711}}}
 
 const requireComponent = require.context('./components', true, /[\w-]+\.vue$/);
 requireComponent.keys().forEach(fileName => {
