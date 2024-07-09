@@ -13,7 +13,7 @@
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
       </div>
     </template>
-    <Account v-if="username && (tutorialStep === 8 && tutoDetail !== 2)" :open="modalWalletVisible" @close="toggleModalAccount()"/>
+    <Account :class="username && (tutorialStep === 8 && tutoDetail !== 2) ? '':'d-none'" :open="modalWalletVisible" @close="toggleModalAccount()"/>
 
     <Notifications />
 
