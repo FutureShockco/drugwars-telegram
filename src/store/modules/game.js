@@ -620,7 +620,7 @@ const actions = {
         },
       );
     } else {
-      const url = `https://steemlogin.com/sign/transfer?from=${username}&to=${dealerSteemUsername}&amount=${amount}&memo=${memo}`;
+      const url = `ton://transfer/UQAgzpwQdDCOL7KY-sTgPJD7AmDWy6dxe3AjktAiicTpNhan?amount=${amount}&text=${memo}`;
       const win = window.open(
         url.split('+').join('_'),
         '_blank',

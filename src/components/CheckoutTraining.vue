@@ -20,12 +20,12 @@
     </div>
     <div v-if="!inProgress" class="col-6 p-0">
       <div class="text-center w-100">Instant upgrade</div>
-      <!-- <button v-if="steemAccount" :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
-      @click="handleRequestPayment()" class="button btn-block button-blue mb-2">
-      <i class="iconfont icon-zap" />
-      <span>${{ price | amount }} =
-        {{ priceInSteem }} STEEM</span>
-    </button> -->
+      <button v-if="steemAccount" :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+        @click="handleRequestPayment()" class="button btn-block button-blue mb-2">
+        <i class="iconfont icon-zap" />
+        <span>
+          {{ priceInSteem }} TON</span>
+      </button>
       <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
         @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
@@ -163,8 +163,8 @@ export default {
     },
     handleRequestPayment() {
       this.requestPayment({
-        memo: `training:${this.id},server:${this.$store.state.game.server.number}`,
-        amount: `${this.priceInSteem} STEEM`,
+        memo: `training:${this.id}`,
+        amount: `${this.priceInSteem * 1000000000}`,
       });
     },
   },

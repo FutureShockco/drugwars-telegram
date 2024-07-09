@@ -199,8 +199,8 @@ export default {
       this.requestPayment({
         memo: `unit:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
-        )},amount:${this.quantity},server:${this.$store.state.game.server.number}`,
-        amount: `${this.priceInSteem} STEEM`,
+        )},amount:${this.quantity}`,
+        amount: `${this.priceInSteem*1000000000}`,
       });
     },
   },

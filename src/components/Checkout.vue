@@ -40,12 +40,7 @@
           </button>
         </div>
         <div v-if="!inProgress" class="col-5 mx-2">
-          <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
-            @click="handleRequestPayment()" class="button btn-block button-blue">
-            <i class="iconfont icon-zap" />
-            <span>
-              {{ priceInSteem }} DWD</span>
-          </button> -->
+
           <button
             :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 3 && id !== 'ammunition') || (tutorialStep === 4 && id !== 't_distillery') || (tutorialStep === 5 && id !== 'training_facility')"
             :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
@@ -205,22 +200,11 @@ export default {
         });
     },
     async handleRequestPayment() {
-      const transaction = {
-        messages: [
-          {
-            address: "0:e5cbb3e6b91c6961fb7a75428e73a2e99f949b0ca4e49ceb066febe87704dcab", // destination address
-            amount: "20000000" //Toncoin in nanotons
-          }
-        ]
-      }
-
-      const result = await window.tonConnectUI.sendTransaction(transaction)
-      console.log(result)
       this.requestPayment({
         memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
-        )},server:${this.$store.state.game.server.number}`,
-        amount: `${this.priceInSteem} STEEM`,
+        )}`,
+        amount: `${this.priceInSteem*1000000000}`,
       });
     },
   },
