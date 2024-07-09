@@ -30,7 +30,7 @@ const state = {
   steemengine: null,
   force_sent_fights_refresh: true,
   server: JSON.parse(localStorage.getItem('server')) || { api: process.env.VUE_APP_API, name: 'Chicago', number: 1 },
-  tutoDetail:0
+  tutoDetail: 0
 };
 
 const mutations = {
@@ -123,7 +123,7 @@ const actions = {
             console.log(user)
             if (user && user.user && user.user.username) {
               if (user.user.tutorial < 15)
-              store.dispatch('showTutorial')
+                store.dispatch('showTutorial')
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 commit('savePrizeProps', prizeProps);
                 commit('saveUser', user);
@@ -573,64 +573,17 @@ const actions = {
         });
     }),
   requestPayment: ({ rootState, dispatch }, { memo, amount }) => {
-    const { username } = rootState.auth;
-    // if(window._steemconnect){
-    //   let op =  {
-    //     from: username,
-    //     to: dealerSteemUsername,
-    //     amount: amount.split(' ')[0] +' STEEM',
-    //     memo:memo
-    //   };
-    //   window._steemconnect.send('transfer', op, function(error,result){
-    //     if(result)
-    //     {
-    //       console.log('success');
-    //       Promise.delay(7000).then(() => {
-    //         dispatch('init');
-    //       });
-    //     }
-    //   })
-    // }
-    //else 
-    if (window.steem_keychain && window.steem_keychain.current_id) {
-      window.steem_keychain.requestTransfer(
-        username,
-        dealerSteemUsername,
-        amount.split(' ')[0],
-        memo,
-        'STEEM',
-        response => {
-          if (response.success || response.error === 'user_cancel') {
-            console.log('success');
-            Promise.delay(7000).then(() => {
-              dispatch('init');
-            });
-          } else {
-            const url = `https://steemlogin.com/sign/transfer?from=${username}&to=${dealerSteemUsername}&amount=${amount}&memo=${memo}`;
-            const win = window.open(
-              url.split('+').join('_'),
-              '_blank',
-              'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-            );
-            win.focus();
-            Promise.delay(15000).then(() => {
-              dispatch('init');
-            });
-          }
-        },
-      );
-    } else {
-      const url = `ton://transfer/UQAgzpwQdDCOL7KY-sTgPJD7AmDWy6dxe3AjktAiicTpNhan?amount=${amount}&text=${memo}`;
-      const win = window.open(
-        url.split('+').join('_'),
-        '_blank',
-        'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-      );
-      win.focus();
-      Promise.delay(15000).then(() => {
-        dispatch('init');
-      });
-    }
+    const url = `ton://transfer/UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF?amount=${amount}&text=${memo}`;
+    const win = window.open(
+      url.split('+').join('_'),
+      '_blank',
+      'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+    );
+    win.focus();
+    Promise.delay(15000).then(() => {
+      dispatch('init');
+    });
+
   },
   requestBuyBot: ({ rootState, dispatch }, { memo, amount }) => {
     const { username } = rootState.auth;
