@@ -1,6 +1,6 @@
 <template>
-  <div v-if="tutorialStep < 9 || (tutorialStep === 9 && tutoDetail === 3)" id="notification-bar-3" class="notification-bar glass-effect detached rounded-m shadow-l fade show pb-3"
-    data-bs-delay="7000">
+  <div v-if="tutorialStep < 9 || (tutorialStep === 9 && tutoDetail === 3)" id="notification-bar-3"
+    class="notification-bar glass-effect detached rounded-m shadow-l fade show pb-3" data-bs-delay="7000">
     <div v-if="tutorialStep === 0">
 
       <div class="d-flex p-3 pb-0">
@@ -11,18 +11,20 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path === '/home'">Hey amigo. Welcome to DrugWars! <br /> First things first, let's pick
+          <h5 v-if="this.$route.path === '/home'">Hola. Welcome to DrugWars! <br /> First things first, let's pick
             the perfect spot
             for your little empire. Find a neighborhood that makes you feel all powerful and safe.
-            Fewer enemies... means less problems, exactly what we want. Choose wisely, baby."</h4>
+            Fewer enemies... means less problems, exactly what we want. Choose wisely, baby." <router-link
+              :to="'/map/territory?location=' + rnd"
+              class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Choose a
+              location</router-link>
+          </h5>
 
-          <h4 v-if="this.$route.path === '/map/territory'">"Alright, now you can use the buttons to
-            navigate through different neighborhoods. When ready <span class="text-yellow">select a square and make it
-              your main base</span>"</h4>
+          <h5 v-if="this.$route.path === '/map/territory'">"Alright, you can use the buttons to
+            navigate through neighborhoods. When ready <span class="text-yellow">select a square and make it
+              your main base</span>"</h5>
 
-          <router-link v-if="this.$route.path === '/home'" :to="'/map/territory?location=' + rnd"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Choose a location</router-link>
-        
+
         </div>
       </div>
 
@@ -37,14 +39,14 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path === '/buildings'">Here we go! Click on the green upgrade button to start the first
+          <h5 v-if="this.$route.path === '/buildings'">Here we go! Click on the green upgrade button to start the first
             upgrade of your <span class="text-yellow">Headquarters.</span> Since this is your first time... I'll boost
-            the speed of the upgrade!</h4>
-          <h4 v-else>Felicitaciones! You've chosen your turf. Now, it's time to
-            make it your stronghold. The next move is upgrading your <span class="text-yellow">Headquarters.</span></h4>
+            the speed of the upgrade!</h5>
+          <h5 v-else>Felicitaciones! You've chosen your turf. Now, it's time to
+            make it your stronghold. The next move is upgrading your <span class="text-yellow">Headquarters.</span></h5>
 
           <router-link v-if="this.$route.path !== '/buildings'" to="/buildings"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Go
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Go
             to
             your base</router-link>
         </div>
@@ -60,19 +62,19 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path === '/buildings/drugs'">"Alright, sugar. <br /> Now click on the yellow instant
+          <h5 v-if="this.$route.path === '/buildings/drugs'">"Alright, sugar. <br /> Now click on the yellow instant
             upgrade button and use the free tokens to purchase the <span class="text-yellow">Crack House</span> and
             increase drug production."
-          </h4>
-          <h4 v-else>"Bien hecho, baby! Your headquarters upgrade is in progress, but we can't wait around. I'm giving
+          </h5>
+          <h5 v-else>"Bien hecho, baby! Your headquarters upgrade is in progress, but we can't wait around. I'm giving
             you
             some
             free DW Tokens to boost purchase a <span class="text-yellow">Crack House</span>. Let's crank up those
             operations and flood the market with our product."
-          </h4>
+          </h5>
 
           <router-link v-if="this.$route.path !== '/buildings/drugs'" to="/buildings/drugs"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
@@ -87,16 +89,16 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path === '/buildings/weapons'">"Click on the yellow instant
+          <h5 v-if="this.$route.path === '/buildings/weapons'">"Click on the yellow instant
             upgrade button and use the free tokens on your <span class="text-yellow">Ammunition
               Factory</span> and start the upgrade process to boost weapon production."
-          </h4>
-          <h4 v-else>"Honey, we've got the drugs flowing, now let's talk firepower. Get some
+          </h5>
+          <h5 v-else>"Honey, we've got the drugs flowing, now let's talk firepower. Get some
             guns rolling. We need to be ready for anything, and a girl loves to feel safe, you know?"
-          </h4>
+          </h5>
 
           <router-link v-if="this.$route.path !== '/buildings/weapons'" to="/buildings/weapons"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
@@ -111,17 +113,17 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path === '/buildings/alcohol'">"Click on the yellow instant
+          <h5 v-if="this.$route.path === '/buildings/alcohol'">"Click on the yellow instant
             upgrade button for the <span class="text-yellow">Bar</span> and
             build it to increase alcohol production."
-          </h4>
-          <h4 v-else>"Alright, darling, it's time to add some fun to our empire. Let’s get that alcohol
+          </h5>
+          <h5 v-else>"Alright, darling, it's time to add some fun to our empire. Let’s get that alcohol
             production going. It’s not just about the money, it’s about making a name for ourselves in every corner of
             the underworld."
-          </h4>
+          </h5>
 
           <router-link v-if="this.$route.path !== '/buildings/alcohol'" to="/buildings/alcohol"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
@@ -133,16 +135,16 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path !== '/buildings'"> "Babe, it's time to take our operation to the next level. We've
+          <h5 v-if="this.$route.path !== '/buildings'"> "Babe, it's time to take our operation to the next level. We've
             got the product flowing, but now we need soldiers. A strong army is the key to keeping everything we've
             built safe and sound."
-          </h4>
-          <h4 v-if="this.$route.path === '/buildings'"> "Construct the <span class="text-yellow">Training
+          </h5>
+          <h5 v-if="this.$route.path === '/buildings'"> "Construct the <span class="text-yellow">Training
               Facility</span> to start recruiting and training units."
-          </h4>
+          </h5>
 
           <router-link v-if="this.$route.path !== '/buildings'" to="/buildings"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
@@ -156,17 +158,17 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path !== '/units'"> "Now, my love, let’s get some bodies in here. Go to the training
+          <h5 v-if="this.$route.path !== '/units'"> "Now, my love, let’s get some bodies in here. Go to the training
             facility and <span class="text-yellow">start the
               recruitment</span>.
-          </h4>
-          <h4 v-if="this.$route.path === '/units'"> "Alright, it's time to bring in the eyes and ears of our
+          </h5>
+          <h5 v-if="this.$route.path === '/units'"> "Alright, it's time to bring in the eyes and ears of our
             operation. Click on the yellow button to recruit a <span class="text-yellow">Spy</span> to gather crucial
             intelligence on our rivals."
-          </h4>
+          </h5>
 
           <router-link v-if="this.$route.path !== '/units'" to="/units"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
       </div>
     </div>
@@ -178,48 +180,49 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path !== '/actions' && tutoDetail === 0"> "Alright, sexy, now it's time to get a little
+          <h5 v-if="this.$route.path !== '/actions' && tutoDetail === 0"> "Alright, sexy, now it's time to get a little
             dirty. We've got
             our spy ready, so let's put them to work for a little fight.
-          </h4>
-          <h4 v-if="this.$route.path === '/actions' && tutoDetail === 0"> "Click on the <span
+          </h5>
+          <h5 v-if="this.$route.path === '/actions' && tutoDetail === 0"> "Click on the <span
               class="text-yellow">Spy</span> to add it to
             the selected army list. Send your
-            spy to gather intel on this rival player. Knowledge is
-            power, and we need to know everything about our enemies before we make a move. Let's dig up some dirt, shall
-            we?"
-          </h4>
-          <h4 v-if="this.$route.path === '/actions' && tutoDetail === 1"> "Ok I already entered the informations of our
+            spy to gather intel on those bastard named <span class="text-yellow">PixelVerse</span>. Knowledge is
+            power, and we need to know everything about our enemies before we make a move."
+            <router-link to="/actions?type=attack&nickname=PixelVerse&message=tuto"
+              class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
+          </h5>
+          <h5 v-if="this.$route.path === '/actions' && tutoDetail === 1"> "Ok I already entered the informations of our
             rival. Next step for you is to click on the <span class="text-yellow">attack!</span> button"
-          </h4>
+          </h5>
 
-          <router-link  to="/actions?type=attack&nickname=WorstRival&message=tuto"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
+
         </div>
       </div>
     </div>
-    <div v-if="tutorialStep === 8 && tutoDetail === 2">
+    <div v-if="tutorialStep > 7 && tutoDetail === 2">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/actions?type=attack&nickname=WorstRival&message=tuto'"
+          <img v-if="this.$route.path === '/actions?type=attack&nickname=PixelVerse&message=tuto'"
             src="/img/sofia21.png" width="80" class="rounded-s" alt="img">
           <img v-else src="/img/sofia18.png" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4 v-if="this.$route.path !== '/actions'"> "See there your <span class="text-yellow">Spy</span> is on the way
+          <h5 v-if="this.$route.path !== '/actions'"> "See there your <span class="text-yellow">Spy</span> is on the way
             to attack our rival! Come back after the fight is done to see the result."
-          </h4>
+            <div @click="setTutoDetail(0)"
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">
+            Continue</div>
+          </h5>
 
-          <h4 v-if="this.$route.path === '/actions'"> "Perfect your <span class="text-yellow">Spy</span> is now
+          <h5 v-if="this.$route.path === '/actions'"> "Perfect your <span class="text-yellow">Spy</span> is now
             on the way! Let take a look at it.
-          </h4>
+          </h5>
 
           <router-link v-if="this.$route.path === '/actions'" to="/actions/outgoing"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Continue</router-link>
-          <div @click="setTutoDetail(0)" v-else
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Continue</div>
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
+
         </div>
       </div>
     </div>
@@ -231,28 +234,30 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4> "Ok, babe, last but not least, you need to connect your TON wallet to DrugWars.
-          </h4>
+          <h5> "Ok, babe, last but not least, you need to connect your TON wallet to DrugWars.
+          </h5>
 
 
-          <div @click="toggleModalAccount" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
+          <div @click="setTutoDetail(0), toggleModalAccount"
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">
             Open Wallet</div>
 
         </div>
       </div>
     </div>
-    <div v-if="tutorialStep === 9 && tutoDetail === 3">
+    <div v-if="tutorialStep === 9 && tutoDetail !== 2">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img src="/img/sofia18.png" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h4> "Wow, you are very impressive, it's time for you now to continue alone, I'll be back soon.
-          </h4>
+          <h5> "Wow, you are very impressive, it's time for you now to continue alone, I'll be back soon.
+          </h5>
 
 
-          <div @click="hideTutorial, setTutoDetail(0)" class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
+          <div @click="hideTutorial, setTutoDetail(0)"
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">
             Continue</div>
 
         </div>
@@ -273,7 +278,7 @@
   </div> -->
   <!-- <div class="card card-style">
     <div class="content">
-      <h4>With Simple Icons</h4>
+      <h5>With Simple Icons</h5>
       <p>
         Default list groups with or without flushed borders with simple no background icons.
       </p>

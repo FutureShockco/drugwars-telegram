@@ -13,7 +13,7 @@
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
       </div>
     </template>
-    <Account v-if="username && tutorialStep > 7" :open="modalWalletVisible" @close="toggleModalAccount()"/>
+    <Account v-if="username && (tutorialStep === 8 && tutoDetail !== 2)" :open="modalWalletVisible" @close="toggleModalAccount()"/>
 
     <Notifications />
 
@@ -48,6 +48,9 @@ export default {
       this.init(this.TWA.initDataUnsafe)
   },
   computed: {
+    tutoDetail() {
+      return this.$store.state.game.tutoDetail
+    },
     modalWalletVisible() {
       return this.$store.state.ui.modalAccountVisible;
     },

@@ -9,10 +9,12 @@
 /*Basic Colors*/
 .color-white {
   color: #FFF !important;
+  --fa-primary-color:#FFF;
 }
 
 .color-black {
   color: #000 !important;
+  --fa-primary-color:#000;
 }
 
 .bg-white {
@@ -975,10 +977,12 @@
 /*Default Colors*/
 .color-white {
   color: #FFF !important;
+  --fa-primary-color:#FFF;
 }
 
 .color-black {
   color: #000 !important;
+  --fa-primary-color:#000;
 }
 
 .bg-white {
@@ -3137,7 +3141,7 @@ divider:after {
 
 .btn-xxs {
   font-size: 11px;
-  padding: 8px 13px;
+  padding: 5px 10px;
 }
 
 .btn-xs {

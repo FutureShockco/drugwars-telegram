@@ -2,13 +2,13 @@
   <div class="d-flex w-100 pb-2">
     <div :class="pendingAmount ? 'd-none' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="pendingAmount">End: {{ timeToWaitString }}</div>
-      <div class="text-center w-100" v-else>Takes: {{ updateTime | ms }}</div>
+      <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <button
         :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base ? 'gradient-red text-white' : 'border-green-dark border-green-dark color-green-dark']"
         :disabled="isLoading || pendingAmount || notEnough || inProgress || !base || tutorialStep < 8" @click="handleSubmit()"
         class="btn-full btn-xxs btn  w-100">
         <template v-if="isLoading || waitingConfirmation">
-          <SmallLoading />
+          Loading...
         </template>
         <template v-else>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
@@ -18,7 +18,7 @@
           <span v-if="pendingAmount > 0">Recruiting {{ pendingAmount }} [{{ percentage }}%]</span>
           <div v-else-if="isLoading">
             <div class="pt-2">
-              <SmallLoading />
+              Loading...
             </div>
           </div>
         </template>
@@ -39,7 +39,7 @@
           <button :disabled="isLoading || notEnoughDWD || !base" @click="handleSubmit('dwd')"
             class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
             <span>
-              {{ this.priceInDWD }} DWD</span>
+              {{ this.priceInDWD }} DW</span>
           </button>
         </div>
       </div>

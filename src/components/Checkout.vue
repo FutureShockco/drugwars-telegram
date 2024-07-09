@@ -2,13 +2,13 @@
   <div class="d-flex w-100 pb-2">
     <div :class="inProgress ? 'd-none' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
-      <div class="text-center w-100" v-else>Takes: {{ updateTime | ms }}</div>
+      <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <button
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep < 8 && id !== 'headquarters')"
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red text-white' : 'border-green-dark border-green-dark color-green-dark ']"
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red color-white' : 'border-green-dark border-green-dark color-green-dark ']"
         @click="handleSubmit()" class="btn-full btn-xxs btn  w-100">
         <template v-if="isLoading || waitingConfirmation">
-          <SmallLoading />
+          Loading...
         </template>
 
         <template v-else>
@@ -154,7 +154,7 @@ export default {
     upgradeLabel() {
       let label = 'Upgrade';
       if (this.notEnough) label = 'Miss resources';
-      if (this.requireUpdate) label = 'Require HQ upgrade';
+      if (this.requireUpdate) label = 'Require HQ+';
       if (this.inProgress) {
         label = `Upgrading [${parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(
           2,

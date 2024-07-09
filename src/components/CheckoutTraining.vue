@@ -2,7 +2,7 @@
   <div class="d-flex">
     <div :class="inProgress ? 'col-12 pe-0' : 'col-6 pe-0'">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
-      <div class="text-center w-100" v-else>Require: {{ updateTime | ms }}</div>
+      <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <button
         :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate ? '' : 'button-green']"
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate" @click="handleSubmit()"
@@ -30,7 +30,7 @@
         @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
         <span>
-          {{ priceInDWD }} DWD</span>
+          {{ priceInDWD }} DW</span>
       </button>
     </div>
   </div>
