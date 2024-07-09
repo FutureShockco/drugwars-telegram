@@ -1,12 +1,12 @@
 <template>
-  <div id="notification-bar-3" class="notification-bar glass-effect detached rounded-m shadow-l fade show pb-3"
+  <div v-if="tutorialStep < 9 || (tutorialStep === 9 && tutoDetail === 3)" id="notification-bar-3" class="notification-bar glass-effect detached rounded-m shadow-l fade show pb-3"
     data-bs-delay="7000">
     <div v-if="tutorialStep === 0">
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/home'" src="/img/sofia14.png" width="112" class="rounded-s" alt="img">
-          <img v-else src="/img/sofia10.png" width="112" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/home'" src="/img/sofia14.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia10.png" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -22,10 +22,7 @@
 
           <router-link v-if="this.$route.path === '/home'" :to="'/map/territory?location=' + rnd"
             class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">Choose a location</router-link>
-          <div @click="hideTutorial" v-if="this.$route.path === '/map/territory'"
-            :to="'/map/territory?location=' + rnd"
-            class="btn p-3 color-green-dark font-11 pt-3 d-inline-block float-end">
-            Close and choose</div>
+        
         </div>
       </div>
 
@@ -34,8 +31,8 @@
 
       <div class="d-flex p-3 pb-0" v-if="tutorialStep === 1">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings'" src="/img/sofia14.png" width="112" class="rounded-s" alt="img">
-          <img v-else src="/img/sofia10.png" width="112" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/buildings'" src="/img/sofia14.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia10.png" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -57,8 +54,8 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings'" src="/img/sofia1.png" width="112" class="rounded-s" alt="img">
-          <img v-else src="/img/sofia11.png" width="112" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/buildings'" src="/img/sofia1.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia11.png" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -83,9 +80,9 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings/weapons'" src="/img/sofia12.png" width="112" class="rounded-s"
+          <img v-if="this.$route.path === '/buildings/weapons'" src="/img/sofia12.png" width="80" class="rounded-s"
             alt="img">
-          <img v-else src="/img/sofia17.png" width="112" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia17.png" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -107,9 +104,9 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings/alcohol'" src="/img/sofia13.png" width="112" class="rounded-s"
+          <img v-if="this.$route.path === '/buildings/alcohol'" src="/img/sofia13.png" width="80" class="rounded-s"
             alt="img">
-          <img v-else src="/img/sofia8.png" width="112" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia8.png" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -132,7 +129,7 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img src="/img/sofia4.png" width="112" class="rounded-s" alt="img">
+          <img src="/img/sofia4.png" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -153,8 +150,8 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/units'" src="/img/sofia20.png" width="112" class="rounded-s" alt="img">
-          <img v-else src="/img/sofia17.png" width="112" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/units'" src="/img/sofia20.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia17.png" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -176,8 +173,8 @@
     <div v-if="tutorialStep === 7">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/actions'" src="/img/sofia21.png" width="112" class="rounded-s" alt="img">
-          <img v-else src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/actions'" src="/img/sofia21.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia18.png" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -205,8 +202,8 @@
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/actions?type=attack&nickname=WorstRival&message=tuto'"
-            src="/img/sofia21.png" width="112" class="rounded-s" alt="img">
-          <img v-else src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
+            src="/img/sofia21.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia18.png" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -229,8 +226,8 @@
     <div v-if="tutorialStep === 8 && tutoDetail === 0">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/actions'" src="/img/sofia21.png" width="112" class="rounded-s" alt="img">
-          <img v-else src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/actions'" src="/img/sofia21.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/sofia18.png" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -247,7 +244,7 @@
     <div v-if="tutorialStep === 9 && tutoDetail === 3">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img src="/img/sofia18.png" width="112" class="rounded-s" alt="img">
+          <img src="/img/sofia18.png" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>

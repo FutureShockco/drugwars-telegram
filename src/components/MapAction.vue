@@ -125,7 +125,7 @@
                 v-if="bases[0]"> [{{ bases[0].ticker }}]</span>
             </h5>
             <div v-for="base in bases" :key="base.id">
-              <button class="button button-yellow"
+              <button class="btn btn-xxs gradient-highlight"
                 @click="chooseBase(base.territory, base.base)">{{ base.territory }}:{{ base.base }} - {{ base.custom }} -
                 HQ:{{ base.lvl }} </button>
             </div>

@@ -3,13 +3,15 @@
     <MapTabs />
     <div class="card card-style">
       <div class="content d-flex m-0">
-        <button class="button button-yellow" @click="decreaseLocation()">
-          <div class="iconfont icon-arrow-left"></div>
-        </button><input type="number" v-model="currentLocation" placeholder="25" class="mt-1 input"
-          @change="updateLocation(currentLocation)" />
-        <button class="button button-yellow" @click="increaseLocation()">
-          <div class="iconfont icon-arrow-right"></div>
-        </button>
+        <div class="d-flex">
+          <button class="col btn btn-xxs gradient-highlight" @click="decreaseLocation()">
+            <i class="fad fa-arrow-left color-black"></i>
+          </button><input type="number" v-model="currentLocation" placeholder="25" class="col mt-1 input"
+            @change="updateLocation(currentLocation)" />
+          <button class="col btn btn-xxs gradient-highlight" @click="increaseLocation()">
+            <i class="fad fa-arrow-right color-black"></i>
+          </button>
+        </div>
       </div>
     </div>
     <div id="territorybg" class="territorybg" style="height:100vw;width: 100vw;">
