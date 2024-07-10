@@ -3,7 +3,6 @@
     <UiCenter class="vue-ui-modal home">
       <Icon name="logo" class="logo-large mt-4 mb-3" />
       <div class="columns rel">
-
         <div class="column det col-4">
           <h5>Create your own virtual empire</h5>
           <img width="100%" class="rounded-2" :src="`//img.drugwars.io/home/home1.jpg`" />

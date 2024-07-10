@@ -2,7 +2,7 @@ import Vue from 'vue';
 
 const state = {
   sidebarVisible: false,
-  modalAccountVisible:false,
+  modalAccountVisible:true,
   showLoading: false,
   showTutorial: false,
   timestamp: new Date().getTime(),

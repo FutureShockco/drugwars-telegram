@@ -1,31 +1,29 @@
 <template>
   <div class="card card-style">
     <div class="content">
-      <h3>Pablo</h3>
-      <p>Sell your DRUGS to Pablo, and convert them into tokens with a daily payment.</p>
+      <h3>"I have an offer for you amigo!"</h3>
+      <p>Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>
       <div class="text-center">
         <div class="pt-2">Total {{ prizeProps.heist_pool | amount }}</div>
         <div class="text-green">You: {{ totalVest | amount }} </div>
         <div class="text-yellow">+{{ ownHeistReward.amount }} ({{ ownHeistReward.percent | amount }}%)</div>
       </div>
-      <form @submit.prevent="handleSubmit" class="mb-2">
-        <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
-        <div class="row">
-          <div class="col">
-            <div :disabled="isLoading || Number(balances.drugs) < Number(amount)" type="submit"
-              class="btn-full btn border border-green-dark color-green-dark">
-              <span v-if="!isLoading">Sell</span>
-              <SmallLoading v-else />
-            </div>
-          </div>
-          <div class="col">
-            <div :disabled="isLoading" @click="handleFullSubmit()"
-              class="btn-full btn border-mint-dark color-mint-dark">Sell
-              all</div>
+      <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
+      <div class="row">
+        <div class="col">
+          <div @click="handleSubmit()" :disabled="isLoading || Number(balances.drugs) < Number(amount)" type="submit"
+            class="btn-full btn border border-green-dark color-green-dark">
+            <span v-if="!isLoading">Sell</span>
+            <SmallLoading v-else />
           </div>
         </div>
+        <div class="col">
+          <div :disabled="isLoading" @click="handleFullSubmit()" class="btn-full btn border-mint-dark color-mint-dark">
+            Set
+            all</div>
+        </div>
+      </div>
 
-      </form>
 
     </div>
   </div>
@@ -121,7 +119,7 @@ export default {
       );
     },
     ownHeistReward() {
-      const percent = (100 / this.prizeProps.heist_pool) * this.totalVest;
+      const percent = (100 / this.prizeProps.heist_pool) * this.totalVest || 0;
       const amount = parseFloat((this.totalHeistDWD / 100) * percent).toFixed(3);
       return {
         amount,
@@ -132,6 +130,7 @@ export default {
   methods: {
     ...mapActions(['investHeist']),
     handleSubmit() {
+      console.log('heyt')
       if (Number(this.amount) > 0) {
         this.isLoading = true;
         const payload = {

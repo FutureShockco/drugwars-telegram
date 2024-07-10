@@ -572,14 +572,52 @@ const actions = {
           return reject(err);
         });
     }),
-  requestPayment: ({ rootState, dispatch }, { memo, amount }) => {
-    const url = `ton://transfer/UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF?amount=${amount}&text=${memo}`;
-    const win = window.open(
-      url.split('+').join('_'),
-      '_blank',
-      'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-    );
-    win.focus();
+  requestPayment: async ({ rootState, dispatch }, { memo, amount }) => {
+    const message = `amount=${amount}&text=${memo}`
+    const url = `ton://transfer/UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF?${message}`;
+    if (window.tonConnectUI) {
+      const transaction = {
+        validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
+        messages: [
+          {
+            address: "UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF-Jn",
+            amount: amount,
+            payload: message // just for instance. Replace with your transaction payload or remove
+          }
+        ]
+      }
+
+      try {
+        const result = await window.tonConnectUI.sendTransaction(transaction);
+
+        // you can use signed boc to find the transaction 
+        console.log(result)
+      } catch (e) {
+        console.error(e);
+      }
+    }
+    else if (window.Telegram.WebApp.openLink) {
+      const t = await window.Telegram.WebApp.openLink(url)
+      if (!t) {
+        const win = window.open(
+          url.split('+').join('_'),
+          '_blank',
+          'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+        );
+        win.focus();
+      }
+
+
+    }
+    else {
+      const win = window.open(
+        url.split('+').join('_'),
+        '_blank',
+        'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+      );
+      win.focus();
+    }
+
     Promise.delay(15000).then(() => {
       dispatch('init');
     });

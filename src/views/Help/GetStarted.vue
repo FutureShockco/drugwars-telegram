@@ -1,21 +1,26 @@
 <template>
-    <div>
-        <HelpTabs/>
-        <div class="p-4">
-            <h3>How to play</h3>
-            <ul class="help">
-                <li>First of all, upgrade your buildings and try to produce as many resources as possible.</li>
-                <li>When you are ready, build some units and train them in the art of war! They will need it.</li>
-                <li>You can attack other players and they can attack you to steal your resources!</li>
-                <li>When players attack or get attacked they have differents options to defend theirself, they can also choose to build more defense and let their defense taking care about the opponents.</li>
-                <li>Good luck - all is fair in love and DrugWars!</li>
-            </ul>
-            <router-link to="/earlyaccess" class="d-block" @click.native="toggleSidebar">
-                <h3>
-                    Early Access (TOS)</h3>
-            </router-link>
+  <div>
+    <HelpTabs />
+    <div class="card card-style">
+      <div class="content">
+        <div class="accordion border-0 accordion-s" id="accordion-group-6">
+          <div class="accordion-item" v-for="(q, index) in faq" :key="faq">
+            <button class="accordion-button px-0" type="button" data-bs-toggle="collapse"
+              :data-bs-target="'#accordion6-' + index" aria-expanded="true">
+              <h3>{{ q.q }}</h3>
+              <i class="bi bi-plus font-20"></i>
+            </button>
+            <div :id="'accordion6-' + index" :class="index === 0 ? 'show' : ''" class="accordion-collapse collapse"
+              data-bs-parent="#accordion-group-6" style="">
+              <p class="pb-3 opacity-60">
+                {{ q.a }}
+              </p>
+            </div>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

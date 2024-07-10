@@ -30,20 +30,26 @@
                 <th scope="col">
                   <h5 class="color-black font-15 mb-0">Tokens</h5>
                 </th>
+                <th scope="col">
+                  <h5 class="color-black font-15 mb-0">Payment</h5>
+                </th>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <td><strong>Production</strong></td>
                 <td>{{ totalDaily | amount }}  <Icon name="dwd" /></td>
+                <td>Daily</td>
               </tr>
               <tr>
                 <td><strong>Pablo</strong></td>
-                <td>{{ totalHeist | amount }}  <Icon name="dwd" /></td>
+                <td>{{ totalHeist | amount }}  <Icon name="ton" size="18" /></td>
+                <td>Weekly</td>
               </tr>
               <tr>
                 <td><strong>Fight</strong></td>
                 <td> {{ totalFight + prizeProps.free_dwd - prizeProps.daily_rewards | amount }}  <Icon name="dwd" /></td>
+                <td>Instant</td>
               </tr>
 
             </tbody>

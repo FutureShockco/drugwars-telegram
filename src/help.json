@@ -1,0 +1,186 @@
+{
+  "Introduction": {
+    "General info": "",
+    "Login and signup": "",
+    "User Settings": {
+      "Settings": "",
+      "Referral": ""
+    }
+  },
+  "DrugWars platform appearance": {
+    "Production Banner": "",
+    "Left menu": {
+      "Overview": {
+        "Overview": "",
+        "Tutorial": ""
+      },
+      "Buildings": {
+        "Office": "",
+        "Drugs": "",
+        "Weapons": "",
+        "Alcohol": ""
+      },
+      "Bootcamp": {
+        "Units": "",
+        "Training": ""
+      },
+      "Actions": {
+        "Actions": {
+          "ATTACK": "",
+          "TRANSPORT": "",
+          "OCCUPY": "",
+          "STATION": ""
+        },
+        "Out": "",
+        "In": "",
+        "Station": ""
+      },
+      "Map": "",
+      "Leaderboard": {
+        "Hall of fame": "",
+        "Production": "",
+        "Heist": ""
+      },
+      "Gangs": {
+        "Gangs": {
+          "Joining a gang": ""
+        },
+        "Create Gang": "",
+        "Being a gang member": ""
+      },
+      "Jobs": "",
+      "Market": {
+        "Shop": "",
+        "Exchange": ""
+      },
+      "Settings": "",
+      "Help": {
+        "Help": "",
+        "Get started": "",
+        "Guides": ""
+      },
+      "Forum": "",
+      "Logout": "",
+      "Links area": {
+        "Future Witness": "",
+        "Sound control": "",
+        "About": "",
+        "Discord link": "",
+        "Github link": ""
+      }
+    },
+    "Right menu": {
+      "Daily prizes info": {
+        "Daily prize": "",
+        "Battle prize": "",
+        "Heist prize": ""
+      },
+      "Heist": ""
+    }
+  },
+  "Gameplay": {
+    "Production": {
+      "Resources": {
+        "Drugs": {
+          "Crack house": "",
+          "Hydroponic Farm": "",
+          "Meth Lab": "",
+          "Cocina": "",
+          "Pharmaceutical Lab": "",
+          "Drug Storage": ""
+        },
+        "Weapons": {
+          "Ammunition Factory": "",
+          "Weapon Factory": "",
+          "Smuggle": "",
+          "Black Market": "",
+          "3D Metal Printing": "",
+          "Weapon Storage": ""
+        },
+        "Alcohol": {
+          "Traditional Distillery": "",
+          "Bar": "",
+          "Brewery": "",
+          "Castle": "",
+          "Industrial Distillery": "",
+          "Alcohol Silo": ""
+        },
+        "Office production": {
+          "Headquarters": "",
+          "Training Facility": "",
+          "Operation Center": "",
+          "Pantheon": "",
+          "Research Center": ""
+        }
+      },
+      "Units": {
+        "Recruiting units": {
+          "HOBO": "",
+          "ROWDY": "",
+          "SUPER BOUNCER": "",
+          "BIG MAMA": "",
+          "KNIFER": "",
+          "GUNMAN": "",
+          "LAWYER": "",
+          "SPY": "",
+          "SNIPER": "",
+          "HITMAN": "",
+          "NINJA": "",
+          "BAZOOKA GUY": "",
+          "OCCUPATION TROOP": "",
+          "MERCENARY": ""
+        },
+        "Training units": {
+          "Routing": "",
+          "Close Combat": "",
+          "Introduction to pistol, rifle, and shotgun": "",
+          "Information procurement": "",
+          "Sniper trains": "",
+          "Spirit wine": "",
+          "Coordination": "",
+          "Chemical training": "",
+          "Weapon master": "",
+          "Fire training": "",
+          "Protection": "",
+          "Bomb construction": "",
+          "Psychological training": ""
+        }
+      }
+    },
+    "Player location on the map": {
+      "Choosing primary base location": "",
+      "Choosing secondary base locations": "",
+      "Production of buildings and units": ""
+    },
+    "Battles": {
+      "Preparing for a battle": {
+        "Unit production and training": "",
+        "Choosing targets": "",
+        "The fight simulator": "",
+        "Unit order and grouping": ""
+      },
+      "Battle process": "",
+      "Battle rewards": "",
+      "Sharing Battles": ""
+    },
+    "Heist": ""
+  },
+  "Gangs": {
+    "Creating a gang": "",
+    "Joining a gang": {
+      "Gang buildings": {
+        "Gang headquarters": "",
+        "Embassy": "",
+        "Military Academy": "",
+        "Scientific Lab": "",
+        "Weapon Development Center": "",
+        "Distillery School": ""
+      },
+      "Deposit": ""
+    },
+    "Affiliations": {
+      "Wars": "",
+      "Other affiliations": ""
+    }
+  }
+}

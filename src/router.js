@@ -546,13 +546,13 @@ export default new Router({
     {
       path: '/help',
       name: 'help',
-      component: Help,
+      component: GetStarted,
     },
     {
       path: '/help/getstarted',
       name: 'getstarted',
       beforeEnter: requireAuth,
-      component: GetStarted,
+      component: Help,
     },
     {
       path: '/help/guides',
