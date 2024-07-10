@@ -1171,7 +1171,22 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 .bg-25 {
-  background-image: url(/img/ban9.png);
+  background-image: url(/img/bg25.png);
+}
+
+.bg-26 {
+  background-image: url(/img/bg26.png);
+}
+
+.bg-27 {
+  background-image: url(/img/bg27.png);
+}
+.bg-28 {
+  background-image: url(/img/bg28.png);
+}
+
+.bg-29 {
+  background-image: url(/img/bg29.png);
 }
 
 /*Typography 1 Settings*/

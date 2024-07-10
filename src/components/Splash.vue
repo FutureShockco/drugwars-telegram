@@ -12,8 +12,8 @@
       <a href="https://discord.me/drugwars">{{ 'message.contact_us' | translate }}</a>
     </ul> -->
 
-    <div class="splide single-slider slider-no-dots slider-no-arrows" id="single-slider-walkthrough"
-      data-splide='{"interval":5000}'>
+    <div v-if="rnd.length > 2" class="splide single-slider slider-no-dots slider-no-arrows"
+      id="single-slider-walkthrough" data-splide='{"interval":5000}'>
       <div class="splide__track">
         <div class="splide__list">
           <div class="splide__slide">
@@ -23,9 +23,14 @@
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
                     style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
-                <p class="color-white font-16 text-center boxed-text-xl">
-                  Create your own virtual empire
-                </p>
+                <div class="content mb-0">
+                  <h1 class="text-center font-700">
+                    "{{ bella[rnd[0]] }}"
+                  </h1>
+                  <h3 class="text-center font-700 pb-3">
+                    Bella Ramirez
+                  </h3>
+                </div>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
@@ -38,9 +43,14 @@
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
                     style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
-                <p class="color-white font-16 text-center boxed-text-xl">
-                  Build up a gang with your mates
-                </p>
+                <div class="content mb-0">
+                  <h3 class="text-center font-700">
+                    {{ dyk[rnd[1]].q }}
+                  </h3>
+                  <h1 class="text-center font-700 pb-3">
+                    {{ dyk[rnd[1]].a }}
+                  </h1>
+                </div>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
@@ -53,9 +63,14 @@
                 <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
                     style="width: 100%;" name="logo" /> </h1>
                 <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
-                <p class="color-white font-16 text-center boxed-text-xl">
-                  Fight with your opponents
-                </p>
+                <div class="content mb-0">
+                  <h3 class="text-center font-700">
+                    Anonymous tip
+                  </h3>
+                  <h1 class="text-center font-700 pb-3">
+                    {{ anon[rnd[2]] }}
+                  </h1>
+                </div>
               </div>
               <div class="card-overlay bg-black opacity-40 rounded-0"></div>
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
@@ -93,11 +108,17 @@
 
 <script>
 import { mapActions } from 'vuex';
-
+import dyk from '@/../dyk.json';
+import anon from '@/../anon.json';
+import bella from '@/../bella.json';
 export default {
   data() {
     return {
       canLogin: process.env.VUE_APP_DEV || false,
+      rnd: [],
+      dyk: dyk,
+      anon: anon,
+      bella: bella,
     };
   },
   watch: {
@@ -105,6 +126,11 @@ export default {
       if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
         this.canLogin = true
     },
+  },
+  created() {
+    this.rnd.push(Math.floor(Math.random() * Math.floor(bella.length)))
+    this.rnd.push(Math.floor(Math.random() * Math.floor(anon.length)))
+    this.rnd.push(Math.floor(Math.random() * Math.floor(dyk.length)))
   },
   methods: {
     ...mapActions(['init', 'login']),
