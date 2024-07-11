@@ -574,7 +574,7 @@ const actions = {
         });
     }),
   requestPayment: async ({ rootState, dispatch }, { memo, amount }) => {
-    const message = `amount=${amount}&text=${memo}`
+    const message = `${memo}`
     const url = `ton://transfer/UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF?${message}`;
     const fUrl = "https://dw-api-telegram-55801a35819b.herokuapp.com/convert/" + message;
     const options = {
