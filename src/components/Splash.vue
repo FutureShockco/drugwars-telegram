@@ -30,10 +30,6 @@ export default {
     window.init_template()
 		this.ok()
   },
-  created() {
-    if (this.TWA.onEvent)
-      this.TWA.onEvent('web_app_ready', this.ok());
-  },
   methods: {
     ...mapActions(['init', 'login']),
     ok() {
@@ -43,10 +39,6 @@ export default {
             this.$router.push({ path: this.$route.query.redirect || '/home' });
           })
         })
-    },
-    makeItok() {
-      this.canLogin = true;
-
     },
   },
   computed: {
