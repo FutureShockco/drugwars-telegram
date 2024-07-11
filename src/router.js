@@ -122,9 +122,8 @@ setInterval(() => {
 const requireAuth = (to, from, next) => {
 
   if (client.ws.readyState === 3) {
-    store.dispatch('showLoading');
-    alert("need to reconnect");
     client.restart();
+    store.dispatch('showLoading');
     if (store.state.auth.username) {
         store.dispatch('init', store.state.auth.username).then(() => {
           store.dispatch('hideLoading');
