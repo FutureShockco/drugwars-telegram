@@ -597,16 +597,20 @@ const actions = {
               {
                 address: "0:2b74953175003ed8a5de0d4ac693c6669fc7a5fb7c6869015af317e1465a6dba",
                 amount: amount,
-                payload: data // just for instance. Replace with your transaction payload or remove
+                payload: data
               }
             ]
           }
 
           try {
             const result = await window.tonConnectUI.sendTransaction(transaction);
-
             console.log(result)
           } catch (e) {
+            store.dispatch('notify', {
+              type: 'error',
+              message: "Your purchase didn't went through. Let try another way...",
+              icon: 'stop',
+            });
             console.error(e);
             const win = window.open(
               url.split('+').join('_'),

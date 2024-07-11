@@ -5,8 +5,10 @@
       <p>Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>
       <div class="text-center">
         <div class="pt-2">Total {{ prizeProps.heist_pool | amount }}</div>
-        <div class="text-green">You: {{ totalVest | amount }} </div>
-        <div class="text-yellow">+{{ ownHeistReward.amount }} ({{ ownHeistReward.percent | amount }}%)</div>
+        <div class="text-green">You: {{ totalVest | amount }} <span class="text-yellow">+{{ ownHeistReward.amount }}
+            <Icon name="ton" size="18" /> ({{ ownHeistReward.percent | amount }}%)
+          </span></div>
+
       </div>
       <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
       <div class="row">

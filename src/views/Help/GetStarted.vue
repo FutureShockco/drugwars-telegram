@@ -1,6 +1,6 @@
 <template>
   <div>
-    <HelpTabs />
+    <RewardsTabs />
     <div class="card card-style">
       <div class="content">
         <div class="accordion border-0 accordion-s" id="accordion-group-6">
@@ -25,6 +25,7 @@
 
 <script>
 import faq from '@/../faq.json';
+import Rewards from '../Rewards.vue';
 
 export default {
   data() {

@@ -1,0 +1,46 @@
+[
+  {
+    "title": "Share it with your friends",
+    "desc": "Use your referral link to invite your friends and receive a bonus",
+    "bonus": "Receive 5% of their daily DW token rewards!",
+    "increase": null,
+    "bg": "26"
+  },
+
+  {
+    "title": "Watch a video",
+    "desc": "Increase your DRUG production to",
+    "bonus": "Receive 500 DRUG - 500 WEAPON - 500 ALCOHOL !",
+    "increase": 5,
+    "bg": "43"
+  },
+  {
+    "title": "Baron",
+    "desc": "Increase your DRUG production to",
+    "bonus": "Receive 500 DRUG - 500 WEAPON - 500 ALCOHOL !",
+    "increase": 5,
+    "bg": "1"
+  },
+  {
+    "title": "Weaponizer",
+    "desc": "Increase your DRUG production to",
+    "bonus": "Receive 500 DRUG - 500 WEAPON - 500 ALCOHOL !",
+    "increase": 5,
+    "bg": "27"
+  },
+  
+  {
+    "title": "Bottleman",
+    "desc": "Increase your DRUG production to",
+    "bonus": "Receive 500 DRUG - 500 WEAPON - 500 ALCOHOL !",
+    "increase": 5,
+    "bg": "24"
+  },
+  {
+    "title": "Boss of referrers",
+    "desc": "Each level of referral give you instantly some resources",
+    "bonus": "Receive 500 DRUG - 500 WEAPON - 500 ALCOHOL !",
+    "increase": 5,
+    "bg": "33"
+  }
+]

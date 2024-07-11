@@ -2,7 +2,7 @@
   <tr>
     <td class="col">
       <div class="d-flex">
-        <Avatar :size="24" :username="player.nickname" :rank="rank" :rankname="rankname"
+        <Avatar :size="20" :username="player.nickname" :rank="rank" :rankname="rankname"
           picture="https://www.enableds.com/products/duo/v30/images/avatars/2s.png" :reputation="player.reputation"
           :xp="player.xp" />
         <!-- <span>
@@ -43,11 +43,11 @@
         {{ player.alcohol_production_rate * 60 * 60 * 24 | amount }}/day
       </div>
     </td>
-    <td v-else-if="player.drugs && !cruelty" class="col">
+    <td v-else-if="!cruelty" class="col">
       <div>
         <div>
           <Icon name="drug" size="22" />
-          {{ player.drugs | amount }}
+          {{ player.drugs || 0 | amount }}
         </div>
       </div>
     </td>
@@ -83,26 +83,18 @@
       </div>
     </td>
     <td class="col">
-      <div v-if="reward && !cruelty">
+      <div v-if="reward">
         <div v-if="player && rank && rank < 26">
           <div>
             <Icon name="dwd" size="22" />
-            +{{ Math.round(reward / rank) | amount }}
+            +{{ Math.round(reward / rank) || 0 | amount }}
           </div>
         </div>
       </div>
-      <h5 v-else-if="cruelty">
-        <span class="mr-3" v-if="player && rank && rank < 11">
-          <div>
-            +{{ Math.round(10000 / rank) | amount }}
-            <Icon name="dwd" size="22" />
-          </div>
-        </span>
-      </h5>
       <h5 v-else-if="!cruelty">
         <span class="mr-3" v-if="player && rank && rank < 26">
           <div>
-            {{ Math.round(10 / rank) | amount }}
+            {{ Math.round(10 / rank) || 0 | amount }}
             <Icon name="dwd" size="22" />
           </div>
         </span>
@@ -116,7 +108,7 @@ import { mapActions } from 'vuex';
 import client from '@/helpers/client';
 
 export default {
-  props: ['player', 'rank', 'reputation', 'reward', 'cruelty'],
+  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list'],
   data() {
     return {
       isLoading: false,
