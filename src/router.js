@@ -123,6 +123,7 @@ const requireAuth = (to, from, next) => {
 
   if (client.ws.readyState === 3) {
     client.restart()
+    alert(store.state.auth.username)
     //store.dispatch('showLoading');
     store.dispatch('login', store.state.auth.username).then(() => {
       if (store.state.auth.username) {
