@@ -125,10 +125,8 @@ const requireAuth = (to, from, next) => {
     client.restart();
     store.dispatch('showLoading');
     if (store.state.auth.username) {
-        store.dispatch('init', store.state.auth.username).then(() => {
           store.dispatch('hideLoading');
           next();
-        });
     }
     else {
         const redirect = to.fullPath === '/' ? undefined : to.fullPath;
