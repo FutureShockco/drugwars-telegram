@@ -42,33 +42,27 @@ export default {
             canLogin: process.env.VUE_APP_DEV || false,
         };
     },
+    created() {
+        // Binnding function to all the event types
+        this.TWA.onEvent('web_app_ready', this.themeChanged);
+
+
+    },
     watch: {
-        ready() {
+        'this.TWA'() {
             if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
                 this.canLogin = true
         },
     },
     methods: {
         ...mapActions(['init', 'login']),
-        ok() {
-            if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
-                this.init(this.TWA.initDataUnsafe).then((result) => {
-                    console.log(result)
-                    this.$router.push({ path: '/home' });
-                })
-
-        },
-        logout() {
-            this.$auth.logOut();
-            this.$router.push({ path: '/' });
-        },
     },
     computed: {
         server() {
             return this.$store.state.game.server;
         },
         ready() {
-            return this.TWA;
+            return this.TWA.ready();
         },
 
     },

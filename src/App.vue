@@ -4,16 +4,17 @@
     <template v-else>
       <TopNav v-if="username" />
       <SidebarLeft v-if="username && showSidebar" />
-      <router-view class="page-content header-clear-medium" :class="{
+      <router-view class="page-content" :class="{
         content: showSidebar,
-        'content--nav-open': sidebarVisible,
+        'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
       }" />
-      <Quickstart v-if="showTutorial"/>
+      <Quickstart v-if="username && showTutorial" />
       <!-- <BottomNav v-if="username" /> -->
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
       </div>
     </template>
-    <Account :class="username && (tutorialStep === 8 && tutoDetail !== 2) ? '':'d-none'" :open="modalWalletVisible" @close="toggleModalAccount()"/>
+    <Account v-if="username" :class="(tutorialStep === 8 && tutoDetail !== 2) ? '' : 'd-none'"
+      :open="modalWalletVisible" @close="toggleModalAccount()" />
 
     <Notifications />
 
@@ -40,13 +41,7 @@ export default {
     ...mapActions(['toggleSidebarVisibility', 'init', 'toggleModalAccount']),
   },
 
-  mounted() {
-    // What is the best? mounted or created??
-    if (this.TWA && this.TWA.ready)
-      this.TWA.ready();
-    if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
-      this.init(this.TWA.initDataUnsafe)
-  },
+
   computed: {
     tutoDetail() {
       return this.$store.state.game.tutoDetail
@@ -61,19 +56,23 @@ export default {
       return this.$store.state.game.user.user.tutorial
     },
     wallet() {
-      if(this.$store.state.game.user.user.wallet)
-      return false
+      if (this.$store.state.game.user.user.wallet)
+        return false
       else return true
-    },
-    showSidebar() {
-      return !this.$route.meta.hideSidebar;
-    },
-    sidebarVisible() {
-      return this.$store.state.ui.sidebarVisible;
     },
     showLoading() {
       return this.$store.state.ui.showLoading;
     },
+    showSidebar() {
+      return !this.$route.meta.hideSidebar;
+    },
+    isHome() {
+      return this.$route.path === '/';
+    },
+    sidebarVisible() {
+      return this.$store.state.ui.sidebarVisible;
+    },
+
     showTutorial() {
       return this.$store.state.ui.showTutorial;
     }

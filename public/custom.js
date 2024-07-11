@@ -699,7 +699,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
-
+    window.init_template = init_template
 
     init_template();
 });

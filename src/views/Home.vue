@@ -1,230 +1,206 @@
 <template>
-  <div>
-    <UiCenter class="vue-ui-modal home">
-      <Icon name="logo" class="logo-large mt-4 mb-3" />
-      <div class="columns rel">
-        <div class="column det col-4">
-          <h5>Create your own virtual empire</h5>
-          <img width="100%" class="rounded-2" :src="`//img.drugwars.io/home/home1.jpg`" />
-        </div>
-        <div class="column det col-4">
-          <h5>Build up a gang with your mates</h5>
-          <img width="100%" class="rounded-2" :src="`//img.drugwars.io/home/home2.jpg`" />
-        </div>
-
-        <div class="column det col-4">
-          <h5>Fight with your opponents</h5>
-          <img width="100%" class="rounded-2" :src="`//img.drugwars.io/home/home3.jpg`" />
-        </div>
-      </div>
-      <h4 class="ui white header">{{ 'message.login_message' | translate }}</h4>
-      <div class="d-inline-grid">
-        <div class="ui blue header big">
-          <h1 v-if="this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user">{{
-            this.TWA.initDataUnsafe.user.id }}</h1>
-          <div class="btn-orange mb-2" @click="isOpen = !isOpen">CHANGE SERVER</div>
-          <div :class="{ isOpen }" class="dropdown">
-            <button class="btn btn-yellow btn-sm rp mr-2 mb-2" v-for="server in servers" @click="chooseServer(server)"
-              :key="server.number">{{ server.number }}: {{ server.name }}
-              <span v-if="server.number === 1">(Recommended)</span>
-            </button>
+  <div class="page-content pb-0 overflow-hidden bg-dark-dark">
+    <div v-if="rnd.length > 2" class="splide single-slider slider-no-dots slider-no-arrows"
+      id="single-slider-walkthrough" data-splide='{"interval":5000}'>
+      <div class="splide__track">
+        <div class="splide__list">
+          <div class="splide__slide">
+            <div class="card bg-dark-dark rounded-0"
+              style="background-image:url(./img/ban7.png); background-size:cover;" data-card-height="cover">
+              <div class="card-center">
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
+                    style="width: 100%;" name="logo" /> </h1>
+                <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
+                <div class="content mb-0">
+                  <h1 class="text-center font-700">
+                    "{{ bella[rnd[0]] }}"
+                  </h1>
+                  <h3 class="text-center font-700 pb-3">
+                    Bella Ramirez
+                  </h3>
+                </div>
+              </div>
+              <div class="card-overlay bg-black opacity-40 rounded-0"></div>
+              <div class="card-overlay bg-gradient-fade rounded-0"></div>
+            </div>
           </div>
-          SERVER {{ server.number }} : {{ server.name.toString().toUpperCase() }}
+          <div class="splide__slide">
+            <div class="card bg-dark-dark rounded-0"
+              style="background-image:url(./img/ban4.png); background-size:cover;" data-card-height="cover">
+              <div class="card-center">
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
+                    style="width: 100%;" name="logo" /> </h1>
+                <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
+                <div class="content mb-0">
+                  <h3 class="text-center font-700">
+                    {{ dyk[rnd[1]].q }}
+                  </h3>
+                  <h1 class="text-center font-700 pb-3">
+                    {{ dyk[rnd[1]].a }}
+                  </h1>
+                </div>
+              </div>
+              <div class="card-overlay bg-black opacity-40 rounded-0"></div>
+              <div class="card-overlay bg-gradient-fade rounded-0"></div>
+            </div>
+          </div>
+          <div class="splide__slide">
+            <div class="card bg-dark-dark rounded-0"
+              style="background-image:url(./img/ban6.png); background-size:cover;" data-card-height="cover">
+              <div class="card-center">
+                <h1 class="color-white font-40 text-center"><img src="//img.drugwars.io/icons/logo.png"
+                    style="width: 100%;" name="logo" /> </h1>
+                <p class="color-white text-center opacity-70">Massively Multiplayer Simulation Game on Blockchain</p>
+                <div class="content mb-0">
+                  <h3 class="text-center font-700">
+                    Anonymous tip
+                  </h3>
+                  <h1 class="text-center font-700 pb-3">
+                    {{ anon[rnd[2]] }}
+                  </h1>
+                </div>
+              </div>
+              <div class="card-overlay bg-black opacity-40 rounded-0"></div>
+              <div class="card-overlay bg-gradient-fade rounded-0"></div>
+            </div>
+          </div>
         </div>
-        <button @click="ok" class="button button-blue button-large mt-2 mb-4">Play Now</button>
-        {{ this.TWA }}
-
-        {{ TWA }}
-        {{ message }}
       </div>
-    </UiCenter>
+    </div>
+    <div class="card-bottom text-center mb-4">
+      <button :disabled="!canLogin" @click="ok"
+        class="btn w-50 gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s" style="color:black">Play
+        Now</button>
+    </div>
   </div>
 </template>
 
+
 <script>
 import { mapActions } from 'vuex';
+import dyk from '@/../dyk.json';
+import anon from '@/../anon.json';
+import bella from '@/../bella.json';
 export default {
-
   data() {
     return {
-      isAuthenticated: false,
-      profile: {},
-      isOpen: false,
-      message: '',
-      servers: [
-        { api: process.env.VUE_APP_API, name: 'Chigaco', number: 1 },
-      ],
+      canLogin: process.env.VUE_APP_DEV || false,
+      rnd: [],
+      dyk: dyk,
+      anon: anon,
+      bella: bella,
     };
   },
-  created() {
-    localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('auth');
-    localStorage.removeItem('loggedIn');
-    if (!localStorage.getItem('logintype'))
-      localStorage.setItem('logintype', 'steem')
-    if (this.TWA)
-      this.TWA.ready();
+  mounted() {
+    window.init_template()
+
   },
-  computed: {
-    server() {
-      return this.$store.state.game.server;
-    },
-    TWA() {
-      if (window && window.Telegram && window.Telegram.WebApp)
-        return window.Telegram.WebApp
-      else return null
-    }
+  created() {
+    if (this.TWA.onEvent)
+      this.TWA.onEvent('web_app_ready', this.makeItok());
+    this.rnd.push(Math.floor(Math.random() * Math.floor(bella.length)))
+    this.rnd.push(Math.floor(Math.random() * Math.floor(anon.length)))
+    this.rnd.push(Math.floor(Math.random() * Math.floor(dyk.length)))
   },
   methods: {
-    ...mapActions(['setServer','init']),
+    ...mapActions(['init', 'login']),
     ok() {
-      this.message = window.Telegram.WebApp
+      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+        this.login(this.TWA.initDataUnsafe).then((res) => {
+          this.init(this.TWA.initDataUnsafe).then((result) => {
+            this.$router.push({ path: this.$route.query.redirect || '/home' });
+          })
+        })
+    },
+    makeItok() {
+      this.canLogin = true;
+
     },
     logout() {
       this.$auth.logOut();
       this.$router.push({ path: '/' });
     },
-    handleLoginEvent(data) {
-      this.isAuthenticated = data.loggedIn;
-      this.profile = data.profile;
+  },
+  computed: {
+    server() {
+      return this.$store.state.game.server;
     },
-    chooseServer(value) {
-      this.setServer(value);
+    ready() {
+      return this.TWA.ready();
     },
+
   },
 };
 </script>
 
 <style lang="less" scoped>
-.title {
-  margin-top: -15px;
-}
-
-.home {
-  p {
-    font-size: 24px;
-  }
-
-  // background-image: url('//img.drugwars.io/home/homecards.png')!important;
-  // background-size: contain!important;
-  // background-repeat: no-repeat!important;
-  // background-position-y: 40px!important;
-}
-
-.bottomt {
-  text-shadow: 0px 0px 5px black, 0px 0px 5px black, 3px 3px 5px black, -3px -3px 5px black;
-}
-
-.rounded-2 {
-  border: 1px solid #eca301;
-}
-
-.white {
-  color: white !important;
-}
-
-.rel {
+.wrapper {
+  width: 65px;
+  height: 20px;
+  border-radius: 20px;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
+  transform: rotate(-35deg);
+  animation: bgmove 5s infinite linear;
+  left: calc(50% - 33px);
+  top: 50%;
   position: relative;
-  // margin-top: 22%!important;
 }
 
-h4 {
-  color: #fbbd08;
-  font-size: 20px;
-  text-shadow: 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black, 0px 0px 5px black,
-    3px 3px 5px black, -3px -3px 5px black;
-  font-family: 'Inter', Helvetica, Arial, sans-serif;
+
+.wrapper:after {
+  clear: both;
+  display: table;
+  content: '';
 }
 
-.btn-orange {
-  border-radius: 0.25em;
-  box-shadow: 0px 3px 10px orangered;
-  background-size: cover;
-  font-weight: bold;
-
-}
-
-.btn-yellow {
-  border-radius: 0.25em;
-  background-color: #fbbd08;
-  color: black;
-  background-image: linear-gradient(160deg, #fbe308 0%, #ffbb00 74%);
-  box-shadow: 0px 3px 10px #c59400;
-  background-size: cover;
-  font-weight: bold;
-
-  &:hover {
-    background-image: linear-gradient(160deg, #fbe308 0%, #ffbb00 20%, #ffc21b 80%);
-    opacity: 1;
-  }
-
-  &:disabled {
-    color: white;
-  }
-}
-
-.btn-blue {
-  border-radius: 0.25em;
-  background-color: #0679fc;
-  color: rgb(250, 250, 250);
-  background-image: linear-gradient(-180deg, #0679fc 0%, #0361cc 90%);
-  box-shadow: 0px 3px 10px #0361cc;
-  background-size: cover;
-  font-weight: bold;
-
-  &:hover {
-    background-image: linear-gradient(-180deg, #0374f4 0%, #035cc2 90%);
-    opacity: 1;
-  }
-
-  &:disabled {
-    color: white;
-  }
-}
-
-h5 {
-  color: #FFC107;
-  font-size: 15px;
-  top: 5px;
-  text-shadow: 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 0 0 5px #000000, 3px 3px 5px #000000, -3px -3px 5px #000000;
-  font-family: 'Inter', Helvetica, Arial, sans-serif;
-  font-weight: 900;
+.wrapper:before {
+  content: '';
+  display: block;
   position: absolute;
-  text-align: center;
-  text-rendering: optimizeLegibility;
-  text-transform: uppercase;
-  overflow-wrap: break-word;
-  white-space: pre-line;
-  max-width: 27%;
+  border-radius: 30px;
+  width: 80%;
+  height: 30%;
+  background: linear-gradient(25deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
+  left: 50%;
+  margin-left: -40%;
+  top: 20%;
 }
 
-.dropdown {
-  left: 50%;
-  transform: translatey(-30%) rotatex(90deg) scale(0);
-  margin-top: 0.55em;
-  transform-origin: 0 0;
-  border-radius: 0.35em;
-  display: none;
-  opacity: 0;
-  transition: all 200ms linear;
+.left {
+  float: left;
+  height: 100%;
+  width: 50%;
+  background: linear-gradient(#ffc012a8, #c7a200c7);
+  border-radius: 40px 0 0 40px;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-right: 1px solid #ffc400;
+  box-shadow: inset 0 5px 0 #ffc400a2, inset 0 -10px 15px #facc02;
+}
 
-  &.isOpen {
-    transform: translatey(0%);
-    display: block;
-    opacity: 1;
+.right {
+  float: right;
+  height: 100%;
+  width: 50%;
+  border-radius: 0 40px 40px 0;
+  border: 1px solid rgba(0, 0, 0, 0.4);
+  border-left: 1px solid rgba(0, 0, 0, 0.6);
+  box-shadow: inset 0 5px 0 #ff1212a1, inset 0 -10px 15px #fa0202ab;
+  background: linear-gradient(#ff1212a6, #fa0202ab);
+}
+
+@keyframes bgmove {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
   }
 }
 
-.vue-ui-modal {
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  height: 100vh;
-  padding: 0px 20px;
-  width: 90vw;
-  background: rgb(0, 0, 0);
-  border-radius: 6px;
-  border: 1px solid #fbbd08;
+.forcelogout {
+  position: absolute;
+  bottom: 0px;
+  left: calc(50% - 37px);
 }
 </style>

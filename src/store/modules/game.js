@@ -103,10 +103,11 @@ const authToken = function () {
 
 const actions = {
   init: ({ commit, dispatch }, newUser) =>
-    new Promise((resolve, reject) => {
+    new Promise(async (resolve, reject) => {
       if (!newUser && registeredUser)
         newUser = registeredUser
-      dispatch('login', newUser);
+      if(!store.state.auth.username)
+      await dispatch('login', newUser);
       registeredUser = newUser;
       let totalbases = 0;
       if (

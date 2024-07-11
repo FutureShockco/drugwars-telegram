@@ -108,7 +108,7 @@
         </div> -->
 
       </li>
-      <li class="col-3 card d-flex pt-2 align-self-stretch">
+      <li @click="toggleModalAccount()" class="col-3 card d-flex pt-2 align-self-stretch">
         <div class="d-flex justify-content-start align-items-start ">
           <Icon class="me-2 mb-1 align-self-start" name="dwd" size="16" />
           <div>
@@ -135,8 +135,12 @@
 
 <script>
 import { getBalances } from '@/helpers/utils';
+import { mapActions } from 'vuex';
 
 export default {
+  methods: {
+    ...mapActions(['toggleSidebarVisibility', 'init', 'toggleModalAccount']),
+  },
   computed: {
     timeToWait() {
       const midnight = new Date().setUTCHours(24, 0, 0, 0);

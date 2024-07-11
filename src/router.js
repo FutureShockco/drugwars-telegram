@@ -120,25 +120,63 @@ setInterval(() => {
 
 
 const requireAuth = (to, from, next) => {
-  if (!store.state.auth.username || !store.state.game.user.user) {
+
+  if (client.ws.readyState === 3) {
     store.dispatch('showLoading');
-    store.dispatch('login',store.state.auth.username).then(() => {
-      if (store.state.game.username) {
-        store.dispatch('init',store.state.game.user).then(() => {
-          store.dispatch('refresh_gang_buildings');
+    client.restart();
+    store.dispatch('login', store.state.auth.username).then(() => {
+      if (store.state.auth.username) {
+        store.dispatch('init', store.state.auth.username).then(() => {
           store.dispatch('hideLoading');
           next();
         });
       } else {
-        store.dispatch('hideLoading');
         const redirect = to.fullPath === '/' ? undefined : to.fullPath;
-        next({ name: 'login', query: { redirect } });
+        next({ name: 'home', query: { redirect } });
       }
     });
-  } else {
+  } else if (!store.state.game.user && store.state.auth.username) {
+    store.dispatch('login', store.state.auth.username).then(() => {
+      if (store.state.auth.username) {
+        store.dispatch('init', store.state.auth.username).then(() => {
+          next();
+        });
+      } else {
+        const redirect = to.fullPath === '/' ? undefined : to.fullPath;
+        next({ name: 'home', query: { redirect } });
+      }
+    });
+  } else if (!store.state.auth.username) {
     store.dispatch('hideLoading');
+
+    const redirect = to.fullPath === '/' ? undefined : to.fullPath;
+    next({ name: 'home', query: { redirect } });
+
+  }
+
+  else {
+
     next();
   }
+
+  // if (store.state.auth.username || !store.state.game.user.user) {
+  //   store.dispatch('showLoading');
+  //   store.dispatch('login',store.state.auth.username).then(() => {
+  //     if (store.state.game.username) {
+  //       store.dispatch('init',store.state.game.user).then(() => {
+  //         store.dispatch('hideLoading');
+  //         next();
+  //       });
+  //     } else {
+  //       store.dispatch('hideLoading');
+  //       const redirect = to.fullPath === '/' ? undefined : to.fullPath;
+  //       next({ name: 'login', query: { redirect } });
+  //     }
+  //   });
+  // } else {
+  //   store.dispatch('hideLoading');
+  //   next();
+  // }
 };
 
 
@@ -151,11 +189,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
-      beforeEnter: requireAuth,
-      meta: {
-        hideSidebar: true,
-      },
+      component: Home
     },
     {
       path: '/home',
