@@ -106,8 +106,8 @@ const actions = {
     new Promise(async (resolve, reject) => {
       if (!newUser && registeredUser)
         newUser = registeredUser
-      if(!store.state.auth.username)
-      await dispatch('login', newUser);
+      if (!store.state.auth.username)
+        await dispatch('login', newUser);
       registeredUser = newUser;
       let totalbases = 0;
       if (
@@ -576,52 +576,67 @@ const actions = {
   requestPayment: async ({ rootState, dispatch }, { memo, amount }) => {
     const message = `amount=${amount}&text=${memo}`
     const url = `ton://transfer/UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF?${message}`;
-    if (window.tonConnectUI) {
-      const transaction = {
-        validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
-        messages: [
-          {
-            address: "UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF-Jn",
-            amount: amount,
-            payload: message // just for instance. Replace with your transaction payload or remove
+    const fUrl = "https://dw-api-telegram-55801a35819b.herokuapp.com/convert/" + message;
+    const options = {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json;charset=UTF-8",
+      }
+    };
+    fetch(fUrl, options)
+      .then((response) => response.json())
+      .then(async (data) => {
+
+        console.log(data);
+        if (window.tonConnectUI) {
+          console.log(await window.tonConnectUI.walletsList)
+          const transaction = {
+            validUntil: Math.floor(Date.now() / 1000) + 60, // 60 sec
+            messages: [
+              {
+                address: "0:2b74953175003ed8a5de0d4ac693c6669fc7a5fb7c6869015af317e1465a6dba",
+                amount: amount,
+                payload: data // just for instance. Replace with your transaction payload or remove
+              }
+            ]
           }
-        ]
-      }
 
-      try {
-        const result = await window.tonConnectUI.sendTransaction(transaction);
+          try {
+            const result = await window.tonConnectUI.sendTransaction(transaction);
 
-        // you can use signed boc to find the transaction 
-        console.log(result)
-      } catch (e) {
-        console.error(e);
-        const win = window.open(
-          url.split('+').join('_'),
-          '_blank',
-          'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-        );
-        win.focus();
-      }
-    }
-    // else if (window.Telegram.WebApp) {
-    //   const t = await window.Telegram.WebApp.openLink(url)
-    //   if (!t) {
-    //     const win = window.open(
-    //       url.split('+').join('_'),
-    //       '_blank',
-    //       'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-    //     );
-    //     win.focus();
-    //   }
-    // }
-    else {
-      const win = window.open(
-        url.split('+').join('_'),
-        '_blank',
-        'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-      );
-      win.focus();
-    }
+            console.log(result)
+          } catch (e) {
+            console.error(e);
+            const win = window.open(
+              url.split('+').join('_'),
+              '_blank',
+              'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+            );
+            win.focus();
+          }
+        }
+        else if (window.Telegram.WebApp) {
+          const t = await window.Telegram.WebApp.openLink(url)
+          if (!t) {
+            const win = window.open(
+              url.split('+').join('_'),
+              '_blank',
+              'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+            );
+            win.focus();
+          }
+        }
+        else {
+          const win = window.open(
+            url.split('+').join('_'),
+            '_blank',
+            'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+          );
+          win.focus();
+        }
+      });
+
 
     Promise.delay(15000).then(() => {
       dispatch('init');
