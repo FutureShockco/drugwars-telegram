@@ -28,7 +28,7 @@ export default {
   },
   mounted() {
     window.init_template()
-
+		this.ok()
   },
   created() {
     if (this.TWA.onEvent)
