@@ -40,7 +40,10 @@ export default {
   methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'toggleModalAccount']),
   },
-
+	created() {
+		if(this.TWA)
+    this.TWA.onEvent('themeChanged', alert("theme"));
+	},
 
   computed: {
     tutoDetail() {
