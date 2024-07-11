@@ -47,7 +47,17 @@ export default {
 	    this.TWA.onEvent('themeChanged', alert("theme"));
 		}
 	},
-
+methods: {
+    ...mapActions(['init', 'login']),
+    checkWS() {
+      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+        this.login(this.TWA.initDataUnsafe).then((res) => {
+          this.init(this.TWA.initDataUnsafe).then((result) => {
+            this.$router.push({ path: this.$route.query.redirect || '/home' });
+          })
+        })
+    },
+  },
   computed: {
     tutoDetail() {
       return this.$store.state.game.tutoDetail
