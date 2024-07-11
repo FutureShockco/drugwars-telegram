@@ -41,22 +41,13 @@ export default {
 	created() {
 		const self = this;
 		setInterval(function() {
-        if (self.TWA.isVisible) {
-            self.checkWS()
-        }
+         self.checkWS()
     }, 1000);
-	window.addEventListener('pageshow', function(event) {
-                if (event.persisted || document.visibilityState === 'visible') {
-                    alert('User is back!');
-                    // Perform actions when user returns
-                    // e.g., refresh data, resume processes, etc.
-                }
-            });
 	},
 methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
     checkWS() {
-      if (this.username && client.ws.readyState > 1 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+      if (this.username && client.ws.readyState === 3 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
 				client.restart();
 				this.login(this.TWA.initDataUnsafe).then((res) => {
           this.init(this.TWA.initDataUnsafe).then((result) => {
