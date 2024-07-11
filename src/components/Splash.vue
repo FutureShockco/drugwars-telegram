@@ -10,12 +10,43 @@
 </template>
 
 
+
 <script>
+import { mapActions } from 'vuex';
+import dyk from '@/../dyk.json';
+import anon from '@/../anon.json';
+import bella from '@/../bella.json';
 export default {
+  data() {
+    return {
+      canLogin: process.env.VUE_APP_DEV || false,
+      rnd: [],
+      dyk: dyk,
+      anon: anon,
+      bella: bella,
+    };
+  },
+  mounted() {
+    window.init_template()
+
+  },
+  created() {
+    if (this.TWA.onEvent)
+      this.TWA.onEvent('web_app_ready', this.ok());
+  },
   methods: {
-    logout() {
-      this.$auth.logOut();
-      this.$router.push({ path: '/' });
+    ...mapActions(['init', 'login']),
+    ok() {
+      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+        this.login(this.TWA.initDataUnsafe).then((res) => {
+          this.init(this.TWA.initDataUnsafe).then((result) => {
+            this.$router.push({ path: this.$route.query.redirect || '/home' });
+          })
+        })
+    },
+    makeItok() {
+      this.canLogin = true;
+
     },
   },
   computed: {
