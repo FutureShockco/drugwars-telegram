@@ -596,19 +596,17 @@ const actions = {
         console.error(e);
       }
     }
-    else if (window.Telegram.WebApp.openLink) {
-      const t = await window.Telegram.WebApp.openLink(url)
-      if (!t) {
-        const win = window.open(
-          url.split('+').join('_'),
-          '_blank',
-          'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-        );
-        win.focus();
-      }
-
-
-    }
+    // else if (window.Telegram.WebApp) {
+    //   const t = await window.Telegram.WebApp.openLink(url)
+    //   if (!t) {
+    //     const win = window.open(
+    //       url.split('+').join('_'),
+    //       '_blank',
+    //       'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+    //     );
+    //     win.focus();
+    //   }
+    // }
     else {
       const win = window.open(
         url.split('+').join('_'),

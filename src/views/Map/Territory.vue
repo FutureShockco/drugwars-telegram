@@ -3,7 +3,7 @@
     <MapTabs />
     <div class="card mb-0" style="margin-top: -15px;">
       <div class="content">
-        <div class="tabs tabs-box" >
+        <div class="tabs tabs-box">
           <div class="tab-controls rounded-s border-highlight">
             <button class=" gradient-highlight" @click="decreaseLocation()">
               <i class="fad fa-arrow-left color-black"></i>
@@ -220,7 +220,7 @@ export default {
           tiles_array[self.selectedTile - 1].fillColor = 'red';
           clearCanvas();
         } else if (self.selectedTile != null && !self.currentNickname && self.job) {
-          tiles_array[self.selectedTile - 1].fillColor = '#ffc508';
+          tiles_array[self.selectedTile - 1].fillColor = '#f6bb428f';
         } else if (self.selectedTile != null) {
           tiles_array[self.selectedTile - 1].fillColor = null;
         }
@@ -247,7 +247,7 @@ export default {
         } else if (elementClickedId.nickname === self.nickname) {
           tiles_array[elementClickedId.id - 1].fillColor = 'green';
         } else if (elementClickedId.nickname !== self.nickname) {
-          tiles_array[elementClickedId.id - 1].fillColor = 'blue';
+          tiles_array[elementClickedId.id - 1].fillColor = '#ffc508';
         } else {
           tiles_array[elementClickedId.id - 1].fillColor = 'gray';
         }
@@ -290,7 +290,6 @@ export default {
         let element;
 
         tiles_array.forEach((tile) => {
-          console.log(tile)
 
           if (
             clickX > tile.workWidth.start &&
@@ -353,6 +352,7 @@ export default {
               custom_name = element.custom;
               main = element.main;
             }
+
           });
           const tile = new Tile(
             drawPosition.x,
@@ -376,8 +376,10 @@ export default {
             drawPosition.x = 0;
             drawPosition.y += tileHeight;
           }
+
         }
       }
+      const tiles = new Image();
 
       const home = new Image();
       const tree = new Image();
@@ -387,6 +389,8 @@ export default {
       const pool = new Image();
       const heliport = new Image();
       const job = new Image();
+      tiles.src = '/img/map/tiles.png';
+
       home.src = '//img.drugwars.io/map/first.png';
       buildingtop.src = '//img.drugwars.io/map/first.png';
       pool.src = '//img.drugwars.io/map/first.png';
@@ -412,7 +416,7 @@ export default {
             context.beginPath();
             if (tile.fillColor) context.fillStyle = tile.fillColor;
             else context.fillStyle = 'rgba(255, 50, 50, 0.0)';
-            context.rect(tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 12);
+            context.rect(tile.x + 7, tile.y + 12, tile.width - 3, tile.height - 5);
 
 
             // context.strokeStyle = '#000';
@@ -429,24 +433,28 @@ export default {
               else if (tile.level > 29) {
                 context.drawImage(fountain, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
-              if (tile.level < 10) {
-                context.drawImage(home, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
+              else if (tile.level < 10) {
+                context.drawImage(home, tile.x + 9, tile.y + 9, tile.width - 13, tile.height - 11);
                 if (tile.fillColor === 'green') {
                   context.drawImage(tree, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
                 }
               }
-              if (tile.level > 9) {
+              else if (tile.level > 9) {
                 context.drawImage(buildingtop, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
-              if (tile.level > 19) {
+              else if (tile.level > 19) {
                 context.drawImage(buildingbottom, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
               }
 
             }
-            context.shadowColor = 'black';
-            context.shadowBlur = 5;
+            else {
+              const rndX = Math.floor(Math.random() * Math.floor(10))  * 50
+              const rndY = Math.floor(Math.random() * Math.floor(10)) * 50
+              console.log(rndX,rndY)
+              context.drawImage(tiles, 18, 16, 50 , 48, tile.x+2, tile.y+9, 54 ,53);
+            }
+   
             context.textAlign = 'center';
-            context.lineWidth = 5;
 
             context.fillStyle = '#fff';
             context.fillText(tile.id, tile.x + 22, tile.y + 42, tile.width);
@@ -552,10 +560,13 @@ export default {
     updateLocation(value) {
       const self = this;
       self.bases = null;
+
       if (self.currentLocation !== self.location) {
         if (value)
           self.currentLocation = value;
         else self.currentLocation = self.location;
+        this.$router.push({ path: `/map/territory?location=${Number(self.currentLocation)}` });
+
         client.requestAsync('get_bases', self.currentLocation).then((result) => {
           [self.bases] = result;
           result[1].forEach((element) => {
@@ -606,7 +617,7 @@ export default {
 
 .overlay {
   position: absolute;
-  background-image: url(/img/map.png);
+  // background-image: url(/img/map.png);
   top: 0px;
   width: 100%;
   height: 100%;
