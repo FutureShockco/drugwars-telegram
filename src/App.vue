@@ -39,18 +39,16 @@ export default {
     };
   },
 	created() {
-		if(this.TWA)
-		{
-	    this.TWA.onEvent('viewportChanged', this.checkWS());
-	    //this.TWA.onEvent('themeChanged', alert("theme"));
-
-this.TWA.onEvent('visibilityChanged', this.checkWS());
-		}
+		const self = this;
+		setInterval(function() {
+        if (self.TWA.isVisible) {
+            self.checkWS()
+        }
+    }, 1000);
 	},
 methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
     checkWS() {
-        alert("viewport",this.username)
       if (this.username && client.ws.readyState > 1 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
 				client.restart();
 				this.login(this.TWA.initDataUnsafe).then((res) => {
