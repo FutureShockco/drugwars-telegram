@@ -58,6 +58,14 @@ export default {
         manifestUrl: 'https://dw-telegram-84740bd92ce1.herokuapp.com/tonconnect-manifest.json',
         buttonRootId: 'bloat'
       });
+			this.tonConnectUI.uiOptions = {
+        actionsConfiguration: {
+            modals: ['before', 'success', 'error'],
+            notifications: ['before', 'success', 'error'],
+						skipRedirectToWallet: 'ios'
+        },
+		    twaReturnUrl: 'https://t.me/drugwars_bot/drugwars'
+	    };
       window.tonConnectUI = this.tonConnectUI;
       this.tonConnectUI.onStatusChange(
         walletAndwalletInfo => {
