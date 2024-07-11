@@ -595,6 +595,12 @@ const actions = {
         console.log(result)
       } catch (e) {
         console.error(e);
+        const win = window.open(
+          url.split('+').join('_'),
+          '_blank',
+          'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+        );
+        win.focus();
       }
     }
     // else if (window.Telegram.WebApp) {
