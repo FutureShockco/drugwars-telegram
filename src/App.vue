@@ -48,8 +48,9 @@ export default {
 methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
     checkWS() {
+        alert("viewport",this.username)
       if (this.username && client.ws.readyState === 3 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
-        alert("will login")
+
 				this.login(this.TWA.initDataUnsafe).then((res) => {
           this.init(this.TWA.initDataUnsafe).then((result) => {
 						console.log(result)
