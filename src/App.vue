@@ -38,9 +38,6 @@ export default {
       firstLoad: true,
     };
   },
-  methods: {
-    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
-  },
 	created() {
 		if(this.TWA)
 		{
@@ -49,7 +46,7 @@ export default {
 		}
 	},
 methods: {
-    ...mapActions(['init', 'login']),
+    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
     checkWS() {
       if (this.username && client.ws.readyState === 3 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
         alert("will login")
