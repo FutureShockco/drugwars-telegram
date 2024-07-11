@@ -45,6 +45,7 @@ export default {
             self.checkWS()
         }
     }, 1000);
+	window.addEventListener('pageshow',alert("shown"));
 	},
 methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
