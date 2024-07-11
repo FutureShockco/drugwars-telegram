@@ -25,6 +25,7 @@
 
 import { mapActions } from 'vuex';
 import Quickstart from './components/Quickstart.vue';
+import client from '@/helpers/client';
 
 export default {
   data() {
@@ -50,7 +51,7 @@ export default {
 methods: {
     ...mapActions(['init', 'login']),
     checkWS() {
-      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+      if (client.ws.readystate === 3 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
         this.login(this.TWA.initDataUnsafe).then((res) => {
           this.init(this.TWA.initDataUnsafe).then((result) => {
             this.$router.push({ path: this.$route.query.redirect || '/home' });
