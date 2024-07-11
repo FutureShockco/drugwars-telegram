@@ -13,17 +13,12 @@
 
 <script>
 import { mapActions } from 'vuex';
-import dyk from '@/../dyk.json';
-import anon from '@/../anon.json';
-import bella from '@/../bella.json';
+import client from '@/helpers/client';
 export default {
   data() {
     return {
       canLogin: process.env.VUE_APP_DEV || false,
       rnd: [],
-      dyk: dyk,
-      anon: anon,
-      bella: bella,
     };
   },
   mounted() {
@@ -34,6 +29,7 @@ export default {
     ...mapActions(['init', 'login']),
     ok() {
       if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+				this.client.restart();
         this.login(this.TWA.initDataUnsafe).then((res) => {
           this.init(this.TWA.initDataUnsafe).then((result) => {
             this.$router.push({ path: this.$route.query.redirect || '/home' });
