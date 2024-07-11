@@ -123,18 +123,21 @@ const requireAuth = (to, from, next) => {
 
   if (client.ws.readyState === 3) {
     store.dispatch('showLoading');
+    alert("need to reconnect");
     client.restart();
+          if (store.state.auth.username) {
     store.dispatch('login', store.state.auth.username).then(() => {
-      if (store.state.auth.username) {
         store.dispatch('init', store.state.auth.username).then(() => {
           store.dispatch('hideLoading');
           next();
         });
-      } else {
+      
+    })
+    }
+    else {
         const redirect = to.fullPath === '/' ? undefined : to.fullPath;
         next({ name: 'home', query: { redirect } });
       }
-    });
   } else if (!store.state.game.user && store.state.auth.username) {
     store.dispatch('login', store.state.auth.username).then(() => {
       if (store.state.auth.username) {
