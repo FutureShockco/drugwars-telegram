@@ -45,7 +45,7 @@ export default {
 		if(this.TWA)
 		{
 	    this.TWA.onEvent('viewportChanged', this.checkWS());
-	    this.TWA.onEvent('themeChanged', alert("theme"));
+	    //this.TWA.onEvent('themeChanged', alert("theme"));
 		}
 	},
 methods: {
