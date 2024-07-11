@@ -39,7 +39,7 @@ export default {
     };
   },
   methods: {
-    ...mapActions(['toggleSidebarVisibility', 'init', 'toggleModalAccount']),
+    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
   },
 	created() {
 		if(this.TWA)
@@ -52,9 +52,10 @@ methods: {
     ...mapActions(['init', 'login']),
     checkWS() {
       if (client.ws.readyState === 3 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
-        this.login(this.TWA.initDataUnsafe).then((res) => {
+        alert("will login")
+				this.login(this.TWA.initDataUnsafe).then((res) => {
           this.init(this.TWA.initDataUnsafe).then((result) => {
-            this.$router.push({ path: this.$route.query.redirect || '/home' });
+						console.log(result)
           })
         })
     },
