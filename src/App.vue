@@ -45,7 +45,13 @@ export default {
             self.checkWS()
         }
     }, 1000);
-	window.addEventListener('pageshow',alert("shown"));
+	window.addEventListener('pageshow', function(event) {
+                if (event.persisted || document.visibilityState === 'visible') {
+                    alert('User is back!');
+                    // Perform actions when user returns
+                    // e.g., refresh data, resume processes, etc.
+                }
+            });
 	},
 methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
