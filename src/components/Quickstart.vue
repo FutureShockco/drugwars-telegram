@@ -238,7 +238,7 @@
           </h5>
 
 
-          <div @click="setTutoDetail(0), toggleModalAccount"
+          <div @click="setTutoDetail(0), toggleModalAccount()"
             class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">
             Open Wallet</div>
 

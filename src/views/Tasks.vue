@@ -39,8 +39,8 @@ import tasks from '@/../tasks.json';
 export default {
     data() {
         return {
-            rnd: [],
             tasks: tasks,
+            usertasks: []
         };
     },
     created() {
@@ -48,14 +48,19 @@ export default {
     },
     methods: {
         ...mapActions(['init', 'login']),
-
+        load_tasks(start) {
+            this.usertasks = [];
+            const params = { user: this.$store.state.auth.username}
+            client.requestAsync('get_user_tasks', params).then(result => {
+                this.usertasks  = result.tasks;
+                this.isLoading = false;
+            });
+        },
     },
     computed: {
         server() {
             return this.$store.state.game.server;
         },
-
-
     },
 };
 </script>
