@@ -8,6 +8,7 @@
             <button class=" gradient-highlight" @click="decreaseLocation()">
               <i class="fad fa-arrow-left color-black"></i>
             </button>
+
             <input type="number" v-model="currentLocation" placeholder="25" class="input color-highlight w-100"
               @change="updateLocation(currentLocation)" />
 
@@ -41,7 +42,7 @@
         <div class="map-title text-left" id="visit">
           <router-link v-if="selectedTile && currentNickname && currentNickname != nickname"
             :to="`/actions?type=attack&target=${location}&base=${selectedTile}`">
-            <button class="button button-red">ATTACK</button>
+            <button class="btn bg-red-light border-red-dark">ATTACK</button>
           </router-link>
           <!-- <router-link v-if="selectedTile && currentNickname && currentNickname != nickname"
             :to="`/actions?type=transport&target=${location}&base=${selectedTile}`">
@@ -101,6 +102,7 @@ export default {
       iso: false,
       x: 'no',
       y: 'no',
+      maprng: null,
     };
   },
   watch: {
@@ -160,11 +162,6 @@ export default {
         const ctx = canvas_element.getContext('2d');
         ctx.clearRect(0, 0, width, height);
       }
-      const TILE_TYPES = {
-        me: { name: 'Me', color: 'green' },
-        sea: { name: 'Sea', color: 'lightBlue' },
-        land: { name: 'Land', color: null },
-      };
 
       function Tile(
         x,
@@ -279,10 +276,8 @@ export default {
 
       function checkClick(event, canvas_element) {
         const canvasRect = canvas_element.getBoundingClientRect();
-        console.log(canvasRect)
         const clickX = event.clientX - canvasRect.left;
         const clickY = event.clientY - canvasRect.top + window.scrollY;
-        console.log(clickX, clickY)
 
         // const clickX = event.layerX;
         // const clickY = event.layerY - 135;
@@ -322,7 +317,7 @@ export default {
           y: 0,
         };
         for (let i = 0; i < quantityAll; i++) {
-          let fillColor = TILE_TYPES.land.color;
+          let fillColor = "";
           let nickname = '';
           let level = '';
           let custom_name = '';
@@ -330,8 +325,8 @@ export default {
           let gang = {};
           let job = '';
           self.bases.forEach((element) => {
-            if (element.base === i && element.job != undefined) {
-              fillColor = '#ffc508';
+            if (element.base === i && element.job != undefined && !element.nickname) {
+              fillColor = 'rgba(255, 206, 84, 0.5)';
               nickname = element.nickname;
               level = element.lvl;
               custom_name = element.custom;
@@ -345,7 +340,7 @@ export default {
               custom_name = element.custom;
               main = element.main;
             } else if (element.base === i && element.nickname !== self.nickname) {
-              fillColor = '#a90000';
+              fillColor = 'red';
               nickname = element.nickname;
               gang = { role: element.role, gang: element.name, ticker: element.ticker };
               level = element.lvl;
@@ -389,7 +384,31 @@ export default {
       const pool = new Image();
       const heliport = new Image();
       const job = new Image();
-      tiles.src = '/img/map/tiles.png';
+      const select = new Image();
+      const enemy = new Image();
+      const lvl1 = new Image();
+      const lvl2 = new Image();
+      const lvl3 = new Image();
+      const lvl4 = new Image();
+      const lvl5 = new Image();
+      const lvl6 = new Image();
+      const lvl7 = new Image();
+      const lvl8 = new Image();
+      const lvl9 = new Image();
+      select.src = "/img/map/select.png"
+      enemy.src = "/img/map/enemy.png"
+      lvl1.src = "/img/map/levels/1.png"
+      lvl2.src = "/img/map/levels/2.png"
+      lvl3.src = "/img/map/levels/3.png"
+      lvl4.src = "/img/map/levels/4.png"
+      lvl5.src = "/img/map/levels/5.png"
+      lvl6.src = "/img/map/levels/6.png"
+      lvl7.src = "/img/map/levels/7.png"
+      lvl8.src = "/img/map/levels/8.png"
+      lvl9.src = "/img/map/levels/9.png"
+
+
+      tiles.src = '/img/map/buldingtiles.png';
 
       home.src = '//img.drugwars.io/map/first.png';
       buildingtop.src = '//img.drugwars.io/map/first.png';
@@ -411,53 +430,86 @@ export default {
         background.src = `/img/mapbg.png`;
         background.onload = () => {
           context.imageSmoothingEnabled = true;
+          // we’re done with the rotating so restore the unrotated context
           context.drawImage(background, 0, 0, canvas.width, canvas.height);
+          context.restore();
+
           tiles_array.forEach((tile) => {
-            context.beginPath();
-            if (tile.fillColor) context.fillStyle = tile.fillColor;
-            else context.fillStyle = 'rgba(255, 50, 50, 0.0)';
-            context.rect(tile.x + 7, tile.y + 12, tile.width - 3, tile.height - 5);
 
-
-            // context.strokeStyle = '#000';
-
-            context.fill();
 
             if (tile.fillColor) {
               if (tile.level > 99) {
-                context.drawImage(heliport, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
+                context.drawImage(lvl9, tile.x, tile.y, tile.width, tile.height);
+              }
+              else if (tile.level > 79) {
+                context.drawImage(lvl8, tile.x, tile.y, tile.width, tile.height);
+              }
+              else if (tile.level > 59) {
+                context.drawImage(lvl7, tile.x, tile.y, tile.width, tile.height);
               }
               else if (tile.level > 49) {
-                context.drawImage(pool, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
+                context.drawImage(lvl6, tile.x, tile.y, tile.width, tile.height);
+              }
+              else if (tile.level > 39) {
+                context.drawImage(lvl5, tile.x, tile.y, tile.width, tile.height);
               }
               else if (tile.level > 29) {
-                context.drawImage(fountain, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
-              }
-              else if (tile.level < 10) {
-                context.drawImage(home, tile.x + 9, tile.y + 9, tile.width - 13, tile.height - 11);
-                if (tile.fillColor === 'green') {
-                  context.drawImage(tree, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
-                }
-              }
-              else if (tile.level > 9) {
-                context.drawImage(buildingtop, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
+                context.drawImage(lvl4, tile.x, tile.y, tile.width, tile.height);
               }
               else if (tile.level > 19) {
-                context.drawImage(buildingbottom, tile.x + 7, tile.y + 9, tile.width - 13, tile.height - 11);
+                context.drawImage(lvl3, tile.x, tile.y, tile.width, tile.height);
               }
+              else if (tile.level > 9) {
+                context.drawImage(lvl2, tile.x, tile.y, tile.width, tile.height);
+              }
+              else if (tile.level > 0) {
+                context.drawImage(lvl1, tile.x, tile.y, tile.width, tile.height);
+              }
+              else {
+
+                context.drawImage(tiles, self.maprng[tile.id - 1].x * 72, self.maprng[tile.id - 1].y * 72, 72, 72, tile.x, tile.y, 50, 50);
+              }
+            }
+            else {
+
+              context.drawImage(tiles, self.maprng[tile.id - 1].x * 72, self.maprng[tile.id - 1].y * 72, 72, 72, tile.x, tile.y, 50, 50);
+            }
+            context.beginPath();
+            if (tile.fillColor) {
+              context.strokeStyle = tile.fillColor
+              context.fillStyle = 'rgba(5, 0, 0, 0.0)';
 
             }
             else {
-              const rndX = Math.floor(Math.random() * Math.floor(10))  * 50
-              const rndY = Math.floor(Math.random() * Math.floor(10)) * 50
-              console.log(rndX,rndY)
-              context.drawImage(tiles, 18, 16, 50 , 48, tile.x+2, tile.y+9, 54 ,53);
+              context.fillStyle = 'rgba(5, 0, 0, 0.0)';
+              //context.rect(tile.x + 7, tile.y + 12, tile.width - 3, tile.height - 5);
+              context.strokeStyle = 'rgba(5, 0, 0, 0.0)';
             }
-   
-            context.textAlign = 'center';
+            if (tile.fillColor === 'green') {
+              //context.roundRect(tile.x + 4, tile.y + 4, tile.width - 8, tile.height - 8, [5, 5]);
 
+              context.drawImage(select, tile.x, tile.y, tile.width, tile.height);
+            }
+            else if (tile.fillColor === 'red') {
+              //context.roundRect(tile.x + 4, tile.y + 4, tile.width - 8, tile.height - 8, [5, 5]);
+              context.strokeStyle = 'red';
+              context.drawImage(enemy, tile.x - 2, tile.y - 2, tile.width + 4, tile.height + 4);
+            }
+            else context.roundRect(tile.x + 8, tile.y + 8, tile.width - 14, tile.height - 15, [5, 5]);
+            context.lineWidth = 3;
+
+
+            context.stroke();
+            // context.strokeStyle = '#000';
+
+            context.fill();
+            context.textAlign = 'center';
+            context.font = "14px Arial";
             context.fillStyle = '#fff';
-            context.fillText(tile.id, tile.x + 22, tile.y + 42, tile.width);
+            context.strokeStyle = 'black';
+            context.strokeText(tile.id, tile.x + 25, tile.y + 38);
+            context.fillText(tile.id, tile.x + 25, tile.y + 38, tile.width);
+
           });
         };
       }
@@ -545,26 +597,31 @@ export default {
       const main = this.isMain;
       this.setMainBase({ territory, base, custom, main });
     },
-    handleZoom() {
-      const bg = document.getElementById('territorybg');
-      const canvas_element = document.getElementById('canvas');
-      const width = bg.offsetWidth;
-      const height = bg.offsetHeight - 300;
-      canvas_element.width = width;
-      canvas_element.height = height;
-      const context = canvas_element.getContext('2d');
-      context.scale(1, 0.5);
-      context.translate(0, 500);
-      context.rotate((-45 * Math.PI) / 180);
-    },
+
     updateLocation(value) {
       const self = this;
       self.bases = null;
+
 
       if (self.currentLocation !== self.location) {
         if (value)
           self.currentLocation = value;
         else self.currentLocation = self.location;
+        const a = 1664525;
+        const c = 1013904223;
+        const m = 4294967296;
+        function lcg(seed) {
+          return function () {
+            seed = (a * seed + c) % m;
+            return seed / m;
+          };
+        }
+        const random = lcg(self.currentLocation)
+        const numbers = [];
+        for (let i = 0; i < 101; i++) {
+          numbers.push({ x: Math.floor(random() * 10), y: Math.floor(random() * 10) });
+        }
+        self.maprng = numbers;
         this.$router.push({ path: `/map/territory?location=${Number(self.currentLocation)}` });
 
         client.requestAsync('get_bases', self.currentLocation).then((result) => {
@@ -587,6 +644,21 @@ export default {
       result[1].forEach((element) => {
         self.bases.push(element);
       });
+      const a = 1664525;
+      const c = 1013904223;
+      const m = 4294967296;
+      function lcg(seed) {
+        return function () {
+          seed = (a * seed + c) % m;
+          return seed / m;
+        };
+      }
+      const random = lcg(self.currentLocation)
+      const numbers = [];
+      for (let i = 0; i < 101; i++) {
+        numbers.push({ x: Math.floor(random() * 10), y: Math.floor(random() * 10) });
+      }
+      self.maprng = numbers;
       self.start();
       self.isLoading = false;
     });
@@ -617,7 +689,7 @@ export default {
 
 .overlay {
   position: absolute;
-  // background-image: url(/img/map.png);
+  //background-image: url(/img/map.png);
   top: 0px;
   width: 100%;
   height: 100%;

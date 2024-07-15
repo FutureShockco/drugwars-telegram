@@ -13,8 +13,7 @@
       <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
       </div>
     </template>
-    <Account v-if="username"
-      :open="modalWalletVisible" @close="toggleModalAccount()" />
+    <Account v-if="username" :open="modalWalletVisible" @close="toggleModalAccount()" />
 
     <Notifications />
 
@@ -38,22 +37,23 @@ export default {
       firstLoad: true,
     };
   },
-	created() {
-		const self = this;
-		setInterval(function() {
-         self.checkWS()
+  created() {
+    const self = this;
+    setInterval(function () {
+      if (this.username && client.ws.readyState === 3)
+        self.checkWS()
     }, 1000);
-	},
-methods: {
+  },
+  methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
     checkWS() {
-      if (this.username && client.ws.readyState === 3 && this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
-				client.restart();
-				this.login(this.TWA.initDataUnsafe).then((res) => {
-          this.init(this.TWA.initDataUnsafe).then((result) => {
-						console.log(result)
-          })
+      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+        client.restart();
+      this.login(this.TWA.initDataUnsafe).then((res) => {
+        this.init(this.TWA.initDataUnsafe).then((result) => {
+          console.log(result)
         })
+      })
     },
   },
   computed: {
