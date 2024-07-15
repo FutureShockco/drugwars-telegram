@@ -3,6 +3,8 @@ import Vue from 'vue';
 const state = {
   sidebarVisible: false,
   modalAccountVisible: false,
+  modalVideoVisible: false,
+  currentVideo: null,
   showLoading: false,
   showTutorial: false,
   timestamp: new Date().getTime(),
@@ -15,6 +17,9 @@ const mutations = {
   },
   toggleModalAccount(_state) {
     Vue.set(_state, 'modalAccountVisible', !_state.modalAccountVisible);
+  },
+  toggleModalVideo(_state) {
+    Vue.set(_state, 'modalVideoVisible', !_state.modalVideoVisible);
   },
   showLoading(_state) {
     Vue.set(_state, 'showLoading', true);
@@ -43,6 +48,9 @@ const actions = {
   },
   toggleModalAccount({ commit }) {
     commit('toggleModalAccount');
+  },
+  toggleModalVideo({ commit }) {
+    commit('toggleModalVideo');
   },
   showLoading({ commit }) {
     commit('showLoading');

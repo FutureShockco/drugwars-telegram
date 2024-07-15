@@ -5019,7 +5019,6 @@ textarea.form-control-lg {
 .offcanvas.offcanvas-bottom {
   right: 0;
   left: 0;
-  height: var(--bs-offcanvas-height);
   max-height: 100%;
   border-top: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
   transform: translateY(100%);

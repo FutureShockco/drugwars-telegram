@@ -14,7 +14,7 @@
       </div>
     </template>
     <Account v-if="username" :open="modalWalletVisible" @close="toggleModalAccount()" />
-
+  
     <Notifications />
 
   </div>

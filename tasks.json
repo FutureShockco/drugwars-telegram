@@ -8,11 +8,12 @@
     "link": "/referral"
   },
   {
-    "title": "Watch a video",
+    "title": "CrossWars Trailer",
     "desc": "Increase your DRUG production to",
     "bonus": "Receive 500 DRUG - 500 WEAPON - 500 ALCOHOL !",
     "increase": 5,
-    "bg": "43"
+    "bg": "43",
+    "vlink": "0V6YtsJJMw4"
   },
   {
     "title": "Baron",
