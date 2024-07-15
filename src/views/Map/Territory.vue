@@ -504,7 +504,7 @@ export default {
 
             context.fill();
             context.textAlign = 'center';
-            context.font = "14px Arial";
+            context.font = "10px Arial";
             context.fillStyle = '#fff';
             context.strokeStyle = 'black';
             context.strokeText(tile.id, tile.x + 25, tile.y + 38);
