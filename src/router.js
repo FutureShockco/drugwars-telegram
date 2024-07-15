@@ -534,7 +534,7 @@ export default new Router({
       component: Settings,
     },
     {
-      path: '/settings/referral',
+      path: '/referral',
       name: 'referral',
       beforeEnter: requireAuth,
       component: Referral,

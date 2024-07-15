@@ -1,33 +1,46 @@
 <template>
-    <div>
-        <SettingsTabs/>
-        <div class="p-4 anim-fade-in text-center">
-            <h1>DrugWars Referral Program</h1>
-            <h3>1.Invite your friends with this link!      <a :href="url" target="_blank">
-              {{ url }}
-            </a></h3>
-            <h3>2.Make them win a Steem account!</h3>
-            <h3>3.And obtain 15% bonus on their DWD crypto rewards.</h3>
-            <h3>Your referrals</h3>
-            <div class="referral"> 
-                <div :key="key" v-for="(referral, key) in referrals">
-                    <p>
-                        {{ referral.nickname }}
-                        <span class="text-green" v-if="getReferralRewardsDWD(referral.drug_production_rate) > 0.001">
-                  +{{ getReferralRewardsDWD(referral.drug_production_rate) }} DWD
-                </span>
-                        <span class="text-red" v-else>
-                  Not enough drug production
-                </span>
-                    </p>
-                </div>
-            </div>
-            <div v-if="!referrals.length" >
-                <p>You have not referred anyone yet.</p>
-            </div>
-            <img class="refferalimg" :src="'//img.drugwars.io/referral.png'">
+  <div>
+    <RewardsTabs />
+    <div class="card card-style">
+      <div class="content">
+        <div class="d-flex">
+          <div>
+            <h1 class="text-yellow">DrugWars Referral Program</h1>
+          </div>
+          <div class="align-self-center ms-auto">
+            <i class="fad fa-share font-24 color-green-dark"></i>
+          </div>
         </div>
+        <h3>1.Invite your friends with this link <a :href="url" target="_blank">
+            {{ url }}
+          </a></h3>
+        <h3>2.Make them win resources!</h3>
+        <h3>3.And obtain 5% bonus on their DW token rewards.</h3>
+
+      </div>
     </div>
+    <div class="card card-style">
+      <div class="content">
+        <h3>Your referrals</h3>
+        <div class="referral">
+          <div :key="key" v-for="(referral, key) in referrals">
+            <p>
+              {{ referral.nickname }}
+              <span class="text-green" v-if="getReferralRewardsDWD(referral.drug_production_rate) > 0.001">
+                +{{ getReferralRewardsDWD(referral.drug_production_rate) }} DWD
+              </span>
+              <span class="text-red" v-else>
+                Not enough drug production
+              </span>
+            </p>
+          </div>
+        </div>
+        <div v-if="!referrals.length">
+          <p>You have not referred anyone yet.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,7 +48,7 @@ export default {
   data() {
     return {
       username: this.$store.state.auth.username,
-      url: `${window.location.origin}/i/${this.$store.state.auth.username}`,
+      url: `https://t.me/drugwars_bot/drugwars&r=${this.$store.state.auth.username}`,
     };
   },
   computed: {
@@ -62,6 +75,7 @@ export default {
 .link {
   font-size: 26px;
 }
+
 .refferalimg {
   z-index: 0;
   position: absolute;

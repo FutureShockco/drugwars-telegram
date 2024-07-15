@@ -15,7 +15,19 @@
                 <p>Bella's missions are waiting for you!</p>
             </div>
         </div>
-        <div v-for="(task, index) in tasks" :key="index" class="card card-style shadow-card shadow-card-l"
+        <router-link :to="task.link" v-if="task.link" v-for="(task, index) in tasks" :key="index" class="card card-style shadow-card shadow-card-l"
+            data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
+            <div class="card-bottom pb-3 px-3">
+                <div class="text-end">
+                    <h6 class="mb-n1 opacity-80 color-highlight">Current Level</h6>
+                    <h3>0</h3>
+                </div>
+                <h3 class="color-white">{{ task.title }}</h3>
+                <p class="color-white opacity-70 mb-0 mt-n1">{{ task.desc }}</p>
+            </div>
+            <div class="card-overlay bg-gradient-fade opacity-80"></div>
+        </router-link>
+        <div v-if="!task.link" v-for="(task, index) in tasks" :key="index" class="card card-style shadow-card shadow-card-l"
             data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">

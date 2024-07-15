@@ -4,9 +4,9 @@
     "desc": "Use your referral link to invite your friends and receive a bonus",
     "bonus": "Receive 5% of their daily DW token rewards!",
     "increase": null,
-    "bg": "26"
+    "bg": "26",
+    "link": "/referral"
   },
-
   {
     "title": "Watch a video",
     "desc": "Increase your DRUG production to",
@@ -28,7 +28,6 @@
     "increase": 5,
     "bg": "27"
   },
-  
   {
     "title": "Bottleman",
     "desc": "Increase your DRUG production to",
