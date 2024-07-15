@@ -3,6 +3,7 @@ import client from '@/helpers/client';
 
 const state = {
   username: null,
+  nickname: null,
   account: null,
   auth_type: null
 };
@@ -10,6 +11,9 @@ const state = {
 const mutations = {
   saveUsername(_state, payload) {
     Vue.set(_state, 'username', payload);
+  },
+  saveNickname(_state, payload) {
+    Vue.set(_state, 'nickname', payload);
   },
   saveAccount(_state, payload) {
     Vue.set(_state, 'account', payload);
@@ -21,15 +25,15 @@ const mutations = {
 
 
 const actions = {
-  login: async ({ commit },{user}) =>
+  login: async ({ commit }, { user }) =>
     new Promise(resolve => {
-      console.log(user)
       user.id = user.id.toString()
       if (user && user.id) {
         client
           .requestAsync('login', { user })
           .then(result => {
             commit('saveUsername', user.id.toString());
+            commit('saveNickname', user.username);
             resolve(result);
           })
           .catch(e => {

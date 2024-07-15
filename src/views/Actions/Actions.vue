@@ -53,7 +53,7 @@
             :class="{ 'button-orange' : action_type ==='station' }"
           >STATION</button> -->
           </div>
-          <div v-if="tutorialStep === 7 && tutoDetail !== 1">
+          <div v-if="tutorialStep > 6">
             <h3>Select your army composition</h3>
             <div class="d-flex" v-if="ownUnits.length > 0">
               <div class="col" v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
@@ -87,7 +87,7 @@
             <div v-if="selectedUnits.length === 0">
               <p>You need to select at least 1 unit.</p>
             </div>
-            <div v-else>
+            <div v-else-if="tutorialStep > 7">
               <h5>Power : {{ offensivePower }}% - Timer : {{ timer | ms }} - Cost : {{ cost | amount }}</h5>
               <button class="button button-blue mb-2" @click="removeUnits()">Remove all</button>
               <div v-if="action_type === 'transport'">

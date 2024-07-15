@@ -2,7 +2,7 @@
   <div>
     <ul class="d-flex balances list-style-none p-0 m-0 ">
       <li v-if="booster" class="col-3 card d-flex pt-2 text-yellow ">
-        <Icon name="drug" size="16" />
+        <Icon name="drug" size="14" />
         <div class="balance">
           <div :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
             {{ balances.drugs | amount }}
@@ -18,7 +18,7 @@
       </li>
       <li class="col-3 card d-flex pt-2 align-self-stretch" v-else>
         <div class="d-flex justify-content-start align-items-start">
-          <Icon name="drug" size="16" class="me-2 mb-1 align-self-start" />
+          <Icon name="drug" size="14" class="me-2 mb-1 align-self-start" />
           <div>
             <h6 class="align-self-start">DRUGS</h6>
             <div class="detail">
@@ -35,7 +35,7 @@
         </div> -->
       </li>
       <li v-if="booster" class="text-yellow col-3 card d-flex pt-2">
-        <Icon name="weapon" size="16" />
+        <Icon name="weapon" size="14" />
         <div class="balance">
           <div :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
             {{ balances.weapons | amount }}
@@ -51,7 +51,7 @@
       </li>
       <li class="col-3 card d-flex pt-2 align-self-stretch" v-else>
         <div class="d-flex justify-content-start align-items-start">
-          <Icon name="weapon" size="16" class="me-2 mb-1 align-self-start" />
+          <Icon name="weapon" size="14" class="me-2 mb-1 align-self-start" />
           <div>
             <h6 class="align-self-start">WEAPONS</h6>
             <div class="detail">
@@ -72,7 +72,7 @@
 
       </li>
       <li v-if="booster" class="text-yellow col-3 card d-flex pt-2">
-        <Icon name="alcohol" size="16" />
+        <Icon name="alcohol" size="14" />
         <div class="balance">
           <div :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
             {{ balances.alcohols | amount }}
@@ -88,7 +88,7 @@
       </li>
       <li class="col-3 card d-flex pt-2 align-self-stretch" v-else>
         <div class="d-flex justify-content-start align-items-start">
-          <Icon name="alcohol" size="16" class="me-2 mb-1 align-self-start" />
+          <Icon name="alcohol" size="14" class="me-2 mb-1 align-self-start" />
           <div>
             <h6 class="align-self-start">ALCOHOL</h6>
             <div class="detail">
@@ -110,7 +110,7 @@
       </li>
       <li @click="toggleModalAccount()" class="col-3 card d-flex pt-2 align-self-stretch">
         <div class="d-flex justify-content-start align-items-start ">
-          <Icon class="me-2 mb-1 align-self-start" name="dwd" size="16" />
+          <Icon class="me-2 mb-1 align-self-start" name="dwd" size="14" />
           <div>
             <h6 class="align-self-start">DWTOKEN</h6>
             <div class="detail">

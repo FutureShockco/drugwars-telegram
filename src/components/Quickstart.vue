@@ -189,13 +189,13 @@
             the selected army list. Send your
             spy to gather intel on those bastard named <span class="text-yellow">PixelVerse</span>. Knowledge is
             power, and we need to know everything about our enemies before we make a move."
-         
+
           </h5>
           <h5 v-if="this.$route.path === '/actions' && tutoDetail === 1"> "Ok I already entered the informations of our
-            rival. Next step for you is to click on the <span class="text-yellow">attack!</span> button"
+            rival. Next step for you is to click on the <span class="text-red">Attack</span> button"
           </h5>
-   <router-link to="/actions?type=attack&nickname=PixelVerse&message=tuto"
-              class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
+          <router-link v-if="this.$route.path !== '/actions'" to="/actions?type=attack&nickname=PixelVerse&message=tuto"
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
 
         </div>
       </div>
@@ -212,8 +212,8 @@
           <h5 v-if="this.$route.path !== '/actions'"> "See there your <span class="text-yellow">Spy</span> is on the way
             to attack our rival! Come back after the fight is done to see the result."
             <div @click="setTutoDetail(0)"
-            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">
-            Continue</div>
+              class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">
+              Continue</div>
           </h5>
 
           <h5 v-if="this.$route.path === '/actions'"> "Perfect your <span class="text-yellow">Spy</span> is now
