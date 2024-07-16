@@ -68,13 +68,16 @@
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
             <div v-if="modalVideoVisible && currentLink === task.vlink" class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
                 :class="modalVideoVisible ? 'show' : ''" :id="'menu-video-' + task.vlink">
-                <div class='responsive-iframe max-iframe'><iframe :src='"https://www.youtube.com/embed/" + task.vlink'
-                        frameborder='0' allowfullscreen></iframe></div>
+                <div class='responsive-iframe max-iframe'><iframe :src='"https://www.youtube.com/embed/" + task.vlink + "?autoplay=1"'
+                        frameborder='0' allowfullscreen autoplay allow="autoplay"></iframe></div>
                 <div class="content mt-n2">
                     <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
                     <p>
                         Get some resources for free!
                     </p>
+                    <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
+                    <div class="progress-bar gradient-yellow" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
                     <a href="#" data-bs-dismiss="offcanvas"
                         class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
                 </div>
