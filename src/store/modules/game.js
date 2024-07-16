@@ -24,7 +24,7 @@ const state = {
   transports: [],
   gang_buildings: [],
   chat: false,
-  videoLink:'',
+  currentLink:'',
   isconnected: null,
   base: null,
   mainbase: null,
@@ -95,8 +95,8 @@ const mutations = {
   setTutoDetail(_state, payload) {
     Vue.set(_state, 'tutoDetail', payload);
   },
-  setVideoLink(_state, payload) {
-    Vue.set(_state, 'videoLink', payload);
+  setCurrentLink(_state, payload) {
+    Vue.set(_state, 'currentLink', payload);
   },
 };
 
@@ -745,9 +745,9 @@ const actions = {
     // console.log(payload);
     commit('setTutoDetail', payload);
   },
-  setVideoLink: ({ commit }, payload) => {
+  setCurrentLink: ({ commit }, payload) => {
     // console.log(payload);
-    commit('setVideoLink', payload);
+    commit('setCurrentLink', payload);
   },
   setMainBase: ({ commit }, payload) => {
     // console.log(payload);
