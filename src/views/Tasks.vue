@@ -40,7 +40,7 @@
                 <p class="color-white opacity-70 mb-0 mt-n1">{{ task.desc }}</p>
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
-            <div v-if="task.vlink" class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
+            <div v-if="task.vlink && modalVideoVisible" class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
                 :class="modalVideoVisible ? 'show' : ''" :id="'menu-video-' + task.vlink">
                 <div class='responsive-iframe max-iframe'><iframe :src='"https://www.youtube.com/embed/" + task.vlink'
                         frameborder='0' allowfullscreen></iframe></div>
