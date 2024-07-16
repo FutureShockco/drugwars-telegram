@@ -48,9 +48,12 @@
                         Get some resources for free!
                     </p>
                     <div @click="TWA.openLink('https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars&text=Join Me on DrugWars')"  data-bs-dismiss="offcanvas"
-                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Share on Telegram</div>
-                    <a href="https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars" target="_blank" data-bs-dismiss="offcanvas"
-                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Share on X (Twitter)</a>
+                        class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">Share on Telegram</div>
+                        <div @click="TWA.openLink('https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars')"  data-bs-dismiss="offcanvas"
+                        class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight my-2">Share on X (Twitter)</div>
+                   
+                        <div @click="toggleModalVideo()" data-bs-dismiss="offcanvas"
+                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</div>
                 </div>
             </div>
         </div>
