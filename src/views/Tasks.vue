@@ -55,7 +55,7 @@
             </div>
         </div>
         <div v-if="task.vlink" v-for="(task, index) in tasks" :key="index"
-            @click="toggleModalVideo(), setCurrentLink(task.vlink)" class="card card-style shadow-card shadow-card-l"
+            @click="toggleModalVideo(), setCurrentLink(task.vlink),startTimer(task.timer)" class="card card-style shadow-card shadow-card-l"
             data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
@@ -76,7 +76,7 @@
                         Get some resources for free!
                     </p>
                     <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
-                    <div class="progress-bar gradient-yellow" role="progressbar" aria-valuenow="29" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar gradient-yellow" role="progressbar" :aria-valuenow="percentage" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <a href="#" data-bs-dismiss="offcanvas"
                         class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
@@ -110,7 +110,9 @@ export default {
     data() {
         return {
             tasks: tasks,
-            usertasks: []
+            usertasks: [],
+            percentage:0,
+            timer:0,
         };
     },
     created() {
@@ -126,6 +128,20 @@ export default {
                 this.isLoading = false;
             });
         },
+        startTimer(time) {
+            const self = this;
+            self.percentage = 0;
+            self.timer = time;
+            let viewTimer = setInterval(function(){
+                self.percentage++;
+            if(self.percentage > self.timer)
+            {
+                self.percentage = 0;
+                self.timer = 0;
+                clearInterval(viewTimer);
+            }
+            },1000);
+        }
     },
     computed: {
         server() {
