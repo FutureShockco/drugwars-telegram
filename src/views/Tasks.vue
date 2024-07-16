@@ -79,7 +79,7 @@
                         Get some resources for free!
                     </p>
                     <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
-                    <div class="progress-bar gradient-yellow" role="progressbar" :aria-valuenow="percentage" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div class="progress-bar gradient-yellow" role="progressbar" :style="'width:'+percentage+'%''" :aria-valuenow="percentage" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <a href="#" data-bs-dismiss="offcanvas"
                         class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
