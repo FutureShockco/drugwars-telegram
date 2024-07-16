@@ -53,7 +53,7 @@
                         class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight my-2">Share on X (Twitter)</div>
                    
                         <div @click="toggleModalVideo()" data-bs-dismiss="offcanvas"
-                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</div>
+                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">Done</div>
                 </div>
             </div>
         </div>
