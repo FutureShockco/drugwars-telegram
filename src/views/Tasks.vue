@@ -47,9 +47,9 @@
                     <p>
                         Get some resources for free!
                     </p>
-                    <a href="https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars&text=Join Me on DrugWars" target="_blank" data-bs-dismiss="offcanvas"
-                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Share on Telegram</a>
-                    <a href="#" data-bs-dismiss="offcanvas"
+                    <div @click="TWA.openLink('https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars&text=Join Me on DrugWars')"  data-bs-dismiss="offcanvas"
+                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Share on Telegram</div>
+                    <a href="https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars" target="_blank" data-bs-dismiss="offcanvas"
                         class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Share on X (Twitter)</a>
                 </div>
             </div>
