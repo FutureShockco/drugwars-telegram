@@ -50,7 +50,7 @@ export default {
     },
     watch: {
         'this.TWA'() {
-            if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+            if (this.TWA && this.TWA.initData && this.TWA.initData.user)
                 this.canLogin = true
         },
     },

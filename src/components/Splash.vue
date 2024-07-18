@@ -28,10 +28,10 @@ export default {
   methods: {
     ...mapActions(['init', 'login']),
     ok() {
-      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+      if (this.TWA && this.TWA.initData)
 				this.client.restart();
-        this.login(this.TWA.initDataUnsafe).then((res) => {
-          this.init(this.TWA.initDataUnsafe).then((result) => {
+        this.login(this.TWA.initData).then((res) => {
+          this.init(this.TWA.initData).then((result) => {
             this.$router.push({ path: this.$route.query.redirect || '/home' });
           })
         })

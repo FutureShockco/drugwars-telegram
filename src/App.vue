@@ -14,7 +14,7 @@
       </div>
     </template>
     <Account v-if="username" :open="modalWalletVisible" @close="toggleModalAccount()" />
-  
+
     <Notifications />
 
   </div>
@@ -47,10 +47,10 @@ export default {
   methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
     checkWS() {
-      if (this.TWA && this.TWA.initDataUnsafe && this.TWA.initDataUnsafe.user)
+      if (this.TWA && this.TWA.initData && this.TWA.initData.user)
         client.restart();
-      this.login(this.TWA.initDataUnsafe).then((res) => {
-        this.init(this.TWA.initDataUnsafe).then((result) => {
+      this.login(this.TWA.initData).then((res) => {
+        this.init(this.TWA.initData).then((result) => {
           console.log(result)
         })
       })
