@@ -4,14 +4,20 @@
     <template v-else>
       <TopNav v-if="username" />
       <SidebarLeft v-if="username && showSidebar" />
-      <router-view class="page-content" :class="{
+
+      <div class="page-content" :class="{
         content: showSidebar,
         'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
-      }" />
+      }">
+        <router-view />
+        <div @click="toggleSidebarVisibility" :class="modalWalletVisible || modalVideoVisible ? 'show' : 'd-none'"
+          class="offcanvas-backdrop fade">
+        </div>
+      </div>
+
       <Quickstart v-if="username && showTutorial" />
       <!-- <BottomNav v-if="username" /> -->
-      <div @click="toggleSidebarVisibility" :class="sidebarVisible ? 'show' : 'd-none'" class="offcanvas-backdrop fade">
-      </div>
+
     </template>
     <Account v-if="username" :open="modalWalletVisible" @close="toggleModalAccount()" />
 
@@ -62,6 +68,9 @@ export default {
     },
     modalWalletVisible() {
       return this.$store.state.ui.modalAccountVisible;
+    },
+    modalVideoVisible() {
+      return this.$store.state.ui.modalVideoVisible;
     },
     username() {
       return this.$store.state.game.user;

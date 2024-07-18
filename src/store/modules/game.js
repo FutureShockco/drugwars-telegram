@@ -131,7 +131,7 @@ const actions = {
           .then(user => {
             console.log(user)
             if (user && user.user && user.user.username) {
-              if (user.user.tutorial < 15)
+              if (user.user.tutorial < 9)
                 store.dispatch('showTutorial')
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 commit('savePrizeProps', prizeProps);
@@ -780,6 +780,24 @@ const actions = {
     commit('saveServer', payload);
     client.reset
   },
+  addTask: ({ rootState }, payload) =>
+    new Promise((resolve, reject) => {
+      const { username } = rootState.auth;
+      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.type = 'dw-add-task'; // eslint-disable-line no-param-reassign
+      return dwsocial(username, payload, result => {
+        if (result) {
+          console.log(result);
+          store.dispatch('init');
+          store.dispatch('notify', {
+            type: 'success',
+            message: result,
+          });
+          return resolve(result);
+        }
+        return reject();
+      });
+    }),
 };
 
 export default {

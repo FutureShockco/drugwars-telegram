@@ -20,8 +20,8 @@
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">Twitter Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your Twitter account!</p>
-                <!-- {{ 'https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/'+TWA.initData  }} -->
-                <div @click="TWA.openLink('https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/'+TWA.initData)"
+                <!-- {{ 'https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/'+encodeURIComponent(TWA.initData)  }} -->
+                <div @click="TWA.openLink('https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/' + TWA.initData)"
                     data-bs-dismiss="offcanvas"
                     class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
                     Link Now</div>
@@ -134,7 +134,7 @@
                     </div>
                     <div class="form-custom form-label mb-3">
                         <input v-model="newTask.description" type="text" class="form-control rounded-xs" id="c2"
-                            placeholder="Task Description" pattern="[A-Za-z ]{1,32}">
+                            placeholder="Task Description">
                         <label for="c2" class="color-theme form-label-active">Task Description</label>
                     </div>
 
@@ -146,6 +146,7 @@
                             <option value="like">Like on X</option>
                             <option value="upgrade">Upgrade Building</option>
                             <option value="win">Win fights</option>
+                            <option value="share">Share</option>
                         </select>
                         <label for="c3" class="color-theme form-label-active">Select a task type</label>
                     </div>
@@ -160,21 +161,18 @@
                         <label for="c1" class="color-theme form-label-active">Select a reward type</label>
                     </div>
                     <div v-if="newTask.tasktype === 'watch'" class="form-custom form-label mb-3">
-                        <input type="url" class="form-control rounded-xs" id="c4" placeholder="0V6YtsJJMw4"
-                            pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
-                            required="">
+                        <input v-model="newTask.link" type="text" class="form-control rounded-xs" id="c4"
+                            placeholder="0V6YtsJJMw4">
                         <label for="c1" class="color-theme form-label-active">Youtube video ID</label>
                     </div>
                     <div v-if="newTask.tasktype === 'follow'" class="form-custom form-label mb-3">
-                        <input type="url" class="form-control rounded-xs" id="c4" placeholder="@twitterusername"
-                            pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
-                            required="">
+                        <input v-model="newTask.link" type="text" class="form-control rounded-xs" id="c4"
+                            placeholder="@twitterusername">
                         <label for="c4" class="color-theme form-label-active">Account username</label>
                     </div>
                     <div v-if="newTask.tasktype === 'like'" class="form-custom form-label mb-3">
-                        <input type="url" class="form-control rounded-xs" id="c4" placeholder="Twitter post link"
-                            pattern="[Hh][Tt][Tt][Pp][Ss]?:\/\/(?:(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)(?:\.(?:[a-zA-Z\u00a1-\uffff0-9]+-?)*[a-zA-Z\u00a1-\uffff0-9]+)*(?:\.(?:[a-zA-Z\u00a1-\uffff]{2,}))(?::\d{2,5})?(?:\/[^\s]*)?"
-                            required="">
+                        <input v-model="newTask.link" type="text" class="form-control rounded-xs" id="c4"
+                            placeholder="Twitter post link">
                         <label for="c4" class="color-theme form-label-active">Post link</label>
                     </div>
                     <div v-if="newTask.tasktype === 'upgrade'" class="form-custom form-label mb-3 d-flex">
@@ -187,8 +185,9 @@
                             placeholder="Level" pattern="{1,32}">
                         <label for="c1" class="color-theme form-label-active">Level</label>
                     </div>
-                    <div v-if="newTask.tasktype === 'win'" class="form-custom form-label mb-3 d-flex">
-                        <input v-model="newTask.upgradeType.level" type="number" class="form-control rounded-xs" id="c1"
+                    <div v-if="newTask.tasktype === 'win' || newTask.tasktype === 'production'"
+                        class="form-custom form-label mb-3 d-flex">
+                        <input v-model="newTask.amount" type="number" class="form-control rounded-xs" id="c1"
                             placeholder="Level" pattern="{1,32}">
                         <label for="c1" class="color-theme form-label-active">How many wins</label>
                     </div>
@@ -287,8 +286,8 @@ import { buildings, units } from 'drugwars';
 export default {
     data() {
         return {
-            newTask: { bg: 26, tasktype: 'watch', rewardType: 'resources', upgradeType: { building: 'headquarters', level: 0 }, rewards: { drug: 0, weapon: 0, alcohol: 0, dwtoken: 0, unit: { name: "spy", amount: 0 } } },
-            tasks: [],
+            newTask: { bg: 26, link: '', tasktype: 'watch', rewardType: 'resources', upgradeType: { building: 'headquarters', level: 0 }, rewards: { drug: 0, weapon: 0, alcohol: 0, dwtoken: 0, unit: { name: "spy", amount: 0 } } },
+            tasks: tasks,
             userTasks: [],
             percentage: 0,
             timer: 0,
@@ -302,18 +301,10 @@ export default {
             this.bgs.push(index + 1);
 
         }
-        this.load_tasks()
-        tw.login((err, tokenSecret, url) => {
-            if (err) {
-                // Handle the error your way
-                console.log(err)
-            }
-            console.log(tokenSecret, url)
-
-        })
+        //this.load_tasks()
     },
     methods: {
-        ...mapActions(['init', 'login', 'toggleModalVideo', 'setCurrentLink']),
+        ...mapActions(['init', 'login', 'toggleModalVideo', 'setCurrentLink', 'addTask']),
         load_tasks() {
             this.usertasks = [];
             const params = { user: this.$store.state.auth.username }
@@ -326,8 +317,9 @@ export default {
                 this.isLoading = false;
             });
         },
-        handleSubmit() {
+        async handleSubmit() {
             console.log(this.newTask)
+            await this.addTask(this.newTask)
         },
         startTimer(time) {
             const self = this;
