@@ -28,9 +28,10 @@ const actions = {
   login: async ({ commit }, { user }) =>
     new Promise(resolve => {
       user.id = user.id.toString()
-      if (user && user.id) {
+      const parsedData = window.Telegram.Utils.urlParseQueryString(user)
+      if (parsedData && user && user.id) {
         client
-          .requestAsync('login', { user })
+          .requestAsync('login', { parsedData })
           .then(result => {
             commit('saveUsername', user.id.toString());
             commit('saveNickname', user.username);
