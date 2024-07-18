@@ -20,7 +20,8 @@
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">Twitter Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your Twitter account!</p>
-                <div @click="TWA.openLink('https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login')"
+                <!-- {{ 'https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/'+TWA.initData  }} -->
+                <div @click="TWA.openLink('https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/'+TWA.initData)"
                     data-bs-dismiss="offcanvas"
                     class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
                     Link Now</div>
@@ -271,19 +272,6 @@
                         type="submit">Submit Task</button>
                 </form>
             </div>
-        </div>
-        <div class="card card-style shadow-card shadow-card-l show" data-card-height="150" style="height: 150px;"
-            :style="`background-image:url(/img/tasks/1.png`">
-            <div class="card-bottom pb-3 px-3">
-                <div class="text-end">
-                    <h6 class="mb-n1 opacity-80 color-highlight">Current Level</h6>
-                    <h3>0</h3>
-                </div>
-                <h3 class="color-white">Test</h3>
-                <p class="color-white opacity-70 mb-0 mt-n1">Test</p>
-            </div>
-            <div class="card-overlay bg-gradient-fade opacity-80"></div>
-
         </div>
     </div>
 </template>

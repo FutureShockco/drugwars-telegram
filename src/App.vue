@@ -47,7 +47,7 @@ export default {
   methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
     checkWS() {
-      if (this.TWA && this.TWA.initData && this.TWA.initData.user)
+      if (this.TWA && this.TWA.initData)
         client.restart();
       this.login(this.TWA.initData).then((res) => {
         this.init(this.TWA.initData).then((result) => {
