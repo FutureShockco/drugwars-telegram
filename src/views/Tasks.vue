@@ -287,7 +287,7 @@ export default {
     data() {
         return {
             newTask: { bg: 26, link: '', tasktype: 'watch', rewardType: 'resources', upgradeType: { building: 'headquarters', level: 0 }, rewards: { drug: 0, weapon: 0, alcohol: 0, dwtoken: 0, unit: { name: "spy", amount: 0 } } },
-            tasks: tasks,
+            tasks: [],
             userTasks: [],
             percentage: 0,
             timer: 0,
@@ -301,7 +301,7 @@ export default {
             this.bgs.push(index + 1);
 
         }
-        //this.load_tasks()
+        this.load_tasks()
     },
     methods: {
         ...mapActions(['init', 'login', 'toggleModalVideo', 'setCurrentLink', 'addTask']),
