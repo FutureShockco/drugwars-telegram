@@ -22,9 +22,10 @@ const state = {
   fights: [],
   stations: [],
   transports: [],
+  tasks: [],
   gang_buildings: [],
   chat: false,
-  currentLink:'',
+  currentLink: '',
   isconnected: null,
   base: null,
   mainbase: null,
@@ -70,6 +71,9 @@ const mutations = {
   },
   saveStations(_state, payload) {
     Vue.set(_state, 'stations', payload);
+  },
+  saveTasks(_state, payload) {
+    Vue.set(_state, 'tasks', payload);
   },
   saveGangBuildings(_state, payload) {
     Vue.set(_state, 'gang_buildings', payload);
@@ -328,6 +332,21 @@ const actions = {
         .requestAsync('get_stations', { token, start, end })
         .then(fights => {
           commit('saveStations', fights);
+          return resolve();
+        })
+        .catch(err => {
+          console.log(err);
+          handleError(dispatch, err, 'Loading sent fights failed');
+          return reject(err);
+        });
+    }),
+  refresh_tasks: ({ commit, dispatch }) =>
+    new Promise((resolve, reject) => {
+      const token = authToken();
+      client
+        .requestAsync('get_tasks', { token })
+        .then(tasks => {
+          commit('saveStations', tasks);
           return resolve();
         })
         .catch(err => {

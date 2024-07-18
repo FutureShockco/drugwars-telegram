@@ -108,11 +108,12 @@ export default {
     ...mapActions(['init', 'login']),
     ok() {
       if (this.TWA && this.TWA.initData)
-        this.login(this.TWA.initData).then((res) => {
-          this.init(this.TWA.initData).then((result) => {
-            this.$router.push({ path: this.$route.query.redirect || '/home' });
-          })
+        console.log(this.TWA.initData)
+      this.login(this.TWA.initData).then((res) => {
+        this.init(this.TWA.initData).then((result) => {
+          this.$router.push({ path: this.$route.query.redirect || '/home' });
         })
+      })
     },
     makeItok() {
       this.canLogin = true;
