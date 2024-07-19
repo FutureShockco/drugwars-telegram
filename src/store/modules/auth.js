@@ -37,6 +37,7 @@ const actions = {
           .requestAsync('login', { parsedData })
           .then(result => {
             console.log(user)
+            commit('saveAccount', data)
             commit('saveUsername', user.id.toString());
             commit('saveNickname', user.username.toString());
             resolve(result);
