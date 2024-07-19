@@ -3,7 +3,7 @@
     <Splash v-if="showLoading" />
     <template v-else>
       <TopNav v-if="username" />
-      <SidebarLeft v-if="username && showSidebar" />
+      <!--<SidebarLeft v-if="username && showSidebar" />-->
 
       <div class="page-content" :class="{
         content: showSidebar,
