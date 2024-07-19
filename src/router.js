@@ -121,12 +121,12 @@ setInterval(() => {
 
 const requireAuth = (to, from, next) => {
 
-  if (client.ws.readyState === 3) {
+  if (client.ws.readyState === 3 && store.state.auth.account) {
     client.restart()
     //store.dispatch('showLoading');
-    store.dispatch('login', {id:store.state.auth.username}).then(() => {
+    store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', store.state.auth.username).then(() => {
+        store.dispatch('init', store.state.auth.account).then(() => {
           next();
         });
       } else {
@@ -134,10 +134,10 @@ const requireAuth = (to, from, next) => {
         next({ name: 'home', query: { redirect } });
       }
     });
-  } else if (!store.state.game.user && store.state.auth.username) {
-    store.dispatch('login', store.state.auth.username).then(() => {
+  } else if (!store.state.game.user && store.state.auth.account) {
+    store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', store.state.auth.username).then(() => {
+        store.dispatch('init', store.state.auth.account).then(() => {
           next();
         });
       } else {
