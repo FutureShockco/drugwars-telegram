@@ -49,6 +49,8 @@ export default {
       if (this.username && client.ws.readyState === 3)
         self.checkWS()
     }, 1000);
+		if(this.TWA && this.TWA.expand)
+			this.TWA.expand()
   },
   methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
