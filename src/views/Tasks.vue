@@ -67,12 +67,12 @@
             </div>
             <div v-if="task.tasktype === 'watch'" class="card card-style shadow-card shadow-card-l"
                 data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
-                :class="task.user.completed === 1 ? 'opacity-50' : ''">
+                :class="task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <TaskResources :task="task" />
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
-                    <div v-if="!task.user.completed"
+                    <div v-if="task.completed === 0"
                         @click="toggleModalVideo(), setCurrentLink(task.link), startTimer(task.timer)"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-green">Watch the
                         video</div>
@@ -104,7 +104,7 @@
 
             <div v-if="task.tasktype === 'join'" class="card card-style shadow-card shadow-card-l"
                 data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
-                :class="task.user && task.user.completed === 1 ? 'opacity-50' : ''">
+                :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
                         <TaskResources :task="task" />
@@ -125,7 +125,7 @@
 
             <div v-if="task.tasktype === 'follow'" class="card card-style shadow-card shadow-card-l"
                 data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
-                :class="task.user && task.user.completed === 1 ? 'opacity-50' : ''">
+                :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
                         <TaskResources :task="task" />
@@ -326,10 +326,13 @@ export default {
                 if (result[1]) {
                     this.usertasks = result[1];
                     this.tasks.forEach(element => {
-                        element.completed = 0
+                        element.completed = 0;
+                        element.paid = 0;
+                        element.user = false;
                         if (this.usertasks.find(u => u.task_id === element.id)) {
-                            element.completed = this.usertasks.find(u => u.task_id === element.id).completed
-                            element.user = this.usertasks.find(u => u.task_id === element.id)
+                            element.user = true;
+                            element.completed = this.usertasks.find(u => u.task_id === element.id).completed;
+                            element.paid = this.usertasks.find(u => u.task_id === element.id).paid;
                         }
                     });
                 }
