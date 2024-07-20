@@ -1,6 +1,6 @@
 <template>
     <div class="text-end">
-        <h6 v-if="task.user.paid === 0" class="mb-1 opacity-80 color-highlight">You will receive</h6>
+        <h6 v-if="task.user && task.user.paid === 0" class="mb-1 opacity-80 color-highlight">You will receive</h6>
         <h6 v-else class="mb-1 opacity-80 color-highlight">Received</h6>
         <h3 class="d-inline-block" v-if="task.rewardType === 'resources' && task.rewards.drug">
             <Icon name="drug" size="14" />{{ task.rewards.drug }}

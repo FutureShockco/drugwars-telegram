@@ -12,7 +12,7 @@
       v-for="(item, key) in items" :class="`flash-${item.type}`">
       <i class="fad fa-check pe-2 color-green-dark"></i>
       <strong class="me-auto color-theme">{{ item.message }}</strong>
-      <small>{{item.timestamp}}</small>
+      <small>{{item.timestamp | fromnow}}</small>
     </div>
   </div>
 </template>
