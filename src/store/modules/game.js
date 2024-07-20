@@ -814,6 +814,7 @@ const actions = {
   verifyTask: ({ rootState }, payload) =>
     new Promise((resolve, reject) => {
       const { username } = rootState.auth;
+      console.log(username)
       payload.username = username; // eslint-disable-line no-param-reassign
       payload.type = 'dw-verify-task'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {

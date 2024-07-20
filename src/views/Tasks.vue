@@ -26,19 +26,6 @@
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
-        <!-- <router-link :to="task.link" v-if="task.link" v-for="(task, index) in tasks" :key="index"
-            class="card card-style shadow-card shadow-card-l" data-card-height="150" style="height: 150px;"
-            :style="`background-image:url(/img/tasks/${task.bg}.png`">
-            <div class="card-bottom pb-3 px-3">
-                <div class="text-end">
-                    <h6 class="mb-n1 opacity-80 color-highlight">Current Level</h6>
-                    <h3>0</h3>
-                </div>
-                <h3 class="color-white">{{ task.title }}</h3>
-                <p class="color-white opacity-70 mb-0 mt-n1">{{ task.desc }}</p>
-            </div>
-            <div class="card-overlay bg-gradient-fade opacity-80"></div>
-        </router-link> -->
         <div v-for="(task, index) in tasks" :key="task.id">
             <div v-if="task.tasktype === 'share'" class="card card-style shadow-card shadow-card-l"
                 data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
@@ -82,27 +69,7 @@
                 data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.user.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
-                    <div class="text-end">
-                        <h6 v-if="task.user.paid === 0" class="mb-1 opacity-80 color-highlight">You will receive</h6>
-                        <h6 v-else class="mb-1 opacity-80 color-highlight">Received</h6>
-                        <h3 class="d-inline-block" v-if="task.rewardType === 'resources' && task.rewards.drug">
-                            <Icon name="drug" size="14" />{{ task.rewards.drug }}
-                        </h3>
-                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.weapon">
-                            <Icon name="weapon" size="14" />{{ task.rewards.weapon }}
-                        </h3>
-                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.alcohol">
-                            <Icon name="alcohol" size="14" />{{ task.rewards.alcohol }}
-                        </h3>
-                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'dwtoken' && task.rewards.dwtoken">
-                            <Icon name="dwd" size="14" />{{ task.rewards.dwtoken }}
-                        </h3>
-                        <h3 v-if="task.rewardType === 'unit' && task.rewards.unit.amount"> <img
-                                :src="`/img/units/${task.rewards.unit.name}.png`" class="img-fluid rounded-s mx-2"
-                                width="32" height="32">{{
-                                    task.rewards.unit.amount }} {{ units[task.rewards.unit.name].name }}</h3>
-
-                    </div>
+                    <TaskResources :task="task" />
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user.completed"
@@ -136,57 +103,44 @@
             </div>
 
             <div v-if="task.tasktype === 'join'" class="card card-style shadow-card shadow-card-l"
-                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
+                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                :class="task.user && task.user.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
-                        <h6 class="mb-1 opacity-80 color-highlight">Receive</h6>
-                        <h3 class="d-inline-block" v-if="task.rewardType === 'resources' && task.rewards.drug">
-                            <Icon name="drug" size="14" />{{ task.rewards.drug }}
-                        </h3>
-                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.weapon">
-                            <Icon name="weapon" size="14" />{{ task.rewards.weapon }}
-                        </h3>
-                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.alcohol">
-                            <Icon name="alcohol" size="14" />{{ task.rewards.alcohol }}
-                        </h3>
-                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'dwtoken' && task.rewards.dwtoken">
-                            <Icon name="dwd" size="14" />{{ task.rewards.dwtoken }}
-                        </h3>
-                        <h3 v-if="task.rewardType === 'unit' && task.rewards.unit.amount"> <img
-                                :src="`/img/units/${task.rewards.unit.name}.png`" class="img-fluid rounded-s mx-2"
-                                width="32" height="32">{{
-                                    task.rewards.unit.amount }} {{ units[task.rewards.unit.name].name }}</h3>
+                        <TaskResources :task="task" />
 
                     </div>
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
-                    <div v-if="task.completed === 0" @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id)"
+                    <div v-if="!task.user && task.completed === 0"
+                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id)"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
                         the {{ task.link }} channel</div>
-                    <div v-else @click="verifyTask(task.id)"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Verify and get paid</div>
+                    <div v-else-if="task.user && task.completed === 0" @click="verifyTask({ id: task.id })"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        Verify and get paid</div>
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
-                <div v-if="modalVideoVisible && currentLink === task.link"
-                    class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
-                    :class="modalVideoVisible ? 'show' : ''" :id="'menu-video-' + task.vlink">
-                    <div class='responsive-iframe max-iframe'><iframe
-                            :src='"https://www.youtube.com/embed/" + task.link + "?autoplay=1"' frameborder='0'
-                            allowfullscreen autoplay allow="autoplay"></iframe></div>
-                    <div class="content mt-n2">
-                        <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
-                        <p>
-                            Get some resources for free!
-                        </p>
-                        <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
-                            <div class="progress-bar gradient-yellow" role="progressbar"
-                                :style="'width:' + percentage + '%'" :aria-valuenow="percentage" aria-valuemin="0"
-                                aria-valuemax="100"></div>
-                        </div>
-                        <a href="#"
-                            class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
+            </div>
+
+            <div v-if="task.tasktype === 'follow'" class="card card-style shadow-card shadow-card-l"
+                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                :class="task.user && task.user.completed === 1 ? 'opacity-50' : ''">
+                <div class="card-bottom pb-3 px-3">
+                    <div class="text-end">
+                        <TaskResources :task="task" />
                     </div>
+                    <h3 class="color-white">{{ task.name }}</h3>
+                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
+                    <div v-if="!task.user && task.completed === 0"
+                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask(task.id)"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Follow
+                        the {{ task.link }} account</div>
+                    <div v-else-if="task.user && task.completed === 0" @click="verifyTask({ id: task.id })"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        Verify and get paid</div>
                 </div>
+                <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
         </div>
         <div class="card card-style" v-if="user.user.username === '354640397' || user.user.username === '1995273768'">
@@ -310,23 +264,7 @@
                         :style="`background-image:url(/img/tasks/${newTask.bg}.png`">
                         <div class="card-bottom pb-3 px-3">
                             <div class="text-end">
-                                <h6 class="mb-n2 opacity-80 color-highlight">Receive</h6>
-                                <h3 v-if="newTask.rewardType === 'resources' && newTask.rewards.drug">
-                                    <Icon name="drug" size="14" />{{ newTask.rewards.drug }}
-                                </h3>
-                                <h3 v-if="newTask.rewardType === 'resources' && newTask.rewards.weapon">
-                                    <Icon name="weapon" size="14" />{{ newTask.rewards.weapon }}
-                                </h3>
-                                <h3 v-if="newTask.rewardType === 'resources' && newTask.rewards.alcohol">
-                                    <Icon name="alcohol" size="14" />{{ newTask.rewards.alcohol }}
-                                </h3>
-                                <h3 v-if="newTask.rewardType === 'dwtoken' && newTask.rewards.dwtoken">
-                                    <Icon name="dwd" size="14" />{{ newTask.rewards.dwtoken }}
-                                </h3>
-                                <h3 v-if="newTask.rewardType === 'unit' && newTask.rewards.unit.amount"> <img
-                                        :src="`/img/units/${newTask.rewards.unit.name}.png`"
-                                        class="img-fluid rounded-s mx-2" width="32" height="32">{{
-                                            newTask.rewards.unit.amount }} {{ units[newTask.rewards.unit.name].name }}</h3>
+                                <TaskResources :task="newTask" />
 
                             </div>
                             <h3 class="color-white">{{ newTask.name }}</h3>
@@ -389,7 +327,6 @@ export default {
                     this.usertasks = result[1];
                     this.tasks.forEach(element => {
                         element.completed = 0
-                        element.user = { completed: 0, paid: 0 }
                         if (this.usertasks.find(u => u.task_id === element.id)) {
                             element.completed = this.usertasks.find(u => u.task_id === element.id).completed
                             element.user = this.usertasks.find(u => u.task_id === element.id)
