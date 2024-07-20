@@ -20,9 +20,7 @@
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">X (Twitter) Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your X (Twitter) account!</p>
-                <!-- {{ 'https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/'+encodeURIComponent(TWA.initData)  }} -->
-                <div @click="TWA.openLink('https://dw-api-telegram-55801a35819b.herokuapp.com/twitter/login/' + TWA.initData)"
-                    data-bs-dismiss="offcanvas"
+                <div @click="TWA.openLink('https://apitelegram.drugwars.io/twitter/login/' + TWA.initData)"
                     class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
                     Link Now</div>
             </div>
@@ -41,106 +39,157 @@
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </router-link> -->
-        <div v-if="task.tasktype === 'share'" v-for="(task, index) in tasks" :key="task.id"
-            @click="toggleModalVideo(), setCurrentLink(task.link)" class="card card-style shadow-card shadow-card-l"
-            data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
-            <div class="card-bottom pb-3 px-3">
-                <div class="text-end">
-                    <h6 class="mb-n1 opacity-80 color-highlight">Current Level</h6>
-                    <h3>0</h3>
-                </div>
-                <h3 class="color-white">{{ task.title }}</h3>
-                <p class="color-white opacity-70 mb-0 mt-n1">{{ task.desc }}</p>
-            </div>
-            <div class="card-overlay bg-gradient-fade opacity-80"></div>
-            <div v-if="modalVideoVisible && currentLink === task.link"
-                class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" :class="modalVideoVisible ? 'show' : ''"
-                :id="'menu-video-' + task.link">
-                <div class="content mt-n2">
-                    <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
-                    <p>
-                        Get some resources for free!
-                    </p>
-                    <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${this.$store.state.auth.username}&text=Join Me on DrugWars`)"
-                        data-bs-dismiss="offcanvas"
-                        class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">Share
-                        on Telegram</div>
-                    <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${this.$store.state.auth.username}`)"
-                        data-bs-dismiss="offcanvas"
-                        class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight my-2">
-                        Share on X (Twitter)</div>
-
-                    <div @click="toggleModalVideo()" data-bs-dismiss="offcanvas"
-                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">
-                        Done</div>
-                </div>
-            </div>
-        </div>
-        <div v-if="task.tasktype === 'watch'" v-for="(task, index) in tasks" :key="task.id"
-            @click="toggleModalVideo(), setCurrentLink(task.link), startTimer(task.timer)"
-            class="card card-style shadow-card shadow-card-l" data-card-height="150" style="height: 150px;"
-            :style="`background-image:url(/img/tasks/${task.bg}.png`">
-            <div class="card-bottom pb-3 px-3">
-                <div class="text-end">
-                    <h6 class="mb-1 opacity-80 color-highlight">Receive</h6>
-                    <h3 class="d-inline-block" v-if="task.rewardType === 'resources' && task.rewards.drug">
-                        <Icon name="drug" size="14" />{{ task.rewards.drug }}
-                    </h3>
-                    <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.weapon">
-                        <Icon name="weapon" size="14" />{{ task.rewards.weapon }}
-                    </h3>
-                    <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.alcohol">
-                        <Icon name="alcohol" size="14" />{{ task.rewards.alcohol }}
-                    </h3>
-                    <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'dwtoken' && task.rewards.dwtoken">
-                        <Icon name="dwd" size="14" />{{ task.rewards.dwtoken }}
-                    </h3>
-                    <h3 v-if="task.rewardType === 'unit' && task.rewards.unit.amount"> <img
-                            :src="`/img/units/${task.rewards.unit.name}.png`" class="img-fluid rounded-s mx-2"
-                            width="32" height="32">{{
-                                task.rewards.unit.amount }} {{ units[task.rewards.unit.name].name }}</h3>
-
-                </div>
-                <h3 class="color-white">{{ task.name }}</h3>
-                <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
-            </div>
-            <div class="card-overlay bg-gradient-fade opacity-80"></div>
-            <div v-if="modalVideoVisible && currentLink === task.link"
-                class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" :class="modalVideoVisible ? 'show' : ''"
-                :id="'menu-video-' + task.vlink">
-                <div class='responsive-iframe max-iframe'><iframe
-                        :src='"https://www.youtube.com/embed/" + task.link + "?autoplay=1"' frameborder='0'
-                        allowfullscreen autoplay allow="autoplay"></iframe></div>
-                <div class="content mt-n2">
-                    <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
-                    <p>
-                        Get some resources for free!
-                    </p>
-                    <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
-                        <div class="progress-bar gradient-yellow" role="progressbar"
-                            :style="'width:' + percentage + '%'" :aria-valuenow="percentage" aria-valuemin="0"
-                            aria-valuemax="100"></div>
+        <div v-for="(task, index) in tasks" :key="task.id">
+            <div v-if="task.tasktype === 'share'" class="card card-style shadow-card shadow-card-l"
+                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
+                <div class="card-bottom pb-3 px-3">
+                    <div class="text-end">
+                        <h6 class="mb-n1 opacity-80 color-highlight">Bonus</h6>
+                        <router-link to="/referral">
+                            <h3>Check referrals</h3>
+                        </router-link>
                     </div>
-                    <a href="#" data-bs-dismiss="offcanvas"
-                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
+                    <h3 class="color-white">{{ task.name }}</h3>
+                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
+                    <div @click="toggleModalVideo(), setCurrentLink(task.link)"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
+                        Share Now</div>
+                </div>
+                <div class="card-overlay bg-gradient-fade opacity-80"></div>
+                <div v-if="modalVideoVisible && currentLink === task.link"
+                    class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
+                    :class="modalVideoVisible ? 'show' : ''" :id="'menu-video-' + task.link">
+                    <div class="content mt-n2">
+                        <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
+                        <p>
+                            Get some resources for free!
+                        </p>
+                        <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text=Join Me on DrugWars`)"
+                            class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                            Share
+                            on Telegram</div>
+                        <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}`)"
+                            class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight my-2">
+                            Share on X (Twitter)</div>
+
+                        <div @click="toggleModalVideo(), setCurrentLink(null)"
+                            class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                            Done</div>
+                    </div>
+                </div>
+            </div>
+            <div v-if="task.tasktype === 'watch'" class="card card-style shadow-card shadow-card-l"
+                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                :class="task.user.completed === 1 ? 'opacity-50' : ''">
+                <div class="card-bottom pb-3 px-3">
+                    <div class="text-end">
+                        <h6 v-if="task.user.paid === 0" class="mb-1 opacity-80 color-highlight">You will receive</h6>
+                        <h6 v-else class="mb-1 opacity-80 color-highlight">Received</h6>
+                        <h3 class="d-inline-block" v-if="task.rewardType === 'resources' && task.rewards.drug">
+                            <Icon name="drug" size="14" />{{ task.rewards.drug }}
+                        </h3>
+                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.weapon">
+                            <Icon name="weapon" size="14" />{{ task.rewards.weapon }}
+                        </h3>
+                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.alcohol">
+                            <Icon name="alcohol" size="14" />{{ task.rewards.alcohol }}
+                        </h3>
+                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'dwtoken' && task.rewards.dwtoken">
+                            <Icon name="dwd" size="14" />{{ task.rewards.dwtoken }}
+                        </h3>
+                        <h3 v-if="task.rewardType === 'unit' && task.rewards.unit.amount"> <img
+                                :src="`/img/units/${task.rewards.unit.name}.png`" class="img-fluid rounded-s mx-2"
+                                width="32" height="32">{{
+                                    task.rewards.unit.amount }} {{ units[task.rewards.unit.name].name }}</h3>
+
+                    </div>
+                    <h3 class="color-white">{{ task.name }}</h3>
+                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
+                    <div v-if="!task.user.completed"
+                        @click="toggleModalVideo(), setCurrentLink(task.link), startTimer(task.timer)"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-green">Watch the
+                        video</div>
+
+
+                </div>
+                <div class="card-overlay bg-gradient-fade opacity-80"></div>
+                <div v-if="modalVideoVisible && currentLink === task.link"
+                    class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
+                    :class="modalVideoVisible ? 'show' : ''" :id="'menu-video-' + task.vlink">
+                    <div class='responsive-iframe max-iframe'><iframe
+                            :src='"https://www.youtube.com/embed/" + task.link + "?autoplay=1"' frameborder='0'
+                            allowfullscreen autoplay allow="autoplay"></iframe></div>
+                    <div class="content mt-n2">
+                        <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
+                        <p>
+                            Get some resources for free!
+                        </p>
+                        <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
+                            <div class="progress-bar gradient-yellow" role="progressbar"
+                                :style="'width:' + percentage + '%'" :aria-valuenow="percentage" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                        <a @click="toggleModalVideo()"
+                            class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
+                    </div>
+                </div>
+            </div>
+
+            <div v-if="task.tasktype === 'join'" class="card card-style shadow-card shadow-card-l"
+                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
+                <div class="card-bottom pb-3 px-3">
+                    <div class="text-end">
+                        <h6 class="mb-1 opacity-80 color-highlight">Receive</h6>
+                        <h3 class="d-inline-block" v-if="task.rewardType === 'resources' && task.rewards.drug">
+                            <Icon name="drug" size="14" />{{ task.rewards.drug }}
+                        </h3>
+                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.weapon">
+                            <Icon name="weapon" size="14" />{{ task.rewards.weapon }}
+                        </h3>
+                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'resources' && task.rewards.alcohol">
+                            <Icon name="alcohol" size="14" />{{ task.rewards.alcohol }}
+                        </h3>
+                        <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'dwtoken' && task.rewards.dwtoken">
+                            <Icon name="dwd" size="14" />{{ task.rewards.dwtoken }}
+                        </h3>
+                        <h3 v-if="task.rewardType === 'unit' && task.rewards.unit.amount"> <img
+                                :src="`/img/units/${task.rewards.unit.name}.png`" class="img-fluid rounded-s mx-2"
+                                width="32" height="32">{{
+                                    task.rewards.unit.amount }} {{ units[task.rewards.unit.name].name }}</h3>
+
+                    </div>
+                    <h3 class="color-white">{{ task.name }}</h3>
+                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
+                    <div v-if="task.completed === 0" @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id)"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
+                        the {{ task.link }} channel</div>
+                    <div v-else @click="verifyTask(task.id)"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Verify and get paid</div>
+                </div>
+                <div class="card-overlay bg-gradient-fade opacity-80"></div>
+                <div v-if="modalVideoVisible && currentLink === task.link"
+                    class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
+                    :class="modalVideoVisible ? 'show' : ''" :id="'menu-video-' + task.vlink">
+                    <div class='responsive-iframe max-iframe'><iframe
+                            :src='"https://www.youtube.com/embed/" + task.link + "?autoplay=1"' frameborder='0'
+                            allowfullscreen autoplay allow="autoplay"></iframe></div>
+                    <div class="content mt-n2">
+                        <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
+                        <p>
+                            Get some resources for free!
+                        </p>
+                        <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
+                            <div class="progress-bar gradient-yellow" role="progressbar"
+                                :style="'width:' + percentage + '%'" :aria-valuenow="percentage" aria-valuemin="0"
+                                aria-valuemax="100"></div>
+                        </div>
+                        <a href="#"
+                            class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- <div v-if="!task.link && !task.vlink" v-for="(task, index) in tasks" :key="task.id"
-            class="card card-style shadow-card shadow-card-l" data-card-height="150" style="height: 150px;"
-            :style="`background-image:url(/img/tasks/${task.bg}.png`">
-            <div class="card-bottom pb-3 px-3">
-                <div class="text-end">
-                    <h6 class="mb-n1 opacity-80 color-highlight">Current Level</h6>
-                    <h3>0</h3>
-                </div>
-                <h3 class="color-white">{{ task.name }}</h3>
-                <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
-            </div>
-            <div class="card-overlay bg-gradient-fade opacity-80"></div>
-        </div> -->
-
-        <div class="card card-style">
+        <div class="card card-style" v-if="user.user.username === '354640397' || user.user.username === '1995273768'">
             <div class="content">
                 <form class="demo-animation needs-validation m-0" @submit.prevent="handleSubmit">
                     <div class="form-custom form-label mb-3">
@@ -157,6 +206,7 @@
                     <div class="form-custom form-label mb-3">
                         <select v-model="newTask.tasktype" class="form-select rounded-xs dropdown-content" id="c3"
                             aria-label="Floating label select example">
+                            <option value="join" selected="">Join Telegram Channel</option>
                             <option value="watch" selected="">Watch video</option>
                             <option value="follow">Follow on X</option>
                             <option value="like">Like on X</option>
@@ -181,10 +231,11 @@
                             placeholder="0V6YtsJJMw4">
                         <label for="c1" class="color-theme form-label-active">Youtube video ID</label>
                     </div>
-                    <div v-if="newTask.tasktype === 'follow'" class="form-custom form-label mb-3">
+                    <div v-if="newTask.tasktype === 'follow' || newTask.tasktype === 'join'"
+                        class="form-custom form-label mb-3">
                         <input v-model="newTask.link" type="text" class="form-control rounded-xs" id="c4"
                             placeholder="@twitterusername">
-                        <label for="c4" class="color-theme form-label-active">Account username</label>
+                        <label for="c4" class="color-theme form-label-active">Channel name</label>
                     </div>
                     <div v-if="newTask.tasktype === 'like'" class="form-custom form-label mb-3">
                         <input v-model="newTask.link" type="text" class="form-control rounded-xs" id="c4"
@@ -318,24 +369,36 @@ export default {
 
         }
         this.load_tasks()
-        this.completeTask({id:4})
+        // this.completeTask({ id: 4 })
     },
     methods: {
-        ...mapActions(['init', 'login', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeTask']),
+        ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeTask', 'verifyTask']),
         load_tasks() {
             this.usertasks = [];
             const params = { user: this.$store.state.auth.username }
             client.requestAsync('get_tasks', params).then(result => {
                 console.log(result)
                 if (result[0])
-                console.log(result[0])
-                    result[0].forEach(element => {
-                        element.rewards = JSON.parse(element.rewards)
-                        element.upgradeType = JSON.parse(element.upgradeType)
-                    });
+                    console.log(result[0])
+                result[0].forEach(element => {
+                    element.rewards = JSON.parse(element.rewards)
+                    element.upgradeType = JSON.parse(element.upgradeType)
+                });
                 this.tasks = result[0]
-                if (result[1])
+                if (result[1]) {
                     this.usertasks = result[1];
+                    this.tasks.forEach(element => {
+                        element.completed = 0
+                        element.user = { completed: 0, paid: 0 }
+                        if (this.usertasks.find(u => u.task_id === element.id)) {
+                            element.completed = this.usertasks.find(u => u.task_id === element.id).completed
+                            element.user = this.usertasks.find(u => u.task_id === element.id)
+                        }
+                    });
+                }
+                console.log(this.tasks)
+                this.tasks.sort(function (a, b) { return a.completed - b.completed });
+                console.log(this.tasks)
                 this.isLoading = false;
             });
         },
@@ -351,7 +414,7 @@ export default {
                 if (self.percentage > self.timer) {
                     console.log(self.$store.state.game.currentLink)
                     clearInterval(viewTimer);
-                    self.completeTask({id:self.tasks.find((t) => self.$store.state.game.currentLink === t.link).id})
+                    self.completeTask({ id: self.tasks.find((t) => self.$store.state.game.currentLink === t.link).id })
                 }
             }, 1000);
         }

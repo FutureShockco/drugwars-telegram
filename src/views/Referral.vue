@@ -45,6 +45,8 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -60,7 +62,12 @@ export default {
       return this.$store.state.game.prizeProps;
     },
   },
+  created() {
+    this.closeModalVideo()
+  },
   methods: {
+    ...mapActions(['closeModalVideo']),
+
     getReferralRewardsDWD(drugProductionRate) {
       const totalDailySteem = this.prizeProps.daily_percent;
       const referralRewards =

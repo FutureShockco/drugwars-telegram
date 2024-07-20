@@ -596,7 +596,7 @@ const actions = {
   requestPayment: async ({ rootState, dispatch }, { memo, amount }) => {
     const message = `${memo}`
     const url = `ton://transfer/UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF?${message}`;
-    const fUrl = "https://dw-api-telegram-55801a35819b.herokuapp.com/convert/" + message;
+    const fUrl = "https://apitelegram.drugwars.io/convert/" + message;
     const options = {
       method: "GET",
       headers: {
@@ -799,6 +799,23 @@ const actions = {
       const { username } = rootState.auth;
       payload.username = username; // eslint-disable-line no-param-reassign
       payload.type = 'dw-complete-task'; // eslint-disable-line no-param-reassign
+      return dwsocial(username, payload, result => {
+        if (result) {
+          store.dispatch('init');
+          store.dispatch('notify', {
+            type: 'success',
+            message: result,
+          });
+          return resolve(result);
+        }
+        return reject();
+      });
+    }),
+  verifyTask: ({ rootState }, payload) =>
+    new Promise((resolve, reject) => {
+      const { username } = rootState.auth;
+      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.type = 'dw-verify-task'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);

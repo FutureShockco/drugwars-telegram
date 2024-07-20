@@ -21,6 +21,9 @@ const mutations = {
   toggleModalVideo(_state) {
     Vue.set(_state, 'modalVideoVisible', !_state.modalVideoVisible);
   },
+  closeModalVideo(_state) {
+    Vue.set(_state, 'modalVideoVisible', false);
+  },
   showLoading(_state) {
     Vue.set(_state, 'showLoading', true);
   },
@@ -51,6 +54,9 @@ const actions = {
   },
   toggleModalVideo({ commit }) {
     commit('toggleModalVideo');
+  },
+  closeModalVideo({ commit }) {
+    commit('closeModalVideo');
   },
   showLoading({ commit }) {
     commit('showLoading');
