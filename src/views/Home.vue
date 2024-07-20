@@ -68,7 +68,7 @@
       </div>
     </div>
     <div class="card-bottom text-center mb-4">
-      {{ this.$route.query }}
+      {{ this.$route.query.tgWebAppStartParam }}
       <button :disabled="!canLogin" @click="ok"
         class="btn w-50 gradient-highlight m-4 font-700 text-uppercase shadow-bg shadow-bg-s" style="color:black">Play
         Now</button>
@@ -102,8 +102,8 @@ export default {
     this.rnd.push(Math.floor(Math.random() * Math.floor(bella.length)))
     this.rnd.push(Math.floor(Math.random() * Math.floor(anon.length)))
     this.rnd.push(Math.floor(Math.random() * Math.floor(dyk.length)))
-    if (this.$route.query && this.$route.query.r)
-      localStorage.setItem('drugwars_referrer', this.$route.query.r);
+    if (this.$route.query && this.$route.query.tgWebAppStartParam)
+      localStorage.setItem('drugwars_referrer', this.$route.query.tgWebAppStartParam);
   },
   methods: {
     ...mapActions(['init', 'login']),
