@@ -362,7 +362,7 @@ const actions = {
       const payload = {};
       payload.username = username.toString(); // eslint-disable-line no-param-reassign
       payload.nickname = nickname;
-      payload.referrer = localStorage.getItem('drugwars_referrer') || null; // eslint-disable-line no-param-reassign
+      payload.referrer = localStorage.getItem('drugwars_referrer') || "null"; // eslint-disable-line no-param-reassign
       payload.type = 'dw-chars'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
