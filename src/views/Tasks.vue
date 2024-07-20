@@ -113,10 +113,11 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id)"
+                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
                         the {{ task.link }} channel</div>
-                    <div v-else-if="task.user && task.completed === 0" @click="verifyTask({ id: task.id })"
+                    <div v-else-if="task.user && task.completed === 0"
+                        @click="verifyTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
@@ -133,10 +134,12 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask(task.id)"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Follow
+                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask(task.id), refreshTask()"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        Follow
                         the {{ task.link }} account</div>
-                    <div v-else-if="task.user && task.completed === 0" @click="verifyTask({ id: task.id })"
+                    <div v-else-if="task.user && task.completed === 0"
+                        @click="verifyTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
@@ -336,14 +339,20 @@ export default {
                         }
                     });
                 }
-                console.log(this.tasks)
                 this.tasks.sort(function (a, b) { return a.completed - b.completed });
-                console.log(this.tasks)
                 this.isLoading = false;
             });
         },
         async handleSubmit() {
             await this.addTask(this.newTask)
+            refreshTask()
+        },
+        async refreshTask() {
+            const self = this;
+            setTimeout(() => {
+                self.load_tasks()
+            }, 3000);
+
         },
         startTimer(time) {
             const self = this;
