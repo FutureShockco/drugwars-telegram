@@ -367,10 +367,6 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           store.dispatch('init');
-          store.dispatch('notify', {
-            type: 'success',
-            message: result,
-          });
           Promise.delay(3000).then(() => {
             store.dispatch('init');
           });

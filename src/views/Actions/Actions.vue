@@ -56,7 +56,7 @@
           <div v-if="tutorialStep > 6">
             <h3>Select your army composition</h3>
             <div class="d-flex" v-if="ownUnits.length > 0">
-              <div class="col" v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
+              <div class="col-2" v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
                 <UnitSelect v-if="ownUnit.amount > 0" :item="ownUnit" @click="addUnit" />
               </div>
             </div>

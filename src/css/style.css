@@ -1897,6 +1897,10 @@ p {
   text-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 }
 
+.text-shadow-xl {
+  text-shadow: 0px 0px 10px rgb(2 0 0 / 81%),0px 0px 10px rgb(2 0 0 / 81%),0px 0px 10px rgb(2 0 0 / 81%),0px 0px 10px rgb(2 0 0 / 81%),0px 0px 10px rgb(2 0 0 / 81%);
+}
+
 /*Boxed Text*/
 .boxed-text-xl,
 .boxed-text-l,
@@ -4485,7 +4489,7 @@ input[type=range] {
 
 /*Pagination*/
 .pagination {
-  margin-bottom: 30px;
+  /* margin-bottom: 30px; */
 }
 
 .pagination .page-link {

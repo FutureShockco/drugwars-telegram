@@ -1,8 +1,8 @@
 <template>
     <div>
         <ActionsTabs/>
-        <Paginate class="ml-6 mt-4 text-center width-full" :page-count="Math.ceil(inc/25)" :page-range="3" :margin-pages="2" :click-handler="load_fights" :prev-text="'Prev'" :next-text="'Next'" :container-class="'pagination'" :page-class="'fight'"></Paginate>
-        <div class="p-4">
+        <Paginate class="ml-6 mt-4 text-center w-100" :page-count="Math.ceil(inc/25)" :page-range="3" :margin-pages="2" :click-handler="load_fights" :prev-text="'Prev'" :next-text="'Next'" :container-class="'pagination'" :page-class="'fight'"></Paginate>
+        <div>
             <div class="fight" v-for="fight in fights" :key="fight.fight_key || fight.transport_key">
                 <ActionsFight v-if="fight.type === 'fight'" :fight="fight" />
                 <ActionsTransport v-if="fight.type === 'transport'" :fight="fight" />

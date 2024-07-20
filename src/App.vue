@@ -10,11 +10,11 @@
         'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
       }">
         <router-view />
-        <div @click="toggleSidebarVisibility" :class="modalWalletVisible || modalVideoVisible ? 'show' : 'd-none'"
+        <div @click="toggleSidebarVisibility"
+          :class="(username && showTutoOverlay) || modalWalletVisible || modalVideoVisible ? 'show' : 'd-none'"
           class="offcanvas-backdrop fade">
         </div>
       </div>
-
       <Quickstart v-if="username && showTutorial" />
       <!-- <BottomNav v-if="username" /> -->
 
@@ -49,8 +49,8 @@ export default {
       if (this.username && client.ws.readyState === 3)
         self.checkWS()
     }, 1000);
-		if(this.TWA && this.TWA.expand)
-			this.TWA.expand()
+    if (this.TWA && this.TWA.expand)
+      this.TWA.expand()
   },
   methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
@@ -65,6 +65,9 @@ export default {
     },
   },
   computed: {
+    showTutoOverlay() {
+      return ((this.tutorialStep === 8 && this.$route.path !== '/actions/outgoing') || (this.tutorialStep === 7 && this.$route.path !== '/actions') || (this.tutorialStep === 6 && this.$route.path !== '/units') || (this.tutorialStep === 5 && this.$route.path !== '/buildings') || (this.tutorialStep === 4 && this.$route.path !== '/buildings/alcohol') || (this.tutorialStep === 3 && this.$route.path !== '/buildings/weapons') || (this.tutorialStep === 2 && this.$route.path !== '/buildings/drugs') || (this.tutoDetail === 0 && this.tutorialStep === 0 && this.$route.path !== '/map/territory'))
+    },
     tutoDetail() {
       return this.$store.state.game.tutoDetail
     },

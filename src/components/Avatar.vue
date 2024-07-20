@@ -49,6 +49,7 @@ export default {
 .avatar {
   position: relative;
   overflow: visible;
+  display: block;
   .avatar-img {
     width: 100%;
     height: 100%;
@@ -70,9 +71,9 @@ export default {
     display: inline-block;
     position: absolute;
     top: -5%;
-    left: 0%;
+    left: -8%;
     bottom: -18%;
-    right: -10%;
+    right: -8%;
     background-image: url('//img.drugwars.io/avatar-border-black.png');
     background-size: contain;
     background-repeat: no-repeat;
@@ -81,7 +82,7 @@ export default {
     display: inline-block;
     position: absolute;
     top: -5%;
-    left: -12%;
+    left: -15%;
     bottom: -18%;
     right: -10%;
     background-image: url('//img.drugwars.io/avatar-border-gold.png');
@@ -92,7 +93,7 @@ export default {
     display: inline-block;
     position: absolute;
     top: -5%;
-    left: -12%;
+    left: -15%;
     bottom: -18%;
     right: -10%;
     background-image: url('//img.drugwars.io/avatar-border-silver.png');
@@ -103,7 +104,7 @@ export default {
     display: inline-block;
     position: absolute;
     top: -5%;
-    left: -12%;
+    left: -15%;
     bottom: -18%;
     right: -10%;
     background-image: url('//img.drugwars.io/avatar-border-copper.png');

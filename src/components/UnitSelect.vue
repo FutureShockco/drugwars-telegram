@@ -1,10 +1,10 @@
 <template>
-  <div class="sunit text-center">
+  <div class="sunit text-center" :class="[tutorialStep === 7 && tutoDetail === 0 && unit.id === 'spy' ? 'tutobox' : '']">
     <div class="sunit" @click="handleClick">
       <div class="smalltitle">{{ unit.name }}</div>
       <img class="preview unit small" :src="`/img/units/${unit.id}.png`" />
       <i class="fad fa-plus"></i>
-      <input class="input" type="number" min="1" :max="item.amount" v-model="amount">
+      <input class="input form-control mb-1 w-100" type="number" min="1" :max="item.amount" v-model="amount">
     </div>
   </div>
 </template>
@@ -22,6 +22,12 @@ export default {
   computed: {
     unit() {
       return units[this.item.key];
+    },
+    tutorialStep() {
+      return this.$store.state.game.user.user.tutorial
+    },
+    tutoDetail() {
+      return this.$store.state.game.tutoDetail
     },
   },
   methods: {
