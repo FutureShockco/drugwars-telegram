@@ -362,7 +362,7 @@ const actions = {
       const payload = {};
       payload.username = username.toString(); // eslint-disable-line no-param-reassign
       payload.nickname = nickname;
-      payload.referrer = localStorage.getItem('drugwars_referrer') || "null"; // eslint-disable-line no-param-reassign
+      payload.referrer = localStorage.getItem('drugwars_referrer'); // eslint-disable-line no-param-reassign
       payload.type = 'dw-chars'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
@@ -781,6 +781,24 @@ const actions = {
       const { username } = rootState.auth;
       payload.username = username; // eslint-disable-line no-param-reassign
       payload.type = 'dw-add-task'; // eslint-disable-line no-param-reassign
+      return dwsocial(username, payload, result => {
+        if (result) {
+          console.log(result);
+          store.dispatch('init');
+          store.dispatch('notify', {
+            type: 'success',
+            message: result,
+          });
+          return resolve(result);
+        }
+        return reject();
+      });
+    }),
+  completeTask: ({ rootState }, payload) =>
+    new Promise((resolve, reject) => {
+      const { username } = rootState.auth;
+      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.type = 'dw-complete-task'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);

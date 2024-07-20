@@ -104,7 +104,6 @@ const Privacy = () => import(/* webpackChunkName: "privacy" */ '@/views/Settings
 const History = () => import(/* webpackChunkName: "userhistory" */ '@/views/Settings/History.vue');
 
 const Referral = () => import(/* webpackChunkName: "referral" */ '@/views/Referral.vue');
-const Invite = () => import(/* webpackChunkName: "invite" */ '@/views/Invite.vue');
 const About = () => import(/* webpackChunkName: "about" */ '@/views/About.vue');
 const Help = () => import(/* webpackChunkName: "help" */ '@/views/Help/Help.vue');
 const GetStarted = () => import(/* webpackChunkName: "getstarted" */ '@/views/Help/GetStarted.vue');
@@ -561,14 +560,6 @@ export default new Router({
       name: 'steemaccount',
       beforeEnter: requireAuth,
       component: SteemAccount,
-    },
-    {
-      path: '/i/:username',
-      name: 'invite',
-      component: Invite,
-      meta: {
-        hideSidebar: true,
-      },
     },
     {
       path: '/about',

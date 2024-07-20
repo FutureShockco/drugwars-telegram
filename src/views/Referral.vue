@@ -22,6 +22,7 @@
     <div class="card card-style">
       <div class="content">
         <h3>Your referrals</h3>
+      
         <div class="referral">
           <div :key="key" v-for="(referral, key) in referrals">
             <p>
@@ -48,7 +49,7 @@ export default {
   data() {
     return {
       username: this.$store.state.auth.username,
-      url: `https://t.me/drugwars_bot/drugwars&r=${this.$store.state.auth.username}`,
+      url: `https://t.me/drugwars_bot/drugwars/start?startapp=${this.$store.state.auth.username}`,
     };
   },
   computed: {
