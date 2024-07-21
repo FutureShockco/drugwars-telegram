@@ -5,7 +5,7 @@
       <div class="title">{{ amountOfDWD }} Tokens</div>
       <!-- <div class="title type">{{ amountOfDWD(item.quantity) }}</div> -->
       {{item.detail}}
-      <!-- <button
+      <!-- <UiButton
         v-if="steemAccount"
         @click="handleRequestPayment()"
         class="button btn-block button-blue mb-2 mt-2"
@@ -13,7 +13,7 @@
         <i class="iconfont icon-zap" />
         ${{ item.price | amount }} -
         {{ priceInSteem | amount }} STEEM
-      </button> -->
+      </UiButton> -->
       <h3 class="mt-0 mb-0" >${{ item.price | amount }}</h3>
       <!-- <PayPal
         :amount="item.price.toString()"

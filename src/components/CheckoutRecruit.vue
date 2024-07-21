@@ -3,7 +3,7 @@
     <div :class="pendingAmount ? 'd-none' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="pendingAmount">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
-      <button
+      <UiButton
         :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base ? 'gradient-red text-white' : 'border-green-dark border-green-dark color-green-dark']"
         :disabled="isLoading || pendingAmount || notEnough || inProgress || !base || tutorialStep < 8" @click="handleSubmit()"
         class="btn-full btn-xxs btn  w-100">
@@ -22,25 +22,25 @@
             </div>
           </div>
         </template>
-      </button>
+      </UiButton>
     </div>
     <div v-if="!pendingAmount" class="col-8">
       <div class="text-center w-100">Instant upgrade TON or DW</div>
       <div class="d-flex">
         <div class="col-6">
-          <button :disabled="isLoading || !base || tutorialStep < 8" @click="handleRequestPayment()"
+          <UiButton :disabled="isLoading || !base || tutorialStep < 8" @click="handleRequestPayment()"
             class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
             <i class="iconfont icon-zap" />
             <span>
               {{ this.priceInSteem }} TON</span>
-          </button>
+          </UiButton>
         </div>
         <div v-if="!inProgress" class="col-5 mx-2">
-          <button :disabled="isLoading || notEnoughDWD || !base" @click="handleSubmit('dwd')"
+          <UiButton :disabled="isLoading || notEnoughDWD || !base" @click="handleSubmit('dwd')"
             class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
             <span>
               {{ this.priceInDWD }} DW</span>
-          </button>
+          </UiButton>
         </div>
       </div>
     </div>

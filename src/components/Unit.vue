@@ -47,7 +47,6 @@
               {{ unit.feature }}
             </span>
           </div>
-          {{ updateTime }}
           <Cost :drugsCost="unit.drugs_cost" :weaponsCost="unit.weapons_cost" :alcoholsCost="unit.alcohols_cost"
             :quantity="quantity" :special="unit.special_cost" />
         </div>

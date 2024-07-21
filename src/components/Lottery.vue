@@ -10,14 +10,14 @@
         </div>
         <form @submit.prevent="handleSubmit" class="mb-2">
                <input class="input form-control input-block mb-2" v-model="amount" type="number" min="1">
-              <button
+              <UiButton
                 :disabled="isLoading  || notEnoughDWD || !base || overlimit"
                 type="submit" 
                 class="button btn-block button-yellow mb-2">
               <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png"/>
               <span> ${{ dwdPrice | amount }} = </span>
                 {{ priceInDWD  }} DWD
-              </button>
+              </UiButton>
         </form>
     </div>
 </template>

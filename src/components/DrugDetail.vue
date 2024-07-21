@@ -54,11 +54,11 @@
             <div class="item-content width-full">
                 <h5>{{ drug.name }}</h5>
                 <div class="mb-2" v-html="drug.description"></div>
-               <router-link :to="'/market?token=dw'+drug.name.substring(0,4).toLowerCase()"> <button
+               <router-link :to="'/market?token=dw'+drug.name.substring(0,4).toLowerCase()"> <UiButton
                   class="button btn-block button-blue mb-2">
                   <i class="iconfont icon-zap"/>
                 TRADE ON MARKET
-                </button></router-link>
+                </UiButton></router-link>
             </div> 
           </div> 
           <div class="px-4">

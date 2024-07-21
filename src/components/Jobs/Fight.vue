@@ -107,10 +107,10 @@
 				</div>
 			<div v-if="fight.is_done!=0">
 				<div v-if="!details" class="text-center">
-					<button class="button button-blue" @click="showDetails()">Show details</button>
+					<UiButton class="button button-blue" @click="showDetails()">Show details</UiButton>
 				</div>
 				<div v-else class="text-center">
-					<button class="button button-blue" @click="hideDetails()">Hide details</button>
+					<UiButton class="button button-blue" @click="hideDetails()">Hide details</UiButton>
 				</div>
 			</div>
 		</div>

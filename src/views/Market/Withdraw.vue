@@ -11,10 +11,10 @@
 		<div class="text-center">
 			<form v-if="user.dwd > 0" class="form mx-auto" @submit.prevent="handleSubmit">
 				<input class="input input-primary mb-2" type="number" v-model="amount" :disabled="isLoading" maxlength="10" placeholder="Amount to change" />
-				<button :disabled="isLoading || user.dwd < amount" type="submit" class="button input-block button-large button-green">
+				<UiButton :disabled="isLoading || user.dwd < amount" type="submit" class="button input-block button-large button-green">
 						<span v-if="!isLoading">Withdraw</span>
 						<SmallLoading v-else />
-					</button>
+					</UiButton>
 					<div class="mt-1">Min : 1 DWD</div>
 			</form>
 			<h3 v-if="!steemAccount">Get started on SteemEngine with using your <router-link :to="`/settings/steem`">Steem account</router-link></h3>
@@ -33,10 +33,10 @@
 		<div class="text-center">
 			<form v-if="user.dwd > 0 && user.paypal" class="form mx-auto" @submit.prevent="handleSubmit">
 				<input class="input input-primary mb-2" type="number" v-model="amount" :disabled="isLoading" maxlength="10" placeholder="Amount to change" />
-					<button disabled class="mt-3 button input-block button-large button-green">
+					<UiButton disabled class="mt-3 button input-block button-large button-green">
 						<span v-if="!isLoading">Cashout</span>
 						<SmallLoading v-else />
-					</button>
+					</UiButton>
 					<div>Min : 50 DWD</div>
 			</form>
 			<div>

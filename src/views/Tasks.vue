@@ -349,8 +349,8 @@
                         </div>
                         <div class="card-overlay bg-gradient-fade opacity-80"></div>
                     </div>
-                    <button class="btn btn-full bg-blue-dark rounded-xs text-uppercase font-700 w-100 btn-s mt-4"
-                        type="submit">Submit Task</button>
+                    <UiButton class="btn btn-full bg-blue-dark rounded-xs text-uppercase font-700 w-100 btn-s mt-4"
+                        type="submit">Submit Task</UiButton>
                 </form>
             </div>
         </div>

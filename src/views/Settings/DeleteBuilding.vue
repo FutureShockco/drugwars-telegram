@@ -7,10 +7,10 @@
             <form class="form container-xxs" @submit.prevent="handleSubmit">
                 <p>Write or copy paste your username : {{user.username}}</p>
                 <input class="input input-primary mb-2" v-model="nickname" maxlength="32" :placeholder="user.username" v-lowercase />
-                <button class="button input-block button-large button-red mb-2" type="submit" :disabled="isLoading || user.username !== nickname">   
+                <UiButton class="button input-block button-large button-red mb-2" type="submit" :disabled="isLoading || user.username !== nickname">   
                             <SmallLoading v-if="isLoading"/>    
                             <span v-else>Delete</span>   
-                          </button>
+                          </UiButton>
             </form>
         </div>
     </div>

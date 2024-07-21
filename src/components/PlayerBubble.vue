@@ -37,14 +37,14 @@
           <Icon name="alcohol" size="18" />
         </span>
       </div>
-      <button
+      <UiButton
         :disabled="!ownSpy || isLoading"
         class="button button-red btn-block"
         @click.prevent="handleSubmit(player.territory,player.base)"
       >
         <SmallLoading v-if="isLoading" />
         <span v-else>Spy</span>
-      </button>
+      </UiButton>
     </div>
   </div>
 </template>

@@ -12,13 +12,13 @@
                 </a>
               </div>
               <div v-else>
-                <button
+                <UiButton
                   class="button button-blue mb-2 mt-2"
                   @click="issueDepositAddress()"
                   :disabled="isLoading"
                 >
                   Generate deposit address
-                </button>
+                </UiButton>
               </div>
 </template>
       </div>

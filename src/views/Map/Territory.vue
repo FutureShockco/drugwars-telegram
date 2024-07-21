@@ -5,17 +5,17 @@
       <div class="content">
         <div class="tabs tabs-box">
           <div class="tab-controls rounded-s border-highlight">
-            <button class=" gradient-highlight" @click="decreaseLocation()">
+            <UiButton class=" gradient-highlight" @click="decreaseLocation()">
               <i class="fad fa-arrow-left color-black"></i>
-            </button>
+            </UiButton>
 
             <input type="number" v-model="currentLocation" placeholder="25" class="input color-highlight w-100"
               @change="updateLocation(currentLocation)" />
 
 
-            <button class="gradient-highlight" @click="increaseLocation()">
+            <UiButton class="gradient-highlight" @click="increaseLocation()">
               <i class="fad fa-arrow-right color-black"></i>
-            </button>
+            </UiButton>
           </div>
         </div>
         <div class="d-flex">
@@ -42,30 +42,30 @@
         <div class="map-title text-left" id="visit">
           <router-link v-if="selectedTile && currentNickname && currentNickname != nickname"
             :to="`/actions?type=attack&target=${location}&base=${selectedTile}`">
-            <button class="btn bg-red-light border-red-dark">ATTACK</button>
+            <UiButton class="btn bg-red-light border-red-dark">ATTACK</UiButton>
           </router-link>
           <!-- <router-link v-if="selectedTile && currentNickname && currentNickname != nickname"
             :to="`/actions?type=transport&target=${location}&base=${selectedTile}`">
-            <button class="button button-blue">TRANSPORT</button>
+            <UiButton class="button button-blue">TRANSPORT</UiButton>
           </router-link> -->
           <!-- <router-link v-else-if="currentNickname != nickname && base"
             :to="`/actions?type=occupy&target=${location}&base=${selectedTile}`">
-            <button class="button button-blue">CREATE NEW BASE</button>
+            <UiButton class="button button-blue">CREATE NEW BASE</UiButton>
           </router-link> -->
-          <!-- <button v-if="
+          <!-- <UiButton v-if="
             currentNickname === nickname && location == base.territory && selectedTile == base.base
           " class="button button-blue">
             ALREADY SELECTED
-          </button>
+          </UiButton>
           <div v-else-if="currentNickname === nickname">
-            <button class="button button-blue" @click="selectBase()">SELECT</button>
+            <UiButton class="button button-blue" @click="selectBase()">SELECT</UiButton>
             <router-link :to="`/actions?type=transport&target=${location}&base=${selectedTile}`">
-              <button class="button button-blue">TRANSPORT</button>
+              <UiButton class="button button-blue">TRANSPORT</UiButton>
             </router-link>
           </div> -->
-          <button v-if="!main" class="btn gradient-highlight text-black" @click="handleSubmit()">
+          <UiButton v-if="!main" class="btn gradient-highlight text-black" @click="handleSubmit()">
             CHOOSE AS MAIN BASE
-          </button>
+          </UiButton>
         </div>
       </div>
       <table id="table" style="position: relative;">

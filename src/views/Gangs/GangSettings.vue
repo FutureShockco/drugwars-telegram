@@ -10,12 +10,12 @@
                     <input class="input input-block text-left mb-2" placeholder="Image URL (optional)" v-model="image" type="url" />
                     <input class="input input-block text-left mb-2" placeholder="Website (optional)" v-model="website" type="url" />
                     <textarea type="text" class="input input-block text-left mb-2" placeholder="Description (optional)" v-model="about" maxlength="280"></textarea>
-                    <button type="submit" class="button button-green btn-block mb-2" :disabled="isLoading">
+                    <UiButton type="submit" class="button button-green btn-block mb-2" :disabled="isLoading">
                 <span v-if="!isLoading">
                   Update
                 </span>
                 <SmallLoading v-else />
-              </button>
+              </UiButton>
                 </form>
             </div>
         </div>

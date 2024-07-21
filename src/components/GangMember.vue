@@ -3,31 +3,31 @@
         <router-link :to="`/actions?type=attack&nickname=${member.nickname}`">
             <GangImage :image="member.picture" size="40" class="mr-2" /> {{ member.nickname }} {{ member.role }} <span v-if="isCapo || isBoss"><i :class="'iconfont icon-check '+isActive(member.active)"></i> </span>
         </router-link>
-        <button @click="handleKick(member.nickname)" class="button button-red float-right" :disabled="isLoading || member.nickname === user.nickname && isBoss" v-if="isBoss">
+        <UiButton @click="handleKick(member.nickname)" class="button button-red float-right" :disabled="isLoading || member.nickname === user.nickname && isBoss" v-if="isBoss">
     			<span v-if="!isLoading">Kick {{member.role}}</span>
     			<SmallLoading v-else/>
-    		</button>
-        <button @click="handleSetBoss(member.nickname)" class="button button-green float-right mr-2" :disabled="isLoadingCapo " v-if="member.role === 'capo' && isBoss">
+    		</UiButton>
+        <UiButton @click="handleSetBoss(member.nickname)" class="button button-green float-right mr-2" :disabled="isLoadingCapo " v-if="member.role === 'capo' && isBoss">
     			<span v-if="!isLoadingCapo">Give boss role</span>
     			<SmallLoading v-else/>
-    		</button>
-        <button @click="handleAddCapo(member.nickname)" class="button button-green float-right mr-2" :disabled="isLoadingCapo " v-if="member.role === 'soldier' && isBoss">
+    		</UiButton>
+        <UiButton @click="handleAddCapo(member.nickname)" class="button button-green float-right mr-2" :disabled="isLoadingCapo " v-if="member.role === 'soldier' && isBoss">
     			<span v-if="!isLoadingCapo">Promote to capo</span>
     			<SmallLoading v-else/>
-    		</button>
-        <button @click="handleDemoteCapo(member.nickname)" class="button button-orange float-right mr-2" :disabled="isLoadingCapo " v-if="member.role === 'capo' && isBoss">
+    		</UiButton>
+        <UiButton @click="handleDemoteCapo(member.nickname)" class="button button-orange float-right mr-2" :disabled="isLoadingCapo " v-if="member.role === 'capo' && isBoss">
     			<span v-if="!isLoadingDemoteCapo">Demote to soldier</span>
     			<SmallLoading v-else/>
-    		</button>
-        <button @click="handleLeave()" class="button button-red float-right mr-2" :disabled="isLoading || isBoss" v-if="member.nickname === user.nickname && !isBoss">
+    		</UiButton>
+        <UiButton @click="handleLeave()" class="button button-red float-right mr-2" :disabled="isLoading || isBoss" v-if="member.nickname === user.nickname && !isBoss">
     			<span v-if="!isLoading">Leave gang</span>
     			<SmallLoading v-else/>
-    		</button>
+    		</UiButton>
         <router-link :to="`/actions?type=transport&nickname=${member.nickname}`">
-            <button class="button button-blue float-right mr-2" :disabled="isLoading" v-if="member.nickname !== user.nickname">
+            <UiButton class="button button-blue float-right mr-2" :disabled="isLoading" v-if="member.nickname !== user.nickname">
     			<span v-if="!isLoading">Transport</span>
     			<SmallLoading v-else/>
-    		</button>
+    		</UiButton>
         </router-link>
     </div>
 </template>

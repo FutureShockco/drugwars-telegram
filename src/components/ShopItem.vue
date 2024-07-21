@@ -5,14 +5,14 @@
       <div class="title">{{ item.name }}</div>
       <div class="title type">{{ item.type }}<span v-if="!item.enabled"> Temporary disabled</span></div>
           <div >{{ item.desc }}</div>
-        <button
+        <UiButton
           :disabled="isLoading || notEnoughDWD ||!item.enabled"
           @click="handleSubmit(item.name)"
           class="button btn-block button-yellow mb-2 mt-2">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png"/>
         <span v-if="shieldUsed && item.name ==='shield'"> {{ priceInDWD*3  }} DWD</span>
                 <span v-else> {{ priceInDWD  }} DWD</span>
-        </button>
+        </UiButton>
     </div>
   </div>
 </template>

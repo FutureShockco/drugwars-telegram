@@ -53,9 +53,9 @@
           <Icon class="logo" name="logo" />
         </router-link>
       </div>
-      <!-- <button class="float-left px-3 py-3 border-right" @click="toggleSidebarVisibility">
+      <!-- <UiButton class="float-left px-3 py-3 border-right" @click="toggleSidebarVisibility">
             <span class="iconfont icon-three-bars"/>
-          </button> -->
+          </UiButton> -->
 
   <!-- <Balances class="width-full text-center" />
       <div class="bottomnav text-center">

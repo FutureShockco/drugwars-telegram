@@ -8,11 +8,11 @@
             <form v-else class="form container-xxs" @submit.prevent="handleRename">
               <h6>New name </h6>
                 <input class="input input-primary mb-2" v-model="base_name" type="text"/>
-            <button
+            <UiButton
               :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || ownBase.custom ==='primary' ||!base_name"
               class="button btn-block button-green mb-2">
             Change name
-            </button>
+            </UiButton>
             </form>
             <h2>MOVE YOUR BASE TO ANOTHER SPOT</h2>
             <h5>Be carefull, everybody can recover your old location on the map. You will keep all your buildings and your units. You can not move if you have any fights which are still ongoing.</h5>
@@ -23,13 +23,13 @@
                     <h6>Location </h6>
                 <input class="input input-primary mb-2" v-model="target_base" type="number"/>
               <h5>   {{ upgradeLabel }}</h5>
-            <button
+            <UiButton
               :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || inProgress || !ownBase ||!target_base || !target_territory"
               class="button btn-block button-yellow mb-2">
             <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png"/>
             <span v-if="dwdPrice"> ${{ dwdPrice | amount }} = </span>
               {{ price  }} DWD
-            </button>
+            </UiButton>
             </form>
             <h4 v-if="errorMessage" class="text-red">Please select a valid territory</h4>
         </div>

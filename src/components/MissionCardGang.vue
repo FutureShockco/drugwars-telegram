@@ -90,7 +90,7 @@
         </div>
       </div>
 
-      <button
+      <UiButton
         :disabled="isLoading || inProgress || (item.type === 'gang' && !isBoss) || jobleft < 1"
         @click="handleSubmit"
         class="button btn-block button-green mb-2"
@@ -98,7 +98,7 @@
         <i class="iconfont icon-target" />
 
         Start Job
-      </button>
+      </UiButton>
     </div>
 
     <div v-else>
@@ -139,14 +139,14 @@
         v-if="timeToWait && restUnits > 0"
         :to="`/actions?type=attack&target=${ownJob.territory}&base=${ownJob.base}&target_type=npc`"
       >
-        <button class="button btn-block button-red mb-2">
+        <UiButton class="button btn-block button-red mb-2">
           <i class="iconfont icon-target" />
 
           Attack
-        </button>
+        </UiButton>
       </router-link>
 
-      <button
+      <UiButton
         v-else-if="!timeToWait"
         :disabled="isLoading || (item.type === 'gang' && !isBoss) || jobleft < 1"
         @click="handleSubmit"
@@ -156,9 +156,9 @@
         <i class="iconfont icon-target" />
 
         Start Job
-      </button>
+      </UiButton>
 
-      <button
+      <UiButton
         v-else
         disabled
         :class="{ progress: waitingConfirmation }"
@@ -167,7 +167,7 @@
         <i class="iconfont icon-clock" />
 
         Waiting
-      </button>
+      </UiButton>
     </div>
   </div>
 </template>

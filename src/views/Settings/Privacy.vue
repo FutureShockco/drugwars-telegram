@@ -7,10 +7,10 @@
             <form class="form container-xxs" @submit.prevent="handleSubmit">
                 <p>Write or copy paste your username : {{user.username}}</p>
                 <input class="input input-primary mb-2" v-model="nickname" maxlength="32" :placeholder="user.username" v-lowercase />
-                <button class="button input-block button-large button-red mb-2" type="submit" :disabled="isLoading || user.username !== nickname">   
+                <UiButton class="button input-block button-large button-red mb-2" type="submit" :disabled="isLoading || user.username !== nickname">   
                             <SmallLoading v-if="isLoading"/>    
                             <span v-else>Delete</span>   
-                          </button>
+                          </UiButton>
             </form>
                         <h2>CHANGE YOUR STEEM ACCOUNT</h2>
             <h5>Be carefull, this action is irreversible, DrugWars can not recover your new account, your tokens and/or your wallets if you decide to change your Steem account by misstake. </h5>
@@ -19,10 +19,10 @@
                 <input class="input input-primary mb-2" v-model="newaccountname" maxlength="32" :placeholder="user.username" v-lowercase />
                 <p>Write or copy paste your actual username : {{user.username}}</p>
                  <input class="input input-primary mb-2" v-model="confirmnickname" maxlength="32" :placeholder="user.username" v-lowercase />
-                <button class="button input-block button-large button-red mb-2" @click="handleAccountTransfer" :disabled="isLoading || confirmnickname !== user.username || newaccountname.length < 3"   >
+                <UiButton class="button input-block button-large button-red mb-2" @click="handleAccountTransfer" :disabled="isLoading || confirmnickname !== user.username || newaccountname.length < 3"   >
                             <SmallLoading v-if="isLoading"/>    
                             <span v-else>Change</span>   
-                          </button>
+                          </UiButton>
             </form>
             Reminder: All tokens on Steem Engine will stay on your old account.
         </div>

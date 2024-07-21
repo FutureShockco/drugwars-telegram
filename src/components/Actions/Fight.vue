@@ -135,16 +135,16 @@
           <div class="wrapper">
             <div>Choose a custom name to remember this opponent or his place.</div>
             <input type="string" v-model="farm_name" placeholder="Snollygoster" class="mt-2 input" />
-            <button class="button button-red" @click="listPopup()">Cancel</button>
-            <button class="button btn-xxs gradient-green ml-1" @click="saveFarm()">Save</button>
+            <UiButton class="button button-red" @click="listPopup()">Cancel</UiButton>
+            <UiButton class="button btn-xxs gradient-green ml-1" @click="saveFarm()">Save</UiButton>
           </div>
         </UiCenter>
         <div v-if="!details" class="text-center mb-3">
-          <button class="btn btn-xxs gradient-blue" @click="showDetails()">Show details</button>
-          <!-- <button v-if="!alreadylisted" class="button button-red ml-1" @click="listPopup()">Add to list</button> -->
+          <UiButton class="btn btn-xxs gradient-blue" @click="showDetails()">Show details</UiButton>
+          <!-- <UiButton v-if="!alreadylisted" class="button button-red ml-1" @click="listPopup()">Add to list</UiButton> -->
         </div>
         <div v-else class="text-center">
-          <button class="btn btn-xxs gradient-blue" @click="hideDetails()">Hide details</button>
+          <UiButton class="btn btn-xxs gradient-blue" @click="hideDetails()">Hide details</UiButton>
         </div>
       </div>
     </div>

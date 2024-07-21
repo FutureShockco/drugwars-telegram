@@ -13,15 +13,16 @@
           <h3>Units in the bunker</h3>
           <ArmyToSend :units="defenders" :disableicon="true" />
           <h5 class="mt-0">Army Value</h5>
-          <h5 class="mt-0">Drugs: {{ defendercost.drugs | amount }} - Weapons: {{ defendercost.weapons | amount }} - Alcohol:
+          <h5 class="mt-0">Drugs: {{ defendercost.drugs | amount }} - Weapons: {{ defendercost.weapons | amount }} -
+            Alcohol:
             {{ defendercost.alcohol | amount }}</h5>
           <h5 class="mt-0">Power: {{ defenderOffensivePower }}%</h5>
           <h5 class="mt-0">Supply: {{ defendersupply | amount }} / {{ maxSupply | amount }}</h5>
-          <button :disabled="!defenders || isLoading" class="button button-large button-red mb-5 "
+          <UiButton :disabled="!defenders || isLoading" class="button button-large button-red mb-5 "
             @click="handleRelease()">
             <SmallLoading v-if="isLoading" />
             <span v-else>Release units</span>
-          </button>
+          </UiButton>
         </div>
         <div v-if="ownUnits.length > 0" class="column col-12 flex-md-items-start mt-0">
           <h3 class="mb-0 mt-0">Select units to hide</h3>
@@ -32,8 +33,8 @@
           </div>
           <div v-else>You must buy troops</div>
         </div>
-        <button v-if="ownUnits.length > 0" class="button button-green mt-2 mb-2" :disabled="ownUnits.length === 0"
-          @click="autoFill()">AutoFill</button>
+        <UiButton v-if="ownUnits.length > 0" class="button button-green mt-2 mb-2" :disabled="ownUnits.length === 0"
+          @click="autoFill()">AutoFill</UiButton>
 
         <div v-if="ownUnits.length > 0" class="column col-12">
           <div class="mb-2">
@@ -50,16 +51,16 @@
                 {{ cost.alcohol | amount }}</h5>
               <h5 class="mt-0">Power: {{ offensivePower }}%</h5>
               <h5 class="mt-0">Supply: {{ supply | amount }} / {{ maxSupply | amount }}</h5>
-              <button class="button button-blue mb-2" @click="removeUnits()">Remove all</button>
+              <UiButton class="button button-blue mb-2" @click="removeUnits()">Remove all</UiButton>
             </div>
           </div>
           <div v-if="defenders && defenders.length > 0" class="mb-3">Please release your units before adding new units.
           </div>
-          <button :disabled="defenders.length > 0 || tooMuchSupply || selectedUnits.length === 0 || isLoading"
+          <UiButton :disabled="defenders.length > 0 || tooMuchSupply || selectedUnits.length === 0 || isLoading"
             class="button button-large button-red mb-5 " @click="handleSave()">
             <SmallLoading v-if="isLoading" />
             <span v-else>Save</span>
-          </button>
+          </UiButton>
 
           <p class="text-red text-left" v-if="errorMessage">{{ errorMessage }}</p>
         </div>

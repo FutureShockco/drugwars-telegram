@@ -115,22 +115,22 @@
           placeholder="The supply count to reduce"
           type="number"
         />
-        <button
+        <UiButton
           class="button input-block button-green mb-2"
           @click="handleSubmit"
           :disabled="isLoading"
         >
           <SmallLoading v-if="isLoading" />
           <span v-else>Create or contribute</span>
-        </button>
-        <button
+        </UiButton>
+        <UiButton
           class="button input-block button-blue mb-2"
           @click="handleSubmitAnonymous"
           :disabled="isLoading"
         >
           <SmallLoading v-if="isLoading" />
           <span v-else>Create or contribute anonymously</span>
-        </button>
+        </UiButton>
         <h6>Example to calculate the supply count :</h6>
         <div>1000 bouncers = 2000 supply</div>
         <div>1000 mercenaries = 8000 supply</div>

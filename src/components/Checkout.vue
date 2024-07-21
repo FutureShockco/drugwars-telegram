@@ -3,7 +3,7 @@
     <div :class="inProgress ? 'd-none' : 'col-4 pe-0  mx-2 '">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
-      <button
+      <UiButton
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep < 8 && id !== 'headquarters')"
         :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red color-white' : 'border-green-dark border-green-dark color-green-dark ']"
         @click="handleSubmit()" class="btn-full btn-xxs btn  w-100">
@@ -17,31 +17,31 @@
           <span>{{ upgradeLabel }}</span>
 
         </template>
-      </button>
+      </UiButton>
 
     </div>
     <div v-if="!inProgress" class="col-8">
       <div class="text-center w-100">Instant upgrade TON or DW</div>
       <div class="d-flex">
         <div class="col-6">
-          <!-- <button :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+          <!-- <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
         @click="handleRequestPayment()" class="button btn-block button-blue">
         <i class="iconfont icon-zap" />
         <span>
           {{ priceInSteem }} DWD</span>
-      </button> -->
-          <button :disabled="isLoading || waitingConfirmation || requireUpdate || !base || tutorialStep < 8"
+      </UiButton> -->
+          <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || !base || tutorialStep < 8"
             :class="isLoading || waitingConfirmation || requireUpdate || !base ? '' : 'button-blue'"
             @click="handleRequestPayment()" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
             <i class="fad fa-arrow-up me-1 text-blue" />
             <span>
               {{ (priceInDWD / 25).toFixed(4) }} TON</span>
 
-          </button>
+          </UiButton>
         </div>
         <div v-if="!inProgress" class="col-5 mx-2">
 
-          <button
+          <UiButton
             :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 3 && id !== 'ammunition') || (tutorialStep === 4 && id !== 't_distillery') || (tutorialStep === 5 && id !== 'training_facility')"
             :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
             @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
@@ -49,7 +49,7 @@
             <span>
               {{ priceInDWD }} DW</span>
 
-          </button>
+          </UiButton>
         </div>
       </div>
     </div>

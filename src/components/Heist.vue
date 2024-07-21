@@ -8,7 +8,6 @@
         <div class="text-green">You: {{ totalVest | amount }} <span class="text-yellow">+{{ ownHeistReward.amount }}
             <Icon name="ton" size="18" /> ({{ ownHeistReward.percent | amount }}%)
           </span></div>
-
       </div>
       <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
       <div class="row">

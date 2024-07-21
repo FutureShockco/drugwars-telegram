@@ -418,7 +418,7 @@ button,
 select {
   text-transform: none;
 }
-// Set the cursor for non-`<button>` buttons
+// Set the cursor for non-`<UiButton>` buttons
 //
 // Details at https://github.com/twbs/bootstrap/pull/30562
 [role="button"] {

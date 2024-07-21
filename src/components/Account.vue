@@ -18,9 +18,9 @@
       <div id="bloat" class="w-100"></div>
       <h2 v-if="hasWallet">You are connected!</h2>
       {{ wallet }}
-      <button v-if="hasWallet" class="btn btn-xxs gradient-highlight" @click="toggleModalAccount">
+      <UiButton v-if="hasWallet" class="btn btn-xxs gradient-highlight" @click="toggleModalAccount">
         Close modal
-      </button>
+      </UiButton>
     </div>
   </div>
 </template>

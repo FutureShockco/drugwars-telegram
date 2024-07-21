@@ -12,10 +12,10 @@
             v-lowercase />
           <p>Profile picture</p>
           <input class="input input-primary mb-4" v-model="picture" type="url" :placeholder="user.picture" />
-          <button class="btn btn-xxs gradient-highlight" type="submit" :disabled="isLoading">
+          <UiButton class="btn btn-xxs gradient-highlight" type="submit" :disabled="isLoading">
             <SmallLoading v-if="isLoading" />
             <span v-else>Edit</span>
-          </button>
+          </UiButton>
         </form>
         <a @click.prevent="alert.isActive ? stop_alerts(alert) : activate_alerts(alert)" v-for="alert in alerts"
           :key="alert.id">
@@ -24,8 +24,8 @@
         </a>
         <div class="mt-3">
           Use this button if you have any issue with loading, deleting squads.
-          <button class="btn btn-xxs gradient-red" @click="deleteFavCompo()">Delete Fav
-            Squads</button>
+          <UiButton class="btn btn-xxs gradient-red" @click="deleteFavCompo()">Delete Fav
+            Squads</UiButton>
         </div>
       </div>
     </div>

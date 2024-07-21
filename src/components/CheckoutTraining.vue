@@ -3,7 +3,7 @@
     <div :class="inProgress ? 'col-12 pe-0' : 'col-6 pe-0'">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
-      <button
+      <UiButton
         :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate ? '' : 'button-green']"
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate" @click="handleSubmit()"
         class="button btn-block  button-left w-100">
@@ -16,22 +16,22 @@
           <i class="iconfont icon-arrow-up" />
           <span>{{ upgradeLabel }}</span>
         </template>
-      </button>
+      </UiButton>
     </div>
     <div v-if="!inProgress" class="col-6 p-0">
       <div class="text-center w-100">Instant upgrade</div>
-      <button v-if="steemAccount" :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+      <UiButton v-if="steemAccount" :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
         @click="handleRequestPayment()" class="button btn-block button-blue mb-2">
         <i class="iconfont icon-zap" />
         <span>
           {{ priceInSteem }} TON</span>
-      </button>
-      <button :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+      </UiButton>
+      <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
         @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
         <span>
           {{ priceInDWD }} DW</span>
-      </button>
+      </UiButton>
     </div>
   </div>
 </template>

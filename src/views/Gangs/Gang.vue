@@ -31,7 +31,7 @@
             >
               <Avatar :username="apply.username" size="40" class="mr-2" />
               {{ apply.username }} soldier
-              <button
+              <UiButton
                 @click="handleReject(apply.username)"
                 class="button button-red float-right"
                 :disabled="isLoading"
@@ -39,15 +39,15 @@
               >
                 <span v-if="!isLoading">Reject</span>
                 <SmallLoading v-else />
-              </button>
-              <button
+              </UiButton>
+              <UiButton
                 @click="handleApprove(apply.username)"
                 class="button button-green float-right mr-2"
                 :disabled="isLoading"
               >
                 <span v-if="!isLoading">Approve</span>
                 <SmallLoading v-else />
-              </button>
+              </UiButton>
               <div class="p-2">{{ apply.message }}</div>
             </div>
           </div>
@@ -66,10 +66,10 @@
               v-model="message"
               maxlength="280"
             ></textarea>
-            <button type="submit" class="button button-green btn-block mb-2" :disabled="isLoading">
+            <UiButton type="submit" class="button button-green btn-block mb-2" :disabled="isLoading">
               <span v-if="!isLoading">Apply</span>
               <SmallLoading v-else />
-            </button>
+            </UiButton>
           </form>
           <h3>Members</h3>
 

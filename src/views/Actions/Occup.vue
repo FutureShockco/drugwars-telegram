@@ -36,10 +36,10 @@
                     Name :
                     <input class="input form-control mb-4" placeholder="Base name" v-model="name">
                 </div>
-                <button :disabled="selectedUnits.length === 0 || !territory || hasNotEnough || isLoading || selectedTotal > carry" class="button button-large button-blue mb-4" @click="handleSubmit">
+                <UiButton :disabled="selectedUnits.length === 0 || !territory || hasNotEnough || isLoading || selectedTotal > carry" class="button button-large button-blue mb-4" @click="handleSubmit">
                           <SmallLoading v-if="isLoading"/>
                         <span v-else>Take base</span>
-                      </button>
+                      </UiButton>
                 <p class="text-red text-left" v-if="errorMessage">
                     {{ errorMessage }}
                 </p>

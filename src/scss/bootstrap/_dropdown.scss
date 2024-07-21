@@ -171,19 +171,19 @@
 
 // Links, buttons, and more within the dropdown menu
 //
-// `<button>`-specific styles are denoted with `// For <button>s`
+// `<UiButton>`-specific styles are denoted with `// For <UiButton>s`
 .dropdown-item {
   display: block;
-  width: 100%; // For `<button>`s
+  width: 100%; // For `<UiButton>`s
   padding: var(--#{$prefix}dropdown-item-padding-y) var(--#{$prefix}dropdown-item-padding-x);
   clear: both;
   font-weight: $font-weight-normal;
   color: var(--#{$prefix}dropdown-link-color);
-  text-align: inherit; // For `<button>`s
+  text-align: inherit; // For `<UiButton>`s
   text-decoration: if($link-decoration == none, null, none);
   white-space: nowrap; // prevent links from randomly breaking onto new lines
-  background-color: transparent; // For `<button>`s
-  border: 0; // For `<button>`s
+  background-color: transparent; // For `<UiButton>`s
+  border: 0; // For `<UiButton>`s
 
   &:hover,
   &:focus {

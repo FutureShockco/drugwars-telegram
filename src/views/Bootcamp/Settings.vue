@@ -23,31 +23,31 @@
             </svg>
           </h5>
         <div :class="{ isOpen }" class="dropdown">
-          <button
+          <UiButton
             class="btn btn-yellow btn-sm rp mr-2"
             v-for="base in allbase"  @click="setRallyPointCoordinates(base.territory,base.base)"
             v-if=" base.building ==='headquarters' && (ownBase.territory+''+ownBase.base !== base.territory+''+base.base)"
             :key="(base.territory+''+base.base)"
           > 
-            {{base.custom }}</button>
+            {{base.custom }}</UiButton>
           </div>
             <form class="form container-xxs" @submit.prevent="handleSubmit">
               <h5>   {{ upgradeLabel }}</h5>
-            <button
+            <UiButton
               :disabled="isLoading || !ownBase ||!target_base || !target_territory"
               class="button btn-block button-yellow mb-4">
             
                              <SmallLoading v-if="isLoading" />
           <span v-else>SET RALLY POINT   </span>
-            </button>
+            </UiButton>
             </form>
-                        <button
+                        <UiButton
               v-if="rallyPoint.rally_territory && rallyPoint.rally_base" @click="resetRallyPoint()"
               :disabled="rallyPoint.rally_territory === ownBase.territory && rallyPoint.rally_base === ownBase.base"
               class="button btn-block button-yellow mt-2 mb-2 container-xxs">
                    <SmallLoading v-if="isLoading" />
           <span v-else>RESET RALLY POINT   </span>
-            </button>
+            </UiButton>
             <h4 v-if="errorMessage" class="text-red">Please select a valid territory</h4>
         </div>
     </div>

@@ -17,41 +17,41 @@
                                 <h2 class="mt-0 column col-6">
                                     <GangImage class="mr-2" size="40" v-if="gang.image" :image="gang.image" />
                                     <router-link v-if="gang && gang.ticker" :to="`/gangs/gang/${gang.gang}`">{{ gang.name || gang.gang }} [{{gang.ticker}}]
-                                        <button v-if="otherEvents(gang.gang).event_type ==='alliance' && myEvents(gang.gang).event_type ==='alliance'" class="button ml-2 allies button-green ">
+                                        <UiButton v-if="otherEvents(gang.gang).event_type ==='alliance' && myEvents(gang.gang).event_type ==='alliance'" class="button ml-2 allies button-green ">
     										<span v-if="!isLoading">ALLIES</span>
     										<SmallLoading v-else/>
-    									</button>
+    									</UiButton>
                                     </router-link>
     
                                 </h2>
                                 <div class="column col-6 text-right">
-                                    <button v-if="otherEvents(gang.gang).event_type ==='war' || myEvents(gang.gang).event_type ==='war'" @click="handleStop('war',gang.gang)" class="button button-blue mb-2" :disabled="isLoading || otherEvents(gang.gang).event_type ==='war' ||  lastUpdate(myEvents(gang.gang)) && myEvents(gang.gang).event_type ==='war'  || myEvents(gang.gang).event_type !=='war'">
+                                    <UiButton v-if="otherEvents(gang.gang).event_type ==='war' || myEvents(gang.gang).event_type ==='war'" @click="handleStop('war',gang.gang)" class="button button-blue mb-2" :disabled="isLoading || otherEvents(gang.gang).event_type ==='war' ||  lastUpdate(myEvents(gang.gang)) && myEvents(gang.gang).event_type ==='war'  || myEvents(gang.gang).event_type !=='war'">
     										<span v-if="!isLoading">stop war</span>
     										<SmallLoading v-else/>
-    									</button>
+    									</UiButton>
                                     <div v-else>
-                                        <button @click="handleSubmit('war',gang.gang)" class="button button-red mb-2 mr-2" :disabled="isLoading || otherEvents(gang.gang).event_type ==='war' || myEvents(gang.gang).event_type ==='war' || myEvents(gang.gang).event_type ==='alliance'">
+                                        <UiButton @click="handleSubmit('war',gang.gang)" class="button button-red mb-2 mr-2" :disabled="isLoading || otherEvents(gang.gang).event_type ==='war' || myEvents(gang.gang).event_type ==='war' || myEvents(gang.gang).event_type ==='alliance'">
     										<span v-if="!isLoading">declare war</span>
     										<SmallLoading v-else/>
-    									</button>
-                                        <button @click="handleSubmit('alliance',gang.gang)" class="button button-green " :disabled="isLoading || myEvents(gang.gang).event_type ==='alliance' || myEvents(gang.gang).event_type ==='war'">
+    									</UiButton>
+                                        <UiButton @click="handleSubmit('alliance',gang.gang)" class="button button-green " :disabled="isLoading || myEvents(gang.gang).event_type ==='alliance' || myEvents(gang.gang).event_type ==='war'">
     										<span v-if="!isLoading">offer alliance</span>
     										<SmallLoading v-else/>
-    									</button>
+    									</UiButton>
                                     </div>
-                                    <button v-if="otherEvents(gang.gang).event_type ==='alliance' || myEvents(gang.gang).event_type ==='alliance' " @click="handleStop('alliance',gang.gang)" class="button button-blue mb-2 " :disabled="isLoading || myEvents(gang.gang).event_type !=='alliance'">
+                                    <UiButton v-if="otherEvents(gang.gang).event_type ==='alliance' || myEvents(gang.gang).event_type ==='alliance' " @click="handleStop('alliance',gang.gang)" class="button button-blue mb-2 " :disabled="isLoading || myEvents(gang.gang).event_type !=='alliance'">
     										<span v-if="!isLoading">stop alliance</span>
     										<SmallLoading v-else/>
-    									</button>
+    									</UiButton>
     
-                                    <button v-if="otherEvents(gang.gang).event_type ==='alliance' && myEvents(gang.gang).event_type !=='alliance'" @click="handleSubmit('alliance',gang.gang)" class="button button-blue mb-2 ml-2" :disabled="isLoading || otherEvents(gang.gang).event_type !=='alliance'">
+                                    <UiButton v-if="otherEvents(gang.gang).event_type ==='alliance' && myEvents(gang.gang).event_type !=='alliance'" @click="handleSubmit('alliance',gang.gang)" class="button button-blue mb-2 ml-2" :disabled="isLoading || otherEvents(gang.gang).event_type !=='alliance'">
     										<span v-if="!isLoading">accept alliance</span>
     										<SmallLoading v-else/>
-    									</button>
-                                    <button v-if="otherEvents(gang.gang).event_type ==='alliance' && myEvents(gang.gang).event_type !=='alliance'" @click="handleStop('alliance',gang.gang)" class="button button-blue mb-2 ml-2" :disabled="isLoading || otherEvents(gang.gang).event_type !=='alliance'">
+    									</UiButton>
+                                    <UiButton v-if="otherEvents(gang.gang).event_type ==='alliance' && myEvents(gang.gang).event_type !=='alliance'" @click="handleStop('alliance',gang.gang)" class="button button-blue mb-2 ml-2" :disabled="isLoading || otherEvents(gang.gang).event_type !=='alliance'">
     										<span v-if="!isLoading">refuse alliance</span>
     										<SmallLoading v-else/>
-    									</button>
+    									</UiButton>
                                 </div>
                             </div>
                         </div>

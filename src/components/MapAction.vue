@@ -7,18 +7,18 @@
             <div class="border-bottom border-top border-left  text-right">
               <h5 class="mb-0">{{ player.name }} <span class="text-yellow mx-1"> {{ player.set.territory }} :
                   {{ player.set.location }} </span>
-                <button class="button button-red" @click="deleteFarm(player.name)">
+                <UiButton class="button button-red" @click="deleteFarm(player.name)">
                   <div class="iconfont icon-trashcan text-white"></div>
-                </button>
-                <button class="button button-green ml-3" @click="loadFarm(player.set)">
+                </UiButton>
+                <UiButton class="button button-green ml-3" @click="loadFarm(player.set)">
                   <div class="iconfont icon-check text-white"></div>
-                </button>
+                </UiButton>
               </h5>
             </div>
           </div>
         </div>
         <h3 v-else>You should first add a place to your list by visiting it.</h3>
-        <button class="button button-red mt-5" @click="openFarmList()">Cancel</button>
+        <UiButton class="button button-red mt-5" @click="openFarmList()">Cancel</UiButton>
       </div>
     </UiCenter>
     <div v-if="show" class="p-4 width-full container-lg clearfix anim-fade-in mapaction">
@@ -37,14 +37,14 @@
           Take a new base (need 1 occupation troop)
         </div>
         <div class="mt-1">
-          <button class="button" @click="chooseActionType('attack')"
-            :class="{ 'button-red': action_type === 'attack' || target_type === 'npc' }">ATTACK</button>
-          <button class="button ml-1" @click="chooseActionType('transport')"
-            :class="{ 'button-blue': action_type === 'transport' }">TRANSPORT</button>
-          <button class="button ml-1" @click="chooseActionType('occupy')"
-            :class="{ 'button-green': action_type === 'occupy' }">OCCUPY</button>
-          <button class="button ml-1" @click="chooseActionType('station')"
-            :class="{ 'button-orange': action_type === 'station' }">STATION</button>
+          <UiButton class="button" @click="chooseActionType('attack')"
+            :class="{ 'button-red': action_type === 'attack' || target_type === 'npc' }">ATTACK</UiButton>
+          <UiButton class="button ml-1" @click="chooseActionType('transport')"
+            :class="{ 'button-blue': action_type === 'transport' }">TRANSPORT</UiButton>
+          <UiButton class="button ml-1" @click="chooseActionType('occupy')"
+            :class="{ 'button-green': action_type === 'occupy' }">OCCUPY</UiButton>
+          <UiButton class="button ml-1" @click="chooseActionType('station')"
+            :class="{ 'button-orange': action_type === 'station' }">STATION</UiButton>
         </div>
         <h3>Select your army composition</h3>
         <div v-if="ownUnits.length > 0">
@@ -58,13 +58,13 @@
         <div v-if="action_type !== 'occupy'" class="column pl-0 mt-6 col-6 text-left width-full">
           <input class="input form-control" :disabled="selectedUnits.length === 0" placeholder="New Squad name"
             v-model="combination_name" maxlength="24">
-          <button class="button button-green" :disabled="selectedUnits.length === 0 || !combination_name"
-            @click="saveCombination()">Save squad</button>
+          <UiButton class="button button-green" :disabled="selectedUnits.length === 0 || !combination_name"
+            @click="saveCombination()">Save squad</UiButton>
           <draggable @start="drag = true" v-model="favoriteCombinations" @end="onEnd">
             <div class="mt-2" v-for="combination in favoriteCombinations" :key="combination.key">
-              <button class="button button-red" @click="deleteCombination(combination.name)">delete squad</button>
-              <button class="button button-blue ml-2" @click="loadCombination(combination.set)">load
-                {{ combination.name }}</button>
+              <UiButton class="button button-red" @click="deleteCombination(combination.name)">delete squad</UiButton>
+              <UiButton class="button button-blue ml-2" @click="loadCombination(combination.set)">load
+                {{ combination.name }}</UiButton>
             </div>
           </draggable>
         </div>
@@ -80,7 +80,7 @@
           </div>
           <div v-else>
             <h5>Power : {{ offensivePower }}% - Timer : {{ timer | ms }} - Cost : {{ cost | amount }}</h5>
-            <button class="button button-blue mb-2" @click="removeUnits()">Remove all</button>
+            <UiButton class="button button-blue mb-2" @click="removeUnits()">Remove all</UiButton>
             <div v-if="action_type === 'transport'">
               <div class="columns mt-4">
                 <div class="column col-4">
@@ -114,20 +114,20 @@
           <h3>Type a nickname</h3>
           <div>
             <input class="input form-control mb-1" type="string" placeholder="Nickname" v-model="targetNickname">
-            <button class="button button-green" @click="getUserBase()">
+            <UiButton class="button button-green" @click="getUserBase()">
               <div class="iconfont icon-search"></div>
-            </button>
-            <button class="button button-blue" @click="openFarmList()">
+            </UiButton>
+            <UiButton class="button button-blue" @click="openFarmList()">
               <div class="iconfont icon-book"></div>
-            </button>
+            </UiButton>
             <h5 v-if="bases" class="mt-1">
               <span v-if="bases[0]">{{ bases[0].role }} OF </span> <span v-if="bases[0]">{{ bases[0].name }}</span> <span
                 v-if="bases[0]"> [{{ bases[0].ticker }}]</span>
             </h5>
             <div v-for="base in bases" :key="base.id">
-              <button class="btn btn-xxs gradient-highlight"
+              <UiButton class="btn btn-xxs gradient-highlight"
                 @click="chooseBase(base.territory, base.base)">{{ base.territory }}:{{ base.base }} - {{ base.custom }} -
-                HQ:{{ base.lvl }} </button>
+                HQ:{{ base.lvl }} </UiButton>
             </div>
           </div>
         </div>
@@ -149,26 +149,26 @@
           <input class="input form-control btn-block mb-4" placeholder="Eg : Saint Street" v-model="baseName"
             maxlength="280">
         </div>
-        <button v-if="action_type === 'attack'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
+        <UiButton v-if="action_type === 'attack'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
           class="button button-large button-red mb-4" @click="handleSubmit">
           <SmallLoading v-if="isLoading" />
           <span v-else>{{ action_type }}</span>
-        </button>
-        <button v-if="action_type === 'transport'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
+        </UiButton>
+        <UiButton v-if="action_type === 'transport'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
           class="button button-large button-blue mb-4" @click="handleSubmit">
           <SmallLoading v-if="isLoading" />
           <span v-else>{{ action_type }}</span>
-        </button>
-        <button v-if="action_type === 'occupy'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
+        </UiButton>
+        <UiButton v-if="action_type === 'occupy'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
           class="button button-large button-green mb-4" @click="handleSubmit">
           <SmallLoading v-if="isLoading" />
           <span v-else>{{ action_type }}</span>
-        </button>
-        <button v-if="action_type === 'station'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
+        </UiButton>
+        <UiButton v-if="action_type === 'station'" :disabled="selectedUnits.length === 0 || !territory || isLoading"
           class="button button-large button-orange mb-4" @click="handleSubmit">
           <SmallLoading v-if="isLoading" />
           <span v-else>{{ action_type }}</span>
-        </button>
+        </UiButton>
         <p class="text-red text-left" v-if="errorMessage">
           {{ errorMessage }}
         </p>
@@ -185,9 +185,9 @@
           </router-link>
         </div>
       </h2>
-      <button class="button button button-red mb-4" @click="closeAction">
+      <UiButton class="button button button-red mb-4" @click="closeAction">
         <span v-if="show">BACK</span>
-      </button>
+      </UiButton>
     </div>
   </div>
 </template>
