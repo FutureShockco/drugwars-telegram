@@ -117,7 +117,7 @@
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
                         the {{ task.link }} channel</div>
                     <div v-else-if="task.user && task.completed === 0"
-                        @click="verifyTask({ id: task.id })"
+                        @click="verifyTask({ id: task.id }),refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
@@ -139,7 +139,7 @@
                         Follow
                         the {{ task.link }} account</div>
                     <div v-else-if="task.user && task.completed === 0"
-                        @click="verifyTask({ id: task.id })"
+                        @click="verifyTask({ id: task.id }),refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
