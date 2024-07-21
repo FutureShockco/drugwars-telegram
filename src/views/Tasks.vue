@@ -113,7 +113,7 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id)"
+                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask({id:task.id}),refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
                         the {{ task.link }} channel</div>
                     <div v-else-if="task.user && task.completed === 0"
@@ -124,7 +124,7 @@
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
 
-            <div v-if="task.tasktype === 'follow'" class="card card-style shadow-card shadow-card-l"
+            <div v-if="hasTwitter && task.tasktype === 'follow'" class="card card-style shadow-card shadow-card-l"
                 data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
@@ -134,7 +134,7 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask(task.id)"
+                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask({id:task.id}),refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Follow
                         the {{ task.link }} account</div>
