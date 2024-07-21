@@ -7,7 +7,7 @@
             <thead>
               <tr>
                 <th scope="col">Player</th>
-                <th scope="col">Prod</th>
+                <th scope="col">Prod/Day</th>
                 <th scope="col">Reward</th>
                 <th scope="col">Bonus</th>
               </tr>

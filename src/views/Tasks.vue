@@ -21,8 +21,53 @@
                 <h3 class="color-white">X (Twitter) Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your X (Twitter) account!</p>
                 <div @click="TWA.openLink('https://apitelegram.drugwars.io/twitter/login/' + TWA.initData)"
-                    class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
+                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
                     Link Now</div>
+            </div>
+            <div class="card-overlay bg-gradient-fade opacity-80"></div>
+        </div>
+        <div class="card card-style shadow-card shadow-card-l show" data-card-height="150" style="height: 150px;"
+            :style="`background-image:url(/img/tasks/1.png`">
+            <div class="card-bottom pb-3 px-3">
+                <h3 class="color-white">Daily Rewards</h3>
+                <p class="color-white opacity-70 mb-0 mt-n1">Come everyday to get your dose!</p>
+                <div @click="toggleModalVideo(), setCurrentLink('daily')"
+                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-2">
+                    Claim now</div>
+            </div>
+            <div v-if="modalVideoVisible && currentLink === 'daily'"
+                class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" :class="modalVideoVisible ? 'show' : ''"
+                :id="'menu-video-' + 'daily'">
+                <div class="content mt-n2">
+                    <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Daily Rewards </h1>
+                    <p>
+                        Get some resources or units for free! Each time you complete a week you will increase your rewards level.
+                    </p>
+                    <div class="d-flex flex-wrap">
+                        <div class="col-3 text-center" v-for="reward in dailyRewards.rewards">
+                            <h3>Day {{ reward.day }}</h3>
+                            <div v-if="reward.reward.type === 'resource'">
+                                <h5 class="d-block" v-if="reward.reward.drug">
+                                    <Icon name="drug" size="12" />{{ reward.reward.drug }}
+                                </h5>
+                                <h5 class="d-block" v-if="reward.reward.weapon">
+                                    <Icon name="weapon" size="12" />{{ reward.reward.weapon }}
+                                </h5>
+                                <h5 class="d-block" v-if="reward.reward.alcohol">
+                                    <Icon name="alcohol" size="12" />{{ reward.reward.alcohol }}
+                                </h5>
+                            </div>
+                            <div v-else>
+                                <img style="border: 1px solid #392828;    "
+                                    :src="`/img/units/${reward.reward.name}.png`" class="img-fluid rounded-s"
+                                    width="100" height="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div @click="toggleModalVideo(), setCurrentLink(null)"
+                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        Done</div>
+                </div>
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
@@ -113,11 +158,11 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask({id:task.id}),refreshTask()"
+                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
                         the {{ task.link }} channel</div>
                     <div v-else-if="task.user && task.completed === 0"
-                        @click="verifyTask({ id: task.id }),refreshTask()"
+                        @click="verifyTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
@@ -134,12 +179,12 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask({id:task.id}),refreshTask()"
+                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Follow
                         the {{ task.link }} account</div>
                     <div v-else-if="task.user && task.completed === 0"
-                        @click="verifyTask({ id: task.id }),refreshTask()"
+                        @click="verifyTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
@@ -297,6 +342,7 @@ export default {
             newTask: { bg: 26, link: '', tasktype: 'watch', rewardType: 'resources', upgradeType: { building: 'headquarters', level: 0 }, rewards: { drug: 0, weapon: 0, alcohol: 0, dwtoken: 0, unit: { name: "spy", amount: 0 } } },
             tasks: [],
             userTasks: [],
+            dailyRewards: [],
             percentage: 0,
             timer: 0,
             units,
@@ -313,10 +359,11 @@ export default {
         // this.completeTask({ id: 4 })
     },
     methods: {
-        ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeTask', 'verifyTask']),
+        ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeDay', 'completeTask', 'verifyTask']),
         load_tasks() {
             this.usertasks = [];
-            const params = { user: this.$store.state.auth.username }
+            const params = { user: { id: this.$store.state.auth.username } }
+            console.log(params)
             client.requestAsync('get_tasks', params).then(result => {
                 console.log(result)
                 if (result[0])
@@ -339,6 +386,10 @@ export default {
                         }
                     });
                 }
+                console.log(result)
+                const rewards = result[2][0]
+                this.dailyRewards = rewards
+                this.dailyRewards.rewards = JSON.parse(this.dailyRewards.rewards)
                 this.tasks.sort(function (a, b) { return a.completed - b.completed });
                 this.isLoading = false;
             });

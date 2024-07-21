@@ -1,5 +1,5 @@
 <template>
-  <div :class="open ? '': 'd-none'" class="offcanvas offcanvas-modal rounded-m offcanvas-detached bg-theme show"
+  <div :class="open ? '' : 'd-none'" class="offcanvas offcanvas-modal rounded-m offcanvas-detached bg-theme show"
     style="width: 340px; visibility: visible;" id="menu-call" aria-modal="true" role="dialog">
     <div class="content">
       <div class="d-flex pb-2">
@@ -16,7 +16,7 @@
         To receive rewards and make payments through DrugWars you need to connect your TON wallet!
       </p>
       <div id="bloat" class="w-100"></div>
-      <h2 v-if="hasWallet" >You are connected!</h2>
+      <h2 v-if="hasWallet">You are connected!</h2>
       {{ wallet }}
       <button v-if="hasWallet" class="btn btn-xxs gradient-highlight" @click="toggleModalAccount">
         Close modal
@@ -48,9 +48,15 @@ export default {
     username() {
       return this.$store.state.game.user;
     },
-    hasWallet(){
+    hasWallet() {
       return this.$store.state.game.user.user.wallet || false;
-    }
+    },
+    tutorialStep() {
+      return this.$store.state.game.user.user.tutorial
+    },
+    tutoDetail() {
+      return this.$store.state.game.tutoDetail
+    },
   },
   mounted() {
     if (window.TON_CONNECT_UI) {
@@ -58,22 +64,21 @@ export default {
         manifestUrl: 'https://dw-telegram-84740bd92ce1.herokuapp.com/tonconnect-manifest.json',
         buttonRootId: 'bloat'
       });
-			this.tonConnectUI.uiOptions = {
+      this.tonConnectUI.uiOptions = {
         actionsConfiguration: {
-            modals: ['before', 'success', 'error'],
-            notifications: ['before', 'success', 'error'],
-						skipRedirectToWallet: 'ios'
+          modals: ['before', 'success', 'error'],
+          notifications: ['before', 'success', 'error'],
+          skipRedirectToWallet: 'ios'
         },
-		    twaReturnUrl: 'https://t.me/drugwars_bot/drugwars'
-	    };
+        twaReturnUrl: 'https://t.me/drugwars_bot/drugwars'
+      };
       window.tonConnectUI = this.tonConnectUI;
       this.tonConnectUI.onStatusChange(
         walletAndwalletInfo => {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet)
-            {
+            if (!this.$store.state.game.user.user.wallet && this.tutorialStep > 7) {
               this.setWallet(this.wallet)
               this.setTutoDetail(3)
               this.toggleModalAccount()
@@ -85,7 +90,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['init','logout', 'send', 'toggleModalAccount','setTutoDetail']),
+    ...mapActions(['init', 'logout', 'send', 'toggleModalAccount', 'setTutoDetail']),
     setWallet() {
       const payload = {
         wallet: this.wallet,
@@ -102,6 +107,7 @@ export default {
           this.isLoading = false;
         });
     },
-  }
+  },
+
 };
 </script>

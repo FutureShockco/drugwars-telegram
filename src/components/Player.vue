@@ -32,15 +32,15 @@
     <td v-if="player.drug_production_rate" class="col">
       <div>
         <Icon name="drug" size="22" />
-        {{ player.drug_production_rate * 60 * 60 * 24 | amount }}/day
+        {{ player.drug_production_rate * 60 * 60 * 24 | amount }}
       </div>
       <div>
         <Icon name="weapon" size="22" />
-        {{ player.weapon_production_rate * 60 * 60 * 24 | amount }}/day
+        {{ player.weapon_production_rate * 60 * 60 * 24 | amount }}
       </div>
       <div>
         <Icon name="alcohol" size="22" />
-        {{ player.alcohol_production_rate * 60 * 60 * 24 | amount }}/day
+        {{ player.alcohol_production_rate * 60 * 60 * 24 | amount }}
       </div>
     </td>
     <td v-else-if="!cruelty" class="col">
