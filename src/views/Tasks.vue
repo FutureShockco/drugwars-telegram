@@ -21,7 +21,7 @@
                 <h3 class="color-white">X (Twitter) Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your X (Twitter) account!</p>
                 <div @click="TWA.openLink('https://apitelegram.drugwars.io/twitter/login/' + TWA.initData)"
-                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
+                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
                     Link Now</div>
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
@@ -30,12 +30,18 @@
             :style="`background-image:url(/img/tasks/1.png`"
             :class="dailyRewards.last_connect === dayCheck ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
+                <div class="text-end">
+                    <h6 class="mb-n1 opacity-80 color-highlight">Level</h6>
+                    <router-link to="/referral">
+                        <h3>{{ dailyRewards.level + 1 }}</h3>
+                    </router-link>
+                </div>
                 <h3 class="color-white">Daily Rewards</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Come everyday to get your dose!</p>
                 <div v-if="dailyRewards.last_connect !== dayCheck" @click="toggleModalVideo(), setCurrentLink('daily')"
-                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-2">
+                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
                     Claim now</div>
-                <div v-else class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-2">
+                <div v-else class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
                     Come back tomorrow</div>
             </div>
             <div v-if="modalVideoVisible && currentLink === 'daily'"
@@ -43,6 +49,7 @@
                 :id="'menu-video-' + 'daily'">
                 <div class="content mt-n2">
                     <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Daily Rewards </h1>
+                    <h6 class="mt-0 pt-0 color-red-dark" v-if="didReset">Oops! Your progress has been reset.</h6>
                     <p>
                         Get some resources or units for free! Each time you complete a week you will increase your
                         rewards level.
@@ -50,7 +57,7 @@
 
                     <div class="row gx-3">
                         <div class="col-3" v-for="(reward, index) in dailyRewards.rewards">
-                            <div @click="claimDaily(),toggleModalVideo(), setCurrentLink(null)"
+                            <div @click="claimDaily(), toggleModalVideo(), setCurrentLink(null)"
                                 :class="[reward.day === parseInt(dailyRewards.current_day) ? 'bg-theme gradient-border' : 'opacity-50 border border-yellow-dark no-pointer', reward.day < parseInt(dailyRewards.current_day) ? 'bg-green btn btn-xxs' : '']"
                                 class="p-0 me-2 mb-3  badge  text-center w-100" style="border-radius:10px;">
                                 <h4 class="bg-highlight" style="border-radius:8px 8px 0px 0px;">Day {{
@@ -98,7 +105,7 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div @click="toggleModalVideo(), setCurrentLink(task.link)"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-2">
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
                         Share Now</div>
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
@@ -115,7 +122,7 @@
                             Share
                             on Telegram</div>
                         <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}`)"
-                            class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight my-2">
+                            class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight my-1">
                             Share on X (Twitter)</div>
 
                         <div @click="toggleModalVideo(), setCurrentLink(null)"
@@ -363,6 +370,7 @@ export default {
             dailyRewards: [],
             percentage: 0,
             timer: 0,
+            didReset: false,
             units,
             buildings,
             bgs: []
@@ -412,9 +420,25 @@ export default {
                 const rewards = result[2][0]
                 this.dailyRewards = rewards
                 this.dailyRewards.rewards = JSON.parse(this.dailyRewards.rewards)
+                const lastConnectDate = this.parseDate(this.dailyRewards.last_connect);
+                const now = new Date();
+                const diffHours = this.getHoursDifference(lastConnectDate, now);
+                if (diffHours >= 48) {
+                    this.dailyRewards.current_day = 1
+                    this.didReset = true
+                }
                 this.tasks.sort(function (a, b) { return a.completed - b.completed });
                 this.isLoading = false;
             });
+        },
+        parseDate(dateStr) {
+            const [day, month, year] = dateStr.split('-').map(Number);
+            return new Date(year, month - 1, day);
+        },
+
+        getHoursDifference(date1, date2) {
+            const diffMs = date2 - date1;
+            return diffMs / (1000 * 60 * 60);
         },
         async handleSubmit() {
             await this.addTask(this.newTask)
@@ -446,6 +470,7 @@ export default {
         }
     },
     computed: {
+
         now() {
             return new Date(this.$store.state.ui.timestamp)
                 .toISOString()
