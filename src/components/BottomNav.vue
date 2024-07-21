@@ -5,11 +5,11 @@
     <router-link to="/units"><i class="fad fa-campground font-20"></i><span>Camp</span></router-link>
     <router-link to="/actions"><i class="fad fa-explosion font-20"></i><span>Fight</span></router-link>
 
-    <router-link v-if="hasBase" :to="'/map/territory?location=' + base.territory"><i
+    <!-- <router-link v-if="hasBase" :to="'/map/territory?location=' + base.territory"><i
         class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link>
 
     <router-link v-else :to="'/map/territory?location=' + rnd"><i
-        class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link>
+        class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link> -->
     <!-- <router-link to="/rewards"><i class="fad fa-award font-20"></i><span>Rewards</span></router-link> -->
     <!-- <router-link to="/leaderboards"><i class="fad fa-trophy font-20"></i><span>Board</span></router-link> -->
 

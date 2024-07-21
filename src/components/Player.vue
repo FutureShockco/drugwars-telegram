@@ -5,9 +5,6 @@
         <Avatar :size="20" :username="player.nickname" :rank="rank" :rankname="rankname"
           picture="https://www.enableds.com/products/duo/v30/images/avatars/2s.png" :reputation="player.reputation"
           :xp="player.xp" />
-        <!-- <span>
-          <div class="username text-xs">{{ rankname }}</div>
-        </span> -->
         <div v-if="player.gang" class="username ms-2" :class="{ 'text-blue': player.gang === user.gang }">{{
           player.nickname
         }}</div>
@@ -15,20 +12,6 @@
         <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
       </div>
     </td>
-    <!-- <td class="col">
-      <router-link v-if="player.gang" :to="`/gangs/gang/${player.gang}`">
-        <span>
-          {{ player.name }}'s {{ player.role }}
-          <div>[{{ player.ticker }}]</div>
-        </span>
-      </router-link>
-      <div class="text-green">Wins :{{ player.wins }}</div>
-      <div class="text-red">Loses :{{ player.loses }}</div>
-      <div class="shield mb-2" v-if="shieldEnd">
-        <Icon name="shield" size="36" class="text-gray" />
-        <div class="text-gray">{{ shieldEnd | ms }}</div>
-      </div>
-    </td> -->
     <td v-if="player.drug_production_rate" class="col">
       <div>
         <Icon name="drug" size="22" />
@@ -44,61 +27,45 @@
       </div>
     </td>
     <td v-else-if="!cruelty" class="col">
-      <div>
-        <div>
-          <Icon name="drug" size="22" />
-          {{ player.drugs || 0 | amount }}
-        </div>
-      </div>
+      <Icon name="drug" size="22" />
+      {{ player.drugs || 0 | amount }}
     </td>
     <td v-else-if="player && player.amount" class="col">
-      <div class="mr-3">
-        <div>
-          +{{ player.amount }}
-          <Icon name="dwd" size="22" />
-        </div>
-      </div>
+      +{{ player.amount }}
+      <Icon name="dwd" size="22" />
     </td>
     <td v-else-if="player && player.ticket" class="col">
-      <div>
-        <div>{{ player.ticket }}</div>
-      </div>
+      <div>{{ player.ticket }}</div>
     </td>
     <td v-if="player.drug_production_rate && totalRewards" class="col">
       <div>
-        <div>
-          <Icon name="dwd" size="22" />
-          +{{ totalRewards.daily | amount }}
-        </div>
+        <Icon name="dwd" size="22" />
+        +{{ totalRewards.daily | amount }}
       </div>
     </td>
-    <td v-if="player.drugs && !cruelty" class="col">
-      <div class="production">
-        <div class="mr-3">
-          <div>
-            <Icon name="dwd" size="22" />
-            +{{ ownHeistReward.amount | amount }}
-          </div>
-        </div>
+    <td v-if="player && !cruelty" class="col">
+      <div v-if="ownHeistReward && ownHeistReward.amount">
+        <Icon name="ton" size="22" />
+        +{{ ownHeistReward.amount | amount }}
+      </div>
+      <div v-else>
+        <Icon name="ton" size="22" />
+        +0
       </div>
     </td>
     <td class="col">
       <div v-if="reward">
         <div v-if="player && rank && rank < 26">
-          <div>
-            <Icon name="dwd" size="22" />
-            +{{ Math.round(reward / rank) || 0 | amount }}
-          </div>
+          <Icon name="dwd" size="22" />
+          +{{ Math.round(reward / rank) || 0 | amount }}
         </div>
       </div>
-      <h5 v-else-if="!cruelty">
-        <span class="mr-3" v-if="player && rank && rank < 26">
-          <div>
-            {{ Math.round(10 / rank) || 0 | amount }}
-            <Icon name="dwd" size="22" />
-          </div>
-        </span>
-      </h5>
+      <div v-else-if="!cruelty">
+        <div class="mr-3" v-if="player && rank && rank < 26">
+          {{ Math.round(10 / rank) || 0 | amount }}
+          <Icon name="dwd" size="22" />
+        </div>
+      </div>
     </td>
   </tr>
 </template>
@@ -191,10 +158,10 @@ export default {
     },
     ownHeistReward() {
       const percent = (100 / this.prizeProps.heist_pool) * this.player.drugs;
-      const amount = parseFloat((this.totalHeistDWD / 100) * percent).toFixed(3);
+      const amount = parseFloat((this.totalHeistDWD / 100) * percent).toFixed(3) || 0;
       return {
-        amount,
-        percent,
+        amount: amount || 0,
+        percent: percent || 0,
       };
     },
   },

@@ -14,6 +14,12 @@
           <span class="text-red">({{ activeIncFightsCount }})</span>
         </span>
       </UiTab>
+
+      <UiTab v-if="hasBase" :to="'/map/territory?location=' + base.territory"><i
+          class="fad fa-map-location-dot font-20"></i><span>Map</span></UiTab>
+
+      <UiTab v-else :to="'/map/territory?location=' + rnd"><i
+          class="fad fa-map-location-dot font-20"></i><span>Map</span></UiTab>
       <!-- <UiTab to="/actions/transport">
         Transport
         <span>
@@ -39,6 +45,12 @@
 <script>
 export default {
   computed: {
+    hasBase() {
+      const building = this.$store.state.game.user.buildings.find(
+        b => b.building === 'headquarters' && b.territory !== 0,
+      );
+      return !!(building && building.lvl > 0);
+    },
     base() {
       return this.$store.state.game.mainbase;
     },

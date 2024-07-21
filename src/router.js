@@ -6,6 +6,7 @@ import client from '@/helpers/client';
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
 const Landing = () => import(/* webpackChunkName: "landing" */ '@/views/Landing.vue');
+const Boards = () => import(/* webpackChunkName: "boards" */ '@/views/Boards.vue');
 
 
 const Jobs = () => import(/* webpackChunkName: "jobs" */ '@/views/Jobs/Jobs.vue');
@@ -202,6 +203,15 @@ export default new Router({
       path: '/pablo',
       name: 'pablo',
       component: Pablo,
+      beforeEnter: requireAuth,
+      meta: {
+        hideSidebar: true,
+      },
+    },
+    {
+      path: '/boards',
+      name: 'boards',
+      component: Boards,
       beforeEnter: requireAuth,
       meta: {
         hideSidebar: true,

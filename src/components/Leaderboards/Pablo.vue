@@ -13,14 +13,11 @@
               </tr>
             </thead>
             <tbody>
-
-              <div class="p-4 text-center mt-6" v-if="isLoading || users.length === 0">
+              <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+                :rank="key + 1" />
+              <p class="p-4 text-center mt-6" v-if="isLoading || users.length === 0">
                 <Loading />
-              </div>
-
-              <div class="mb-4" v-else>
-                <Player v-for="(user, key) in users" :player="user" :key="user.username" :rank="key + 1" />
-              </div>
+              </p>
             </tbody>
           </table>
         </div>

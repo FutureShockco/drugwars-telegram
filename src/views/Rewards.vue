@@ -12,28 +12,23 @@
         <Prize />
         <div class="card card-style">
             <div class="content">
-                <h6 class="font-700 mb-n1 color-highlight">Your next rival is there</h6>
-                <h1 class="pb-2">Leaderboard</h1>
-            </div>
-
-            <div class="tabs tabs-cards mx-3" id="tab-group-5">
-                <div class="tab-controls">
-                    <a class="font-13" data-bs-toggle="collapse" href="#tab-13" aria-expanded="true">Board</a>
-                    <a class="font-13" data-bs-toggle="collapse" href="#tab-14" aria-expanded="false">Pablo</a>
-                    <!-- <a class="font-13" data-bs-toggle="collapse" href="#tab-15" aria-expanded="false">Contact</a> -->
-                </div>
-                <div class="card card-style">
-                    <div class="collapse show" id="tab-13" data-bs-parent="#tab-group-5">
-                        <LeaderboardsProduction />
+                <div class="d-flex">
+                    <div>
+                        <h6 class="mb-n1 opacity-80 color-highlight">DrugWars Rewards System</h6>
+                        <h3>Production Rewards</h3>
                     </div>
-                    <div class="collapse" id="tab-14" data-bs-parent="#tab-group-5">
-                        <LeaderboardsPablo />
-                    </div>
-                    <!-- <div class="collapse" id="tab-15" data-bs-parent="#tab-group-5">
-                        <p class="content">Some placeholder content for the collapse component. This panel is hidden by
-                            default but revealed when the user activates the relevant trigger.</p>
-                    </div> -->
                 </div>
+                <p>Every day, players can earn up to 1,000 DW TOKEN as part of their daily drug production. This reward
+                    accumulates automatically based on your in-game production capabilities.
+                </p>
+                <h3>Pablo Rewards</h3>
+                <p>Each week, players can earn 100 TON tokens by selling their drug to Pablo. Whenever an user make a
+                    purchase with TON, 50% is added to this prize pool.
+                </p>
+                <h3>Fight Rewards</h3>
+                <p>: After each fight, you may earn DW TOKEN instantly. These rewards are given immediately upon the
+                    conclusion of each fight, and the number of units killed, reflecting your combat prowess.
+                </p>
             </div>
         </div>
     </div>

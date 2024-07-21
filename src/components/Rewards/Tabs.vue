@@ -4,6 +4,7 @@
       <UiTab to="/home">Rewards</UiTab>
       <UiTab to="/pablo">Pablo</UiTab>
       <UiTab to="/tasks">Tasks</UiTab>
+      <UiTab to="/boards">Boards</UiTab>
       <UiTab to="/referral">Referrals</UiTab>
     </UiTabs>
     <!-- <div class="coordbase text-right" v-if="base">

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <MapTabs />
+    <ActionsTabs />
     <div class="card mb-0" style="margin-top: -15px;">
       <div class="content">
         <div class="tabs tabs-box">

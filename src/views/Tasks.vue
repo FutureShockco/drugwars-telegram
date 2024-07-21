@@ -85,8 +85,12 @@
                             </div>
                         </div>
                     </div>
+                    
+                    <div @click="claimDaily(), toggleModalVideo(), setCurrentLink(null)"
+                        class="btn mb-3 btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-green">
+                        Claim</div>
                     <div @click="toggleModalVideo(), setCurrentLink(null)"
-                        class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        class="close-menu btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Done</div>
                 </div>
             </div>
@@ -118,15 +122,15 @@
                             Get some resources for free!
                         </p>
                         <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text=Join Me on DrugWars`)"
-                            class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                            class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Share
                             on Telegram</div>
                         <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}`)"
-                            class="btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight my-1">
+                            class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight my-1">
                             Share on X (Twitter)</div>
 
                         <div @click="toggleModalVideo(), setCurrentLink(null)"
-                            class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                            class="close-menu btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Done</div>
                     </div>
                 </div>
@@ -163,7 +167,7 @@
                                 aria-valuemax="100"></div>
                         </div>
                         <a @click="toggleModalVideo()"
-                            class="close-menu btn btn-full btn-m shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
+                            class="close-menu btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
                     </div>
                 </div>
             </div>
