@@ -830,6 +830,23 @@ const actions = {
         return reject();
       });
     }),
+  completeDay: ({ rootState }, payload) =>
+    new Promise((resolve, reject) => {
+      const { username } = rootState.auth;
+      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.type = 'dw-complete-day'; // eslint-disable-line no-param-reassign
+      return dwsocial(username, payload, result => {
+        if (result) {
+          store.dispatch('init');
+          store.dispatch('notify', {
+            type: 'success',
+            message: result,
+          });
+          return resolve(result);
+        }
+        return reject();
+      });
+    }),
 };
 
 export default {

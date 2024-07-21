@@ -11,18 +11,23 @@
             <i class="fad fa-share font-24 color-green-dark"></i>
           </div>
         </div>
-        <h3>1.Invite your friends with this link <a :href="url" target="_blank">
+        <h2 class="mt-3">Invite Your Friends</h2>
+        <h5>Share this link with your friends: <a :href="url" target="_blank">
             {{ url }}
-          </a></h3>
-        <h3>2.Make them win resources!</h3>
-        <h3>3.And obtain 5% bonus on their DW token rewards.</h3>
+          </a></h5>
+        <h2 class="mt-3">Help Them Succeed</h2>
+        <h5>Encourage your friends to win resources and achieve great rewards!</h5>
+        <h2 class="mt-3">Earn a 5% Bonus</h2>
+        <h5>For every DW token reward your friends earn with production, you receive a 5% bonus on their rewards. This
+          bonus is an extra
+          benefit for you and does not affect their rewards at all!</h5>
 
       </div>
     </div>
     <div class="card card-style">
       <div class="content">
         <h3>Your referrals</h3>
-      
+
         <div class="referral">
           <div :key="key" v-for="(referral, key) in referrals">
             <p>
@@ -38,6 +43,7 @@
         </div>
         <div v-if="!referrals.length">
           <p>You have not referred anyone yet.</p>
+          Start referring now and boost your rewards while helping your friends thrive in DrugWars!
         </div>
       </div>
     </div>

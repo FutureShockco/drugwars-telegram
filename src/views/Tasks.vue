@@ -27,13 +27,16 @@
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
         <div class="card card-style shadow-card shadow-card-l show" data-card-height="150" style="height: 150px;"
-            :style="`background-image:url(/img/tasks/1.png`">
+            :style="`background-image:url(/img/tasks/1.png`"
+            :class="dailyRewards.last_connect === dayCheck ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">Daily Rewards</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Come everyday to get your dose!</p>
-                <div @click="toggleModalVideo(), setCurrentLink('daily')"
+                <div v-if="dailyRewards.last_connect !== dayCheck" @click="toggleModalVideo(), setCurrentLink('daily')"
                     class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-2">
                     Claim now</div>
+                <div v-else class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-2">
+                    Come back tomorrow</div>
             </div>
             <div v-if="modalVideoVisible && currentLink === 'daily'"
                 class="offcanvas offcanvas-bottom rounded-m offcanvas-detached" :class="modalVideoVisible ? 'show' : ''"
@@ -41,26 +44,37 @@
                 <div class="content mt-n2">
                     <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Daily Rewards </h1>
                     <p>
-                        Get some resources or units for free! Each time you complete a week you will increase your rewards level.
+                        Get some resources or units for free! Each time you complete a week you will increase your
+                        rewards level.
                     </p>
-                    <div class="d-flex flex-wrap">
-                        <div class="col-3 text-center" v-for="reward in dailyRewards.rewards">
-                            <h3>Day {{ reward.day }}</h3>
-                            <div v-if="reward.reward.type === 'resource'">
-                                <h5 class="d-block" v-if="reward.reward.drug">
-                                    <Icon name="drug" size="12" />{{ reward.reward.drug }}
-                                </h5>
-                                <h5 class="d-block" v-if="reward.reward.weapon">
-                                    <Icon name="weapon" size="12" />{{ reward.reward.weapon }}
-                                </h5>
-                                <h5 class="d-block" v-if="reward.reward.alcohol">
-                                    <Icon name="alcohol" size="12" />{{ reward.reward.alcohol }}
-                                </h5>
-                            </div>
-                            <div v-else>
-                                <img style="border: 1px solid #392828;    "
-                                    :src="`/img/units/${reward.reward.name}.png`" class="img-fluid rounded-s"
-                                    width="100" height="100">
+
+                    <div class="row gx-3">
+                        <div class="col-3" v-for="(reward, index) in dailyRewards.rewards">
+                            <div @click="claimDaily(),toggleModalVideo(), setCurrentLink(null)"
+                                :class="[reward.day === parseInt(dailyRewards.current_day) ? 'bg-theme gradient-border' : 'opacity-50 border border-yellow-dark no-pointer', reward.day < parseInt(dailyRewards.current_day) ? 'bg-green btn btn-xxs' : '']"
+                                class="p-0 me-2 mb-3  badge  text-center w-100" style="border-radius:10px;">
+                                <h4 class="bg-highlight" style="border-radius:8px 8px 0px 0px;">Day {{
+                                    reward.day }}
+                                </h4>
+                                <div v-if="reward.reward.type === 'resource'">
+                                    <h6 class="d-block" v-if="reward.reward.drug">
+                                        <Icon name="drug" size="10" />{{ reward.reward.drug }}
+                                    </h6>
+                                    <h6 class="d-block" v-if="reward.reward.weapon">
+                                        <Icon name="weapon" size="10" />{{ reward.reward.weapon }}
+                                    </h6>
+                                    <h6 class="d-block" v-if="reward.reward.alcohol">
+                                        <Icon name="alcohol" size="10" />{{ reward.reward.alcohol }}
+                                    </h6>
+                                </div>
+                                <div v-else>
+                                    <img style="border: 1px solid #392828;    "
+                                        :src="`/img/units/${reward.reward.name}.png`" class="img-fluid rounded-s"
+                                        width="50">
+                                    <h6 class="d-block">
+                                        X{{ reward.reward.amount }}
+                                    </h6>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -164,7 +178,7 @@
                     <div v-else-if="task.user && task.completed === 0"
                         @click="verifyTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
-                        Verify and get paid</div>
+                        Verify and get paid now</div>
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
@@ -177,12 +191,16 @@
                         <TaskResources :task="task" />
                     </div>
                     <h3 class="color-white">{{ task.name }}</h3>
-                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
+                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }} </p>
                     <div v-if="!task.user && task.completed === 0"
                         @click="TWA.openLink(`https://x.com/${task.link}`), completeTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Follow
-                        the {{ task.link }} account</div>
+                        the {{ task.link }} account </div>
+
+                    <div v-else-if="task.user && task.completed === 0 && task.time > now"
+                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
+                        Verification in process {{ (new Date().getTime() - new Date(task.time).getTime()) | ms }}</div>
                     <div v-else-if="task.user && task.completed === 0"
                         @click="verifyTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
@@ -356,7 +374,6 @@ export default {
 
         }
         this.load_tasks()
-        // this.completeTask({ id: 4 })
     },
     methods: {
         ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeDay', 'completeTask', 'verifyTask']),
@@ -379,8 +396,13 @@ export default {
                         element.completed = 0;
                         element.paid = 0;
                         element.user = false;
+                        element.time = new Date()
+                            .toISOString()
+                            .slice(0, 19)
+                            .replace('T', ' ');
                         if (this.usertasks.find(u => u.task_id === element.id)) {
                             element.user = true;
+                            element.time = this.usertasks.find(u => u.task_id === element.id).time;
                             element.completed = this.usertasks.find(u => u.task_id === element.id).completed;
                             element.paid = this.usertasks.find(u => u.task_id === element.id).paid;
                         }
@@ -417,9 +439,23 @@ export default {
                     self.completeTask({ id: self.tasks.find((t) => self.$store.state.game.currentLink === t.link).id })
                 }
             }, 1000);
+        },
+        async claimDaily() {
+            await this.completeDay({})
+            this.load_tasks()
         }
     },
     computed: {
+        now() {
+            return new Date(this.$store.state.ui.timestamp)
+                .toISOString()
+                .slice(0, 19)
+                .replace('T', ' ');
+        },
+        dayCheck() {
+            const rDate = new Date();
+            return `${rDate.getUTCDate()}-${rDate.getUTCMonth() + 1}-${rDate.getUTCFullYear()}`; // Format date as DD-MM-YYYY
+        },
         user() {
             return this.$store.state.game.user;
         },
@@ -450,5 +486,51 @@ export default {
     border-radius: 0.25rem;
     color: #000;
     cursor: pointer;
+}
+
+
+.gradient-border {
+    position: relative;
+    background: linear-gradient(0deg, #000, #272727);
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.gradient-border:before,
+.gradient-border:after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    top: -2px;
+    background: linear-gradient(45deg, #fb0094, #0000ff, #00ff00, #ffff00, #ff0000, #fb0094,
+            #0000ff, #00ff00, #ffff00, #ff0000);
+    background-size: 400%;
+    width: calc(100% + 4px);
+    height: calc(100% + 4px);
+    z-index: -1;
+    border-radius: 10px;
+    animation: steam 20s linear infinite;
+}
+
+@keyframes steam {
+    0% {
+        background-position: 0 0;
+    }
+
+    50% {
+        background-position: 400% 0;
+    }
+
+    100% {
+        background-position: 0 0;
+    }
+}
+
+.gradient-border:after {
+    filter: blur(50px);
+}
+
+.no-pointer {
+    pointer-events: none;
 }
 </style>
