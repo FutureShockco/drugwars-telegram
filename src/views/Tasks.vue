@@ -113,11 +113,11 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id), refreshTask()"
+                        @click="TWA.openLink(`https://t.me/${task.link}`), completeTask(task.id)"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
                         the {{ task.link }} channel</div>
                     <div v-else-if="task.user && task.completed === 0"
-                        @click="verifyTask({ id: task.id }), refreshTask()"
+                        @click="verifyTask({ id: task.id })"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
@@ -134,12 +134,12 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
-                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask(task.id), refreshTask()"
+                        @click="TWA.openLink(`https://x.com/${task.link}`), completeTask(task.id)"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Follow
                         the {{ task.link }} account</div>
                     <div v-else-if="task.user && task.completed === 0"
-                        @click="verifyTask({ id: task.id }), refreshTask()"
+                        @click="verifyTask({ id: task.id })"
                         class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
@@ -345,7 +345,7 @@ export default {
         },
         async handleSubmit() {
             await this.addTask(this.newTask)
-            refreshTask()
+            this.refreshTask()
         },
         async refreshTask() {
             const self = this;
