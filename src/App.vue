@@ -69,7 +69,7 @@ export default {
       if (this.TWA && this.TWA.initData)
         client.restart();
       this.login(this.TWA.initData).then((res) => {
-        this.init(this.TWA.initData).then((result) => {
+        this.init({user:this.TWA.initData,showLoading:true}).then((result) => {
           this.$router.push({ path: this.$route.query.redirect || '/home' });
         })
       })
