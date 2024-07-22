@@ -61,7 +61,7 @@ export default {
   mounted() {
     if (window.TON_CONNECT_UI) {
       this.tonConnectUI = new window.TON_CONNECT_UI.TonConnectUI({
-        manifestUrl: 'https://dw-telegram-84740bd92ce1.herokuapp.com/tonconnect-manifest.json',
+        manifestUrl: 'https://telegram.drugwars.io/tonconnect-manifest.json',
         buttonRootId: 'bloat'
       });
       this.tonConnectUI.uiOptions = {
@@ -85,7 +85,7 @@ export default {
               setTimeout(() => {
                 self.toggleModalAccount()
               }, 3000);
-             
+
 
             }
           }
@@ -103,7 +103,7 @@ export default {
       this.send(payload)
         .then(() => {
           this.isLoading = false;
-          this.init()
+          this.init({ user: this.TWA.initData, showLoading: false })
         })
         .catch(e => {
           this.notify({ type: 'error', message: 'Failed to set wallet' });
