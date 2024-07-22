@@ -54,12 +54,12 @@
       <div class="level">{{ ownItem.amount }}</div>
       <UnitValues :unit="unit" :modifiedValues="modifiedValues" :speed="speed" />
     </div>
-    <div  v-if="!inProgress" class="mx-auto form-field form-name">
+    <div v-if="!inProgress" class="mx-auto form-field form-name">
       <input class="input form-control mb-1" type="number" v-model="quantity" min="1">
     </div>
     <CheckoutRecruit :id="unit.id" :level="training_facility.lvl" :coeff="unit.coeff" :inProgress="inProgress"
-      :price="unit.drugs_cost / 1400000 + unit.weapons_cost / 1400000 + unit.alcohols_cost / 1400000"
-      :notEnough="hasNotEnough" :quantity="quantity" />
+      :price="(unit.drugs_cost / 1400000 + unit.weapons_cost / 1400000 + unit.alcohols_cost / 1400000)"
+      :notEnough="hasNotEnough" :quantity="pendingAmount > 0 ? pendingAmount : quantity" />
   </div>
 </template>
 
@@ -201,6 +201,23 @@ export default {
       const now = new Date().getTime();
       return nextUpdate >= now;
     },
+    pendingAmount() {
+      if (
+        this.$store.state.game.user.units.find(
+          b =>
+            b.unit === this.unit.id && b.territory === this.base.territory && b.base === this.base.base,
+        )
+      )
+        return (
+          this.$store.state.game.user.units.find(
+            b =>
+              b.unit === this.unit.id &&
+              b.territory === this.base.territory &&
+              b.base === this.base.base,
+          ).pending_amount || 0
+        );
+      return 0;
+    },
     training_facility() {
       return (
         this.$store.state.game.user.buildings.find(
@@ -241,7 +258,7 @@ export default {
       return 0;
     },
     updateTime() {
-      return ((this.unit.coeff * 1500) / (this.training_facility.lvl + this.militaryAcademy)) * (this.quantity * 1000);
+      return ((this.unit.coeff * 1500) / (this.training_facility.lvl)) * (this.pendingAmount * 1000);
     },
     progress() {
       if (this.timeToWait || this.updateTime)

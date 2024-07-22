@@ -11,7 +11,7 @@
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
           <span v-if="!isLoading && pendingAmount === 0">
             {{ notEnough ? 'Miss resources' : 'Slow Recruit' }} </span>
-          <span v-if="pendingAmount > 0">Recruiting {{ pendingAmount }} [{{ percentage }}%]</span>
+          <span v-if="pendingAmount > 0">Recruiting {{ pendingAmount }} [{{ progress }}%]</span>
           <div v-else-if="isLoading">
             <div class="pt-2">
               Loading...
@@ -97,21 +97,18 @@ export default {
       return 0;
     },
     priceInSteem() {
+      let amount = this.quantity
+      if (this.pendingAmount > 0)
+        amount = this.pendingAmount
       return parseFloat(
-        (this.price * this.quantity) / this.$store.state.game.prizeProps.steemprice,
+        (this.price * amount) / this.$store.state.game.prizeProps.steemprice,
       ).toFixed(3);
     },
     priceInDWD() {
-      return parseFloat(this.priceInSteem * 50).toFixed(3);
+      return parseFloat(this.priceInSteem * 50).toFixed(3) / 100 * (100 - this.progress);
     },
-    dwdPrice() {
-      if (!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
-        return false
-      const price = this.$store.state.game.prizeProps.seProps.lastPrice || 0;
-      return price * this.priceInDWD * this.$store.state.game.prizeProps.steemprice;
-    },
-    notEnoughDWD() {
-      return (this.priceInSteem * 50).toFixed(3) > this.$store.state.game.user.user.dwd;
+    priceInTon() {
+      return (this.priceInSteem * 1000000000) / 100 * (100 - this.progress)
     },
     timeToWait() {
       const unit = this.$store.state.game.user.units.find(
@@ -146,9 +143,14 @@ export default {
         100 - (this.timeToWait / (this.updateTime * this.pendingAmount)) * 100,
       ).toFixed(2);
     },
+    progress() {
+      if (this.timeToWait && this.updateTime)
+        return parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(2)
+      else return 0
+    }
   },
   methods: {
-    ...mapActions(['recruitUnit', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment','showLoading']),
+    ...mapActions(['recruitUnit', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment', 'showLoading']),
     handleSubmit(use) {
       this.isLoading = true;
       if (this.quantity > 0) {
@@ -200,7 +202,7 @@ export default {
         memo: `unit:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
         )},amount:${this.quantity}`,
-        amount: `${this.priceInSteem * 1000000000}`,
+        amount: `${this.priceInTon}`,
       }
       this.setCurrentPayment({ type: "unit", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()

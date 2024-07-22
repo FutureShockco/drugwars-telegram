@@ -8,7 +8,8 @@
             </div>
             <div class="d-flex px-4">
                 <div class="col-6 text-center">
-                    <UiButton class="btn border-blue-dark" @click="handleRequestPayment(), toggleModalPayment()" :disabled="tutorialStep < 9">
+                    <UiButton class="btn border-blue-dark" @click="handleRequestPayment(), toggleModalPayment()"
+                        :disabled="tutorialStep < 9">
                         <Icon name="ton" size="50" />
                     </UiButton>
                     <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{ currentPayment.ton.amount
@@ -16,7 +17,8 @@
                         1000000000 }} TON</span>
                 </div>
                 <div class="col-6 text-center">
-                    <UiButton class="btn border-yellow-dark" @click="handleSubmit(), toggleModalPayment()">
+                    <UiButton :disabled="notEnoughDWD" class="btn border-yellow-dark"
+                        @click="handleSubmit(), toggleModalPayment()">
                         <Icon name="dwd" style="font-size: 50px;line-height: 46px;" />
                     </UiButton>
                     <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{ currentPayment.price }}
@@ -45,6 +47,9 @@ export default {
         },
         tutorialStep() {
             return this.$store.state.game.user.user.tutorial
+        },
+        notEnoughDWD() {
+            return this.currentPayment.price > this.$store.state.game.user.user.dwd;
         },
     },
     methods: {
