@@ -5,7 +5,8 @@ const state = {
   modalAccountVisible: false,
   modalVideoVisible: false,
   currentVideo: null,
-  showLoading: false,
+  showLoading: true,
+  loadingPercentage: 0,
   showTutorial: false,
   timestamp: new Date().getTime(),
   notifications: [],
@@ -38,6 +39,9 @@ const mutations = {
   },
   updateTimestamp(_state) {
     Vue.set(_state, 'timestamp', new Date().getTime());
+  },
+  setLoadingPercentage(_state, payload) {
+    Vue.set(_state, 'loadingPercentage', payload);
   },
   notify(_state, payload) {
     const timestamp = parseInt(new Date().getTime() / 1000);
@@ -75,6 +79,9 @@ const actions = {
   },
   notify({ commit }, payload) {
     commit('notify', payload);
+  },
+  setLoadingPercentage({ commit }, payload) {
+    commit('setLoadingPercentage', payload);
   },
 };
 

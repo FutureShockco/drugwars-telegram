@@ -146,7 +146,7 @@ const requireAuth = (to, from, next) => {
       }
     });
   } else if (!store.state.auth.username) {
-    store.dispatch('hideLoading');
+    //store.dispatch('hideLoading');
 
     const redirect = to.fullPath === '/' ? undefined : to.fullPath;
     next({ name: 'home', query: { redirect } });

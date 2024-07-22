@@ -112,10 +112,14 @@ const authToken = function () {
 const actions = {
   init: ({ commit, dispatch }, newUser) =>
     new Promise(async (resolve, reject) => {
+      await dispatch('showLoading');
+
       if (!newUser && registeredUser)
         newUser = registeredUser
       if (!store.state.auth.username)
         await dispatch('login', newUser);
+      dispatch('setLoadingPercentage', 10);
+
       registeredUser = newUser;
       let totalbases = 0;
       if (
@@ -129,11 +133,14 @@ const actions = {
         client
           .requestAsync('get_user', registeredUser)
           .then(user => {
+            dispatch('setLoadingPercentage', 20);
             console.log(user)
             if (user && user.user && user.user.username) {
+              dispatch('setLoadingPercentage', 30);
               if (user.user.tutorial < 9)
                 store.dispatch('showTutorial')
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
+                dispatch('setLoadingPercentage', 40);
                 commit('savePrizeProps', prizeProps);
                 commit('saveUser', user);
                 commit('saveConnected', true);
@@ -155,8 +162,10 @@ const actions = {
                     ),
                   );
                 dispatch('refresh_fights_count');
+                dispatch('setLoadingPercentage', 100);
                 //dispatch('refresh_transport_count');
                 //dispatch('refresh_station_count');
+                dispatch('hideLoading');
                 return resolve("success");
               });
             } else {

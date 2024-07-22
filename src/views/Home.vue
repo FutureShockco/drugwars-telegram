@@ -104,6 +104,7 @@ export default {
     if (this.$route.query && this.$route.query.tgWebAppStartParam)
       localStorage.setItem('drugwars_referrer', this.$route.query.tgWebAppStartParam);
     else localStorage.setItem('drugwars_referrer', 'null');
+
   },
   methods: {
     ...mapActions(['init', 'login']),

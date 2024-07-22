@@ -1,10 +1,40 @@
 <template>
-  <div class="page-content pb-0 overflow-hidden bg-transparent">
-    <h5 class="text-center mb-0">Server ({{ server.number }}) : {{ server.name }}</h5>
+  <div class="content pb-0 overflow-hidden">
+
+    <div style="background-repeat:none;position: absolute;width: 100vw;height:100vh;filter: grayscale(1);"
+      :style="{ 'background-image': `url(${bg}`, 'background-size': `100% auto!important`, 'background-position': `center bottom` }">
+    </div>
+    <div id="overlay2" style="left: 0px;
+    position: absolute;
+    overflow: hidden;
+       background-position: bottom;
+    width: 100%;
+    z-index:50;
+    background-size: cover;
+    border-top: 1px solid green;
+    " :style="`top:${100 - loadPercentage}%;height:${loadPercentage}%!important;`">
+
+    </div>
+    <div class="ocrloader">
+      <em></em>
+      <span></span>
+    </div>
+    <div id="overlay" class="rounded-s" style="left: 0px;
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+
+    "
+      :style="`top:${100 - loadPercentage}%;background-size:100% auto!important;background-repeat:none;background-position:center bottom; height:${loadPercentage}%!important;background-image:url(${bg})`">
+    </div>
+
     <Icon class="logo-large img-fluid" name="logo" />
-    <div class="wrapper mt-2">
-      <div class="left"></div>
-      <div class="right"></div>
+    <div class="pill">
+      <div class="medicine">
+        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+      </div>
+      <div class="side"></div>
+      <div class="side"></div>
     </div>
   </div>
 </template>
@@ -13,110 +43,358 @@
 
 <script>
 import { mapActions } from 'vuex';
-import client from '@/helpers/client';
 export default {
   data() {
     return {
       canLogin: process.env.VUE_APP_DEV || false,
       rnd: [],
+      bg: "./img/ban11.png"
     };
   },
   mounted() {
     window.init_template()
-		this.ok()
+    //this.ok()
+    // setInterval(() => {
+    //   this.setLoadingPercentage(this.loadPercentage + 5)
+    //   if (this.loadPercentage >= 100)
+    //     this.setLoadingPercentage(0)
+    // }, 50);
   },
   methods: {
-    ...mapActions(['init', 'login']),
+    ...mapActions(['init', 'login', 'setLoadingPercentage']),
     ok() {
-      if (this.TWA && this.TWA.initData)
-				this.client.restart();
-        this.login(this.TWA.initData).then((res) => {
-          this.init(this.TWA.initData).then((result) => {
-            this.$router.push({ path: this.$route.query.redirect || '/home' });
-          })
+      if (this.client && this.TWA && this.TWA.initData)
+        this.client.restart();
+      this.login(this.TWA.initData).then((res) => {
+        this.init(this.TWA.initData).then((result) => {
+          this.$router.push({ path: this.$route.query.redirect || '/home' });
         })
+      })
     },
   },
   computed: {
     server() {
       return this.$store.state.game.server;
     },
+    loadPercentage() {
+      return this.$store.state.ui.loadingPercentage;
+    },
   },
 };
 </script>
 
 <style lang="less" scoped>
-.wrapper {
-  width: 65px;
-  height: 20px;
-  border-radius: 20px;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.2);
-  transform: rotate(-35deg);
-  cursor: pointer;
-  animation: bgmove 5s infinite linear;
-  left: calc(50% - 33px);
-  top: 56%;
+.logo-large {
   position: absolute;
+  max-width: 90%;
+  top: 30%;
 }
 
-.wrapper:hover {
-  transform: rotate(35deg);
+.content {
+  width: 100vw;
+  height: 100vh;
+  max-height: 100vh;
+  background: #fff0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.wrapper:after {
-  clear: both;
-  display: table;
-  content: '';
-}
-
-.wrapper:before {
-  content: '';
-  display: block;
-  position: absolute;
-  border-radius: 30px;
-  width: 80%;
+.pill {
+  background: #fff0;
+  width: 15%;
   height: 30%;
-  background: linear-gradient(25deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.3));
-  left: 50%;
-  margin-left: -40%;
-  top: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  transform: rotate(180deg);
+  animation: spin 4s linear 0s infinite;
 }
 
-.left {
-  float: left;
+@keyframes spin {
+  100% {
+    transform: rotate(-540deg);
+  }
+}
+
+.pill .side {
+  background: #ffb700;
+  position: relative;
+  overflow: hidden;
+  width: 6vmin;
+  height: 9vmin;
+  box-shadow: 0px 0px 5px rgb(255, 204, 0);
+  border-radius: 6vmin 6vmin 0 0;
+}
+
+.pill .side+.side {
+  background: #ffffff;
+  border-radius: 0 0 6vmin 6vmin;
+  border-top: 1vmin solid #bfbfbf;
+  box-shadow: 0px 0px 5px rgb(255, 255, 255);
+  animation: open 2s ease-in-out 0s infinite;
+}
+
+@keyframes open {
+
+  0%,
+  20%,
+  80%,
+  100% {
+    margin-top: 0;
+  }
+
+  30%,
+  70% {
+    margin-top: 10vmin;
+  }
+}
+
+.pill .side:before {
+  content: "";
+  position: absolute;
+  width: 2vmin;
+  height: 10vmin;
+  bottom: 0;
+  right: 1.5vmin;
+  background: #fff2;
+  border-radius: 1vmin 1vmin 0 0;
+  animation: shine 1s ease-out -1s infinite alternate-reverse;
+}
+
+.pill .side+.side:before {
+  bottom: inherit;
+  top: 0;
+  border-radius: 0 0 1vmin 1vmin;
+}
+
+.pill .side:after {
+  content: "";
+  position: absolute;
+  width: 100%;
   height: 100%;
-  width: 50%;
-  background: linear-gradient(#ffc012a8, #c7a200c7);
-  border-radius: 40px 0 0 40px;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-right: 1px solid #ffc400;
-  box-shadow: inset 0 5px 0 #ffc400a2, inset 0 -10px 15px #facc02;
+  bottom: 0;
+  left: 0;
+  border-radius: 6vmin 6vmin 0 0;
+  border: 1.75vmin solid #00000022;
+  border-bottom-color: #fff0;
+  border-bottom-width: 0vmin;
+  border-top-width: 1vmin;
+  animation: shadow 1s ease -1s infinite alternate-reverse;
 }
 
-.right {
-  float: right;
+.pill .side+.side:after {
+  bottom: inherit;
+  top: 0;
+  border-radius: 0 0 6vmin 6vmin;
+  border-top-color: #fff0;
+  border-top-width: 0vmin;
+  border-bottom-width: 1vmin;
+}
+
+@keyframes shine {
+
+  0%,
+  46% {
+    right: 1.5vmin;
+  }
+
+  54%,
+  100% {
+    right: 7.5vmin;
+  }
+}
+
+@keyframes shadow {
+
+  0%,
+  49.999% {
+    transform: rotateY(0deg);
+    left: 0;
+  }
+
+  50%,
+  100% {
+    transform: rotateY(180deg);
+    left: -3vmin;
+  }
+}
+
+.medicine {
+  position: absolute;
+  width: calc(100% - 11vmin);
+  height: calc(100% - 13vmin);
+  background: #fff0;
+  border-radius: 5vmin;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+
+.medicine i {
+  width: 1vmin;
+  height: 1vmin;
+  background: rgb(255, 255, 255);
+  border-radius: 100%;
+  position: absolute;
+  box-shadow: 0px 0px 5px rgb(255, 255, 255);
+  animation: medicine-dust 1.75s ease 0s infinite alternate;
+}
+
+.medicine i:nth-child(2n+2) {
+  width: 1.4vmin;
+  height: 1.4vmin;
+  margin-top: -4vmin;
+  margin-right: -4vmin;
+  animation-delay: -0.2s;
+  box-shadow: 0px 0px 5px rgb(255, 204, 0);
+  background: rgb(255, 204, 0);
+}
+
+.medicine i:nth-child(3n+3) {
+  width: 2vmin;
+  height: 2vmin;
+  margin-top: 4vmin;
+  margin-right: 3vmin;
+  animation-delay: -0.33s;
+}
+
+.medicine i:nth-child(4) {
+  margin-top: -5vmin;
+  margin-right: 4vmin;
+  animation-delay: -0.4s;
+}
+
+.medicine i:nth-child(5) {
+  margin-top: 5vmin;
+  margin-right: -4vmin;
+  animation-delay: -0.5s;
+}
+
+.medicine i:nth-child(6) {
+  margin-top: 0vmin;
+  margin-right: -3.5vmin;
+  animation-delay: -0.66s;
+}
+
+.medicine i:nth-child(7) {
+  margin-top: -2vmin;
+  margin-right: 5vmin;
+  animation-delay: -0.7s;
+}
+
+.medicine i:nth-child(8) {
+  margin-top: 6vmin;
+  margin-right: -1vmin;
+  animation-delay: -0.8s;
+}
+
+.medicine i:nth-child(9) {
+  margin-top: 4vmin;
+  margin-right: -2vmin;
+  animation-delay: -0.99s;
+}
+
+.medicine i:nth-child(10) {
+  margin-top: -7vmin;
+  margin-right: 2vmin;
+  animation-delay: -1.11s;
+}
+
+.medicine i:nth-child(11) {
+  margin-top: 6vmin;
+  margin-right: 4vmin;
+  animation-delay: -1.125s;
+}
+
+.medicine i:nth-child(12) {
+  margin-top: -7vmin;
+  margin-right: -2vmin;
+  animation-delay: -1.275s;
+}
+
+.medicine i:nth-child(13) {
+  margin-top: -1vmin;
+  margin-right: 3vmin;
+  animation-delay: -1.33s;
+}
+
+.medicine i:nth-child(14) {
+  margin-top: -3vmin;
+  margin-right: -1vmin;
+  animation-delay: -1.4s;
+}
+
+.medicine i:nth-child(15) {
+  margin-top: -1vmin;
+  margin-right: -3vmin;
+  animation-delay: -1.55s;
+}
+
+@keyframes medicine-dust {
+
+  0%,
+  100% {
+    transform: translate3d(0vmin, 0vmin, -0.1vmin);
+  }
+
+  25% {
+    transform: translate3d(0.25vmin, 5vmin, 0vmin);
+  }
+
+  75% {
+    transform: translate3d(-0.1vmin, -4vmin, 0.25vmin);
+  }
+}
+
+
+.ocrloader span::before {
+  content: "";
+  position: absolute;
+  bottom: 0px;
+  left: 45%;
+  width: 10px;
+  z-index: 0;
   height: 100%;
-  width: 50%;
-  border-radius: 0 40px 40px 0;
-  border: 1px solid rgba(0, 0, 0, 0.4);
-  border-left: 1px solid rgba(0, 0, 0, 0.6);
-  box-shadow: inset 0 5px 0 #ff1212a1, inset 0 -10px 15px #fa0202ab;
-  background: linear-gradient(#ff1212a6, #fa0202ab);
+  background: green;
+  box-shadow: 0 0 20px 5px green;
+  clip-path: inset(0);
+  animation:
+    x 1s ease-in-out infinite,
+    y 1s ease-in-out infinite;
+  rotate: 90deg;
+  top: 0px;
 }
 
-@keyframes bgmove {
-  0% {
-    transform: rotate(0deg);
+
+@keyframes x {
+  1% {
+    rotate: 90deg;
+    transform: translateX(100vh);
   }
 
   100% {
-    transform: rotate(360deg);
+    rotate: 90deg;
+    transform: translateX(-100vh);
   }
 }
 
-.forcelogout {
-  position: absolute;
-  bottom: 0px;
-  left: calc(50% - 120px);
+@keyframes y {
+  33% {
+    clip-path: inset(0 0 0 -50vh);
+  }
+
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  83% {
+    clip-path: inset(0 -50vh 0 0);
+  }
+
 }
 </style>

@@ -45,10 +45,13 @@ export default {
   },
   created() {
     const self = this;
-    setInterval(function () {
-      if (this.username && client.ws.readyState === 3)
-        self.checkWS()
-    }, 1000);
+    setTimeout(() => {
+      setInterval(function () {
+        if (this.username && client.ws.readyState === 3)
+          self.checkWS()
+      }, 1000);
+    }, 5000);
+    self.checkWS()
     if (this.TWA && this.TWA.expand)
       this.TWA.expand()
   },
@@ -59,7 +62,7 @@ export default {
         client.restart();
       this.login(this.TWA.initData).then((res) => {
         this.init(this.TWA.initData).then((result) => {
-          console.log(result)
+          this.$router.push({ path: this.$route.query.redirect || '/home' });
         })
       })
     },
