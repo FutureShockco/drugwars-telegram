@@ -165,9 +165,9 @@ const actions = {
                 //dispatch('refresh_station_count');
                 dispatch('setLoadingPercentage', 100);
                 Promise.delay(1000).then(() => {
-                  //dispatch('hideLoading');
-                  //dispatch('setFirstLoad', false);
-                  //dispatch('setLoadingPercentage', 0);
+                  dispatch('hideLoading');
+                  dispatch('setFirstLoad', false);
+                  dispatch('setLoadingPercentage', 0);
                   return resolve("success");
 
                 });
