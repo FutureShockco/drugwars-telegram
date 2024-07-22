@@ -1,30 +1,26 @@
 <template>
-  <div class="d-flex">
-    <div :class="inProgress ? 'd-none' : 'col-6'">
+  <div class="row mx-3 mb-3 g-3">
+    <div class="col-6">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading || waitingConfirmation"
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4)"
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4) ? 'gradient-red color-white' : 'gradient-green']"
-        @click="handleSubmit()" class="btn btn-full btn-xxs w-100 left">
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4) ? 'border-red-dark color-red-dark' : 'border-green-dark color-green-dark']"
+        @click="handleSubmit()" class="btn btn-full btn-xxs w-100">
         <template>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
-          <i class="fad fa-arrow-up me-1 text-white" />
           <span>{{ upgradeLabel }}</span>
         </template>
       </UiButton>
-
     </div>
-    <div v-if="!inProgress" :class="inProgress ? 'd-none' : 'col-6 '">
-      <div class="text-center w-100">Instant upgrade</div>
+    <div class="col-6">
+      <div class="text-center w-100">Instant</div>
       <div>
         <UiButton :loading="isLoading || waitingConfirmation"
           :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse')"
-          :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') ? 'gradient-red color-white' : 'gradient-blue'"
-          @click="handleRequestPayment()" class="btn btn-full btn-xxs w-100 right">
-          <i class="fad fa-arrow-up me-1 text-white" />
-          <span> UPGRADE
-            <!-- {{ (priceInDWD / 25).toFixed(4) }} TON -->
+          :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'"
+          @click="handleRequestPayment()" class="btn btn-full btn-xxs w-100">
+          <span> Fast Upgrade
           </span>
         </UiButton>
         <!-- <div v-if="!inProgress" class="col-5 mx-2">
@@ -80,18 +76,8 @@ export default {
     priceInDWD() {
       return parseFloat(this.priceInSteem * 50).toFixed(3);
     },
-    dwdPrice() {
-      if (!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
-        return false
-      const price = this.$store.state.game.prizeProps.seProps.lastPrice || 0;
-      return price * this.priceInDWD * this.$store.state.game.prizeProps.steemprice;
-    },
     notEnoughDWD() {
       return parseFloat(this.priceInSteem * 50).toFixed(3) > this.$store.state.game.user.user.dwd;
-    },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return false;
     },
     timeToWait() {
       const building = this.$store.state.game.user.buildings.find(
@@ -135,7 +121,7 @@ export default {
       return this.level > this.hqLevel && this.id !== 'headquarters';
     },
     upgradeLabel() {
-      let label = 'Upgrade';
+      let label = 'Slow Upgrade';
       if ((this.tutorialStep < 8 && this.id !== 'headquarters')) label = 'Finish tutorial';
       if (this.notEnough) label = 'No resources';
       if (this.requireUpdate) label = 'Require HQ+';
@@ -202,7 +188,7 @@ export default {
         )}`,
         amount: `${this.priceInSteem * 1000000000}`,
       }
-      this.setCurrentPayment({ dwd, ton, price: this.priceInDWD })
+      this.setCurrentPayment({ type: "building", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()
       // this.requestPayment({
       //   memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(

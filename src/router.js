@@ -95,8 +95,7 @@ const CrueltyBoard = () =>
 
 const DeleteBuilding = () =>
   import(/* webpackChunkName: "jobboard" */ '@/views/Settings/DeleteBuilding.vue');
-const SteemAccount = () =>
-  import(/* webpackChunkName: "steemaccount" */ '@/views/Settings/SteemAccount.vue');
+
 
 const EarlyAccess = () => import(/* webpackChunkName: "earlyaccess" */ '@/views/EarlyAccess.vue');
 const Settings = () => import(/* webpackChunkName: "settings" */ '@/views/Settings/Settings.vue');
@@ -566,12 +565,7 @@ export default new Router({
       beforeEnter: requireAuth,
       component: DeleteBuilding,
     },
-    {
-      path: '/settings/steem',
-      name: 'steemaccount',
-      beforeEnter: requireAuth,
-      component: SteemAccount,
-    },
+
     {
       path: '/about',
       name: 'about',

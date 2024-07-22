@@ -1,8 +1,6 @@
 <template>
     <div class="m-2 columns" v-if="!share">
-        <span v-if="steemAccount" @click="handleShareFight('steemit')">
-          <Icon :size="32" class="mr-1 icon" name="steem" />
-        </span>
+
         <span @click="handleShareFight('facebook')">
         <Icon :size="32" class="mr-1 icon" name="facebook"/>
         </span>
@@ -36,12 +34,7 @@ export default {
       share: false,
     };
   },
-  computed: {
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return 0;
-    },
-  },
+
   methods: {
     ...mapActions(['notify']),
     handleShareFight(where) {

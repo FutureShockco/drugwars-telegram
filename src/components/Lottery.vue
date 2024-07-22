@@ -57,10 +57,7 @@ export default {
     notEnoughDWD() {
       return this.priceInDWD > this.$store.state.game.user.user.dwd;
     },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return false;
-    },
+
     myTickets() {
       if (this.$store.state.game.user.lottery && this.$store.state.game.user.lottery[0]) {
         return this.$store.state.game.user.lottery[0].ticket;

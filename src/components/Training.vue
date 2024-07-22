@@ -3,8 +3,7 @@
     <div class="content">
       <div class="d-flex">
         <div class="pt-1 ms-auto">
-          <img class="img-fluid rounded-s" width="100" height="100"
-            :src="`/img/trainings/${training.id}.png`" />
+          <img class="img-fluid rounded-s" width="100" height="100" :src="`/img/trainings/${training.id}.png`" />
         </div>
         <div class="ps-3 me-auto" style="width: 100%;">
           <!-- <div class="level">{{ ownItem.lvl }}</div> -->
@@ -18,32 +17,22 @@
         </div>
       </div>
       <!-- <div class="mb-2" v-html="training.desc"></div> -->
+      <div v-for="unit in training_modificator[training.id]" :key="unit" class="d-inline-block">
+        <div v-if="unit === 'all' && !a.npc" v-for="a in units" :key="a.id" class="d-inline">
+          <img class="preview unit mini mb-2 me-2 rounded-s" width="50" :src="`/img/units/${a.id}.png`">
+        </div>
+        <div v-else-if="unit === 'melee' && m.type === 'Melee' && !m.npc" v-for="m in units" :key="m.id"
+          class="d-inline">
+          <img class="preview unit mini mb-2  me-2 rounded-s" width="50" :src="`/img/units/${m.id}.png`">
+        </div>
+        <div v-else-if="unit === 'range' && r.type === 'Range' && !r.npc" v-for="r in units" :key="r.id"
+          class="d-inline">
+          <img class="preview unit mini mb-2  me-2 rounded-s" width="50" :src="`/img/units/${r.id}.png`">
+        </div>
+        <div v-if="unit === t.id && !t.npc" v-for="t in units" :key="t.id" class="d-inline">
+          <img class="preview unit mini mb-2  me-2 rounded-s" width="50" :src="`/img/units/${t.id}.png`">
+        </div>
 
-      <div v-for="unit in training_modificator[training.id]" :key="unit" class="d-inline">
-        <div v-if="unit === 'all'">
-          <div v-for="u in units" :key="u.id" class="d-inline">
-            <img v-if="u.id && !u.npc" class="preview unit mini"
-              width="50" :src="`/img/units/${u.id}.png`">
-          </div>
-        </div>
-        <div v-else-if="unit === 'melee'">
-          <div v-for="u in units" :key="u.id" class="d-inline">
-            <img v-if="u.id && u.type === 'Melee' && !u.npc" class="preview unit mini"
-              width="50" :src="`/img/units/${u.id}.png`">
-          </div>
-        </div>
-        <div v-else-if="unit === 'range'">
-          <div v-for="u in units" :key="u.id" class="d-inline">
-            <img v-if="u.id && u.type === 'Range' && !u.npc" class="preview unit mini"
-              width="50" :src="`/img/units/${u.id}.png`">
-          </div>
-        </div>
-        <div v-else class="d-inline">
-          <div v-for="u in units" :key="u.id" class="d-inline" v-if="unit === u.id && !u.npc">
-            <img class="preview unit mini"
-              width="50" :src="`/img/units/${u.id}.png`">
-          </div>
-        </div>
       </div>
     </div>
     <div v-if="(training.id === 'routing' && ownItem.lvl > 209)">Max level reached</div>

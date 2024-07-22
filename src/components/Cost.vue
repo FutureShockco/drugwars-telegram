@@ -1,6 +1,6 @@
 <template>
   <div class="cost mt-2">
-
+    <span class="me-2"> Cost:  </span>
     <span class="me-2" :class="{ 'not-enough': drugsCost * this.quantity > balances.drugs }" v-if="drugsCost">
       <Icon class="me-1" :size="16" name="drug" />
       {{ drugsCost * this.quantity | amount }}

@@ -38,10 +38,7 @@ export default {
     notEnoughDWD() {
       return this.priceInDWD > this.$store.state.game.user.user.dwd;
     },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return false;
-    },
+
     username() {
       return this.$store.state.auth.username;
     },

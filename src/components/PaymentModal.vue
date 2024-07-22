@@ -45,15 +45,29 @@ export default {
         }
     },
     methods: {
-        ...mapActions(['upgradeBuilding', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment']),
+        ...mapActions(['upgradeBuilding', 'recruitUnit', 'upgradeTraining', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment']),
         handleSubmit() {
-            console.log(this.currentPayment.dwd)
-            this.upgradeBuilding(this.currentPayment.dwd)
-                .then(() => {
-                })
-                .catch(e => {
-                    console.error('Failed', e);
-                });
+            if (this.currentPayment.type === 'building')
+                this.upgradeBuilding(this.currentPayment.dwd)
+                    .then(() => {
+                    })
+                    .catch(e => {
+                        console.error('Failed', e);
+                    });
+            if (this.currentPayment.type === 'unit')
+                this.recruitUnit(this.currentPayment.dwd)
+                    .then(() => {
+                    })
+                    .catch(e => {
+                        console.error('Failed', e);
+                    });
+            if (this.currentPayment.type === 'training')
+                this.upgradeTraining(this.currentPayment.dwd)
+                    .then(() => {
+                    })
+                    .catch(e => {
+                        console.error('Failed', e);
+                    });
         },
         async handleRequestPayment() {
             this.requestPayment(this.currentPayment.ton);

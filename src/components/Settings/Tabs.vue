@@ -2,7 +2,6 @@
   <Header>
     <UiTabs>
       <UiTab to="/settings">Settings</UiTab>
-      <!-- <UiTab v-if="!steemAccount" to="/settings/steem">Steem</UiTab> -->
       <UiTab to="/settings/referral">Referral</UiTab>
       <!-- <UiTab to="/settings/privacy">Privacy</UiTab> -->
       <UiTab to="/settings/history">History</UiTab>
@@ -28,11 +27,7 @@ export default {
           b => b.main === 1 && b.base === this.base.base && b.territory === this.base.territory,
         ) || null
       );
-    },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return 0;
-    },
+    }
   },
 };
 </script>

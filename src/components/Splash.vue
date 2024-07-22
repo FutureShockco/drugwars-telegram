@@ -1,7 +1,7 @@
 <template>
 
   <div class="p-0 m-0 overflow-hidden"
-    :style="firstLoad ? '' : 'background: #000000b8;position: absolute;z-index: 5000;'">
+    :style="firstLoad ? '' : 'background: #000000b8;position: fixed;z-index: 5000;    height: 100vh;top: 0px;bottom: 0px; '">
     <div class="m-content p-0 m-0 overflow-hidden" v-if="firstLoad">
       <div style="background-repeat:none;position: absolute;width: 100vw;height:100vh;filter: grayscale(1);z-index: 5;"
         :style="{ 'background-image': `url(${bg}`, 'background-size': `100% auto!important`, 'background-position': `center bottom` }">
@@ -38,7 +38,8 @@
             <h3 class="text-center font-700 pb-3">
               {{ a }}
             </h3>
-            <h6 class="text-center text-red">Warning: DrugWars is a game that involves fictional scenarios and elements related
+            <h6 class="text-center text-red">Warning: DrugWars is a game that involves fictional scenarios and elements
+              related
               to drugs, alcohol, and violence. These themes are not to be taken lightly in real life.</h6>
           </div>
         </div>

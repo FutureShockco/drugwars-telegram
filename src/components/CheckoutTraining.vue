@@ -1,37 +1,32 @@
 <template>
-  <div class="d-flex">
-    <div :class="inProgress ? 'col-12 pe-0' : 'col-6 pe-0'">
+  <div class="row mx-3 mb-3 g-3">
+    <div class="col-6">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
-      <UiButton
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate ? '' : 'button-green']"
+      <UiButton :loading="isLoading || waitingConfirmation"
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate ? 'border-red-dark color-red-dark' : 'border-green-dark border-green-dark color-green-dark']"
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate" @click="handleSubmit()"
-        class="button btn-block  button-left w-100">
-        <template v-if="isLoading || waitingConfirmation">
-          <SmallLoading />
-        </template>
-
-        <template v-else>
+        class="btn-full btn-xxs btn  w-100">
+        <template>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
           <i class="iconfont icon-arrow-up" />
           <span>{{ upgradeLabel }}</span>
         </template>
       </UiButton>
     </div>
-    <div v-if="!inProgress" class="col-6 p-0">
-      <div class="text-center w-100">Instant upgrade</div>
-      <UiButton v-if="steemAccount" :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
-        @click="handleRequestPayment()" class="button btn-block button-blue mb-2">
-        <i class="iconfont icon-zap" />
+    <div class="col-6">
+      <div class="text-center w-100">Instant</div>
+      <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
+        @click="handleRequestPayment()" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
         <span>
-          {{ priceInSteem }} TON</span>
+          Fast upgrade</span>
       </UiButton>
-      <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+      <!-- <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
         @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
         <span>
           {{ priceInDWD }} DW</span>
-      </UiButton>
+      </UiButton> -->
     </div>
   </div>
 </template>
@@ -65,10 +60,7 @@ export default {
     priceInSteem() {
       return (this.price / this.$store.state.game.prizeProps.steemprice).toFixed(3);
     },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return false;
-    },
+
     dwdPrice() {
       if (!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
         return false
@@ -113,7 +105,7 @@ export default {
       return this.level > this.researchCenterLvl && this.id !== 'research_center';
     },
     upgradeLabel() {
-      let label = 'Upgrade';
+      let label = 'Slow Upgrade';
       if (this.notEnough) label = 'Miss resources';
       if (this.requireUpdate) label = 'Require RC upgrade';
       if (this.inProgress)
@@ -124,7 +116,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['upgradeTraining', 'requestPayment']),
+    ...mapActions(['upgradeTraining', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment']),
     handleSubmit(use) {
       this.isLoading = true;
       const self = this;
@@ -161,11 +153,20 @@ export default {
           self.isLoading = false;
         });
     },
-    handleRequestPayment() {
-      this.requestPayment({
+    async handleRequestPayment() {
+      const dwd = {
+        training: this.id,
+        level: this.level,
+        use: 'dwd',
+        territory: Number(this.base.territory),
+        base: Number(this.base.base),
+      };
+      const ton = {
         memo: `training:${this.id}`,
         amount: `${this.priceInSteem * 1000000000}`,
-      });
+      }
+      this.setCurrentPayment({ type: "training", dwd, ton, price: this.priceInDWD })
+      this.toggleModalPayment()
     },
   },
 };

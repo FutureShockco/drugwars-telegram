@@ -1,20 +1,16 @@
 <template>
-  <div class="d-flex w-100 pb-2">
-    <div :class="pendingAmount ? 'd-none' : 'col-4 pe-0  mx-2 '">
+  <div class="row mx-3 mb-3 g-3">
+    <div class="col-6">
       <div class="text-center w-100" v-if="pendingAmount">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
-      <UiButton
-        :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base ? 'gradient-red text-white' : 'border-green-dark border-green-dark color-green-dark']"
-        :disabled="isLoading || pendingAmount || notEnough || inProgress || !base || tutorialStep < 8" @click="handleSubmit()"
-        class="btn-full btn-xxs btn  w-100">
-        <template v-if="isLoading || waitingConfirmation">
-          Loading...
-        </template>
-        <template v-else>
+      <UiButton :loading="isLoading"
+        :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base ? 'border-red-dark color-red-dark' : 'border-green-dark border-green-dark color-green-dark']"
+        :disabled="isLoading || pendingAmount || notEnough || inProgress || !base || tutorialStep < 8"
+        @click="handleSubmit()" class="btn-full btn-xxs btn  w-100">
+        <template>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
-          <i class="iconfont icon-person" />
           <span v-if="!isLoading && pendingAmount === 0">
-            {{ notEnough ? 'Miss resources' : 'Recruit' }} </span>
+            {{ notEnough ? 'Miss resources' : 'Slow Recruit' }} </span>
           <span v-if="pendingAmount > 0">Recruiting {{ pendingAmount }} [{{ percentage }}%]</span>
           <div v-else-if="isLoading">
             <div class="pt-2">
@@ -24,16 +20,16 @@
         </template>
       </UiButton>
     </div>
-    <div v-if="!pendingAmount" class="col-8">
-      <div class="text-center w-100">Instant upgrade TON or DW</div>
-      <div class="d-flex">
+    <div class="col-6">
+      <div class="text-center w-100">Instant</div>
+      <UiButton :loading="isLoading" :disabled="isLoading || !base || tutorialStep < 8" @click="handleRequestPayment()"
+        class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
+        <span>
+          Fast Recruit</span>
+      </UiButton>
+      <!-- <div class="d-flex">
         <div class="col-6">
-          <UiButton :disabled="isLoading || !base || tutorialStep < 8" @click="handleRequestPayment()"
-            class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
-            <i class="iconfont icon-zap" />
-            <span>
-              {{ this.priceInSteem }} TON</span>
-          </UiButton>
+        
         </div>
         <div v-if="!inProgress" class="col-5 mx-2">
           <UiButton :disabled="isLoading || notEnoughDWD || !base" @click="handleSubmit('dwd')"
@@ -42,7 +38,7 @@
               {{ this.priceInDWD }} DW</span>
           </UiButton>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -82,10 +78,7 @@ export default {
         militaryLvl = this.$store.state.game.gang_buildings.find(b => b.building === 'academy').lvl;
       return militaryLvl;
     },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return false;
-    },
+
     pendingAmount() {
       if (
         this.$store.state.game.user.units.find(
@@ -155,7 +148,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['recruitUnit', 'requestPayment']),
+    ...mapActions(['recruitUnit', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment','showLoading']),
     handleSubmit(use) {
       this.isLoading = true;
       if (this.quantity > 0) {
@@ -195,13 +188,22 @@ export default {
           });
       }
     },
-    handleRequestPayment() {
-      this.requestPayment({
+    async handleRequestPayment() {
+      const dwd = {
+        unit: this.id,
+        unit_amount: Number(this.quantity),
+        use: 'dwd',
+        territory: Number(this.base.territory),
+        base: Number(this.base.base),
+      };
+      const ton = {
         memo: `unit:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
         )},amount:${this.quantity}`,
-        amount: `${this.priceInSteem*1000000000}`,
-      });
+        amount: `${this.priceInSteem * 1000000000}`,
+      }
+      this.setCurrentPayment({ type: "unit", dwd, ton, price: this.priceInDWD })
+      this.toggleModalPayment()
     },
   },
 };

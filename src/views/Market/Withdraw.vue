@@ -17,7 +17,6 @@
 					</UiButton>
 					<div class="mt-1">Min : 1 DWD</div>
 			</form>
-			<h3 v-if="!steemAccount">Get started on SteemEngine with using your <router-link :to="`/settings/steem`">Steem account</router-link></h3>
 			<div v-if="!picked">
 				<p class="mb-4">You must choose your currency.</p>
 			</div>
@@ -163,10 +162,7 @@ export default {
         Date.parse(this.$store.state.game.user.user.last_profile_update),
       ).toLocaleString();
     },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return 0;
-    },
+
     dwdToSteem() {
       const { prizeProps } = this.$store.state.game;
       return parseFloat(prizeProps.total_dwd / parseFloat(prizeProps.balance)).toFixed(0);

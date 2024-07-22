@@ -78,10 +78,7 @@ export default {
     notEnoughDWD() {
       return this.price > this.$store.state.game.user.user.dwd;
     },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return false;
-    },
+
     timeToWait() {
       const building = this.$store.state.game.user.buildings.find(
         b =>

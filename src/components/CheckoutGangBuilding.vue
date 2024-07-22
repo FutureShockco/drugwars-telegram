@@ -83,10 +83,7 @@ export default {
         (this.priceInSteem * 2 * this.quantity).toFixed(3) > this.$store.state.game.user.user.dwd
       );
     },
-    steemAccount() {
-      if (this.$store.state.auth.account) return this.$store.state.auth.account;
-      return false;
-    },
+ 
     timeToWait() {
       const building = this.$store.state.game.gang_buildings.find(b => b.building === this.id);
       if (building) {
