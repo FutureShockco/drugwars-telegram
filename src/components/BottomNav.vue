@@ -1,5 +1,6 @@
 <template>
-  <div id="footer-bar" class="footer-bar footer-bar-detached" v-if="username && !showLoading && this.$store.state.game.user.buildings">
+  <div id="footer-bar" class="footer-bar footer-bar-detached"
+    v-if="username && (!showLoading || (showLoading && !firstLoad)) && this.$store.state.game.user.buildings">
     <router-link to="/home"><i class="fad fa-trophy font-20"></i><span>Home</span></router-link>
     <router-link to="/buildings"><i class="fad fa-building font-20"></i><span>HQ</span></router-link>
     <router-link to="/units"><i class="fad fa-campground font-20"></i><span>Camp</span></router-link>
@@ -120,6 +121,9 @@ export default {
     },
     sidebarVisible() {
       return this.$store.state.ui.sidebarVisible;
+    },
+    firstLoad() {
+      return this.$store.state.ui.firstLoad;
     },
     username() {
       return this.$store.state.auth.username;

@@ -25,7 +25,11 @@ import messages from '@/translation.json';
 import numberFormats from '@/number.json';
 if (window.Telegram && window.Telegram.WebApp)
   Vue.prototype.TWA = window.Telegram.WebApp
-
+if (process.env.VUE_APP_DEV && process.env.VUE_APP_DATA) {
+  Vue.prototype.TWA = { ready: true, initData: process.env.VUE_APP_DATA }
+  function ready() { return true };
+  Vue.prototype.TWA.ready = ready;
+}
 
 const requireComponent = require.context('./components', true, /[\w-]+\.vue$/);
 requireComponent.keys().forEach(fileName => {
@@ -82,7 +86,7 @@ Vue.filter(
   'translate',
   value =>
     i18n.messages[i18n.locale][value.split('.')[0]] &&
-    i18n.messages[i18n.locale][value.split('.')[0]][value.split('.')[1]]
+      i18n.messages[i18n.locale][value.split('.')[0]][value.split('.')[1]]
       ? i18n.messages[i18n.locale][value.split('.')[0]][value.split('.')[1]]
       : i18n.messages.en[value.split('.')[0]][value.split('.')[1]],
 );

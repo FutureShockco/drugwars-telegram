@@ -1,162 +1,42 @@
 [
-  {
-    "q": "Did you know?",
-    "a": "Coca plants, used to produce cocaine, are primarily cultivated in Colombia, Peru, and Bolivia."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Methamphetamine labs can be set up almost anywhere, from rural areas to urban homes."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The production of heroin involves extracting morphine from opium poppies, mainly grown in Afghanistan."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Synthetic drugs like MDMA (ecstasy) are often produced in clandestine laboratories in Europe."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Drug cartels sometimes use agricultural techniques, such as crop rotation, to improve yields."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Cocaine is often cut with other substances, such as baking soda, to increase profit margins."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The extraction of morphine from poppies is a labor-intensive process, often done by hand."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Meth production releases toxic gases and chemicals, making it hazardous for both producers and the environment."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Some cartels use drones for surveillance and to transport small quantities of drugs."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Cocaine production involves several chemical processes, including the use of dangerous solvents like gasoline."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Opium poppies have been cultivated for thousands of years, with ancient civilizations using them for medicinal and recreational purposes."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The synthetic opioid fentanyl is much more potent than heroin and is often mixed with other drugs, leading to high overdose rates."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Cannabis plants can be grown indoors or outdoors, with indoor cultivation allowing for more control over growth conditions."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Ecstasy pills often contain a mix of MDMA and other substances, which can vary widely in potency and effects."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Drug producers often use coded language and secret locations to avoid detection by law enforcement."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Cocaine is often smuggled in liquid form, soaked into clothing or other materials to evade detection."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The global drug trade generates hundreds of billions of dollars annually, with significant impacts on economies and societies."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Cartels often use violence and corruption to maintain control over drug production and distribution networks."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Some drug labs are mobile, allowing producers to quickly relocate to avoid raids."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The purity of street drugs can vary significantly, increasing the risk of overdose and adverse reactions."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Cocaine production involves the use of chemicals like sulfuric acid and potassium permanganate, which are hazardous to both people and the environment."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The U.S. Drug Enforcement Administration (DEA) often uses aerial surveillance to spot illegal cannabis cultivation."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Afghanistan produces about 90% of the world's opium, which is the raw material for heroin."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Cartels often recruit chemists and engineers to improve drug production techniques and efficiency."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Meth labs are notorious for explosions due to the volatile chemicals used in the production process."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The process of making crack cocaine involves cooking powdered cocaine with baking soda and water."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Some synthetic drugs are designed to mimic the effects of traditional drugs but with slightly altered chemical structures to evade legal restrictions."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Drug cartels sometimes use submarines and semi-submersibles to transport drugs across international waters."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Narco-corridos, a genre of music in Mexico, often glorifies the lifestyles and exploits of drug traffickers."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The Golden Triangle comprising parts of Thailand, Laos, and Myanmar, is a major region for opium production."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Colombia's demobilized guerrilla groups have often turned to cocaine production as a means of income."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Some cartels have their own paramilitary units to protect their production facilities and smuggling routes."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The synthetic drug trade often involves chemicals sourced from countries with less stringent regulatory controls."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Drug mules, individuals who transport drugs in their bodies, often risk their lives by swallowing drug-filled capsules."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The poppy plant's latex, from which opium is derived, has been used medicinally for thousands of years."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Hydroponic systems are commonly used for high-quality indoor cannabis cultivation."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Fentanyl, a synthetic opioid, is often mixed with heroin to increase potency but significantly raises the risk of overdose."
-  },
-  {
-    "q": "Did you know?",
-    "a": "The 'pizza connection' case in the 1980s revealed how Sicilian Mafia members used pizzerias as fronts for drug trafficking in the United States."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Some drug production operations use child labor, especially in regions where poverty is rampant."
-  },
-  {
-    "q": "Did you know?",
-    "a": "Illicit drug production can lead to significant deforestation, especially in regions where coca and poppy plants are cultivated."
-  }
+  "Coca plants, used to produce cocaine, are primarily cultivated in Colombia, Peru, and Bolivia.",
+  "Methamphetamine labs can be set up almost anywhere, from rural areas to urban homes.",
+  "The production of heroin involves extracting morphine from opium poppies, mainly grown in Afghanistan.",
+  "Synthetic drugs like MDMA (ecstasy) are often produced in clandestine laboratories in Europe.",
+  "Drug cartels sometimes use agricultural techniques, such as crop rotation, to improve yields.",
+  "Cocaine is often cut with other substances, such as baking soda, to increase profit margins.",
+  "The extraction of morphine from poppies is a labor-intensive process, often done by hand.",
+  "Meth production releases toxic gases and chemicals, making it hazardous for both producers and the environment.",
+  "Some cartels use drones for surveillance and to transport small quantities of drugs.",
+  "Cocaine production involves several chemical processes, including the use of dangerous solvents like gasoline.",
+  "Opium poppies have been cultivated for thousands of years, with ancient civilizations using them for medicinal and recreational purposes.",
+  "The synthetic opioid fentanyl is much more potent than heroin and is often mixed with other drugs, leading to high overdose rates.",
+  "Cannabis plants can be grown indoors or outdoors, with indoor cultivation allowing for more control over growth conditions.",
+  "Ecstasy pills often contain a mix of MDMA and other substances, which can vary widely in potency and effects.",
+  "Drug producers often use coded language and secret locations to avoid detection by law enforcement.",
+  "Cocaine is often smuggled in liquid form, soaked into clothing or other materials to evade detection.",
+  "The global drug trade generates hundreds of billions of dollars annually, with significant impacts on economies and societies.",
+  "Cartels often use violence and corruption to maintain control over drug production and distribution networks.",
+  "Some drug labs are mobile, allowing producers to quickly relocate to avoid raids.",
+  "The purity of street drugs can vary significantly, increasing the risk of overdose and adverse reactions.",
+  "Cocaine production involves the use of chemicals like sulfuric acid and potassium permanganate, which are hazardous to both people and the environment.",
+  "The U.S. Drug Enforcement Administration (DEA) often uses aerial surveillance to spot illegal cannabis cultivation.",
+  "Afghanistan produces about 90% of the world's opium, which is the raw material for heroin.",
+  "Cartels often recruit chemists and engineers to improve drug production techniques and efficiency.",
+  "Meth labs are notorious for explosions due to the volatile chemicals used in the production process.",
+  "The process of making crack cocaine involves cooking powdered cocaine with baking soda and water.",
+  "Some synthetic drugs are designed to mimic the effects of traditional drugs but with slightly altered chemical structures to evade legal restrictions.",
+  "Drug cartels sometimes use submarines and semi-submersibles to transport drugs across international waters.",
+  "Narco-corridos, a genre of music in Mexico, often glorifies the lifestyles and exploits of drug traffickers.",
+  "The Golden Triangle comprising parts of Thailand, Laos, and Myanmar, is a major region for opium production.",
+  "Colombia's demobilized guerrilla groups have often turned to cocaine production as a means of income.",
+  "Some cartels have their own paramilitary units to protect their production facilities and smuggling routes.",
+  "The synthetic drug trade often involves chemicals sourced from countries with less stringent regulatory controls.",
+  "Drug mules, individuals who transport drugs in their bodies, often risk their lives by swallowing drug-filled capsules.",
+  "The poppy plant's latex, from which opium is derived, has been used medicinally for thousands of years.",
+  "Hydroponic systems are commonly used for high-quality indoor cannabis cultivation.",
+  "Fentanyl, a synthetic opioid, is often mixed with heroin to increase potency but significantly raises the risk of overdose.",
+  "The 'pizza connection' case in the 1980s revealed how Sicilian Mafia members used pizzerias as fronts for drug trafficking in the United States.",
+  "Some drug production operations use child labor, especially in regions where poverty is rampant.",
+  "Illicit drug production can lead to significant deforestation, especially in regions where coca and poppy plants are cultivated."
 ]

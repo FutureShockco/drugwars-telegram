@@ -112,7 +112,7 @@ const authToken = function () {
 const actions = {
   init: ({ commit, dispatch }, newUser) =>
     new Promise(async (resolve, reject) => {
-
+      dispatch('showLoading');
       if (!newUser && registeredUser)
         newUser = registeredUser
       if (!store.state.auth.username)
@@ -164,9 +164,13 @@ const actions = {
                 //dispatch('refresh_transport_count');
                 //dispatch('refresh_station_count');
                 dispatch('setLoadingPercentage', 100);
-                dispatch('hideLoading');
-                dispatch('setLoadingPercentage', 0);
-                return resolve("success");
+                Promise.delay(1000).then(() => {
+                  //dispatch('hideLoading');
+                  //dispatch('setFirstLoad', false);
+                  //dispatch('setLoadingPercentage', 0);
+                  return resolve("success");
+
+                });
               });
             } else {
               dispatch('signup').then(() => {

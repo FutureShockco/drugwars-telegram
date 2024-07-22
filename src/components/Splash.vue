@@ -1,59 +1,103 @@
 <template>
-  <div class="content pb-0 overflow-hidden">
 
-    <div style="background-repeat:none;position: absolute;width: 100vw;height:100vh;filter: grayscale(1);"
-      :style="{ 'background-image': `url(${bg}`, 'background-size': `100% auto!important`, 'background-position': `center bottom` }">
-    </div>
-    <div id="overlay2" style="left: 0px;
+  <div class="p-0 m-0 overflow-hidden"
+    :style="firstLoad ? '' : 'background: #000000b8;position: absolute;z-index: 5000;'">
+    <div class="m-content p-0 m-0 overflow-hidden" v-if="firstLoad">
+      <div style="background-repeat:none;position: absolute;width: 100vw;height:100vh;filter: grayscale(1);z-index: 5;"
+        :style="{ 'background-image': `url(${bg}`, 'background-size': `100% auto!important`, 'background-position': `center bottom` }">
+      </div>
+      <div id="overlay2" style="left: 0px;
     position: absolute;
     overflow: hidden;
        background-position: bottom;
     width: 100%;
-    z-index:50;
+    z-index:50; z-index: 10;
     background-size: cover;
-    border-top: 1px solid green;
+    border-top: 1px solid red;
     " :style="`top:${100 - loadPercentage}%;height:${loadPercentage}%!important;`">
 
-    </div>
-    <div class="ocrloader">
-      <em></em>
-      <span></span>
-    </div>
-    <div id="overlay" class="rounded-s" style="left: 0px;
+      </div>
+      <div class="ocrloader">
+        <em></em>
+        <span></span>
+      </div>
+      <div id="overlay" class="rounded-s" style="left: 0px;
     position: absolute;
     overflow: hidden;
-    width: 100%;
+    width: 100%;z-index:7;
 
-    "
-      :style="`top:${100 - loadPercentage}%;background-size:100% auto!important;background-repeat:none;background-position:center bottom; height:${loadPercentage}%!important;background-image:url(${bg})`">
-    </div>
-
-    <Icon class="logo-large img-fluid" name="logo" />
-    <div class="pill">
-      <div class="medicine">
-        <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+    " :style="`top:${100 - loadPercentage}%;background-size:100% auto!important;background-repeat:none;background-position:center bottom; height:${loadPercentage}%!important;background-image:url(${bg})`">
       </div>
-      <div class="side"></div>
-      <div class="side"></div>
+      <div class="logo-large">
+        <Icon class="img-fluid" name="logo" />
+        <div class="card card-style">
+          <div class="content">
+            <h5 class="text-center font-700 text-yellow">
+              {{ q }}
+            </h5>
+            <h3 class="text-center font-700 pb-3">
+              {{ a }}
+            </h3>
+            <h6 class="text-center text-red">Warning: DrugWars is a game that involves fictional scenarios and elements related
+              to drugs, alcohol, and violence. These themes are not to be taken lightly in real life.</h6>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div v-else class="m-content p-0 m-0 overflow-hidden" :style="firstLoad ? '' : 'background:transparent;'">
+      <div class="pill">
+        <div class="medicine">
+          <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+        </div>
+        <div class="side"></div>
+        <div class="side"></div>
+      </div>
     </div>
   </div>
+
 </template>
 
 
 
 <script>
 import { mapActions } from 'vuex';
+import dyk from '@/.././dyk.json';
+import anon from '@/../anon.json';
+import bella from '@/../bella.json';
 export default {
   data() {
     return {
       canLogin: process.env.VUE_APP_DEV || false,
+      bg: "./img/ban11.png",
       rnd: [],
-      bg: "./img/ban11.png"
+      a: "",
+      dyk: dyk,
+      anon: anon,
+      bella: bella,
+      q: "Did You Know?"
     };
   },
+  created() {
+    this.setMessage()
 
+  },
   methods: {
     ...mapActions(['init', 'login', 'setLoadingPercentage']),
+    setMessage() {
+      const p = Math.floor(Math.random() * 3)
+      if (p === 0) {
+        this.q = "Bella Ramirez"
+        this.a = '"' + bella[(Math.floor(Math.random() * Math.floor(bella.length)))] + '"'
+      }
+      else if (p === 1) {
+        this.q = "Anonymous tip"
+        this.a = '"' + anon[(Math.floor(Math.random() * Math.floor(anon.length)))] + '"'
+      }
+      else
+        this.a = dyk[(Math.floor(Math.random() * Math.floor(dyk.length)))]
+
+    },
     ok() {
       if (this.client && this.TWA && this.TWA.initData)
         this.client.restart();
@@ -71,6 +115,9 @@ export default {
     loadPercentage() {
       return this.$store.state.ui.loadingPercentage;
     },
+    firstLoad() {
+      return this.$store.state.ui.firstLoad;
+    },
   },
 };
 </script>
@@ -80,10 +127,14 @@ export default {
   position: absolute;
   max-width: 90%;
   top: 30%;
+  z-index: 10;
 }
 
-.content {
+.m-content {
+  position: relative;
   width: 100vw;
+  left: 0px;
+  top: 0px;
   height: 100vh;
   max-height: 100vh;
   background: #fff0;
@@ -360,6 +411,7 @@ export default {
     y 1s ease-in-out infinite;
   rotate: 90deg;
   top: 0px;
+  z-index: 8;
 }
 
 

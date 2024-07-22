@@ -73,15 +73,19 @@ export default {
         twaReturnUrl: 'https://t.me/drugwars_bot/drugwars'
       };
       window.tonConnectUI = this.tonConnectUI;
+      const self = this;
       this.tonConnectUI.onStatusChange(
         walletAndwalletInfo => {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet && this.tutorialStep > 7) {
+            if (!this.$store.state.game.user.user.wallet || this.tutorialStep === 8) {
               this.setWallet(this.wallet)
               this.setTutoDetail(3)
-              this.toggleModalAccount()
+              setTimeout(() => {
+                self.toggleModalAccount()
+              }, 3000);
+             
 
             }
           }

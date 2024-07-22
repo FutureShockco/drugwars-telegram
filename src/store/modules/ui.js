@@ -11,7 +11,8 @@ const state = {
   showTutorial: false,
   timestamp: new Date().getTime(),
   notifications: [],
-  currentPayment: null
+  currentPayment: null,
+  firstLoad:true
 };
 
 const mutations = {
@@ -55,6 +56,9 @@ const mutations = {
     const timestamp = parseInt(new Date().getTime() / 1000);
     _state.notifications.push({ ...payload, timestamp });
   },
+  setFirstLoad(_state, payload) {
+    Vue.set(_state, 'firstLoad', payload);
+  },
 };
 
 const actions = {
@@ -96,6 +100,9 @@ const actions = {
   },
   setCurrentPayment({ commit }, payload) {
     commit('setCurrentPayment', payload);
+  },
+  setFirstLoad({ commit }, payload) {
+    commit('setFirstLoad', payload);
   },
 };
 

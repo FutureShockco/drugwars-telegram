@@ -119,7 +119,7 @@ setInterval(() => {
 
 
 const requireAuth = (to, from, next) => {
-
+ 
   if (client.ws.readyState === 3 && store.state.auth.account) {
     client.restart()
     store.dispatch('showLoading');

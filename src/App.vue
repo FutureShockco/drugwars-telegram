@@ -1,14 +1,14 @@
 <template>
   <div id="app">
     <Splash v-if="showLoading" />
-    <template v-else>
-      <TopNav v-if="username" />
+    <template>
+      <TopNav v-if="username && (!showLoading || (showLoading && !firstLoad))" />
       <!--<SidebarLeft v-if="username && showSidebar" />-->
 
       <div class="page-content" :class="{
         content: showSidebar,
         'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
-      }">
+      }" style="height: 100%; overflow: hidden">
         <router-view />
         <div @click="toggleSidebarVisibility(), toggleModalPayment(), setCurrentPayment(null)"
           :class="(username && showTutoOverlay) || modalWalletVisible || modalVideoVisible || modalPaymentVisible ? 'show' : 'd-none'"
@@ -36,14 +36,19 @@ import client from '@/helpers/client';
 import PaymentModal from './components/PaymentModal.vue';
 
 export default {
+  watch: {
+    showLoading: function(val) {
+      const el = document.body;
+      el.classList[val ? 'add' : 'remove']('overflow-hidden');
+    }
+  },
   data() {
     return {
       modalIsOpen: localStorage.firstime || false,
       messageIsOpen: localStorage.message || false,
       attempt: 1,
       connected: false,
-      timeIsopen: false,
-      firstLoad: true,
+      timeIsopen: false
     };
   },
   created() {
@@ -99,6 +104,9 @@ export default {
     },
     showLoading() {
       return this.$store.state.ui.showLoading;
+    },
+    firstLoad() {
+      return this.$store.state.ui.firstLoad;
     },
     showSidebar() {
       return !this.$route.meta.hideSidebar;
