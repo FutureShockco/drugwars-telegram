@@ -21,7 +21,7 @@
                 <h3 class="color-white">X (Twitter) Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your X (Twitter) account!</p>
                 <div @click="TWA.openLink('https://apitelegram.drugwars.io/twitter/login/' + TWA.initData)"
-                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
                     Link Now</div>
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
@@ -39,9 +39,9 @@
                 <h3 class="color-white">Daily Rewards</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Come everyday to get your dose!</p>
                 <div v-if="dailyRewards.last_connect !== dayCheck" @click="toggleModalVideo(), setCurrentLink('daily')"
-                    class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
                     Claim now</div>
-                <div v-else class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
+                <div v-else class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
                     Come back tomorrow</div>
             </div>
             <div v-if="modalVideoVisible && currentLink === 'daily'"
@@ -58,7 +58,7 @@
                     <div class="row gx-3">
                         <div class="col-3" v-for="(reward, index) in dailyRewards.rewards">
                             <div @click="claimDaily(), toggleModalVideo(), setCurrentLink(null)"
-                                :class="[reward.day === parseInt(dailyRewards.current_day) ? 'bg-theme gradient-border' : 'opacity-50 border border-yellow-dark no-pointer', reward.day < parseInt(dailyRewards.current_day) ? 'bg-green btn btn-xxs' : '']"
+                                :class="[reward.day === parseInt(dailyRewards.current_day) ? 'bg-theme gradient-border' : 'opacity-50 border border-yellow-dark no-pointer', reward.day < parseInt(dailyRewards.current_day) ? 'bg-green btn btn-xs' : '']"
                                 class="p-0 me-2 mb-3  badge  text-center w-100" style="border-radius:10px;">
                                 <h4 class="bg-highlight" style="border-radius:8px 8px 0px 0px;">Day {{
                                     reward.day }}
@@ -87,10 +87,10 @@
                     </div>
                     
                     <div @click="claimDaily(), toggleModalVideo(), setCurrentLink(null)"
-                        class="btn mb-3 btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-green">
+                        class="btn mb-3 btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-green">
                         Claim</div>
                     <div @click="toggleModalVideo(), setCurrentLink(null)"
-                        class="close-menu btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        class="close-menu btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Done</div>
                 </div>
             </div>
@@ -109,7 +109,7 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div @click="toggleModalVideo(), setCurrentLink(task.link)"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
                         Share Now</div>
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
@@ -122,15 +122,15 @@
                             Get some resources for free!
                         </p>
                         <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text=Join Me on DrugWars`)"
-                            class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                            class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Share
                             on Telegram</div>
                         <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}`)"
-                            class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight my-1">
+                            class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight my-3">
                             Share on X (Twitter)</div>
 
                         <div @click="toggleModalVideo(), setCurrentLink(null)"
-                            class="close-menu btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                            class="close-menu btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Done</div>
                     </div>
                 </div>
@@ -144,7 +144,7 @@
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="task.completed === 0"
                         @click="toggleModalVideo(), setCurrentLink(task.link), startTimer(task.timer)"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-green">Watch the
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-green">Watch the
                         video</div>
 
 
@@ -167,7 +167,7 @@
                                 aria-valuemax="100"></div>
                         </div>
                         <a @click="toggleModalVideo()"
-                            class="close-menu btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
+                            class="close-menu btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
                     </div>
                 </div>
             </div>
@@ -184,11 +184,11 @@
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="!task.user && task.completed === 0"
                         @click="TWA.openLink(`https://t.me/${task.link}`), completeTask({ id: task.id }), refreshTask()"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">Join
                         the {{ task.link }} channel</div>
                     <div v-else-if="task.user && task.completed === 0"
                         @click="verifyTask({ id: task.id }), refreshTask()"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid now</div>
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
@@ -205,16 +205,16 @@
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }} </p>
                     <div v-if="!task.user && task.completed === 0"
                         @click="TWA.openLink(`https://x.com/${task.link}`), completeTask({ id: task.id }), refreshTask()"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Follow
                         the {{ task.link }} account </div>
 
                     <div v-else-if="task.user && task.completed === 0 && task.time > now"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
                         Verification in process {{ (new Date().getTime() - new Date(task.time).getTime()) | ms }}</div>
                     <div v-else-if="task.user && task.completed === 0"
                         @click="verifyTask({ id: task.id }), refreshTask()"
-                        class="btn btn-full btn-xxs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid</div>
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
