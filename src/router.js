@@ -5,7 +5,6 @@ import { isWeb } from '@/helpers/utils';
 import client from '@/helpers/client';
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
-const Landing = () => import(/* webpackChunkName: "landing" */ '@/views/Landing.vue');
 const Boards = () => import(/* webpackChunkName: "boards" */ '@/views/Boards.vue');
 
 
@@ -123,7 +122,7 @@ const requireAuth = (to, from, next) => {
 
   if (client.ws.readyState === 3 && store.state.auth.account) {
     client.restart()
-    //store.dispatch('showLoading');
+    store.dispatch('showLoading');
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
         store.dispatch('init', store.state.auth.account).then(() => {
@@ -135,6 +134,8 @@ const requireAuth = (to, from, next) => {
       }
     });
   } else if (!store.state.game.user && store.state.auth.account) {
+    store.dispatch('showLoading');
+
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
         store.dispatch('init', store.state.auth.account).then(() => {

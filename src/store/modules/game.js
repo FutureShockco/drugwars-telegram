@@ -112,13 +112,12 @@ const authToken = function () {
 const actions = {
   init: ({ commit, dispatch }, newUser) =>
     new Promise(async (resolve, reject) => {
-      await dispatch('showLoading');
 
       if (!newUser && registeredUser)
         newUser = registeredUser
       if (!store.state.auth.username)
         await dispatch('login', newUser);
-      dispatch('setLoadingPercentage', 10);
+      dispatch('setLoadingPercentage', store.state.ui.loadingPercentage+20);
 
       registeredUser = newUser;
       let totalbases = 0;
@@ -133,14 +132,14 @@ const actions = {
         client
           .requestAsync('get_user', registeredUser)
           .then(user => {
-            dispatch('setLoadingPercentage', 20);
+            dispatch('setLoadingPercentage', store.state.ui.loadingPercentage+20);
             console.log(user)
             if (user && user.user && user.user.username) {
-              dispatch('setLoadingPercentage', 30);
+              dispatch('setLoadingPercentage', store.state.ui.loadingPercentage+20);
               if (user.user.tutorial < 9)
                 store.dispatch('showTutorial')
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
-                dispatch('setLoadingPercentage', 40);
+                dispatch('setLoadingPercentage', 80);
                 commit('savePrizeProps', prizeProps);
                 commit('saveUser', user);
                 commit('saveConnected', true);
@@ -162,14 +161,14 @@ const actions = {
                     ),
                   );
                 dispatch('refresh_fights_count');
-                dispatch('setLoadingPercentage', 100);
                 //dispatch('refresh_transport_count');
                 //dispatch('refresh_station_count');
+                dispatch('setLoadingPercentage', 100);
                 dispatch('hideLoading');
+                dispatch('setLoadingPercentage', 0);
                 return resolve("success");
               });
             } else {
-              console.log('signup')
               dispatch('signup').then(() => {
                 Promise.delay(2000).then(() => {
                   // window.location = '/home';
@@ -375,7 +374,6 @@ const actions = {
       payload.type = 'dw-chars'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init');
           Promise.delay(3000).then(() => {
             store.dispatch('init');
           });
