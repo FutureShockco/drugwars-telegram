@@ -112,7 +112,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['startFight', 'init']),
+    ...mapActions(['startFight']),
     async handleSubmit(territory, base) {
       this.isLoading = true;
       const self = this;

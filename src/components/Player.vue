@@ -166,7 +166,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['startFight', 'init']),
+    ...mapActions(['startFight']),
     async handleSubmit() {
       this.isLoading = true;
       const payload = {

@@ -73,12 +73,7 @@ export default {
     paymentAuthorized(data) {
       this.handleSubmit(data.orderID);
     },
-    paymentCompleted(data) {
-      // console.log(data);
-    },
-    paymentCancelled(data) {
-      // console.log(data);
-    },
+
     handleSubmit(orderID) {
       // console.log(orderID);
       const payload = {

@@ -27,20 +27,17 @@ const mutations = {
 const actions = {
   login: async ({ commit },  data ) =>
     new Promise(resolve => {
-      console.log(data)
       const parsedData = window.Telegram.Utils.urlParseQueryString(data)
-      console.log(parsedData)
       let user = JSON.parse(parsedData.user)
 
       if (parsedData && user && user.id) {
         client
           .requestAsync('login', { parsedData })
           .then(result => {
-            console.log(user)
             commit('saveAccount', data)
             commit('saveUsername', user.id.toString());
             commit('saveNickname', user.username.toString());
-            resolve(result);
+            resolve();
           })
           .catch(e => {
             console.log(e);

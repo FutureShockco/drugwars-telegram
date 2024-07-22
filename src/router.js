@@ -118,13 +118,12 @@ setInterval(() => {
 
 
 const requireAuth = (to, from, next) => {
- 
   if (client.ws.readyState === 3 && store.state.auth.account) {
     client.restart()
     store.dispatch('showLoading');
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', store.state.auth.account, true).then(() => {
+        store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
           next();
         });
       } else {
@@ -137,7 +136,7 @@ const requireAuth = (to, from, next) => {
 
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', store.state.auth.account, true).then(() => {
+        store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
           next();
         });
       } else {
@@ -152,12 +151,9 @@ const requireAuth = (to, from, next) => {
     next({ name: 'home', query: { redirect } });
 
   }
-
   else {
-
     next();
   }
-
 };
 
 

@@ -38,17 +38,23 @@
             <tbody>
               <tr>
                 <td><strong>Production</strong></td>
-                <td>{{ totalDaily | amount }}  <Icon name="dwd" /></td>
+                <td>{{ totalDaily | amount }}
+                  <Icon name="dwd" />
+                </td>
                 <td>Daily</td>
               </tr>
               <tr>
                 <td><strong>Pablo</strong></td>
-                <td>{{ totalHeist | amount }}  <Icon name="ton" size="18" /></td>
+                <td>{{ pablo | amount }}
+                  <Icon name="ton" size="18" />
+                </td>
                 <td>Weekly</td>
               </tr>
               <tr>
                 <td><strong>Fight</strong></td>
-                <td> {{ totalFight + prizeProps.free_dwd - prizeProps.daily_rewards | amount }}  <Icon name="dwd" /></td>
+                <td> {{ totalFight + prizeProps.free_dwd - prizeProps.daily_rewards | amount }}
+                  <Icon name="dwd" />
+                </td>
                 <td>Instant</td>
               </tr>
 
@@ -131,6 +137,10 @@ export default {
     totalHeist() {
       const { prizeProps } = this.$store.state.game;
       return prizeProps.heist_percent;
+    },
+    pablo() {
+      const { prizeProps } = this.$store.state.game;
+      return prizeProps.balance / 1000000000;
     },
     user() {
       return this.$store.state.game.user.user;

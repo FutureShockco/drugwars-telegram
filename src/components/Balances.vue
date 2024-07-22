@@ -139,7 +139,7 @@ import { mapActions } from 'vuex';
 
 export default {
   methods: {
-    ...mapActions(['toggleSidebarVisibility', 'init', 'toggleModalAccount']),
+    ...mapActions(['toggleSidebarVisibility',  'toggleModalAccount']),
   },
   computed: {
     timeToWait() {

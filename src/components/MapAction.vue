@@ -370,7 +370,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['missions', 'init', 'get_bases', 'setBase']),
+    ...mapActions(['missions',  'get_bases', 'setBase']),
     resetForm() {
       this.target = null;
       this.base = null;

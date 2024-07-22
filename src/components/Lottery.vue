@@ -119,7 +119,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['send', 'init']),
+    ...mapActions(['send']),
     handleSubmit() {
       if (Number(this.amount) > 0) {
         this.isLoading = true;

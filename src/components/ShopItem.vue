@@ -52,7 +52,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['send', 'init']),
+    ...mapActions(['send']),
     handleSubmit(type) {
       this.isLoading = true;
       const payload = {

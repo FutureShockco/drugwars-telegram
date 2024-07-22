@@ -228,7 +228,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['init', 'send']),
+    ...mapActions([ 'send']),
     handleSubmit() {
       const self = this;
       self.isLoading = true;

@@ -84,7 +84,7 @@ export default {
 
   },
   methods: {
-    ...mapActions(['init', 'login', 'setLoadingPercentage']),
+    ...mapActions(['setLoadingPercentage']),
     setMessage() {
       const p = Math.floor(Math.random() * 3)
       if (p === 0) {
@@ -98,16 +98,7 @@ export default {
       else
         this.a = dyk[(Math.floor(Math.random() * Math.floor(dyk.length)))]
 
-    },
-    ok() {
-      if (this.client && this.TWA && this.TWA.initData)
-        this.client.restart();
-      this.login(this.TWA.initData).then((res) => {
-        this.init(this.TWA.initData).then((result) => {
-          this.$router.push({ path: this.$route.query.redirect || '/home' });
-        })
-      })
-    },
+    }
   },
   computed: {
     server() {

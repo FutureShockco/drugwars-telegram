@@ -242,7 +242,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['init', 'send']),
+    ...mapActions(['send']),
     handleSubmit() {
       const self = this;
       this.isLoading = true;
