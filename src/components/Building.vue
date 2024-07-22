@@ -2,20 +2,23 @@
   <div v-if="building.id === 'strategic_center' && !main"></div>
   <div v-else-if="building.id === 'pantheon' && !main"></div>
   <div v-else>
-    <div class="card card-style mb-3"
-      :class="[hasNotEnough ? 'not-enough' : '', tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox' : '', tutorialStep === 2 && building.id === 'crackhouse' ? 'tutobox' : '', tutorialStep === 3 && building.id === 'ammunition' ? 'tutobox' : '', tutorialStep === 4 && building.id === 't_distillery' ? 'tutobox' : '', tutorialStep === 5 && building.id === 'training_facility' ? 'tutobox' : '']">
-      <div class="content">
-        <div class="d-flex">
-          <div class="pt-1 ms-auto">
-            <div style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;"
-              class="rounded-s">
-              <img :style="inProgress ? 'filter: grayscale(1);' : ''" style="border: 1px solid #392828;    "
-                :src="`/img/buildings/${building.id}.png`" class="img-fluid rounded-s" width="100" height="100">
-              <div v-if="inProgress" style="text-align:center;position: absolute; top:0px; width:100%;z-index:10;">
-                <h5 class="color-highlight" style="padding:5px;background:#0000004d;border-radius: 0px 0px 5px 5px;">{{
-                  progress }}%</h5>
-              </div>
-              <div v-if="inProgress" id="overlay2" style="left: 0px;
+    <div :class="[tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox' : '', tutorialStep === 2 && building.id === 'crackhouse' ? 'tutobox' : '', tutorialStep === 3 && building.id === 'ammunition' ? 'tutobox' : '', tutorialStep === 4 && building.id === 't_distillery' ? 'tutobox' : '', tutorialStep === 5 && building.id === 'training_facility' ? 'tutobox' : '']">
+      <div class="card card-style mb-3"
+        :class="[hasNotEnough ? 'not-enough' : '']">
+        <div class="content">
+          <div class="d-flex">
+            <div class="pt-1 ms-auto">
+              <div
+                style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;"
+                class="rounded-s">
+                <img :style="inProgress ? 'filter: grayscale(1);' : ''" style="border: 1px solid #392828;    "
+                  :src="`/img/buildings/${building.id}.png`" class="img-fluid rounded-s" width="100" height="100">
+                <div v-if="inProgress" style="text-align:center;position: absolute; top:0px; width:100%;z-index:10;">
+                  <h5 class="color-highlight" style="padding:5px;background:#0000004d;border-radius: 0px 0px 5px 5px;">
+                    {{
+                      progress }}%</h5>
+                </div>
+                <div v-if="inProgress" id="overlay2" style="left: 0px;
     position: absolute;
     overflow: hidden;
        background-position: bottom;
@@ -25,12 +28,12 @@
     border-top: 1px solid green;
     " :style="`top:${100 - progress}%;height:${progress}%!important;`">
 
-              </div>
-              <div v-if="inProgress" class="ocrloader">
-                <em></em>
-                <span></span>
-              </div>
-              <div id="overlay" class="rounded-s" style="left: 0px;
+                </div>
+                <div v-if="inProgress" class="ocrloader">
+                  <em></em>
+                  <span></span>
+                </div>
+                <div id="overlay" class="rounded-s" style="left: 0px;
     position: absolute;
     overflow: hidden;
        background-position: bottom;
@@ -38,71 +41,72 @@
     background-size: cover;
 
     " :style="`top:${100 - progress}%;background-size:100%; height:${progress}%!important;background-image:url(/img/buildings/${building.id}.png)`">
+                </div>
               </div>
             </div>
-          </div>
-          <div class="ps-3 me-auto" style="width: 100%;">
-            <router-link class="mt-n2 pb-2" :to="`/buildings/detail?name=${building.id}`">
-              <h3 class="mt-0">{{ building.name }} lvl.{{ ownItem.lvl }}</h3>
-            </router-link>
-            <!-- <div class="mb-2" v-html="building.desc"></div> -->
-            <div v-if="building.feature">
-              <div>{{ building.feature }}</div>
+            <div class="ps-3 me-auto" style="width: 100%;">
+              <router-link class="mt-n2 pb-2" :to="`/buildings/detail?name=${building.id}`">
+                <h3 class="mt-0">{{ building.name }} lvl.{{ ownItem.lvl }}</h3>
+              </router-link>
+              <!-- <div class="mb-2" v-html="building.desc"></div> -->
+              <div v-if="building.feature">
+                <div>{{ building.feature }}</div>
+              </div>
+              <div v-if="building.production_type">
+                <BuildingProduction :compactview="0" :production_type="building.production_type" :level="ownItem.lvl"
+                  :coeff="building.coeff" :production_rate="building.production_rate" />
+              </div>
+              <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
+                <div v-if="ownItem.lvl">
+                  <b>Current capacity:</b>
+                  {{ 10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl | amount }}
+                </div>
+                <div v-if="ownItem.lvl">
+                  <b>Next capacity:</b>
+                  {{ 10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) |
+                    amount
+                  }}
+                </div>
+                <div v-else>
+                  <b>Next capacity:</b>
+                  {{ 10000 + (18000 * 1 * ((Math.sqrt(1)) / 100)) * 1 | amount }}
+                </div>
+                <div v-if="ownItem.lvl">
+                  <b>Safe:</b>
+                  {{ (10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl)) / 100) * ownItem.lvl) / 100 * 20 | amount
+                  }}
+                </div>
+                <div v-if="ownItem.lvl">
+                  <b>Next Safe:</b>
+                  {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1)) /
+                    100
+                    *
+                    20 |
+                    amount }}
+                </div>
+                <div v-else>
+                  <b>Safe:</b>
+                  {{ 10000 / 100 * 15 | amount }}
+                </div>
+              </div>
+              <Cost :drugsCost="drugsCost" :weaponsCost="weaponsCost" :alcoholsCost="alcoholsCost" :quantity="1" />
+              <div class="w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
+
             </div>
-            <div v-if="building.production_type">
-              <BuildingProduction :compactview="0" :production_type="building.production_type" :level="ownItem.lvl"
-                :coeff="building.coeff" :production_rate="building.production_rate" />
-            </div>
-            <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
-              <div v-if="ownItem.lvl">
-                <b>Current capacity:</b>
-                {{ 10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl | amount }}
-              </div>
-              <div v-if="ownItem.lvl">
-                <b>Next capacity:</b>
-                {{ 10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) |
-                  amount
-                }}
-              </div>
-              <div v-else>
-                <b>Next capacity:</b>
-                {{ 10000 + (18000 * 1 * ((Math.sqrt(1)) / 100)) * 1 | amount }}
-              </div>
-              <div v-if="ownItem.lvl">
-                <b>Safe:</b>
-                {{ (10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl)) / 100) * ownItem.lvl) / 100 * 20 | amount }}
-              </div>
-              <div v-if="ownItem.lvl">
-                <b>Next Safe:</b>
-                {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1)) /
-                  100
-                  *
-                  20 |
-                  amount }}
-              </div>
-              <div v-else>
-                <b>Safe:</b>
-                {{ 10000 / 100 * 15 | amount }}
-              </div>
-            </div>
-            <Cost :drugsCost="drugsCost" :weaponsCost="weaponsCost" :alcoholsCost="alcoholsCost" :quantity="1" />
-            <div class="w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
 
           </div>
+
 
         </div>
-
-
-      </div>
-      <div v-if="(building.id === 'strategic_center' && ownItem.lvl > 204)">Max level reached</div>
-      <Checkout v-else :id="building.id" :level="ownItem.lvl + 1" :coeff="building.coeff" :hqLevel="ownHq.lvl"
-        :inProgress="inProgress" :price="drugsCost / 150000" :notEnough="hasNotEnough" />
-      <!-- <div class="item-content width-full mr-3">
+        <div v-if="(building.id === 'strategic_center' && ownItem.lvl > 204)">Max level reached</div>
+        <Checkout v-else :id="building.id" :level="ownItem.lvl + 1" :coeff="building.coeff" :hqLevel="ownHq.lvl"
+          :inProgress="inProgress" :price="drugsCost / 150000" :notEnough="hasNotEnough" />
+        <!-- <div class="item-content width-full mr-3">
       <div v-if="buildingupgrades" v-for="item in buildingupgrades" :key="item.id">
         <BuildingUpgrade class="column col-6 p-0" :upgrade="item" />
       </div>
     </div> -->
-
+      </div>
 
     </div>
   </div>

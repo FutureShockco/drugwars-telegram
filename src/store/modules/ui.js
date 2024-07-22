@@ -4,12 +4,14 @@ const state = {
   sidebarVisible: false,
   modalAccountVisible: false,
   modalVideoVisible: false,
+  modalPaymentVisible: false,
   currentVideo: null,
   showLoading: true,
   loadingPercentage: 0,
   showTutorial: false,
   timestamp: new Date().getTime(),
   notifications: [],
+  currentPayment: null
 };
 
 const mutations = {
@@ -21,6 +23,9 @@ const mutations = {
   },
   toggleModalVideo(_state) {
     Vue.set(_state, 'modalVideoVisible', !_state.modalVideoVisible);
+  },
+  toggleModalPayment(_state) {
+    Vue.set(_state, 'modalPaymentVisible', !_state.modalPaymentVisible);
   },
   closeModalVideo(_state) {
     Vue.set(_state, 'modalVideoVisible', false);
@@ -43,6 +48,9 @@ const mutations = {
   setLoadingPercentage(_state, payload) {
     Vue.set(_state, 'loadingPercentage', payload);
   },
+  setCurrentPayment(_state, payload) {
+    Vue.set(_state, 'currentPayment', payload);
+  },
   notify(_state, payload) {
     const timestamp = parseInt(new Date().getTime() / 1000);
     _state.notifications.push({ ...payload, timestamp });
@@ -58,6 +66,9 @@ const actions = {
   },
   toggleModalVideo({ commit }) {
     commit('toggleModalVideo');
+  },
+  toggleModalPayment({ commit }) {
+    commit('toggleModalPayment');
   },
   closeModalVideo({ commit }) {
     commit('closeModalVideo');
@@ -82,6 +93,9 @@ const actions = {
   },
   setLoadingPercentage({ commit }, payload) {
     commit('setLoadingPercentage', payload);
+  },
+  setCurrentPayment({ commit }, payload) {
+    commit('setCurrentPayment', payload);
   },
 };
 

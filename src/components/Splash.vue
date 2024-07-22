@@ -51,15 +51,7 @@ export default {
       bg: "./img/ban11.png"
     };
   },
-  mounted() {
-    window.init_template()
-    //this.ok()
-    // setInterval(() => {
-    //   this.setLoadingPercentage(this.loadPercentage + 5)
-    //   if (this.loadPercentage >= 100)
-    //     this.setLoadingPercentage(0)
-    // }, 50);
-  },
+
   methods: {
     ...mapActions(['init', 'login', 'setLoadingPercentage']),
     ok() {

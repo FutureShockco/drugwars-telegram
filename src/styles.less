@@ -525,8 +525,16 @@
 }
 
 
+.btn.left {
+  border-radius: 0px 0px 0px 25px;
+}
+
+.btn.right {
+  border-radius: 0px 0px 25px 0px;
+}
 
 .tutobox {
+  margin: 0px 15px 15px 15px;
   color: white;
   text-shadow: 0 1px 0 #000;
 
@@ -539,7 +547,7 @@
 
   border: solid 5px transparent !important;
   --gradient-border: conic-gradient(from var(--border-angle), transparent 25%, rgb(0, 0, 0), rgb(255, 200, 0) 99%, transparent);
-  border-radius: 0px !important;
+  border-radius: 35px !important;
   background:
     // padding-box clip this background in to the overall element except the border.
     var(--main-bg) padding-box,
@@ -558,6 +566,12 @@
     }
   }
 
+
+}
+
+
+.tutobox .card {
+  margin: 0px 0px 0px 0px !important;
 }
 
 .list-style-none {
@@ -572,7 +586,8 @@
 
 }
 
-.pagination .page-item:first-child .page-link, .pagination .page-item:last-child .page-link {
+.pagination .page-item:first-child .page-link,
+.pagination .page-item:last-child .page-link {
   padding: 6px 12px !important;
 }
 

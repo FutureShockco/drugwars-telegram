@@ -10,11 +10,13 @@
         'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
       }">
         <router-view />
-        <div @click="toggleSidebarVisibility"
-          :class="(username && showTutoOverlay) || modalWalletVisible || modalVideoVisible ? 'show' : 'd-none'"
+        <div @click="toggleSidebarVisibility(), toggleModalPayment(), setCurrentPayment(null)"
+          :class="(username && showTutoOverlay) || modalWalletVisible || modalVideoVisible || modalPaymentVisible ? 'show' : 'd-none'"
           class="offcanvas-backdrop fade">
         </div>
       </div>
+      <PaymentModal v-if="username && modalPaymentVisible" />
+
       <Quickstart v-if="username && showTutorial" />
       <!-- <BottomNav v-if="username" /> -->
 
@@ -31,6 +33,7 @@
 import { mapActions } from 'vuex';
 import Quickstart from './components/Quickstart.vue';
 import client from '@/helpers/client';
+import PaymentModal from './components/PaymentModal.vue';
 
 export default {
   data() {
@@ -56,7 +59,7 @@ export default {
       this.TWA.expand()
   },
   methods: {
-    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount']),
+    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount', 'toggleModalPayment', 'setCurrentPayment']),
     checkWS() {
       if (this.TWA && this.TWA.initData)
         client.restart();
@@ -79,6 +82,9 @@ export default {
     },
     modalVideoVisible() {
       return this.$store.state.ui.modalVideoVisible;
+    },
+    modalPaymentVisible() {
+      return this.$store.state.ui.modalPaymentVisible;
     },
     username() {
       return this.$store.state.game.user;

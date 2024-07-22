@@ -1,45 +1,33 @@
 <template>
-  <div class="d-flex w-100 pb-2">
-    <div :class="inProgress ? 'd-none' : 'col-4 pe-0  mx-2 '">
+  <div class="d-flex">
+    <div :class="inProgress ? 'd-none' : 'col-6'">
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
-      <UiButton
-        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep < 8 && id !== 'headquarters')"
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base ? 'gradient-red color-white' : 'border-green-dark border-green-dark color-green-dark ']"
-        @click="handleSubmit()" class="btn-full btn-xxs btn  w-100">
-        <template v-if="isLoading || waitingConfirmation">
-          Loading...
-        </template>
-
-        <template v-else>
+      <UiButton :loading="isLoading || waitingConfirmation"
+        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4)"
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4) ? 'gradient-red color-white' : 'gradient-green']"
+        @click="handleSubmit()" class="btn btn-full btn-xxs w-100 left">
+        <template>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
-          <i class="fad fa-arrow-up me-1 text-green" />
+          <i class="fad fa-arrow-up me-1 text-white" />
           <span>{{ upgradeLabel }}</span>
-
         </template>
       </UiButton>
 
     </div>
-    <div v-if="!inProgress" class="col-8">
-      <div class="text-center w-100">Instant upgrade TON or DW</div>
-      <div class="d-flex">
-        <div class="col-6">
-          <!-- <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || inProgress || !base"
-        @click="handleRequestPayment()" class="button btn-block button-blue">
-        <i class="iconfont icon-zap" />
-        <span>
-          {{ priceInSteem }} DWD</span>
-      </UiButton> -->
-          <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || !base || tutorialStep < 8"
-            :class="isLoading || waitingConfirmation || requireUpdate || !base ? '' : 'button-blue'"
-            @click="handleRequestPayment()" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
-            <i class="fad fa-arrow-up me-1 text-blue" />
-            <span>
-              {{ (priceInDWD / 25).toFixed(4) }} TON</span>
-
-          </UiButton>
-        </div>
-        <div v-if="!inProgress" class="col-5 mx-2">
+    <div v-if="!inProgress" :class="inProgress ? 'd-none' : 'col-6 '">
+      <div class="text-center w-100">Instant upgrade</div>
+      <div>
+        <UiButton :loading="isLoading || waitingConfirmation"
+          :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse')"
+          :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') ? 'gradient-red color-white' : 'gradient-blue'"
+          @click="handleRequestPayment()" class="btn btn-full btn-xxs w-100 right">
+          <i class="fad fa-arrow-up me-1 text-white" />
+          <span> UPGRADE
+            <!-- {{ (priceInDWD / 25).toFixed(4) }} TON -->
+          </span>
+        </UiButton>
+        <!-- <div v-if="!inProgress" class="col-5 mx-2">
 
           <UiButton
             :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 3 && id !== 'ammunition') || (tutorialStep === 4 && id !== 't_distillery') || (tutorialStep === 5 && id !== 'training_facility')"
@@ -50,7 +38,7 @@
               {{ priceInDWD }} DW</span>
 
           </UiButton>
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -148,6 +136,7 @@ export default {
     },
     upgradeLabel() {
       let label = 'Upgrade';
+      if ((this.tutorialStep < 8 && this.id !== 'headquarters')) label = 'Finish tutorial';
       if (this.notEnough) label = 'No resources';
       if (this.requireUpdate) label = 'Require HQ+';
       if (this.inProgress) {
@@ -160,7 +149,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['upgradeBuilding', 'requestPayment']),
+    ...mapActions(['upgradeBuilding', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment']),
     handleSubmit(use) {
       this.isLoading = true;
       let payload = {};
@@ -200,12 +189,27 @@ export default {
         });
     },
     async handleRequestPayment() {
-      this.requestPayment({
+      const dwd = {
+        building: this.id,
+        level: this.level,
+        use: 'dwd',
+        territory: Number(this.base.territory),
+        base: Number(this.base.base),
+      };
+      const ton = {
         memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
         )}`,
-        amount: `${this.priceInSteem*1000000000}`,
-      });
+        amount: `${this.priceInSteem * 1000000000}`,
+      }
+      this.setCurrentPayment({ dwd, ton, price: this.priceInDWD })
+      this.toggleModalPayment()
+      // this.requestPayment({
+      //   memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(
+      //     this.base.base,
+      //   )}`,
+      //   amount: `${this.priceInSteem * 1000000000}`,
+      // });
     },
   },
 };
