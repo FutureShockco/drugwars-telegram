@@ -8,7 +8,7 @@
             </div>
             <div class="d-flex px-4">
                 <div class="col-6 text-center">
-                    <UiButton class="btn border-blue-dark" @click="handleRequestPayment(), toggleModalPayment()">
+                    <UiButton class="btn border-blue-dark" @click="handleRequestPayment(), toggleModalPayment()" :disabled="tutorialStep < 9">
                         <Icon name="ton" size="50" />
                     </UiButton>
                     <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{ currentPayment.ton.amount
@@ -42,7 +42,10 @@ export default {
     computed: {
         currentPayment() {
             return this.$store.state.ui.currentPayment
-        }
+        },
+        tutorialStep() {
+            return this.$store.state.game.user.user.tutorial
+        },
     },
     methods: {
         ...mapActions(['upgradeBuilding', 'recruitUnit', 'upgradeTraining', 'requestPayment', 'toggleModalPayment', 'setCurrentPayment']),

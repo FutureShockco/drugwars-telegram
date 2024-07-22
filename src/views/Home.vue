@@ -92,8 +92,8 @@ export default {
     };
   },
   mounted() {
-    if (window && window.init_template)
-      window.init_template()
+    if(window && window.init_template)
+    window.init_template()
 
   },
   created() {

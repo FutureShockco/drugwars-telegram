@@ -137,8 +137,7 @@ const actions = {
             console.log(user)
             if (user && user.user && user.user.username) {
               dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
-              if (user.user.tutorial < 9)
-                store.dispatch('showTutorial')
+
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 dispatch('setLoadingPercentage', 80);
                 commit('savePrizeProps', prizeProps);
@@ -161,14 +160,19 @@ const actions = {
                         b.building === 'headquarters',
                     ),
                   );
+
                 dispatch('refresh_fights_count');
                 //dispatch('refresh_transport_count');
                 //dispatch('refresh_station_count');
-                dispatch('setLoadingPercentage', 100);
+                dispatch('setLoadingPercentage', 90);
                 Promise.delay(1000).then(() => {
+                  dispatch('setLoadingPercentage', 100);
+
                   dispatch('hideLoading');
                   dispatch('setFirstLoad', false);
                   dispatch('setLoadingPercentage', 0);
+                  if (user.user.tutorial < 9)
+                    store.dispatch('showTutorial')
                   return resolve("success");
 
                 });

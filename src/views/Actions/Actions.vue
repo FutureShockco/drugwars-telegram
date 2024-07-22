@@ -56,7 +56,7 @@
           <div v-if="tutorialStep > 6">
             <h3>Select your army composition</h3>
             <div class="d-flex" v-if="ownUnits.length > 0">
-              <div class="col-2" v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
+              <div class="col-3" v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
                 <UnitSelect v-if="ownUnit.amount > 0" :item="ownUnit" @click="addUnit" />
               </div>
             </div>
@@ -122,7 +122,8 @@
           <div v-if="action_type !== 'occupy' && target_type !== 'npc'">
             <h3>Type a nickname</h3>
             <div class="d-flex">
-              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-1" type="string" placeholder="Nickname" v-model="targetNickname" />
+              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-1" type="string"
+                placeholder="Nickname" v-model="targetNickname" />
               <UiButton class="button button-green" @click="getUserBase()">
                 <div class="fad fa-search"></div>
               </UiButton>
@@ -162,13 +163,15 @@
           <h3 class="mt-1">Or your target coordinates</h3>
           <div class="d-flex">
             <div class="col">
-              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-4" type="number" placeholder="Territory" v-model="target" />
+              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-4" type="number"
+                placeholder="Territory" v-model="target" />
             </div>
             <div class="col">
-              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-4" type="number" placeholder="Base" v-model="base" />
+              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-4" type="number"
+                placeholder="Base" v-model="base" />
             </div>
           </div>
-          <div :class=" tutorialStep === 7 ? 'd-none':''"
+          <div :class="tutorialStep === 7 ? 'd-none' : ''"
             v-if="target_type !== 'npc' && (action_type === 'attack' || action_type === 'transport')">
             <h3>Add a fight message*</h3>
             <div>* optional</div>

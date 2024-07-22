@@ -4,8 +4,8 @@
       <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading || waitingConfirmation"
-        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4)"
-        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4) ? 'border-red-dark color-red-dark' : 'border-green-dark color-green-dark']"
+        :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4 || tutorialStep === 5"
+        :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4 || tutorialStep === 5 ? 'border-red-dark color-red-dark' : 'border-green-dark color-green-dark']"
         @click="handleSubmit()" class="btn btn-full btn-xxs w-100">
         <template>
           <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
@@ -17,8 +17,8 @@
       <div class="text-center w-100">Instant</div>
       <div>
         <UiButton :loading="isLoading || waitingConfirmation"
-          :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse')"
-          :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'"
+          :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility')"
+          :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility') ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'"
           @click="handleRequestPayment()" class="btn btn-full btn-xxs w-100">
           <span> Fast Upgrade
           </span>
