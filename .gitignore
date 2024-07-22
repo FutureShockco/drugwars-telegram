@@ -22,3 +22,4 @@ yarn-error.log*
 *.sw*
 .env
 src/main.js
+src/main.js
