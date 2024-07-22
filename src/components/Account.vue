@@ -94,7 +94,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['init', 'logout', 'send', 'toggleModalAccount', 'setTutoDetail']),
+    ...mapActions(['logout', 'send', 'toggleModalAccount', 'setTutoDetail']),
     setWallet() {
       const payload = {
         wallet: this.wallet,

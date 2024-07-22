@@ -37,7 +37,7 @@ import PaymentModal from './components/PaymentModal.vue';
 
 export default {
   watch: {
-    showLoading: function(val) {
+    showLoading: function (val) {
       const el = document.body;
       el.classList[val ? 'add' : 'remove']('overflow-hidden');
     }
@@ -69,7 +69,7 @@ export default {
       if (this.TWA && this.TWA.initData)
         client.restart();
       this.login(this.TWA.initData).then((res) => {
-        this.init(this.TWA.initData).then((result) => {
+        this.init({ user: this.TWA.initData, showLoading: true }).then((result) => {
           this.$router.push({ path: this.$route.query.redirect || '/home' });
         })
       })

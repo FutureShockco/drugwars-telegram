@@ -124,7 +124,7 @@ const requireAuth = (to, from, next) => {
     store.dispatch('showLoading');
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', store.state.auth.account).then(() => {
+        store.dispatch('init', store.state.auth.account, true).then(() => {
           next();
         });
       } else {
@@ -137,7 +137,7 @@ const requireAuth = (to, from, next) => {
 
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', store.state.auth.account).then(() => {
+        store.dispatch('init', store.state.auth.account, true).then(() => {
           next();
         });
       } else {
@@ -158,24 +158,6 @@ const requireAuth = (to, from, next) => {
     next();
   }
 
-  // if (store.state.auth.username || !store.state.game.user.user) {
-  //   store.dispatch('showLoading');
-  //   store.dispatch('login',store.state.auth.username).then(() => {
-  //     if (store.state.game.username) {
-  //       store.dispatch('init',store.state.game.user).then(() => {
-  //         store.dispatch('hideLoading');
-  //         next();
-  //       });
-  //     } else {
-  //       store.dispatch('hideLoading');
-  //       const redirect = to.fullPath === '/' ? undefined : to.fullPath;
-  //       next({ name: 'login', query: { redirect } });
-  //     }
-  //   });
-  // } else {
-  //   store.dispatch('hideLoading');
-  //   next();
-  // }
 };
 
 

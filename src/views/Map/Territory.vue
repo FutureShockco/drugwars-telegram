@@ -519,7 +519,7 @@ export default {
       // const limit = (document.body.clientWidth)-bg.offsetWidth;
       // tb.style.left = (limit+50) +'px';
     },
-    ...mapActions(['send', 'notify', 'setMainBase', 'init']),
+    ...mapActions(['send', 'notify', 'setMainBase']),
     async handleSubmit() {
       const self = this;
       const isValid = await this.validateFormFree();

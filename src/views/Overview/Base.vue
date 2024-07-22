@@ -176,7 +176,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['send', 'init']),
+    ...mapActions(['send']),
     handleSubmit() {
       const self = this;
       this.errorMessage = null;

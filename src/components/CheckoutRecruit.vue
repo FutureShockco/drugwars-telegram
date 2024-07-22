@@ -22,7 +22,7 @@
     </div>
     <div class="col-6">
       <div class="text-center w-100">Instant</div>
-      <UiButton :loading="isLoading" :disabled="isLoading || !base || tutorialStep < 8" @click="handleRequestPayment()"
+      <UiButton :disabled="isLoading || !base || tutorialStep < 8" @click="handleRequestPayment()"
         class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
         <span>
           Fast Recruit</span>
