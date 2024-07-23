@@ -165,7 +165,7 @@ export default {
       };
       const ton = {
         memo: `training:${this.id},territory:${Number(this.base.territory)},base:${Number(this.base.base)}`,
-        amount: `${this.priceInSteem * 1000000000}`,
+        amount: `${this.priceInTon * 1000000000}`,
       }
       this.setCurrentPayment({ type: "training", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()
