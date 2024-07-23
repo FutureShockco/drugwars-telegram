@@ -1,7 +1,7 @@
 <template>
   <div class="row mx-3 mb-3 g-3">
     <div class="col-6">
-      <div class="text-center w-100" v-if="pendingAmount">End: {{ timeToWaitString }}</div>
+      <div class="text-center w-100" v-if="pendingAmount">{{ new Date().getTime() + (timeToWait) | end}}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading"
         :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base || tutorialStep < 8 ? 'border-red-dark color-red-dark' : 'border-green-dark border-green-dark color-green-dark']"

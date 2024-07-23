@@ -1,7 +1,7 @@
 <template>
   <div class="row mx-3 mb-3 g-3">
     <div class="col-6">
-      <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
+      <div class="text-center w-100" v-if="inProgress">{{ new Date().getTime() + (timeToWait) | end}}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading || waitingConfirmation"
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4 || tutorialStep === 5"
@@ -13,7 +13,7 @@
       </UiButton>
     </div>
     <div class="col-6">
-      <div class="text-center w-100">Instant {{ timeToWait }} - {{ updateTime }}</div>
+      <div class="text-center w-100">Instant</div>
       <div>
         <UiButton :loading="isLoading || waitingConfirmation"
           :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility')"

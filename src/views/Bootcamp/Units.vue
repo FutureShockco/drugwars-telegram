@@ -3,7 +3,7 @@
     <BootcampTabs />
     <div v-if="trainingFacility.lvl > 0">
       <div class="units">
-        <Unit v-if="!unit.disabled && !unit.npc" v-for="unit in units" :unit="unit" :key="unit.id" />
+        <Unit v-if="!unit.disabled && !unit.npc && unit.id !== 'occupation_troop'" v-for="unit in units" :unit="unit" :key="unit.id" />
       </div>
 
     </div>

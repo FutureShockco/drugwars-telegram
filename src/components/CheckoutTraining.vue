@@ -1,7 +1,7 @@
 <template>
   <div class="row mx-3 mb-3 g-3">
     <div class="col-6">
-      <div class="text-center w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
+      <div class="text-center w-100" v-if="inProgress">{{ new Date().getTime() + (timeToWait) | end}}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading || waitingConfirmation"
         :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate ? 'border-red-dark color-red-dark' : 'border-green-dark border-green-dark color-green-dark']"
@@ -18,8 +18,7 @@
       <div class="text-center w-100">Instant</div>
       <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || !base" @click="handleRequestPayment()"
         class="btn-full btn-xxs btn w-100"
-        :class="isLoading || waitingConfirmation || requireUpdate || !base  ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'"
-        >
+        :class="isLoading || waitingConfirmation || requireUpdate || !base ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'">
         <span>
           Fast upgrade</span>
       </UiButton>
@@ -60,7 +59,7 @@ export default {
       return this.$store.state.game.mainbase;
     },
     priceInSteem() {
-      return parseFloat(this.price / this.$store.state.game.prizeProps.steemprice).toFixed(4);
+      return this.price / this.$store.state.game.prizeProps.steemprice;
     },
     dwdPrice() {
       if (!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
@@ -165,7 +164,7 @@ export default {
         base: Number(this.base.base),
       };
       const ton = {
-        memo: `training:${this.id}`,
+        memo: `training:${this.id},territory:${Number(this.base.territory)},base:${Number(this.base.base)}`,
         amount: `${this.priceInSteem * 1000000000}`,
       }
       this.setCurrentPayment({ type: "training", dwd, ton, price: this.priceInDWD })

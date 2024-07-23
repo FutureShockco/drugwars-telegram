@@ -46,7 +46,25 @@ Vue.filter('decimal', value => numeral(value).format('0.[00000]'));
 Vue.filter('dateparse', value =>
   moment(new Date(value * 1000), 'YYYY-MM-DD').format('MMMM Do YYYY, h:mm:ss a'),
 );
-Vue.filter('fromnow', value => moment(new Date(value * 1000), 'YYYY-MM-DD').fromNow());
+Vue.filter('fromnow', value => moment(new Date(value * 1000), 'YYYY-MM-DD ').fromNow());
+
+Vue.filter('end', value => {
+  const now = moment();
+  const future = moment(value);
+  const duration = moment.duration(future.diff(now));
+  const hours = Math.floor(duration.asHours());
+  const minutes = duration.minutes();
+  const seconds = duration.seconds();
+  let a = 'End in '
+  if (hours > 0)
+    a += `${hours}h `
+  if (minutes > 0)
+    a += `${minutes}m `
+  return a += `${seconds}s`;
+
+})
+
+
 
 Vue.directive('lowercase', {
   update: el => {
