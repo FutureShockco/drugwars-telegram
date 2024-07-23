@@ -100,10 +100,14 @@ export default {
         wallet: this.wallet,
         type: 'set-wallet',
       };
+      const self = this;
       this.send(payload)
         .then(() => {
           this.isLoading = false;
-          this.init({ user: this.TWA.initData, showLoading: false })
+          Promise.delay(1000).then(() => {
+            self.init({ user: this.TWA.initData, showLoading: true })
+
+          })
         })
         .catch(e => {
           this.notify({ type: 'error', message: 'Failed to set wallet' });

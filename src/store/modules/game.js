@@ -819,11 +819,14 @@ const actions = {
       payload.type = 'dw-complete-task'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init');
-          store.dispatch('notify', {
-            type: 'success',
-            message: result,
-          });
+          Promise.delay(1000).then(() => {
+            store.dispatch('init',{user:null,showLoading:true});
+            store.dispatch('notify', {
+              type: 'success',
+              message: result,
+            });
+          })
+
           return resolve(result);
         }
         return reject();
@@ -838,11 +841,13 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init',{user:null,showLoading:true});
-          store.dispatch('notify', {
-            type: 'success',
-            message: result,
-          });
+          Promise.delay(1000).then(() => {
+            store.dispatch('init',{user:null,showLoading:true});
+            store.dispatch('notify', {
+              type: 'success',
+              message: result,
+            });
+          })
           return resolve(result);
         }
         return reject();
@@ -855,11 +860,13 @@ const actions = {
       payload.type = 'dw-complete-day'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init',{user:null,showLoading:true});
-          store.dispatch('notify', {
-            type: 'success',
-            message: result,
-          });
+          Promise.delay(1000).then(() => {
+            store.dispatch('init',{user:null,showLoading:true});
+            store.dispatch('notify', {
+              type: 'success',
+              message: result,
+            });
+          })
           return resolve(result);
         }
         return reject();
