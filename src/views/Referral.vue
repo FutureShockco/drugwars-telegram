@@ -7,14 +7,16 @@
           <div>
             <h1 class="text-yellow">DrugWars Referral Program</h1>
           </div>
-          <div class="align-self-center ms-auto">
-            <i class="fad fa-share font-24 color-green-dark"></i>
-          </div>
+
         </div>
         <h2 class="mt-3">Invite Your Friends</h2>
         <h5>Share this link with your friends: <a :href="url" target="_blank">
             {{ url }}
+
+
           </a></h5>
+        <h6 @click="copy" :class="(copied === 'Copied to clipboard') ? 'text-green' :''">{{ copied }} <i
+            class="fad fa-copy font-24 color-green-dark"></i></h6>
         <h2 class="mt-3">Help Them Succeed</h2>
         <h5>Encourage your friends to win resources and achieve great rewards!</h5>
         <h2 class="mt-3">Earn a 5% Bonus</h2>
@@ -58,6 +60,8 @@ export default {
     return {
       username: this.$store.state.auth.username,
       url: `https://t.me/drugwars_bot/drugwars/start?startapp=${this.$store.state.auth.username}`,
+      copied: 'Copy to clipboard',
+      green:false
     };
   },
   computed: {
@@ -81,6 +85,17 @@ export default {
         15;
       return parseFloat(referralRewards).toFixed(3);
     },
+    copy() {
+      var copyText = this.url;
+
+      this.copied = 'Copied to clipboard'
+      // Copy the text inside the text field
+      navigator.clipboard.writeText(copyText);
+      const self = this;
+      setTimeout(() => {
+        self.copied = 'Copy to clipboard'
+      }, 1000);
+    }
   },
 };
 </script>

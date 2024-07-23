@@ -26,7 +26,7 @@
                     purchase with TON, 50% is added to this prize pool.
                 </p>
                 <h3>Fight Rewards</h3>
-                <p>: After each fight, you may earn DW TOKEN instantly. These rewards are given immediately upon the
+                <p>After each fight, you may earn DW TOKEN instantly. These rewards are given immediately upon the
                     conclusion of each fight, and the number of units killed, reflecting your combat prowess.
                 </p>
             </div>

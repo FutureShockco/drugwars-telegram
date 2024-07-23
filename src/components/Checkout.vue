@@ -124,7 +124,7 @@ export default {
     upgradeLabel() {
       let label = 'Slow Upgrade';
       if ((this.tutorialStep < 8 && this.id !== 'headquarters')) label = 'Finish tutorial';
-      if (this.notEnough) label = 'No resources';
+      if (this.notEnough) label = 'Miss resources';
       if (this.requireUpdate) label = 'Require HQ+';
       if (this.inProgress) {
         label = `Upgrading [${parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(
