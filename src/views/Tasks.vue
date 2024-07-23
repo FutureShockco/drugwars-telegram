@@ -57,7 +57,7 @@
 
                     <div class="row gx-3">
                         <div class="col-3" v-for="(reward, index) in dailyRewards.rewards">
-                            <div @click="claimDaily(), toggleModalVideo(), setCurrentLink(null)"
+                            <div @click="claimDaily(), closeModalVideo(), setCurrentLink(null)"
                                 :class="[reward.day === parseInt(dailyRewards.current_day) ? 'bg-theme gradient-border' : 'opacity-50 border border-yellow-dark no-pointer', reward.day < parseInt(dailyRewards.current_day) ? 'bg-green btn btn-xs' : '']"
                                 class="p-0 me-2 mb-3  badge  text-center w-100" style="border-radius:10px;">
                                 <h4 class="bg-highlight" style="border-radius:8px 8px 0px 0px;">Day {{
@@ -86,10 +86,10 @@
                         </div>
                     </div>
 
-                    <div @click="claimDaily(), toggleModalVideo(), setCurrentLink(null)"
+                    <div @click="claimDaily(), closeModalVideo(), setCurrentLink(null)"
                         class="btn mb-3 btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-green">
                         Claim</div>
-                    <div @click="toggleModalVideo(), setCurrentLink(null)"
+                    <div @click="closeModalVideo(), setCurrentLink(null)"
                         class="close-menu btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Done</div>
                 </div>
