@@ -7,7 +7,6 @@
           <div>
             <h1 class="text-yellow">DrugWars Referral Program</h1>
           </div>
-
         </div>
         <h2 class="mt-3">Invite Your Friends</h2>
         <h5>Share this link with your friends: <a :href="url" target="_blank">

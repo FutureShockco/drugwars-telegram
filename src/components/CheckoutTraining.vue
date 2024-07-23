@@ -22,12 +22,12 @@
         <span>
           Fast upgrade</span>
       </UiButton>
-      <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+      <!-- <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
         @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
         <span>
           {{ priceInDWD }} DW</span>
-      </UiButton>
+      </UiButton> -->
     </div>
   </div>
 </template>
