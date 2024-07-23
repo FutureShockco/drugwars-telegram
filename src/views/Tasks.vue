@@ -166,8 +166,8 @@
                                 :style="'width:' + percentage * 2 + '%'" :aria-valuenow="percentage * 2" aria-valuemin="0"
                                 aria-valuemax="100"></div>
                         </div>
-                        <a @click="toggleModalVideo()"
-                            class="close-menu btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</a>
+                        <UiButton @click="completeTask({ id: task.id }), toggleModalVideo()" :disabled="!finishedWatching"
+                            class="btn btn-full w-100 btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</UiButton>
                     </div>
                 </div>
             </div>
@@ -377,7 +377,8 @@ export default {
             didReset: false,
             units,
             buildings,
-            bgs: []
+            bgs: [],
+            finishedWatching : false
         };
     },
     created() {
@@ -462,7 +463,8 @@ export default {
                 self.percentage++;
                 if (self.percentage > self.timer) {
                     clearInterval(viewTimer);
-                    self.completeTask({ id: self.tasks.find((t) => self.$store.state.game.currentLink === t.link).id })
+                    self.finishedWatching = true;
+                    // self.completeTask({ id: self.tasks.find((t) => self.$store.state.game.currentLink === t.link).id })
                 }
             }, 1000);
         },
