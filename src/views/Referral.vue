@@ -51,7 +51,7 @@
         <h3>Your drops</h3>
 
         <div class="d-flex">
-          <div class="col-2" :key="key" v-for="(box, key) in boxes">
+          <div class="col-3" :key="key" v-for="(box, key) in boxes">
             <img style="border: 1px solid #392828;    " :src="`/img/box.png`" class="img-fluid rounded-s" width="100"
               height="100">
             <UiButton class="btn w-100 bg-green-dark rounded-xs text-uppercase font-700 btn-xxs mt-2" type="submit">
