@@ -1,7 +1,7 @@
 <template>
   <div class="row mx-3 mb-3 g-3">
     <div class="col-6">
-      <div class="text-center w-100" v-if="inProgress">{{ new Date().getTime() + (timeToWait) | end}}</div>
+      <div class="text-center w-100" v-if="inProgress">{{ new Date().getTime() + (timeToWait) | end }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading || waitingConfirmation"
         :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate ? 'border-red-dark color-red-dark' : 'border-green-dark border-green-dark color-green-dark']"
@@ -22,12 +22,12 @@
         <span>
           Fast upgrade</span>
       </UiButton>
-      <!-- <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
+      <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base"
         @click="handleSubmit('dwd')" class="button btn-block button-right w-100">
         <img class="dwdicon" src="//img.drugwars.io/icons/dwd.png" />
         <span>
           {{ priceInDWD }} DW</span>
-      </UiButton> -->
+      </UiButton>
     </div>
   </div>
 </template>

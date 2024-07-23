@@ -1,7 +1,7 @@
 <template>
   <div class="row mx-3 mb-3 g-3">
     <div class="col-6">
-      <div class="text-center w-100" v-if="pendingAmount">{{ new Date().getTime() + (timeToWait) | end}}</div>
+      <div class="text-center w-100" v-if="pendingAmount">{{ new Date().getTime() + (timeToWait) | end }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading"
         :class="[pendingAmount ? 'progress' : '', isLoading || pendingAmount || notEnough || inProgress || !base || tutorialStep < 8 ? 'border-red-dark color-red-dark' : 'border-green-dark border-green-dark color-green-dark']"
@@ -22,7 +22,12 @@
     </div>
     <div class="col-6">
       <div class="text-center w-100">Instant</div>
-      <UiButton :disabled="isLoading || !base" @click="handleRequestPayment()"
+      <UiButton v-if="tutorialStep < 9" :disabled="isLoading || notEnoughDWD || !base || (tutorialStep < 9 && id !== 'spy')" @click="handleSubmit('dwd')"
+        class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
+        <span>
+          Fast Recruit</span>
+      </UiButton>
+      <UiButton v-else :disabled="isLoading || !base" @click="handleRequestPayment()"
         class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
         <span>
           Fast Recruit</span>

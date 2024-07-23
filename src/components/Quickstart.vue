@@ -39,7 +39,7 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings'">Here we go! Click on the green upgrade button to start the first
+          <h5 v-if="this.$route.path === '/buildings'">Here we go! Click on the <span class="text-green">green button</span> (Slow upgrade) to start the first
             upgrade of your <span class="text-yellow">Headquarters.</span> Since this is your first time... I'll boost
             the speed of the upgrade!</h5>
           <h5 v-else>Felicitaciones! You've chosen your turf. Now, it's time to
@@ -62,8 +62,8 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings/drugs'">"Alright, sugar. <br /> Now click on the yellow instant
-            upgrade button and use the free tokens to purchase the <span class="text-yellow">Crack House</span> and
+          <h5 v-if="this.$route.path === '/buildings/drugs'">"Alright, sugar. <br /> Now click on the <span class="text-yellow">yellow button</span>
+            (Instant upgrade) and use the free tokens to purchase the <span class="text-yellow">Crack House</span> and
             increase drug production."
           </h5>
           <h5 v-else>"Bien hecho, baby! Your headquarters upgrade is in progress, but we can't wait around. I'm giving
@@ -163,7 +163,7 @@
               recruitment</span>.
           </h5>
           <h5 v-if="this.$route.path === '/units'"> "Alright, it's time to bring in the eyes and ears of our
-            operation. Click on the yellow button to recruit a <span class="text-yellow">Spy</span> to gather crucial
+            operation. Click on the <span class="text-yellow">yellow button</span> (Fast Recruit) to recruit a <span class="text-yellow">Spy</span> to gather crucial
             intelligence on our rivals."
           </h5>
 

@@ -1,7 +1,7 @@
 <template>
   <div class="row mx-3 mb-3 g-3">
     <div class="col-6">
-      <div class="text-center w-100" v-if="inProgress">{{ new Date().getTime() + (timeToWait) | end}}</div>
+      <div class="text-center w-100" v-if="inProgress">{{ new Date().getTime() + (timeToWait) | end }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading || waitingConfirmation"
         :disabled="isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4 || tutorialStep === 5"
@@ -15,25 +15,22 @@
     <div class="col-6">
       <div class="text-center w-100">Instant</div>
       <div>
-        <UiButton :loading="isLoading || waitingConfirmation"
+        <UiButton v-if="tutorialStep < 9"
+          :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 4 && id !== 't_distillery') || (tutorialStep === 5 && id !== 'training_facility')"
+          :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
+          @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
+          <span>
+            Fast Upgrade</span>
+
+        </UiButton>
+        <UiButton v-else :loading="isLoading || waitingConfirmation" 
           :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility')"
           :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility') ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'"
           @click="handleRequestPayment()" class="btn btn-full btn-xxs w-100">
           <span> Fast Upgrade
           </span>
         </UiButton>
-        <!-- <div v-if="!inProgress" class="col-5 mx-2">
-
-          <UiButton
-            :disabled="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 3 && id !== 'ammunition') || (tutorialStep === 4 && id !== 't_distillery') || (tutorialStep === 5 && id !== 'training_facility')"
-            :class="isLoading || waitingConfirmation || requireUpdate || notEnoughDWD || !base ? '' : 'button-yellow'"
-            @click="handleSubmit('dwd')" class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
-            <i class="fad fa-arrow-up me-1" />
-            <span>
-              {{ priceInDWD }} DW</span>
-
-          </UiButton>
-        </div> -->
+        
       </div>
     </div>
   </div>

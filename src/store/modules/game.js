@@ -384,7 +384,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           Promise.delay(3000).then(() => {
-            store.dispatch('init');
+            store.dispatch('init',{user:null,showLoading:true});
           });
           return resolve(result);
         }
@@ -401,7 +401,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -420,7 +420,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('refresh_gang_buildings');
           store.dispatch('notify', {
             type: 'success',
@@ -442,7 +442,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('refresh_gang_buildings');
           store.dispatch('notify', {
             type: 'success',
@@ -460,7 +460,7 @@ const actions = {
       payload.type = 'dw-trainings'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -478,7 +478,7 @@ const actions = {
       payload.type = 'dw-units'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -496,7 +496,7 @@ const actions = {
       payload.type = 'dw-heists'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -526,7 +526,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('refresh_sent_fights');
           store.dispatch('refresh_transport_count');
           store.dispatch('notify', {
@@ -554,7 +554,7 @@ const actions = {
               message: result,
             });
             Promise.delay(3000).then(() => {
-              store.dispatch('init');
+              store.dispatch('init',{user:null,showLoading:true});
             });
           }
           return resolve(result);
@@ -800,7 +800,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -817,7 +817,7 @@ const actions = {
       payload.type = 'dw-complete-task'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -836,7 +836,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -853,7 +853,7 @@ const actions = {
       payload.type = 'dw-complete-day'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init');
+          store.dispatch('init',{user:null,showLoading:true});
           store.dispatch('notify', {
             type: 'success',
             message: result,
