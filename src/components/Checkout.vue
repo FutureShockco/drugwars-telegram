@@ -8,7 +8,6 @@
         :class="[inProgress ? 'progress' : '', isLoading || waitingConfirmation || inProgress || notEnough || requireUpdate || !base || (tutorialStep === 1 && id !== 'headquarters') || tutorialStep === 2 || tutorialStep === 3 || tutorialStep === 4 || tutorialStep === 5 ? 'border-red-dark color-red-dark' : 'border-green-dark color-green-dark']"
         @click="handleSubmit()" class="btn btn-full btn-xxs w-100">
         <template>
-          <div class="progression" v-if="inProgress" :style="'margin-right:' + (100 - percentage) + '%'"></div>
           <span>{{ upgradeLabel }}</span>
         </template>
       </UiButton>
@@ -71,13 +70,16 @@ export default {
       return utils.calculateTimeToBuild(this.id, this.coeff, this.level, this.hqLevel);
     },
     priceInSteem() {
-      return parseFloat(this.price / this.$store.state.game.prizeProps.steemprice).toFixed(3);
+      return this.price / this.$store.state.game.prizeProps.steemprice;
     },
     priceInDWD() {
-      return parseFloat(this.priceInSteem * 50).toFixed(3);
+      return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(4);
+    },
+    priceInTon() {
+      return parseFloat((this.priceInSteem * 1000000000) / 100 * (100 - this.percentage) / 1000000000).toFixed(4);
     },
     notEnoughDWD() {
-      return parseFloat(this.priceInSteem * 50).toFixed(3) > this.$store.state.game.user.user.dwd;
+      return this.priceInDWD > this.$store.state.game.user.user.dwd;
     },
     timeToWait() {
       const building = this.$store.state.game.user.buildings.find(
@@ -115,7 +117,9 @@ export default {
       return 0;
     },
     percentage() {
-      return parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(2);
+      if (this.timeToWait && this.updateTime)
+        return parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(2);
+      else return 0
     },
     requireUpdate() {
       return this.level > this.hqLevel && this.id !== 'headquarters';
@@ -186,7 +190,7 @@ export default {
         memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
         )}`,
-        amount: `${this.priceInSteem * 1000000000}`,
+        amount: `${this.priceInTon}`,
       }
       this.setCurrentPayment({ type: "building", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()

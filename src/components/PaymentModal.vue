@@ -13,8 +13,7 @@
                         <Icon name="ton" size="50" />
                     </UiButton>
                     <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{ currentPayment.ton.amount
-                        /
-                        1000000000 }} TON</span>
+                         }} TON</span>
                 </div>
                 <div class="col-6 text-center">
                     <UiButton :disabled="notEnoughDWD" class="btn border-yellow-dark"

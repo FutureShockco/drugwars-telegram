@@ -24,8 +24,8 @@
       </div>
     </div>
     <div id="territorybg" class="territorybg" style="height:100vw;width: 100vw;">
-      <div class="title" id="title" style="display: none">
-        <h5 v-if="selectedTile">BASE {{ selectedTile }}</h5>
+      <div :style="selectedTile ? 'display: block;' : 'display:none'" class="title" id="title">
+        <h5>BASE {{ selectedTile }}</h5>
         <div class="mt-0">
           <div v-if="currentNickname"> Under the control of : <h5>{{ currentNickname }}</h5>
           </div>
@@ -316,7 +316,7 @@ export default {
           x: 0,
           y: 0,
         };
-        for (let i = 0; i < quantityAll; i++) {
+        for (let i = 1; i < quantityAll + 1; i++) {
           let fillColor = "";
           let nickname = '';
           let level = '';
@@ -354,7 +354,7 @@ export default {
             drawPosition.y,
             tileWidth,
             tileHeight,
-            i + 1,
+            i,
             nickname,
             level,
             custom_name,
@@ -467,12 +467,12 @@ export default {
               }
               else {
 
-                context.drawImage(tiles, self.maprng[tile.id - 1].x * 72, self.maprng[tile.id - 1].y * 72, 72, 72, tile.x, tile.y, 50, 50);
+                context.drawImage(tiles, self.maprng[tile.id].x * 72, self.maprng[tile.id].y * 72, 72, 72, tile.x, tile.y, 50, 50);
               }
             }
             else {
 
-              context.drawImage(tiles, self.maprng[tile.id - 1].x * 72, self.maprng[tile.id - 1].y * 72, 72, 72, tile.x, tile.y, 50, 50);
+              context.drawImage(tiles, self.maprng[tile.id].x * 72, self.maprng[tile.id].y * 72, 72, 72, tile.x, tile.y, 50, 50);
             }
             context.beginPath();
             if (tile.fillColor) {
@@ -601,7 +601,7 @@ export default {
     updateLocation(value) {
       const self = this;
       self.bases = null;
-
+      self.selectedTile = null;
 
       if (self.currentLocation !== self.location) {
         if (value)
@@ -618,7 +618,7 @@ export default {
         }
         const random = lcg(self.currentLocation)
         const numbers = [];
-        for (let i = 0; i < 101; i++) {
+        for (let i = 0; i < 103; i++) {
           numbers.push({ x: Math.floor(random() * 10), y: Math.floor(random() * 10) });
         }
         self.maprng = numbers;
@@ -655,7 +655,7 @@ export default {
       }
       const random = lcg(self.currentLocation)
       const numbers = [];
-      for (let i = 0; i < 101; i++) {
+      for (let i = 0; i < 103; i++) {
         numbers.push({ x: Math.floor(random() * 10), y: Math.floor(random() * 10) });
       }
       self.maprng = numbers;

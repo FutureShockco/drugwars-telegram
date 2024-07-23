@@ -68,10 +68,10 @@ export default {
       return price * this.priceInDWD * this.$store.state.game.prizeProps.steemprice;
     },
     priceInDWD() {
-      return (this.priceInSteem * 50).toFixed(3);
+      return parseFloat(this.priceInSteem * 50 / 100 * (100 - this.percentage)).toFixed(4);
     },
-    notEnoughDWD() {
-      return (this.priceInSteem * 50).toFixed(3) > this.$store.state.game.user.user.dwd;
+    priceInTon() {
+      return parseFloat((this.priceInSteem * 1000000000) / 100 * (100 - this.percentage) / 1000000000).toFixed(4);
     },
     timeToWait() {
       const training = this.$store.state.game.user.trainings.find(b => b.training === this.id);

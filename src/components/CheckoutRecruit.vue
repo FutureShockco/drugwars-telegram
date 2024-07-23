@@ -100,15 +100,13 @@ export default {
       let amount = this.quantity
       if (this.pendingAmount > 0)
         amount = this.pendingAmount
-      return parseFloat(
-        (this.price * amount) / this.$store.state.game.prizeProps.steemprice,
-      ).toFixed(3);
+      return (this.price * amount) / this.$store.state.game.prizeProps.steemprice
     },
     priceInDWD() {
-      return parseFloat(this.priceInSteem * 50).toFixed(3) / 100 * (100 - this.progress);
+      return parseFloat(this.priceInSteem * 50 / 100 * (100 - this.progress)).toFixed(4);
     },
     priceInTon() {
-      return (this.priceInSteem * 1000000000) / 100 * (100 - this.progress)
+      return parseFloat((this.priceInSteem * 1000000000) / 100 * (100 - this.progress) / 1000000000).toFixed(4);
     },
     timeToWait() {
       const unit = this.$store.state.game.user.units.find(
