@@ -121,11 +121,11 @@
                         <p>
                             Get some resources for free!
                         </p>
-                        <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text=Join Me on DrugWars`)"
+                        <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
                             class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Share
                             on Telegram</div>
-                        <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}`)"
+                        <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username} Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
                             class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight my-3">
                             Share on X (Twitter)</div>
 

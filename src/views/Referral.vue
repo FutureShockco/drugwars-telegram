@@ -12,8 +12,6 @@
         <h2 class="mt-3">Invite Your Friends</h2>
         <h5>Share this link with your friends: <a :href="url" target="_blank">
             {{ url }}
-
-
           </a></h5>
         <h6 @click="copy" :class="(copied === 'Copied to clipboard') ? 'text-green' :''">{{ copied }} <i
             class="fad fa-copy font-24 color-green-dark"></i></h6>
