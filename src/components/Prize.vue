@@ -20,6 +20,7 @@
           {{ totalDWD | amount }}
           <Icon name="dwd" />
         </h1> -->
+
         <div class="border border-yellow-dark rounded-s overflow-hidden">
           <table class="table color-theme border-yellow-dark mb-0">
             <thead class="rounded-s bg-yellow-dark border-l">
@@ -140,7 +141,7 @@ export default {
     },
     pablo() {
       const { prizeProps } = this.$store.state.game;
-      return prizeProps.balance / 1000000000;
+      return prizeProps.pool.find((p) => p.pool === "pablo").reward / 1000000000;
     },
     user() {
       return this.$store.state.game.user.user;
