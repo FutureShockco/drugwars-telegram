@@ -1,8 +1,8 @@
 <template>
   <div :class="open ? '' : 'd-none'" class="offcanvas offcanvas-modal rounded-m offcanvas-detached bg-theme show"
     style="width: 340px; visibility: visible;" id="menu-call" aria-modal="true" role="dialog">
-    <div class="content">
-      <div class="d-flex pb-2">
+    <div class="content text-center">
+      <div class="pb-2">
         <div class="align-self-center">
           <h5 class="mb-n1 font-12 color-highlight font-700 text-uppercase pt-1">TON Network</h5>
           <h1 class="font-700">Connect your wallet</h1>
@@ -12,15 +12,17 @@
               class="bi bi-x-circle-fill color-red-dark font-18 me-n4"></i></a>
         </div>
       </div>
-      <p>
+      <div class="mb-3">
         To receive rewards and make payments through DrugWars you need to connect your TON wallet!
-      </p>
+      </div>
       <div id="bloat" class="w-100"></div>
-      <h2 v-if="hasWallet">You are connected!</h2>
-      {{ wallet }}
-      <UiButton v-if="hasWallet" class="btn btn-xxs gradient-highlight" @click="toggleModalAccount">
-        Close modal
-      </UiButton>
+      <div>
+        <h2 class="mt-3" v-if="hasWallet">Good.You are connected!</h2>
+        {{ wallet }}
+        <UiButton v-if="hasWallet" class="btn btn-xs gradient-highlight" @click="toggleModalAccount">
+          Close
+        </UiButton>
+      </div>
     </div>
   </div>
 </template>
@@ -42,6 +44,8 @@ export default {
   watch: {
     open() {
       this.step = null;
+      document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto"
+
     }
   },
   computed: {
@@ -79,7 +83,7 @@ export default {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet || this.tutorialStep === 8) {
+            if (!this.$store.state.game.user.user.wallet && this.tutorialStep === 8) {
               this.setWallet(this.wallet)
               this.setTutoDetail(3)
               setTimeout(() => {
@@ -119,3 +123,9 @@ export default {
 
 };
 </script>
+
+<style lang="scss" scoped>
+#bloat div {
+  background: red;
+}
+</style>

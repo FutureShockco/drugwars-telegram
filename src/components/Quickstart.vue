@@ -2,12 +2,31 @@
   <div v-if="tutorialStep < 9 || (tutorialStep === 9 && tutoDetail === 3)" id="notification-bar-3"
     class="notification-bar glass-effect detached rounded-m shadow-l fade show pb-3" data-bs-delay="7000">
     <div v-if="tutorialStep === 0">
-
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
+          <img v-if="this.$route.path !== '/map/territory'" src="/img/bella/14.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/bella/10.png" width="80" class="rounded-s" alt="img">
+        </div>
+        <div class="ps-4">
+          <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
+          <h5 v-if="this.$route.path !== '/map/territory'">Hola. Welcome to DrugWars! <br /> First things first, let's pick
+            the perfect spot
+            for your little empire. Find a neighborhood that makes you feel all powerful and safe.
+            Fewer enemies... means less problems, exactly what we want. Choose wisely, baby." <router-link
+              :to="'/map/territory?location=' + rnd"
+              class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Choose a
+              location</router-link>
+          </h5>
+          <h5 v-if="this.$route.path === '/map/territory'">"Alright, you can use the buttons to
+            navigate through neighborhoods. When ready <span class="text-yellow">select a square and make it
+              your main base</span>"</h5>
+        </div>
+      </div>
+    </div>
+    <div v-else-if="tutorialStep < 1">
+      <div class="ms-auto">
           <img v-if="this.$route.path === '/home'" src="/img/bella/14.png" width="80" class="rounded-s" alt="img">
           <img v-else src="/img/bella/10.png" width="80" class="rounded-s" alt="img">
-
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -19,15 +38,10 @@
               class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Choose a
               location</router-link>
           </h5>
-
           <h5 v-if="this.$route.path === '/map/territory'">"Alright, you can use the buttons to
             navigate through neighborhoods. When ready <span class="text-yellow">select a square and make it
               your main base</span>"</h5>
-
-
         </div>
-      </div>
-
     </div>
     <div v-if="tutorialStep === 1">
 
@@ -39,7 +53,8 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings'">Here we go! Click on the <span class="text-green">green button</span> (Slow upgrade) to start the first
+          <h5 v-if="this.$route.path === '/buildings'">Here we go! Click on the <span class="text-green">green
+              button</span> (Slow upgrade) to start the first
             upgrade of your <span class="text-yellow">Headquarters.</span> Since this is your first time... I'll boost
             the speed of the upgrade!</h5>
           <h5 v-else>Felicitaciones! You've chosen your turf. Now, it's time to
@@ -62,7 +77,8 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings/drugs'">"Alright, sugar. <br /> Now click on the <span class="text-yellow">yellow button</span>
+          <h5 v-if="this.$route.path === '/buildings/drugs'">"Alright, sugar. <br /> Now click on the <span
+              class="text-yellow">yellow button</span>
             (Instant upgrade) and use the free tokens to purchase the <span class="text-yellow">Crack House</span> and
             increase drug production."
           </h5>
@@ -89,7 +105,8 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings/weapons'">"Click on <span class="text-yellow">the yellow button</span> (Fast
+          <h5 v-if="this.$route.path === '/buildings/weapons'">"Click on <span class="text-yellow">the yellow
+              button</span> (Fast
             upgrade) and use the free tokens on your <span class="text-yellow">Ammunition
               Factory</span> and start the upgrade process to boost weapon production."
           </h5>
@@ -113,7 +130,8 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings/alcohol'">"Click on <span class="text-yellow">the yellow button</span> (Fast
+          <h5 v-if="this.$route.path === '/buildings/alcohol'">"Click on <span class="text-yellow">the yellow
+              button</span> (Fast
             upgrade) for the <span class="text-yellow">Traditional distillery</span> and
             build it to increase alcohol production."
           </h5>
@@ -149,7 +167,6 @@
       </div>
     </div>
     <div v-if="tutorialStep === 6">
-
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/units'" src="/img/bella/20.png" width="80" class="rounded-s" alt="img">
@@ -163,10 +180,10 @@
               recruitment</span>.
           </h5>
           <h5 v-if="this.$route.path === '/units'"> "Alright, it's time to bring in the eyes and ears of our
-            operation. Click on the <span class="text-yellow">yellow button</span> (Fast Recruit) to recruit a <span class="text-yellow">Spy</span> to gather crucial
+            operation. Click on the <span class="text-yellow">yellow button</span> (Fast Recruit) to recruit a <span
+              class="text-yellow">Spy</span> to gather crucial
             intelligence on our rivals."
           </h5>
-
           <router-link v-if="this.$route.path !== '/units'" to="/units"
             class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
         </div>
@@ -189,7 +206,6 @@
             the selected army list. Send your
             spy to gather intel on those bastard named <span class="text-yellow">PixelVerse</span>. Knowledge is
             power, and we need to know everything about our enemies before we make a move."
-
           </h5>
           <h5 v-if="this.$route.path === '/actions' && tutoDetail === 1"> "Ok I already entered the informations of our
             rival. Next step for you is to click on the <span class="text-red">Attack</span> button"
