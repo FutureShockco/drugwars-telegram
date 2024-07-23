@@ -15,8 +15,8 @@
                 <p>Bella's missions are waiting for you!</p>
             </div>
         </div>
-        <div v-if="!hasTwitter" class="card card-style shadow-card shadow-card-l show" 
-            style="min-height: 120px;" :style="`background-image:url(/img/tasks/1.png`">
+        <div v-if="!hasTwitter" class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
+            :style="`background-image:url(/img/tasks/1.png`">
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">X (Twitter) Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your X (Twitter) account!</p>
@@ -98,8 +98,7 @@
         </div>
         <div v-for="(task, index) in tasks" :key="task.id">
             <div v-if="task.tasktype === 'share'" class="card card-style shadow-card shadow-card-l"
-                style="min-height: 120px;"
-                :style="`background-image:url(/img/tasks/${task.bg}.png`">
+                style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
                         <h6 class="mb-n1 opacity-80 color-highlight">Bonus</h6>
@@ -137,8 +136,7 @@
                 </div>
             </div>
             <div v-if="task.tasktype === 'watch'" class="card card-style shadow-card shadow-card-l"
-                style="min-height: 120px;"
-                :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
@@ -179,8 +177,7 @@
             </div>
 
             <div v-if="task.tasktype === 'join'" class="card card-style shadow-card shadow-card-l"
-                style="min-height: 120px;"
-                :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
@@ -202,8 +199,7 @@
             </div>
 
             <div v-if="hasTwitter && task.tasktype === 'follow'" class="card card-style shadow-card shadow-card-l"
-                 style="min-height: 120px;"
-                :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
@@ -228,7 +224,8 @@
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
         </div>
-        <div class="card card-style" v-if="user.user.username === '354640397' || user.user.username === '1995273768'">
+        <div class="card card-style"
+            v-if="user.user.username === '354640397' || user.user.username === '1995273768' || user.user.username === '584566992' || user.user.username === '1718002652'">
             <div class="content">
                 <form class="demo-animation needs-validation m-0" @submit.prevent="handleSubmit">
                     <div class="form-custom form-label mb-3">
@@ -345,8 +342,8 @@
                     </div>
 
 
-                    <div class="card card-style shadow-card shadow-card-l" 
-                        style="min-height: 120px;" :style="`background-image:url(/img/tasks/${newTask.bg}.png`">
+                    <div class="card card-style shadow-card shadow-card-l" style="min-height: 120px;"
+                        :style="`background-image:url(/img/tasks/${newTask.bg}.png`">
                         <div class="card-bottom pb-3 px-3">
                             <div class="text-end">
                                 <TaskResources :task="newTask" />
@@ -513,10 +510,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
-.card-bottom{
+.card-bottom {
     position: relative;
 }
+
 .dropdown-content option {
     appearance: none;
     width: 100%;
