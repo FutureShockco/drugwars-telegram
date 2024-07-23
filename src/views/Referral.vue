@@ -13,7 +13,7 @@
         <h5>Share this link with your friends: <a :href="url" target="_blank">
             {{ url }}
           </a></h5>
-        <h6 @click="copy" :class="(copied === 'Copied to clipboard') ? 'text-green' :''">{{ copied }} <i
+        <h6 @click="copy" :class="(copied === 'Copied to clipboard') ? 'text-green' : ''">{{ copied }} <i
             class="fad fa-copy font-24 color-green-dark"></i></h6>
         <h2 class="mt-3">Help Them Succeed</h2>
         <h5>Encourage your friends to win resources and achieve great rewards!</h5>
@@ -47,6 +47,29 @@
         </div>
       </div>
     </div>
+    <div class="card card-style">
+      <div class="content">
+        <h3>Your drops</h3>
+
+        <div class="referral">
+          <div :key="key" v-for="(referral, key) in referrals">
+            <p>
+              {{ referral.nickname }}
+              <span class="text-green" v-if="getReferralRewardsDWD(referral.drug_production_rate) > 0.001">
+                +{{ getReferralRewardsDWD(referral.drug_production_rate) }} DWD
+              </span>
+              <span class="text-red" v-else>
+                Not enough drug production
+              </span>
+            </p>
+          </div>
+        </div>
+        <div v-if="!referrals.length">
+          <p>You have not referred anyone yet.</p>
+          Start referring now and boost your rewards while helping your friends thrive in DrugWars!
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -59,7 +82,7 @@ export default {
       username: this.$store.state.auth.username,
       url: `https://t.me/drugwars_bot/drugwars/start?startapp=${this.$store.state.auth.username}`,
       copied: 'Copy to clipboard',
-      green:false
+      green: false
     };
   },
   computed: {

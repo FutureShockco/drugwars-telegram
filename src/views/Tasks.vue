@@ -85,7 +85,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div @click="claimDaily(), toggleModalVideo(), setCurrentLink(null)"
                         class="btn mb-3 btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-green">
                         Claim</div>
@@ -143,7 +143,7 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="task.completed === 0"
-                        @click="toggleModalVideo(), setCurrentLink(task.link), startTimer(task.timer)"
+                        @click="toggleModalVideo(), setCurrentLink(task.link), startTimer(50)"
                         class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-green">Watch the
                         video</div>
 
@@ -163,7 +163,7 @@
                         </p>
                         <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
                             <div class="progress-bar gradient-yellow" role="progressbar"
-                                :style="'width:' + percentage + '%'" :aria-valuenow="percentage" aria-valuemin="0"
+                                :style="'width:' + percentage*2 + '%'" :aria-valuenow="percentage*2" aria-valuemin="0"
                                 aria-valuemax="100"></div>
                         </div>
                         <a @click="toggleModalVideo()"
@@ -377,7 +377,8 @@ export default {
             didReset: false,
             units,
             buildings,
-            bgs: []
+            bgs: [],
+            viewTimer: null
         };
     },
     created() {
@@ -459,11 +460,10 @@ export default {
             const self = this;
             self.percentage = 0;
             self.timer = time || 10;
-            let viewTimer = setInterval(function () {
+            self.viewTimer = setInterval(function () {
                 self.percentage++;
                 if (self.percentage > self.timer) {
-                    console.log(self.$store.state.game.currentLink)
-                    clearInterval(viewTimer);
+                    clearInterval(self.viewTimer);
                     self.completeTask({ id: self.tasks.find((t) => self.$store.state.game.currentLink === t.link).id })
                 }
             }, 1000);
