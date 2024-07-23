@@ -5,7 +5,8 @@
       <p>Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>
       <div class="text-center">
         <div class="pt-2">Total {{ prizeProps.heist_pool | amount }}</div>
-        <div class="text-green">You: {{ totalVest | amount }} <span class="text-yellow">+{{ ownHeistReward.amount }}
+        <div v-if="totalVest && ownHeistReward.percent" class="text-green">You: {{ totalVest | amount }} <span
+            class="text-yellow">+{{ ownHeistReward.amount }}
             <Icon name="ton" size="18" /> ({{ ownHeistReward.percent | amount }}%)
           </span></div>
       </div>
@@ -13,15 +14,15 @@
       <div class="row">
         <div class="col">
           <div @click="handleSubmit()" :disabled="isLoading || Number(balances.drugs) < Number(amount)" type="submit"
-            class="btn-full btn border border-green-dark color-green-dark">
+            class="btn-full btn-xs  btn border border-green-dark color-green-dark">
             <span v-if="!isLoading">Sell</span>
             <SmallLoading v-else />
           </div>
         </div>
         <div class="col">
-          <div :disabled="isLoading" @click="handleFullSubmit()" class="btn-full btn border-mint-dark color-mint-dark">
-            Set
-            all</div>
+          <div :disabled="isLoading" @click="handleFullSubmit()"
+            class="btn-full btn-xs btn border-mint-dark color-mint-dark">
+            Set all</div>
         </div>
       </div>
 
@@ -39,7 +40,7 @@ export default {
   data() {
     return {
       isLoading: false,
-      amount: Math.round(this.$store.state.game.user.user.drugs_balance),
+      amount: 100,
     };
   },
   computed: {
@@ -80,6 +81,10 @@ export default {
     totalHeistDWD() {
       const { prizeProps } = this.$store.state.game;
       return prizeProps.heist_percent;
+    },
+    pablo() {
+      const { prizeProps } = this.$store.state.game;
+      return prizeProps.pool.find((p) => p.pool === "pablo").reward / 1000000000;
     },
     balances() {
       let ocLvl = 0;

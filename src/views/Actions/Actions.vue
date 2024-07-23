@@ -182,11 +182,13 @@
             <input class="input form-control btn-block mb-2" placeholder="Eg : Saint Street" v-model="baseName"
               maxlength="280" />
           </div>
-          <UiButton v-if="action_type === 'attack'" :disabled="selectedUnits.length === 0 || !target || isLoading"
-            class="btn w-100 gradient-red font-700 text-uppercase" @click="handleSubmit">
-            <SmallLoading v-if="isLoading" />
-            <span v-else>{{ action_type }}</span>
-          </UiButton>
+          <div :class="tutoDetail === 1 && tutorialStep === 7 ? 'tutobox' : ''">
+            <UiButton v-if="action_type === 'attack'" :disabled="selectedUnits.length === 0 || !target || isLoading"
+              class="btn w-100 gradient-red font-700 text-uppercase" @click="handleSubmit">
+              <SmallLoading v-if="isLoading" />
+              <span v-else>{{ action_type }}</span>
+            </UiButton>
+          </div>
 
           <UiButton v-if="action_type === 'transport'" :disabled="selectedUnits.length === 0 || !target || isLoading"
             class="button button-large button-blue mb-2 d-block" @click="handleSubmit">

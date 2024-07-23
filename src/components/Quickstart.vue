@@ -89,8 +89,8 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings/weapons'">"Click on the yellow instant
-            upgrade button and use the free tokens on your <span class="text-yellow">Ammunition
+          <h5 v-if="this.$route.path === '/buildings/weapons'">"Click on <span class="text-yellow">the yellow button</span> (Fast
+            upgrade) and use the free tokens on your <span class="text-yellow">Ammunition
               Factory</span> and start the upgrade process to boost weapon production."
           </h5>
           <h5 v-else>"Honey, we've got the drugs flowing, now let's talk firepower. Get some
@@ -113,8 +113,8 @@
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/buildings/alcohol'">"Click on the yellow instant
-            upgrade button for the <span class="text-yellow">Bar</span> and
+          <h5 v-if="this.$route.path === '/buildings/alcohol'">"Click on <span class="text-yellow">the yellow button</span> (Fast
+            upgrade) for the <span class="text-yellow">Bar</span> and
             build it to increase alcohol production."
           </h5>
           <h5 v-else>"Alright, darling, it's time to add some fun to our empire. Let’s get that alcohol
