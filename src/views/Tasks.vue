@@ -139,7 +139,7 @@
                 data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
-                    <TaskResources :task="task" />
+                    <TaskResources :task="task" v-if="task.completed === 0"/>
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="task.completed === 0"
@@ -163,7 +163,7 @@
                         </p>
                         <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
                             <div class="progress-bar gradient-yellow" role="progressbar"
-                                :style="'width:' + percentage*2 + '%'" :aria-valuenow="percentage*2" aria-valuemin="0"
+                                :style="'width:' + percentage * 2 + '%'" :aria-valuenow="percentage * 2" aria-valuemin="0"
                                 aria-valuemax="100"></div>
                         </div>
                         <a @click="toggleModalVideo()"
@@ -177,7 +177,7 @@
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
-                        <TaskResources :task="task" />
+                        <TaskResources :task="task" v-if="task.completed === 0"/>
 
                     </div>
                     <h3 class="color-white">{{ task.name }}</h3>
@@ -199,7 +199,7 @@
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
-                        <TaskResources :task="task" />
+                        <TaskResources :task="task" v-if="task.completed === 0"/>
                     </div>
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }} </p>
@@ -458,7 +458,7 @@ export default {
             const self = this;
             self.percentage = 0;
             self.timer = time || 10;
-           const viewTimer = setInterval(function () {
+            const viewTimer = setInterval(function () {
                 self.percentage++;
                 if (self.percentage > self.timer) {
                     clearInterval(viewTimer);
