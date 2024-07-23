@@ -421,7 +421,6 @@ export default {
                         }
                     });
                 }
-                console.log(result)
                 const rewards = result[2][0]
                 this.dailyRewards = rewards
                 this.dailyRewards.rewards = JSON.parse(this.dailyRewards.rewards)

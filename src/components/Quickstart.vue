@@ -114,7 +114,7 @@
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
           <h5 v-if="this.$route.path === '/buildings/alcohol'">"Click on <span class="text-yellow">the yellow button</span> (Fast
-            upgrade) for the <span class="text-yellow">Bar</span> and
+            upgrade) for the <span class="text-yellow">Traditional distillery</span> and
             build it to increase alcohol production."
           </h5>
           <h5 v-else>"Alright, darling, it's time to add some fun to our empire. Let’s get that alcohol

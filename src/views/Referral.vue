@@ -51,22 +51,18 @@
       <div class="content">
         <h3>Your drops</h3>
 
-        <div class="referral">
-          <div :key="key" v-for="(referral, key) in referrals">
-            <p>
-              {{ referral.nickname }}
-              <span class="text-green" v-if="getReferralRewardsDWD(referral.drug_production_rate) > 0.001">
-                +{{ getReferralRewardsDWD(referral.drug_production_rate) }} DWD
-              </span>
-              <span class="text-red" v-else>
-                Not enough drug production
-              </span>
-            </p>
+        <div class="d-flex">
+          <div class="col-2" :key="key" v-for="(box, key) in boxes">
+            <img style="border: 1px solid #392828;    " :src="`/img/box.png`" class="img-fluid rounded-s" width="100"
+              height="100">
+            <UiButton class="btn w-100 bg-green-dark rounded-xs text-uppercase font-700 btn-xxs mt-2" type="submit">
+              Claim
+            </UiButton>
           </div>
         </div>
-        <div v-if="!referrals.length">
-          <p>You have not referred anyone yet.</p>
-          Start referring now and boost your rewards while helping your friends thrive in DrugWars!
+        <div v-if="!boxes.length">
+          <p>You have nothign to claim yet.</p>
+          Start referring now and obtain drop boxes!
         </div>
       </div>
     </div>
@@ -75,6 +71,7 @@
 
 <script>
 import { mapActions } from 'vuex';
+import client from '@/helpers/client';
 
 export default {
   data() {
@@ -82,7 +79,8 @@ export default {
       username: this.$store.state.auth.username,
       url: `https://t.me/drugwars_bot/drugwars/start?startapp=${this.$store.state.auth.username}`,
       copied: 'Copy to clipboard',
-      green: false
+      green: false,
+      boxes: []
     };
   },
   computed: {
@@ -95,10 +93,18 @@ export default {
   },
   created() {
     this.closeModalVideo()
+    this.load_boxes()
   },
   methods: {
     ...mapActions(['closeModalVideo']),
-
+    load_boxes() {
+      this.usertasks = [];
+      const params = { user: { id: this.$store.state.auth.username } }
+      client.requestAsync('get_boxes', params).then(result => {
+        console.log(result)
+        this.boxes = result
+      });
+    },
     getReferralRewardsDWD(drugProductionRate) {
       const totalDailySteem = this.prizeProps.daily_percent;
       const referralRewards =
