@@ -1,11 +1,11 @@
 <template>
-  <div class="sunit text-center" :class="[tutorialStep === 7 && tutoDetail === 0 && unit.id === 'spy' ? 'tutobox' : '']">
+  <div class="sunit text-center"
+    :class="[tutorialStep === 7 && tutoDetail === 0 && unit.id === 'spy' ? 'tutobox' : '']">
     <div class="sunit" @click="handleClick">
       <div class="smalltitle">{{ unit.name }}</div>
       <img class="preview unit small" :src="`/img/units/${unit.id}.png`" />
-      <i class="fad fa-plus"></i>
-      <input class="input form-control mb-1 w-100" type="number" min="1" :max="item.amount" v-model="amount">
     </div>
+    <input class="input form-control mb-1 w-100" type="number" min="1" :max="item.amount" v-model="amount">
   </div>
 </template>
 
@@ -14,6 +14,7 @@ import { units } from 'drugwars';
 
 export default {
   props: ['item'],
+  emits: ['select'],
   data() {
     return {
       amount: this.item.amount,
@@ -32,7 +33,7 @@ export default {
   },
   methods: {
     handleClick() {
-      this.$emit('click', {
+      this.$emit('select', {
         key: this.unit.id,
         amount: this.amount,
       });

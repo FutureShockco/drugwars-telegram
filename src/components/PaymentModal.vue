@@ -12,8 +12,9 @@
                         :disabled="tutorialStep < 9">
                         <Icon name="ton" size="50" />
                     </UiButton>
-                    <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{ currentPayment.ton.amount
-                         }} TON</span>
+                    <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{
+                        parseFloat(currentPayment.ton.amount / 1000000000).toFixed(4)
+                        }} TON</span>
                 </div>
                 <div class="col-6 text-center">
                     <UiButton :disabled="notEnoughDWD" class="btn border-yellow-dark"

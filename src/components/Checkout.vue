@@ -13,7 +13,7 @@
       </UiButton>
     </div>
     <div class="col-6">
-      <div class="text-center w-100">Instant</div>
+      <div class="text-center w-100">Instant {{ timeToWait }} - {{ updateTime }}</div>
       <div>
         <UiButton :loading="isLoading || waitingConfirmation"
           :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility')"
@@ -70,13 +70,13 @@ export default {
       return utils.calculateTimeToBuild(this.id, this.coeff, this.level, this.hqLevel);
     },
     priceInSteem() {
-      return this.price / this.$store.state.game.prizeProps.steemprice;
+      return parseFloat(this.price / this.$store.state.game.prizeProps.steemprice).toFixed(4);
     },
     priceInDWD() {
       return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(4);
     },
     priceInTon() {
-      return parseFloat((this.priceInSteem * 1000000000) / 100 * (100 - this.percentage) / 1000000000).toFixed(4);
+      return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(4);
     },
     notEnoughDWD() {
       return this.priceInDWD > this.$store.state.game.user.user.dwd;
@@ -190,7 +190,7 @@ export default {
         memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
         )}`,
-        amount: `${this.priceInTon}`,
+        amount: `${this.priceInTon * 1000000000}`,
       }
       this.setCurrentPayment({ type: "building", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()

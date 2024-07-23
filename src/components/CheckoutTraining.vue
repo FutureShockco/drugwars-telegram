@@ -16,8 +16,10 @@
     </div>
     <div class="col-6">
       <div class="text-center w-100">Instant</div>
-      <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || !base"
-        @click="handleRequestPayment()" class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
+      <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || !base" @click="handleRequestPayment()"
+        class="btn-full btn-xxs btn w-100"
+        :class="isLoading || waitingConfirmation || requireUpdate || !base  ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'"
+        >
         <span>
           Fast upgrade</span>
       </UiButton>
@@ -58,9 +60,8 @@ export default {
       return this.$store.state.game.mainbase;
     },
     priceInSteem() {
-      return (this.price / this.$store.state.game.prizeProps.steemprice).toFixed(3);
+      return parseFloat(this.price / this.$store.state.game.prizeProps.steemprice).toFixed(4);
     },
-
     dwdPrice() {
       if (!this.$store.state.game.prizeProps.seProps || !this.$store.state.game.prizeProps.seProps.lastPrice)
         return false
@@ -68,10 +69,10 @@ export default {
       return price * this.priceInDWD * this.$store.state.game.prizeProps.steemprice;
     },
     priceInDWD() {
-      return parseFloat(this.priceInSteem * 50 / 100 * (100 - this.percentage)).toFixed(4);
+      return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(4);
     },
     priceInTon() {
-      return parseFloat((this.priceInSteem * 1000000000) / 100 * (100 - this.percentage) / 1000000000).toFixed(4);
+      return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(4);
     },
     timeToWait() {
       const training = this.$store.state.game.user.trainings.find(b => b.training === this.id);
@@ -99,7 +100,9 @@ export default {
       return 0;
     },
     percentage() {
-      return parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(2);
+      if (this.timeToWait && this.updateTime)
+        return parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(2);
+      else return 0
     },
     requireUpdate() {
       return this.level > this.researchCenterLvl && this.id !== 'research_center';
