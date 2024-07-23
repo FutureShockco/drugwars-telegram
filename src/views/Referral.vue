@@ -50,13 +50,24 @@
       <div class="content">
         <h3>Your drops</h3>
 
-        <div class="d-flex">
-          <div class="col-3" :key="key" v-for="(box, key) in boxes">
-            <img style="border: 1px solid #392828;    " :src="`/img/box.png`" class="img-fluid rounded-s" width="100"
-              height="100">
-            <UiButton class="btn w-100 bg-green-dark rounded-xs text-uppercase font-700 btn-xxs mt-2" type="submit">
-              Claim
-            </UiButton>
+        <div class="row g-2 mx-auto">
+          <div class="col-4 text-center" :key="key" v-for="(box, key) in boxes">
+            <div class="border rounded-s border-highlight">
+              <img style="border: 1px solid #392828;    " :src="`/img/box.png`" class="img-fluid rounded-s">
+              <h6 class="d-block mt-1" v-if="box.resources.drug">
+                <Icon name="drug" size="10" />{{ box.resources.drug }}
+              </h6>
+              <h6 class="d-block" v-if="box.resources.weapon">
+                <Icon name="weapon" size="10" />{{ box.resources.weapon }}
+              </h6>
+              <h6 class="d-block" v-if="box.resources.alcohol">
+                <Icon name="alcohol" size="10" />{{ box.resources.alcohol }}
+              </h6>
+              <UiButton @click="claim(box)" class="btn w-100 bg-highlight rounded-xs text-uppercase font-700 btn-xxs mt-1"
+                type="submit">
+                Claim
+              </UiButton>
+            </div>
           </div>
         </div>
         <div v-if="!boxes.length">
@@ -95,14 +106,25 @@ export default {
     this.load_boxes()
   },
   methods: {
-    ...mapActions(['closeModalVideo']),
+    ...mapActions(['closeModalVideo', 'claimBox']),
     load_boxes() {
       this.usertasks = [];
       const params = { user: { id: this.$store.state.auth.username } }
       client.requestAsync('get_boxes', params).then(result => {
         console.log(result)
+        result.forEach(element => {
+          element.resources = JSON.parse(element.resources)
+        });
         this.boxes = result
       });
+    },
+    claim(box) {
+      const self = this
+      this.claimBox({ id: box.id })
+      setTimeout(() => {
+        self.load_boxes()
+      }, 1000);
+
     },
     getReferralRewardsDWD(drugProductionRate) {
       const totalDailySteem = this.prizeProps.daily_percent;

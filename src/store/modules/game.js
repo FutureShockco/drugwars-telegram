@@ -420,7 +420,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init',{user:null,showLoading:true});
+          store.dispatch('init', { user: null, showLoading: true });
           store.dispatch('refresh_gang_buildings');
           store.dispatch('notify', {
             type: 'success',
@@ -442,7 +442,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init',{user:null,showLoading:true});
+          store.dispatch('init', { user: null, showLoading: true });
           store.dispatch('refresh_gang_buildings');
           store.dispatch('notify', {
             type: 'success',
@@ -498,7 +498,7 @@ const actions = {
       payload.type = 'dw-heists'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          store.dispatch('init',{user:null,showLoading:true});
+          store.dispatch('init', { user: null, showLoading: true });
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -528,7 +528,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           console.log(result);
-          store.dispatch('init',{user:null,showLoading:true});
+          store.dispatch('init', { user: null, showLoading: true });
           store.dispatch('refresh_sent_fights');
           store.dispatch('refresh_transport_count');
           store.dispatch('notify', {
@@ -820,7 +820,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           Promise.delay(1000).then(() => {
-            store.dispatch('init',{user:null,showLoading:true});
+            store.dispatch('init', { user: null, showLoading: true });
             store.dispatch('notify', {
               type: 'success',
               message: result,
@@ -842,7 +842,7 @@ const actions = {
         if (result) {
           console.log(result);
           Promise.delay(1000).then(() => {
-            store.dispatch('init',{user:null,showLoading:true});
+            store.dispatch('init', { user: null, showLoading: true });
             store.dispatch('notify', {
               type: 'success',
               message: result,
@@ -861,7 +861,26 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           Promise.delay(1000).then(() => {
-            store.dispatch('init',{user:null,showLoading:true});
+            store.dispatch('init', { user: null, showLoading: true });
+            store.dispatch('notify', {
+              type: 'success',
+              message: result,
+            });
+          })
+          return resolve(result);
+        }
+        return reject();
+      });
+    }),
+  claimBox: ({ rootState }, payload) =>
+    new Promise((resolve, reject) => {
+      const { username } = rootState.auth;
+      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.type = 'dw-claim-box'; // eslint-disable-line no-param-reassign
+      return dwsocial(username, payload, result => {
+        if (result) {
+          Promise.delay(1000).then(() => {
+            store.dispatch('init', { user: null, showLoading: true });
             store.dispatch('notify', {
               type: 'success',
               message: result,
