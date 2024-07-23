@@ -377,8 +377,7 @@ export default {
             didReset: false,
             units,
             buildings,
-            bgs: [],
-            viewTimer: null
+            bgs: []
         };
     },
     created() {
@@ -459,10 +458,10 @@ export default {
             const self = this;
             self.percentage = 0;
             self.timer = time || 10;
-            self.viewTimer = setInterval(function () {
+           const viewTimer = setInterval(function () {
                 self.percentage++;
                 if (self.percentage > self.timer) {
-                    clearInterval(self.viewTimer);
+                    clearInterval(viewTimer);
                     self.completeTask({ id: self.tasks.find((t) => self.$store.state.game.currentLink === t.link).id })
                 }
             }, 1000);
