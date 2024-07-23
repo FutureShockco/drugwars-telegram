@@ -15,18 +15,18 @@
                 <p>Bella's missions are waiting for you!</p>
             </div>
         </div>
-        <div v-if="!hasTwitter" class="card card-style shadow-card shadow-card-l show" data-card-height="150"
-            style="height: 150px;" :style="`background-image:url(/img/tasks/1.png`">
+        <div v-if="!hasTwitter" class="card card-style shadow-card shadow-card-l show" 
+            style="min-height: 120px;" :style="`background-image:url(/img/tasks/1.png`">
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">X (Twitter) Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your X (Twitter) account!</p>
                 <div @click="TWA.openLink('https://apitelegram.drugwars.io/twitter/login/' + TWA.initData)"
-                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-blue">
                     Link Now</div>
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
-        <div class="card card-style shadow-card shadow-card-l show" data-card-height="150" style="height: 150px;"
+        <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
             :style="`background-image:url(/img/tasks/1.png`"
             :class="dailyRewards.last_connect === dayCheck ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
@@ -39,9 +39,9 @@
                 <h3 class="color-white">Daily Rewards</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Come everyday to get your dose!</p>
                 <div v-if="dailyRewards.last_connect !== dayCheck" @click="toggleModalVideo(), setCurrentLink('daily')"
-                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red">
                     Claim now</div>
-                <div v-else class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red my-1">
+                <div v-else class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red">
                     Come back tomorrow</div>
             </div>
             <div v-if="modalVideoVisible && currentLink === 'daily'"
@@ -98,7 +98,8 @@
         </div>
         <div v-for="(task, index) in tasks" :key="task.id">
             <div v-if="task.tasktype === 'share'" class="card card-style shadow-card shadow-card-l"
-                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`">
+                style="min-height: 120px;"
+                :style="`background-image:url(/img/tasks/${task.bg}.png`">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
                         <h6 class="mb-n1 opacity-80 color-highlight">Bonus</h6>
@@ -109,7 +110,7 @@
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div @click="toggleModalVideo(), setCurrentLink(task.link)"
-                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-blue my-1">
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-blue">
                         Share Now</div>
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
@@ -136,10 +137,13 @@
                 </div>
             </div>
             <div v-if="task.tasktype === 'watch'" class="card card-style shadow-card shadow-card-l"
-                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                style="min-height: 120px;"
+                :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
-                    <TaskResources :task="task" v-if="task.completed === 0"/>
+                    <div class="text-end">
+                        <TaskResources :task="task" />
+                    </div>
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
                     <div v-if="task.completed === 0"
@@ -163,21 +167,24 @@
                         </p>
                         <div class="progress bg-theme border border-yellow-light mb-3" style="height:4px">
                             <div class="progress-bar gradient-yellow" role="progressbar"
-                                :style="'width:' + percentage * 2 + '%'" :aria-valuenow="percentage * 2" aria-valuemin="0"
-                                aria-valuemax="100"></div>
+                                :style="'width:' + percentage * 2 + '%'" :aria-valuenow="percentage * 2"
+                                aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <UiButton @click="completeTask({ id: task.id }), toggleModalVideo()" :disabled="!finishedWatching"
-                            class="btn btn-full w-100 btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">Done</UiButton>
+                        <UiButton @click="completeTask({ id: task.id }), toggleModalVideo()"
+                            :disabled="!finishedWatching"
+                            class="btn btn-full w-100 btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">
+                            Done</UiButton>
                     </div>
                 </div>
             </div>
 
             <div v-if="task.tasktype === 'join'" class="card card-style shadow-card shadow-card-l"
-                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                style="min-height: 120px;"
+                :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
-                        <TaskResources :task="task" v-if="task.completed === 0"/>
+                        <TaskResources :task="task" />
 
                     </div>
                     <h3 class="color-white">{{ task.name }}</h3>
@@ -195,11 +202,12 @@
             </div>
 
             <div v-if="hasTwitter && task.tasktype === 'follow'" class="card card-style shadow-card shadow-card-l"
-                data-card-height="150" style="height: 150px;" :style="`background-image:url(/img/tasks/${task.bg}.png`"
+                 style="min-height: 120px;"
+                :style="`background-image:url(/img/tasks/${task.bg}.png`"
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
-                        <TaskResources :task="task" v-if="task.completed === 0"/>
+                        <TaskResources :task="task" />
                     </div>
                     <h3 class="color-white">{{ task.name }}</h3>
                     <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }} </p>
@@ -337,8 +345,8 @@
                     </div>
 
 
-                    <div class="card card-style shadow-card shadow-card-l" data-card-height="150" style="height: 150px;"
-                        :style="`background-image:url(/img/tasks/${newTask.bg}.png`">
+                    <div class="card card-style shadow-card shadow-card-l" 
+                        style="min-height: 120px;" :style="`background-image:url(/img/tasks/${newTask.bg}.png`">
                         <div class="card-bottom pb-3 px-3">
                             <div class="text-end">
                                 <TaskResources :task="newTask" />
@@ -378,7 +386,7 @@ export default {
             units,
             buildings,
             bgs: [],
-            finishedWatching : false
+            finishedWatching: false
         };
     },
     created() {
@@ -505,6 +513,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.card-bottom{
+    position: relative;
+}
 .dropdown-content option {
     appearance: none;
     width: 100%;
