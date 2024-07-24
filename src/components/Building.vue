@@ -12,7 +12,7 @@
                 style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;"
                 class="rounded-s">
                 <img :style="inProgress ? 'filter: grayscale(1);' : ''" style="border: 1px solid #392828;    "
-                  :src="`/img/buildings/${building.id}.png`" class="img-fluid rounded-s" width="100" height="100">
+                  :src="`/img/buildings/${building.id}.jpg`" class="img-fluid rounded-s" width="100" height="100">
                 <div v-if="inProgress" style="text-align:center;position: absolute; top:0px; width:100%;z-index:10;">
                   <h5 class="color-highlight" style="padding:5px;background:#0000004d;border-radius: 0px 0px 5px 5px;">
                     {{
@@ -40,7 +40,7 @@
     width: 100%;
     background-size: cover;
 
-    " :style="`top:${100 - progress}%;background-size:100%; height:${progress}%!important;background-image:url(/img/buildings/${building.id}.png)`">
+    " :style="`top:${100 - progress}%;background-size:100%; height:${progress}%!important;background-image:url(/img/buildings/${building.id}.jpg)`">
                 </div>
               </div>
             </div>
