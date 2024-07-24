@@ -88,6 +88,7 @@ export default {
       const self = this;
       this.tonConnectUI.onStatusChange(
         walletAndwalletInfo => {
+          document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto";
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
