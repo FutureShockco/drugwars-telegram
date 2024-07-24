@@ -46,7 +46,7 @@ export default {
       const self = this;
       this.step = null;
       document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto"
-      if (!this.$store.state.game.user.user.wallet&&value&&tutorialStep>6) {
+      if (!this.$store.state.game.user.user.wallet&&this.wallet && value&&this.tutorialStep>6) {
               this.setWallet()
               this.setTutoDetail(3)
               setTimeout(() => {
@@ -91,7 +91,7 @@ export default {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet&&this.open) {
+            if (!this.$store.state.game.user.user.wallet&&this.wallet && value&&this.tutorialStep>6) {
               this.setWallet()
               this.setTutoDetail(3)
               setTimeout(() => {
