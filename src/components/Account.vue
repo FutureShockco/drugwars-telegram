@@ -42,11 +42,19 @@ export default {
     };
   },
   watch: {
-    open() {
+    open(value) {
+      const self = this;
       this.step = null;
       document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto"
+      if (!this.$store.state.game.user.user.wallet&&value&&tutorialStep>6) {
+              this.setWallet()
+              this.setTutoDetail(3)
+              setTimeout(() => {
+                self.toggleModalAccount()
+              }, 3000);
+            }
 
-    }
+    },
   },
   computed: {
     username() {
@@ -83,14 +91,12 @@ export default {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet && this.tutorialStep > 6) {
-              this.setWallet(this.wallet)
+            if (!this.$store.state.game.user.user.wallet&&this.open) {
+              this.setWallet()
               this.setTutoDetail(3)
               setTimeout(() => {
                 self.toggleModalAccount()
               }, 3000);
-
-
             }
           }
         }
@@ -98,20 +104,15 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['logout', 'send', 'toggleModalAccount', 'setTutoDetail']),
+    ...mapActions(['logout','init', 'send', 'toggleModalAccount', 'setTutoDetail']),
     setWallet() {
       const payload = {
         wallet: this.wallet,
         type: 'set-wallet',
       };
-      const self = this;
       this.send(payload)
         .then(() => {
-          this.isLoading = false;
-          Promise.delay(1000).then(() => {
-            self.init({ user: this.TWA.initData, showLoading: true })
-
-          })
+            thi.init({ user: this.TWA.initData, showLoading: true })
         })
         .catch(e => {
           this.notify({ type: 'error', message: 'Failed to set wallet' });
