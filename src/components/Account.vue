@@ -92,11 +92,9 @@ export default {
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
             if (!this.$store.state.game.user.user.wallet&&this.wallet && value&&this.tutorialStep>6) {
+              this.toggleModalAccount()
               this.setWallet()
               this.setTutoDetail(3)
-              setTimeout(() => {
-                self.toggleModalAccount()
-              }, 3000);
             }
           }
         }
