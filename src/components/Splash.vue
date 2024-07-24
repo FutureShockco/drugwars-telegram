@@ -4,7 +4,7 @@
     :style="firstLoad ? '' : 'background: #000000b8;position: fixed;z-index: 5000;    height: 100vh;top: 0px;bottom: 0px; '">
     <div class="m-content p-0 m-0 overflow-hidden" v-if="firstLoad">
       <div style="background-repeat:none;position: absolute;width: 100vw;height:100vh;filter: grayscale(1);z-index: 5;"
-        :style="{ 'background-image': `url(${bg}`, 'background-size': `100% auto!important`, 'background-position': `center bottom` }">
+        :style="{ 'background-image': `url(./img/loaders/${loader}.jpg)`, 'background-size': `100% auto!important`, 'background-position': `center bottom` }">
       </div>
       <div id="overlay2" style="left: 0px;
     position: absolute;
@@ -26,7 +26,7 @@
     overflow: hidden;
     width: 100%;z-index:7;
 
-    " :style="`top:${100 - loadPercentage}%;background-size:100% auto!important;background-repeat:none;background-position:center bottom; height:${loadPercentage}%!important;background-image:url(${bg})`">
+    " :style="`top:${100 - loadPercentage}%;background-size:100% auto!important;background-repeat:none;background-position:center bottom; height:${loadPercentage}%!important;background-image:url(./img/loaders/${loader}.jpg)`">
       </div>
       <div class="logo-large">
         <Icon class="img-fluid" name="logo" />
@@ -70,18 +70,18 @@ export default {
   data() {
     return {
       canLogin: process.env.VUE_APP_DEV || false,
-      bg: "./img/ban11.png",
       rnd: [],
       a: "",
       dyk: dyk,
       anon: anon,
       bella: bella,
+      loader:1,
       q: "Did You Know?"
     };
   },
   created() {
     this.setMessage()
-
+    this.loader = Math.floor(Math.random() * Math.floor(27))+1
   },
   methods: {
     ...mapActions(['setLoadingPercentage']),
