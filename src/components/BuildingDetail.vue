@@ -7,7 +7,7 @@
         <div class="pt-1 ms-auto">
           <div style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;"
             class="rounded-s">
-            <img :src="`/img/buildings/${building.id}.png`" class="img-fluid rounded-s" width="100" height="100" />
+            <img :src="`/img/buildings/${building.id}.jpg`" class="img-fluid rounded-s" width="100" height="100" />
           </div>
         </div>
         <div class="ps-3 me-auto" style="width: 100%;">

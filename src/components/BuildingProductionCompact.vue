@@ -3,7 +3,7 @@
     <div class="content px-0 mx-0">
       <div class="d-flex">
         <div class="pt-1 ms-auto">
-          <img class="img-fluid rounded-s" width="100" height="100" :src="`/img/buildings/${building.id}.png`">
+          <img class="img-fluid rounded-s" width="100" height="100" :src="`/img/buildings/${building.id}.jpg`">
         </div>
         <div class="ps-3 me-auto" style="width: 100%;">
           <div class="width-full">
@@ -21,7 +21,7 @@
     <div class="content  px-0 mx-0">
       <div class="d-flex">
         <div class="pt-1 ms-auto">
-          <img class="img-fluid rounded-s" width="100" height="100" :src="`./img/buildings/${building.id}.png`">
+          <img class="img-fluid rounded-s" width="100" height="100" :src="`./img/buildings/${building.id}.jpg`">
         </div>
         <div class="ps-3 me-auto" style="width: 100%;">
           <div class="width-full">
