@@ -89,10 +89,10 @@ export default {
       this.tonConnectUI.onStatusChange(
         walletAndwalletInfo => {
           document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto";
-          const currentWallet = this.tonConnectUI.wallet;
+          const currentWallet = self.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet&&this.wallet && this.tutorialStep>6) {
+            if (!self.$store.state.game.user.user.wallet&&self.wallet && self.tutorialStep>6) {
               this.toggleModalAccount()
               this.setWallet()
               this.setTutoDetail(3)
