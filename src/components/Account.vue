@@ -83,7 +83,7 @@ export default {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet && this.tutorialStep === 8) {
+            if (!this.$store.state.game.user.user.wallet && this.tutorialStep > 8) {
               this.setWallet(this.wallet)
               this.setTutoDetail(3)
               setTimeout(() => {
