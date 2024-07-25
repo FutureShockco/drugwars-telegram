@@ -4,12 +4,14 @@
     <div v-if="tutorialStep === 0">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path !== '/map/territory'" src="/img/bella/14.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/10.png" width="80" class="rounded-s" alt="img">
+          <img v-if="this.$route.path !== '/map/territory'" src="/img/bella/talk.gif" width="80" class="rounded-s"
+            alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path !== '/map/territory'">Hola. Welcome to DrugWars! <br /> First things first, let's pick
+          <h5 v-if="this.$route.path !== '/map/territory'">Hola. Welcome to DrugWars! <br /> First things first, let's
+            pick
             the perfect spot
             for your little empire. Find a neighborhood that makes you feel all powerful and safe.
             Fewer enemies... means less problems, exactly what we want. Choose wisely, baby." <router-link
@@ -25,30 +27,31 @@
     </div>
     <div v-else-if="tutorialStep < 1">
       <div class="ms-auto">
-          <img v-if="this.$route.path === '/home'" src="/img/bella/14.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/10.png" width="80" class="rounded-s" alt="img">
-        </div>
-        <div class="ps-4">
-          <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
-          <h5 v-if="this.$route.path === '/home'">Hola. Welcome to DrugWars! <br /> First things first, let's pick
-            the perfect spot
-            for your little empire. Find a neighborhood that makes you feel all powerful and safe.
-            Fewer enemies... means less problems, exactly what we want. Choose wisely, baby." <router-link
-              :to="'/map/territory?location=' + rnd"
-              class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Choose a
-              location</router-link>
-          </h5>
-          <h5 v-if="this.$route.path === '/map/territory'">"Alright, you can use the buttons to
-            navigate through neighborhoods. When ready <span class="text-yellow">select a square and make it
-              your main base</span>"</h5>
-        </div>
+        <img v-if="this.$route.path === '/home'" src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
+        <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
+      </div>
+      <div class="ps-4">
+        <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
+        <h5 v-if="this.$route.path === '/home'">Hola. Welcome to DrugWars! <br /> First things first, let's pick
+          the perfect spot
+          for your little empire. Find a neighborhood that makes you feel all powerful and safe.
+          Fewer enemies... means less problems, exactly what we want. Choose wisely, baby." <router-link
+            :to="'/map/territory?location=' + rnd"
+            class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Choose a
+            location</router-link>
+        </h5>
+        <h5 v-if="this.$route.path === '/map/territory'">"Alright, you can use the buttons to
+          navigate through neighborhoods. When ready <span class="text-yellow">select a square and make it
+            your main base</span>"</h5>
+      </div>
     </div>
     <div v-if="tutorialStep === 1">
 
       <div class="d-flex p-3 pb-0" v-if="tutorialStep === 1">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings'" src="/img/bella/14.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/10.png" width="80" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/buildings'" src="/img/bella/show.gif" width="80" class="rounded-s"
+            alt="img">
+          <img v-else src="/img/bella/show.gif" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -71,8 +74,11 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings'" src="/img/bella/1.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/11.png" width="80" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/buildings/drugs'" src="/img/bella/show.gif" width="80" class="rounded-s"
+            alt="img">
+          <img v-else-if="this.$route.path === '/buildings'" src="/img/bella/talk.gif" width="80" class="rounded-s"
+            alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -98,9 +104,9 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings/weapons'" src="/img/bella/12.png" width="80" class="rounded-s"
+          <img v-if="this.$route.path === '/buildings/weapons'" src="/img/bella/talk.gif" width="80" class="rounded-s"
             alt="img">
-          <img v-else src="/img/bella/17.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -123,9 +129,9 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/buildings/alcohol'" src="/img/bella/13.png" width="80" class="rounded-s"
+          <img v-if="this.$route.path === '/buildings/alcohol'" src="/img/bella/show.gif" width="80" class="rounded-s"
             alt="img">
-          <img v-else src="/img/bella/8.png" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -149,7 +155,9 @@
 
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img src="/img/bella/4.png" width="80" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/buildings'" src="/img/bella/show.gif" width="80" class="rounded-s"
+            alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -169,8 +177,8 @@
     <div v-if="tutorialStep === 6">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/units'" src="/img/bella/20.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/17.png" width="80" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/units'" src="/img/bella/show.gif" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
 
         </div>
         <div class="ps-4">
@@ -192,8 +200,11 @@
     <div v-if="tutorialStep === 7">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/actions'" src="/img/bella/21.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/18.png" width="80" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/actions' && tutoDetail === 0" src="/img/bella/show.gif" width="80"
+            class="rounded-s" alt="img">
+          <img v-else-if="this.$route.path === '/actions' && tutoDetail === 1" src="/img/bella/angry.jpg" width="80"
+            class="rounded-s" alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -220,8 +231,8 @@
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
           <img v-if="this.$route.path === '/actions?type=attack&nickname=PixelVerse&message=tuto'"
-            src="/img/bella/21.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/18.png" width="80" class="rounded-s" alt="img">
+            src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/bella/show.gif" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -245,8 +256,8 @@
     <div v-if="tutorialStep === 8 && tutoDetail === 0">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/actions'" src="/img/bella/21.png" width="80" class="rounded-s" alt="img">
-          <img v-else src="/img/bella/18.png" width="80" class="rounded-s" alt="img">
+          <img v-if="this.$route.path === '/actions'" src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
+          <img v-else src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>
@@ -264,7 +275,7 @@
     <div v-if="tutorialStep === 9 && tutoDetail !== 2">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img src="/img/bella/18.png" width="80" class="rounded-s" alt="img">
+          <img src="/img/bella/thumb.gif" width="80" class="rounded-s" alt="img">
         </div>
         <div class="ps-4">
           <i class="bi bi-check-circle-fill font-36 color-green-dark"></i>

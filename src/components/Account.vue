@@ -1,15 +1,11 @@
 <template>
   <div :class="open ? '' : 'd-none'" class="offcanvas offcanvas-modal rounded-m offcanvas-detached bg-theme show"
     style="width: 340px; visibility: visible;" id="menu-call" aria-modal="true" role="dialog">
-    <div class="content text-center">
+    <div class="content">
       <div class="pb-2">
         <div class="align-self-center">
           <h5 class="mb-n1 font-12 color-highlight font-700 text-uppercase pt-1">TON Network</h5>
           <h1 class="font-700">Connect your wallet</h1>
-        </div>
-        <div class="align-self-center ms-auto">
-          <a href="#" data-bs-dismiss="offcanvas" class="icon icon-m"><i
-              class="bi bi-x-circle-fill color-red-dark font-18 me-n4"></i></a>
         </div>
       </div>
       <div class="mb-3">
@@ -44,8 +40,7 @@ export default {
   watch: {
     open() {
       this.step = null;
-      document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto"
-
+      this.replaceButton()
     }
   },
   computed: {
@@ -80,6 +75,7 @@ export default {
       const self = this;
       this.tonConnectUI.onStatusChange(
         walletAndwalletInfo => {
+          self.replaceButton()
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
@@ -99,6 +95,16 @@ export default {
   },
   methods: {
     ...mapActions(['logout', 'send', 'toggleModalAccount', 'setTutoDetail']),
+    replaceButton() {
+      if (document.querySelectorAll('button[data-tc-connect-button="true"]')[0]) {
+        document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto"
+
+      }
+      else if (document.querySelectorAll('tc-root')[0] && document.querySelectorAll('tc-root')[0].children[0])
+        document.querySelectorAll('tc-root')[0].children[0].classList.add("w-100")
+      if (document.querySelectorAll('button[data-tc-dropdown-button="true"]')[0])
+        document.querySelectorAll('button[data-tc-dropdown-button="true"]')[0].style.margin = "auto"
+    },
     setWallet() {
       const payload = {
         wallet: this.wallet,
@@ -127,5 +133,9 @@ export default {
 <style lang="scss" scoped>
 #bloat div {
   background: red;
+}
+
+tc-root div {
+  width: 100%;
 }
 </style>
