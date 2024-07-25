@@ -166,8 +166,7 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Rewards,
-      beforeEnter: requireAutu
+      component: Home
     },
     {
       path: '/home',
