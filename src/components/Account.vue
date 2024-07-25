@@ -85,7 +85,7 @@ export default {
         walletAndwalletInfo => {
           const currentWallet = self.tonConnectUI.wallet;
           if (currentWallet) {
-            this.wallet = currentWallet.account.address.toString()
+            self.wallet = currentWallet.account.address.toString()
             if (!self.$store.state.game.user.user.wallet) {
               this.toggleModalAccount()
               this.setWallet()
@@ -105,7 +105,7 @@ export default {
       };
       this.send(payload)
         .then(() => {
-            thi.init({ user: this.TWA.initData, showLoading: true })
+            this.init({ user: this.TWA.initData, showLoading: true })
         })
         .catch(e => {
           this.notify({ type: 'error', message: 'Failed to set wallet' });
