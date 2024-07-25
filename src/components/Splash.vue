@@ -81,7 +81,7 @@ export default {
   },
   created() {
     this.setMessage()
-    this.loader = Math.floor(Math.random() * Math.floor(27))+1
+    this.loader = Math.floor(Math.random() * Math.floor(46))+1
   },
   methods: {
     ...mapActions(['setLoadingPercentage']),
