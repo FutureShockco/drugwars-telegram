@@ -48,13 +48,6 @@ export default {
       if(document.querySelectorAll('button[data-tc-connect-button="true"]'))
       document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto"
 
-      if (!this.$store.state.game.user.user.wallet&&this.wallet &&this.tutorialStep>6) {
-              this.setWallet()
-              this.setTutoDetail(3)
-              setTimeout(() => {
-                self.toggleModalAccount()
-              }, 3000);
-            }
 
     },
   },
@@ -95,7 +88,7 @@ export default {
           const currentWallet = self.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!self.$store.state.game.user.user.wallet && self.tutorialStep>6) {
+            if (!self.$store.state.game.user.user.wallet) {
               this.toggleModalAccount()
               this.setWallet()
               this.setTutoDetail(3)
