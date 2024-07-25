@@ -2,13 +2,13 @@
   <tr>
     <td class="col">
       <div class="d-flex">
-        <Avatar :size="20" :username="player.nickname" :rank="rank" :rankname="rankname"
+        <!-- <Avatar :size="20" :username="player.nickname" :rank="rank" :rankname="rankname"
           picture="https://www.enableds.com/products/duo/v30/images/avatars/2s.png" :reputation="player.reputation"
-          :xp="player.xp" />
-        <div v-if="player.gang" class="username ms-2" :class="{ 'text-blue': player.gang === user.gang }">{{
+          :xp="player.xp" /> -->
+        <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
           player.nickname
         }}</div>
-        <div v-else class="username text-purple ms-2">{{ player.nickname }}</div>
+        <div v-else class="username text-purple">{{ player.nickname }}</div>
         <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
       </div>
     </td>
