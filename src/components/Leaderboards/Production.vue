@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div class="card card-style">
+    <div v-if="!users || !users.length">
+      <Loading />
+    </div>
+    <div v-else class="card card-style mx-0">
       <div class="content mx-0 mb-0">
         <div class="table">
           <table class="table color-theme mb-2">
@@ -9,16 +12,14 @@
                 <th scope="col">Player</th>
                 <th scope="col">Prod/Day</th>
                 <th scope="col">Reward</th>
-                <th scope="col">Bonus</th>
+                <!-- <th scope="col">Bonus</th> -->
               </tr>
             </thead>
             <tbody>
               <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
                 :rank="key + currentRank + 1" :reward="50">
               </Player>
-              <p v-if="!users || !users.length">
-                <Loading />
-              </p>
+
             </tbody>
           </table>
         </div>

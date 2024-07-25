@@ -5,11 +5,20 @@
         <!-- <Avatar :size="20" :username="player.nickname" :rank="rank" :rankname="rankname"
           picture="https://www.enableds.com/products/duo/v30/images/avatars/2s.png" :reputation="player.reputation"
           :xp="player.xp" /> -->
-        <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
-          player.nickname
-        }}</div>
-        <div v-else class="username text-purple">{{ player.nickname }}</div>
-        <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
+        <router-link v-if="player.nickname !== user.nickname" :to="'/actions?type=attack&nickname=' + player.nickname">
+          <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
+            player.nickname
+          }}</div>
+          <div v-else class="username text-magenta">{{ player.nickname }}</div>
+          <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
+        </router-link>
+        <div v-else>
+          <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
+            player.nickname
+          }}</div>
+          <div v-else class="username text-yellow">{{ player.nickname }}</div>
+          <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
+        </div>
       </div>
     </td>
     <td v-if="player.drug_production_rate" class="col">
@@ -53,7 +62,7 @@
         +0
       </div>
     </td>
-    <td class="col">
+    <!-- <td class="col">
       <div v-if="reward">
         <div v-if="player && rank && rank < 26">
           <Icon name="dwd" size="22" />
@@ -66,7 +75,7 @@
           <Icon name="dwd" size="22" />
         </div>
       </div>
-    </td>
+    </td> -->
   </tr>
 </template>
 

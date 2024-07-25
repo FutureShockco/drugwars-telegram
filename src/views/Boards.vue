@@ -10,21 +10,20 @@
 
             <div class="tabs tabs-pill mx-3" id="tab-group-5">
                 <div class="tab-controls p-1">
-                    <a class="font-13" data-bs-toggle="collapse" href="#tab-13" aria-expanded="true">Board</a>
+                    <a class="font-13" data-bs-toggle="collapse" href="#tab-13" aria-expanded="true">Production</a>
                     <a class="font-13" data-bs-toggle="collapse" href="#tab-14" aria-expanded="false">Pablo</a>
-                    <!-- <a class="font-13" data-bs-toggle="collapse" href="#tab-15" aria-expanded="false">Contact</a> -->
+                    <a class="font-13" data-bs-toggle="collapse" href="#tab-15" aria-expanded="false">Fight</a>
                 </div>
-                <div class="card card-style">
+                <div class="card card-style mx-0">
                     <div class="collapse show" id="tab-13" data-bs-parent="#tab-group-5">
                         <LeaderboardsProduction />
                     </div>
                     <div class="collapse" id="tab-14" data-bs-parent="#tab-group-5">
                         <LeaderboardsPablo />
                     </div>
-                    <!-- <div class="collapse" id="tab-15" data-bs-parent="#tab-group-5">
-                        <p class="content">Some placeholder content for the collapse component. This panel is hidden by
-                            default but revealed when the user activates the relevant trigger.</p>
-                    </div> -->
+                    <div class="collapse" id="tab-15" data-bs-parent="#tab-group-5">
+                        <LeaderboardsFight />
+                    </div>
                 </div>
             </div>
         </div>

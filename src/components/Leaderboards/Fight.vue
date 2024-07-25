@@ -10,15 +10,14 @@
             <thead>
               <tr>
                 <th scope="col">Player</th>
-                <th scope="col">Deposit</th>
+                <th scope="col">Killed pop.</th>
                 <th scope="col">Reward</th>
-                <!-- <th scope="col">Bonus</th> -->
               </tr>
             </thead>
             <tbody>
-              <Player :heist="true" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
-                :rank="key + 1" />
-
+              <div class="mb-4">
+                <Player v-for="(user, key) in users" :player="user" :key="user.username" :rank="key + 1" />
+              </div>
             </tbody>
           </table>
         </div>
@@ -41,10 +40,20 @@ export default {
   },
   created() {
     this.isLoading = true;
-    client.requestAsync('get_heistboard', null).then(result => {
+    client.requestAsync('get_fightboard', null).then(result => {
       this.users = result.players;
       this.isLoading = false;
     });
   },
 };
 </script>
+
+<style scoped>
+.revolver_part::before {
+  background: #0f1117;
+}
+
+.revolver_part:after {
+  background: #0f1117;
+}
+</style>

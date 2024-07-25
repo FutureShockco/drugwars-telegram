@@ -645,6 +645,10 @@
   color: #967ADC !important;
 }
 
+.text-magenta {
+  color: #967ADC !important;
+}
+
 .color-icon-magenta {
   stroke: #967ADC !important;
   fill: rgba(150, 122, 220, 0.3) !important;

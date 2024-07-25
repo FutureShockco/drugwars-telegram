@@ -28,6 +28,7 @@
   margin-left: auto;
   margin-right: auto;
   pointer-events: none;
+  margin-top: 30px;
 }
 
 .revolver_part {
@@ -44,7 +45,7 @@
 .revolver_part:before {
   content: ' ';
   display: block;
-  background: #18191a;
+  background: #0f1117;
   height: 26px;
   width: 26px;
   border-radius: 13px;
