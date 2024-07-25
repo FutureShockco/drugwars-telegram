@@ -7,10 +7,6 @@
           <h5 class="mb-n1 font-12 color-highlight font-700 text-uppercase pt-1">TON Network</h5>
           <h1 class="font-700">Connect your wallet</h1>
         </div>
-        <div class="align-self-center ms-auto">
-          <a href="#" data-bs-dismiss="offcanvas" class="icon icon-m"><i
-              class="bi bi-x-circle-fill color-red-dark font-18 me-n4"></i></a>
-        </div>
       </div>
       <div class="mb-3">
         To receive rewards and make payments through DrugWars you need to connect your TON wallet!
