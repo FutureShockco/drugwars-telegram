@@ -38,7 +38,8 @@ export default {
     };
   },
   watch: {
-    open() {
+    open(value) {
+      const self = this;
       this.step = null;
       this.replaceButton()
     }
@@ -70,7 +71,7 @@ export default {
           skipRedirectToWallet: 'ios'
         },
         twaReturnUrl: 'https://t.me/drugwars_bot/drugwars'
-      };
+      };  
       window.tonConnectUI = this.tonConnectUI;
       const self = this;
       this.tonConnectUI.onStatusChange(
@@ -78,15 +79,11 @@ export default {
           self.replaceButton()
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
-            this.wallet = currentWallet.account.address.toString()
-            if (!this.$store.state.game.user.user.wallet && this.tutorialStep === 8) {
-              this.setWallet(this.wallet)
+            self.wallet = currentWallet.account.address.toString()
+            if (self.tutorialStep>6) {
+              this.toggleModalAccount()
+              this.setWallet()
               this.setTutoDetail(3)
-              setTimeout(() => {
-                self.toggleModalAccount()
-              }, 3000);
-
-
             }
           }
         }
@@ -110,14 +107,9 @@ export default {
         wallet: this.wallet,
         type: 'set-wallet',
       };
-      const self = this;
       this.send(payload)
         .then(() => {
-          this.isLoading = false;
-          Promise.delay(1000).then(() => {
-            self.init({ user: this.TWA.initData, showLoading: true })
-
-          })
+            this.init({ user: this.TWA.initData, showLoading: true })
         })
         .catch(e => {
           this.notify({ type: 'error', message: 'Failed to set wallet' });
