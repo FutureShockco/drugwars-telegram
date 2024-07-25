@@ -80,10 +80,10 @@ export default {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             self.wallet = currentWallet.account.address.toString()
-            if (self.tutorialStep>6) {
-              this.toggleModalAccount()
+            if (self.tutorialStep>=8) {
               this.setWallet()
               this.setTutoDetail(3)
+              this.toggleModalAccount()
             }
           }
         }
@@ -109,7 +109,7 @@ export default {
       };
       this.send(payload)
         .then(() => {
-            this.init({ user: this.TWA.initData, showLoading: true })
+            this.init({ user: this.TWA.initData, showLoading: false })
         })
         .catch(e => {
           this.notify({ type: 'error', message: 'Failed to set wallet' });
