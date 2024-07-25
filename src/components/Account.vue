@@ -71,7 +71,7 @@ export default {
           skipRedirectToWallet: 'ios'
         },
         twaReturnUrl: 'https://t.me/drugwars_bot/drugwars'
-      };  
+      };
       window.tonConnectUI = this.tonConnectUI;
       const self = this;
       this.tonConnectUI.onStatusChange(
@@ -80,7 +80,7 @@ export default {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             self.wallet = currentWallet.account.address.toString()
-            if (self.tutorialStep>=8) {
+            if (!self.hasWallet && self.tutorialStep >= 8) {
               this.setWallet()
               this.setTutoDetail(3)
               this.toggleModalAccount()
@@ -109,7 +109,7 @@ export default {
       };
       this.send(payload)
         .then(() => {
-            this.init({ user: this.TWA.initData, showLoading: false })
+          this.init({ user: this.TWA.initData, showLoading: false })
         })
         .catch(e => {
           this.notify({ type: 'error', message: 'Failed to set wallet' });
