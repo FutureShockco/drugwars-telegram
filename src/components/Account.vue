@@ -45,7 +45,7 @@ export default {
     open(value) {
       const self = this;
       this.step = null;
-      if(document.querySelectorAll('button[data-tc-connect-button="true"]'))
+      if(document.querySelectorAll('button[data-tc-connect-button="true"]') && document.querySelectorAll('button[data-tc-connect-button="true"]')[0])
       document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto"
 
 
@@ -83,8 +83,6 @@ export default {
       const self = this;
       this.tonConnectUI.onStatusChange(
         walletAndwalletInfo => {
-          if(document.querySelectorAll('button[data-tc-connect-button="true"]'))
-          document.querySelectorAll('button[data-tc-connect-button="true"]')[0].style.margin = "auto";
           const currentWallet = self.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
