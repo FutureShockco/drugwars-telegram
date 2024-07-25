@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="card overflow-visible card-style">
+    <div class="card card-style">
       <div class="content mx-0 mb-0">
-        <div class="table-responsive">
+        <div class="table">
           <table class="table color-theme mb-2">
             <thead>
               <tr>
@@ -24,9 +24,12 @@
         </div>
       </div>
     </div>
-    <Paginate class="ml-6 mt-4 text-center width-full" :page-count="Math.ceil(count / 50)" :page-range="3"
-      :margin-pages="2" :click-handler="load_leaders" :prev-text="'Prev'" :next-text="'Next'"
-      :container-class="'pagination'" :page-class="'leaders'"></Paginate>
+    <div class="d-flex">
+      <Paginate class="mx-auto pagination" :page-count="Math.ceil(count / 50)" :page-range="3" :margin-pages="2"
+        :click-handler="load_leaders" :prev-text="'Prev'" :next-text="'Next'" :container-class="'pagination'"
+        :page-class="'page-item fight'"
+        :page-link-class="'page-link rounded-xs color-white  bg-theme shadow-l border-0'"></Paginate>
+    </div>
   </div>
 </template>
 

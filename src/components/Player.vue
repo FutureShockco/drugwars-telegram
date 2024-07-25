@@ -44,11 +44,11 @@
       </div>
     </td>
     <td v-if="player && !cruelty" class="col">
-      <div v-if="ownHeistReward && ownHeistReward.amount">
+      <div v-if="heist && ownHeistReward && ownHeistReward.amount > 0">
         <Icon name="ton" size="22" />
         +{{ ownHeistReward.amount | amount }}
       </div>
-      <div v-else>
+      <div v-else-if="heist && ownHeistReward">
         <Icon name="ton" size="22" />
         +0
       </div>
@@ -75,7 +75,7 @@ import { mapActions } from 'vuex';
 import client from '@/helpers/client';
 
 export default {
-  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list'],
+  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list', 'heist'],
   data() {
     return {
       isLoading: false,

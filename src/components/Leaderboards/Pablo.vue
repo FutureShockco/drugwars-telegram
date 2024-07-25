@@ -13,7 +13,7 @@
               </tr>
             </thead>
             <tbody>
-              <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+              <Player :heist="true" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
                 :rank="key + 1" />
               <p class="p-4 text-center mt-6" v-if="isLoading || users.length === 0">
                 <Loading />
