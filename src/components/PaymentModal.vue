@@ -26,6 +26,12 @@
                 </div>
 
             </div>
+            <!-- <div class="col-12 text-center px-5">
+                    <UiButton :disabled="notEnoughDWD || currentPayment.price < 0.0001" class="btn btn-xxs border-magenta-dark w-100"
+                        @click="handleSubmit(), toggleModalPayment()"> OR Share payment link
+                    </UiButton>
+                 
+                </div> -->
             <div class="text-center pt-3">
                 <UiButton @click="toggleModalPayment(), setCurrentPayment(null)" class="btn btn-xxs gradient-red">
                     Cancel

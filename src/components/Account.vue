@@ -80,7 +80,7 @@ export default {
           const currentWallet = this.tonConnectUI.wallet;
           if (currentWallet) {
             self.wallet = currentWallet.account.address.toString()
-            if (!self.hasWallet && self.tutorialStep >= 8) {
+            if (!self.hasWallet && self.tutorialStep >= 7) {
               this.setWallet()
               this.setTutoDetail(3)
               this.toggleModalAccount()
