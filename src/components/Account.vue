@@ -95,7 +95,7 @@ export default {
           const currentWallet = self.tonConnectUI.wallet;
           if (currentWallet) {
             this.wallet = currentWallet.account.address.toString()
-            if (!self.$store.state.game.user.user.wallet&&self.wallet && self.tutorialStep>6) {
+            if (!self.$store.state.game.user.user.wallet && self.tutorialStep>6) {
               this.toggleModalAccount()
               this.setWallet()
               this.setTutoDetail(3)
