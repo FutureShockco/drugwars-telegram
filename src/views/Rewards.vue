@@ -18,16 +18,15 @@
                         <h3>Production Rewards</h3>
                     </div>
                 </div>
-                <p>Every day, players can earn up to 1,000 DW TOKEN as part of their daily drug production. This reward
-                    accumulates automatically based on your in-game production capabilities.
+                <p>Every day, players can earn up to 1,000+ DW TOKEN as part of their daily drug production. This reward
+                    accumulates automatically based on your in-game production capabilities. The rewards pool automatically increase by 100 tokens for every additional 1000 active players.
                 </p>
                 <h3>Pablo Rewards</h3>
-                <p>Each week, players can earn 100 TON tokens by selling their drug to Pablo. Whenever an user make a
-                    purchase with TON, 50% is added to this prize pool.
+                <p>Each week, players can earn TON tokens by selling their DRUG <Icon class="mx-1" name="drug"/> to Pablo. These rewards are funded by the game treasury and by user purchases. Each purchase contributes to the pool, which is redistributed at a rate of 1% per week.
                 </p>
                 <h3>Fight Rewards</h3>
                 <p>After each fight, you may earn DW TOKEN instantly. These rewards are given immediately upon the
-                    conclusion of each fight, and the number of units killed, reflecting your combat prowess.
+                    conclusion of each fight, and the number of units killed, reflecting your combat prowess. Rewards for battles increase automatically based on the in-game population and units.
                 </p>
             </div>
         </div>

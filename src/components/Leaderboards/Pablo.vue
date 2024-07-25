@@ -5,12 +5,12 @@
     </div>
     <div v-else class="card card-style mx-0">
       <div class="content mx-0 mb-0">
-        <div class="table">
+        <div class="table-responsive">
           <table class="table color-theme mb-2">
             <thead>
               <tr>
                 <th scope="col">Player</th>
-                <th scope="col">Deposit</th>
+                <th scope="col">Sold</th>
                 <th scope="col">Reward</th>
                 <!-- <th scope="col">Bonus</th> -->
               </tr>

@@ -39,6 +39,7 @@ Vue.filter('date', value => moment(value, 'YYYY-MM-DD').format('MMM D, YYYY'));
 Vue.filter('ms', value => prettyMs(parseInt(value / 1000) * 1000));
 Vue.filter('parseUrl', value => urlParse(value).host);
 Vue.filter('amount', value => numeral(value).format('0.[00]a'));
+Vue.filter('tonamount', value => numeral(value).format('0.[0000]a'));
 Vue.filter('round', value => numeral(value).format('0a'));
 Vue.filter('million', value => numeral(value).format('0,0.0000'));
 Vue.filter('decimal', value => numeral(value).format('0.[00000]'));

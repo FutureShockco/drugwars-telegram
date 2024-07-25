@@ -9,7 +9,7 @@
             <div class="d-flex px-4">
                 <div class="col-6 text-center">
                     <UiButton class="btn border-blue-dark" @click="handleRequestPayment(), toggleModalPayment()"
-                        :disabled="tutorialStep < 9">
+                        :disabled="tutorialStep < 9 || currentPayment.ton.amount / 1000000000 < 0.0001">
                         <Icon name="ton" size="50" />
                     </UiButton>
                     <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{
@@ -17,7 +17,7 @@
                         }} TON</span>
                 </div>
                 <div class="col-6 text-center">
-                    <UiButton :disabled="notEnoughDWD" class="btn border-yellow-dark"
+                    <UiButton :disabled="notEnoughDWD || currentPayment.price < 0.0001" class="btn border-yellow-dark"
                         @click="handleSubmit(), toggleModalPayment()">
                         <Icon name="dwd" style="font-size: 50px;line-height: 46px;" />
                     </UiButton>

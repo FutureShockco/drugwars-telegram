@@ -23,43 +23,43 @@
     </td>
     <td v-if="player.drug_production_rate" class="col">
       <div>
-        <Icon name="drug" size="22" />
-        {{ player.drug_production_rate * 60 * 60 * 24 | amount }}
+       
+        {{ player.drug_production_rate * 60 * 60 * 24 | amount }}  <Icon class="ms-1" name="drug" size="22" />
+      </div>
+      <!-- <div>
+       
+        {{ player.weapon_production_rate * 60 * 60 * 24 | amount }}  <Icon class="ms-1" name="weapon" size="22" />
       </div>
       <div>
-        <Icon name="weapon" size="22" />
-        {{ player.weapon_production_rate * 60 * 60 * 24 | amount }}
-      </div>
-      <div>
-        <Icon name="alcohol" size="22" />
-        {{ player.alcohol_production_rate * 60 * 60 * 24 | amount }}
-      </div>
+      
+        {{ player.alcohol_production_rate * 60 * 60 * 24 | amount }}   <Icon class="ms-1" name="alcohol" size="22" />
+      </div> -->
     </td>
     <td v-else-if="!cruelty" class="col">
-      <Icon name="drug" size="22" />
       {{ player.drugs || 0 | amount }}
+      <Icon class="ms-1" name="drug" size="22" />
+
     </td>
     <td v-else-if="player && player.amount" class="col">
       +{{ player.amount }}
-      <Icon name="dwd" size="22" />
+      <Icon class="ms-1" name="dwd" size="22" />
     </td>
     <td v-else-if="player && player.ticket" class="col">
       <div>{{ player.ticket }}</div>
     </td>
     <td v-if="player.drug_production_rate && totalRewards" class="col">
       <div>
-        <Icon name="dwd" size="22" />
-        +{{ totalRewards.daily | amount }}
+       
+        +{{ totalRewards.daily | amount }}  <Icon class="ms-1" name="dwd" size="22" />
       </div>
     </td>
     <td v-if="player && !cruelty" class="col">
       <div v-if="heist && ownHeistReward && ownHeistReward.amount > 0">
-        <Icon name="ton" size="22" />
-        +{{ ownHeistReward.amount | amount }}
+        <span>+{{ ownHeistReward.amount | tonamount }}</span>  <Icon class="align-text-top ms-2" name="ton" size="18" />
       </div>
       <div v-else-if="heist && ownHeistReward">
-        <Icon name="ton" size="22" />
-        +0
+        
+        +0 <Icon class="align-text-top ms-2" name="ton" size="18" />
       </div>
     </td>
     <!-- <td class="col">
@@ -165,9 +165,13 @@ export default {
       const { prizeProps } = this.$store.state.game;
       return prizeProps.heist_percent;
     },
+    pablo() {
+      const { prizeProps } = this.$store.state.game;
+      return prizeProps.pool.find((p) => p.pool === "pablo").reward / 1000000000;
+    },
     ownHeistReward() {
       const percent = (100 / this.prizeProps.heist_pool) * this.player.drugs;
-      const amount = parseFloat((this.totalHeistDWD / 100) * percent).toFixed(3) || 0;
+      const amount = parseFloat((this.pablo / 100) * percent).toFixed(4) || 0;
       return {
         amount: amount || 0,
         percent: percent || 0,
