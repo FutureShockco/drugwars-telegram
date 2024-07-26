@@ -381,7 +381,7 @@ export default {
     return {
       username: this.$store.state.auth.username,
       nickname: this.$store.state.game.user.user.nickname,
-      rnd: Math.floor(Math.random() * Math.floor(250)) + 1,
+      rnd: Math.floor(Math.random() * Math.floor(4999)) + 1,
 
     };
   },

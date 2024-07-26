@@ -44,6 +44,11 @@
 
 <script>
 export default {
+  data() {
+    return {
+      rnd: Math.floor(Math.random() * Math.floor(4999)) + 1
+    };
+  },
   computed: {
     hasBase() {
       const building = this.$store.state.game.user.buildings.find(
