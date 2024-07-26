@@ -16,6 +16,8 @@
             class="fad fa-copy font-24 color-green-dark"></i></h6>
         <h2 class="mt-3">Help Them Succeed</h2>
         <h5>Encourage your friends to win resources and achieve great rewards!</h5>
+        <h2 class="mt-3">Both of you receive a drop of resources</h2>
+        <h5>Instantly receive a box containing  <div>1000 <Icon name="drug"/> - 2500 <Icon name="weapon"/> - 2500 <Icon name="alcohol"/></div></h5>
         <h2 class="mt-3">Earn a 5% Bonus</h2>
         <h5>For every DW token reward your friends earn with production, you receive a 5% bonus on their rewards. This
           bonus is an extra
