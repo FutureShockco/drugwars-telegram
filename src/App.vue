@@ -57,7 +57,7 @@ export default {
       setInterval(function () {
         if (this.username && client.ws.readyState === 3)
           self.checkWS()
-      }, 1000);
+      }, 5000);
     }, 5000);
     self.checkWS()
     if (this.TWA && this.TWA.expand)
