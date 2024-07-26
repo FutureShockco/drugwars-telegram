@@ -43,6 +43,8 @@ export default {
       weapon_buildings: pickBy(buildings, b => b.production_type === 'weapons') || [],
       alcohol_buildings: pickBy(buildings, b => b.production_type === 'alcohol') || [],
       drugs,
+      rnd: Math.floor(Math.random() * Math.floor(4999)) + 1,
+
     };
   },
   computed: {

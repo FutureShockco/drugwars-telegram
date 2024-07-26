@@ -38,7 +38,7 @@ export default {
   data() {
     return {
       trainings,
-      rnd: Math.floor(Math.random() * Math.floor(250)) + 1,
+      rnd: Math.floor(Math.random() * Math.floor(4999)) + 1,
     };
   },
   computed: {

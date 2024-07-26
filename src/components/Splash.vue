@@ -70,7 +70,6 @@ export default {
   data() {
     return {
       canLogin: process.env.VUE_APP_DEV || false,
-      rnd: [],
       a: "",
       dyk: dyk,
       anon: anon,

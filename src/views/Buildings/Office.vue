@@ -121,7 +121,7 @@ export default {
   data() {
     return {
       items: pickBy(buildings, b => b.type === 'main'),
-      rnd: Math.floor(Math.random() * Math.floor(250)) + 1,
+      rnd: Math.floor(Math.random() * Math.floor(4999)) + 1,
     };
   },
   computed: {

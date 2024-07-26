@@ -287,6 +287,7 @@ export default {
       active: false,
       privateAttack: true,
       enemyProd: 0,
+      rnd: Math.floor(Math.random() * Math.floor(4999)) + 1,
     };
   },
   components: {
