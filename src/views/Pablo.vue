@@ -9,7 +9,7 @@
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
         <Heist />
-        <div class="card card-style shadow-card shadow-card-l" data-card-height="150" style="height: 150px;"
+        <!-- <div class="card card-style shadow-card shadow-card-l" data-card-height="150" style="height: 150px;"
             :style="`background-image:url(/img/tasks/42.jpg`">
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">Increase your bonus</h3>
@@ -17,6 +17,6 @@
                     DRUG bonus when depositing.</p>
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
-        </div>
+        </div> -->
     </div>
 </template>

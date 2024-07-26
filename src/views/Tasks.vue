@@ -16,9 +16,9 @@
             </div>
         </div>
         <div v-if="!hasTwitter" class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
-            :style="`background-image:url(/img/tasks/1.jpg`">
+            :style="`background-image:url(/img/tasks/7.jpg`">
             <div class="card-bottom pb-3 px-3">
-                <h3 class="color-white">X (Twitter) Gang</h3>
+                <h3 class="color-white mt-3">X (Twitter) Gang</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Link your X (Twitter) account!</p>
                 <div @click="TWA.openLink('https://apitelegram.drugwars.io/twitter/login/' + TWA.initData)"
                     class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-blue">
@@ -27,7 +27,7 @@
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
         <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
-            :style="`background-image:url(/img/tasks/1.jpg`"
+            :style="`background-image:url(/img/tasks/27.jpg`"
             :class="dailyRewards.last_connect === dayCheck ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">

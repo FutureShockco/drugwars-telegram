@@ -11,7 +11,7 @@
           </span></div>
       </div>
       <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
-      <div class="row">
+      <div class="row mt-3">
         <div class="col">
           <div @click="handleSubmit()" :disabled="isLoading || Number(balances.drugs) < Number(amount)" type="submit"
             class="btn-full btn-xs  btn border border-green-dark color-green-dark">
