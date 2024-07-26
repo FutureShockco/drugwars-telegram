@@ -164,7 +164,7 @@ export default {
       let height = 0;
 
       width = bg.offsetWidth;
-      height = bg.offsetHeight;
+      height = bg.offsetWidth;
       canvas_element.width = width;
       canvas_element.height = height;
       self.canvasWidth = width;
@@ -477,12 +477,12 @@ export default {
               }
               else {
 
-                context.drawImage(tiles, self.maprng[tile.id].x * 72, self.maprng[tile.id].y * 72, 72, 72, tile.x, tile.y, 50, 50);
+                context.drawImage(tiles, self.maprng[tile.id].x * 72, self.maprng[tile.id].y * 72, 72, 72, tile.x, tile.y, width / 10, width / 10);
               }
             }
             else {
 
-              context.drawImage(tiles, self.maprng[tile.id].x * 72, self.maprng[tile.id].y * 72, 72, 72, tile.x, tile.y, 50, 50);
+              context.drawImage(tiles, self.maprng[tile.id].x * 72, self.maprng[tile.id].y * 72, 72, 72, tile.x, tile.y, width / 10, width / 10);
             }
 
             if (self.canvasWidth < 500) {
