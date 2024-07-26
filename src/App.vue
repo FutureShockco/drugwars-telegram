@@ -10,7 +10,7 @@
         'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
       }" style="height: 100%; overflow: hidden">
         <router-view />
-        <div @click="toggleSidebarVisibility(), toggleModalPayment(), setCurrentPayment(null)"
+        <div @click="closeModalAccount(), toggleSidebarVisibility(), toggleModalPayment(),  setCurrentPayment(null)"
           :class="(username && showTutoOverlay) || modalWalletVisible || modalVideoVisible || modalPaymentVisible ? 'show' : 'd-none'"
           class="offcanvas-backdrop fade">
         </div>
@@ -64,7 +64,7 @@ export default {
       this.TWA.expand()
   },
   methods: {
-    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount', 'toggleModalPayment', 'setCurrentPayment']),
+    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount','closeModalAccount', 'toggleModalPayment', 'setCurrentPayment']),
     checkWS() {
       if (this.TWA && this.TWA.initData)
         client.restart();

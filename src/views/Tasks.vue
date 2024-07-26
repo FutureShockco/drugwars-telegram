@@ -168,7 +168,7 @@
                                 :style="'width:' + percentage * 2 + '%'" :aria-valuenow="percentage * 2"
                                 aria-valuemin="0" aria-valuemax="100"></div>
                         </div>
-                        <UiButton @click="completeTask({ id: task.id }), toggleModalVideo()"
+                        <UiButton @click="completeTask({ id: task.id }), toggleModalVideo(), refreshTask()"
                             :disabled="!finishedWatching"
                             class="btn btn-full w-100 btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight mt-n2">
                             Done</UiButton>

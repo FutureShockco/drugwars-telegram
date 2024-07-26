@@ -22,6 +22,9 @@ const mutations = {
   toggleModalAccount(_state) {
     Vue.set(_state, 'modalAccountVisible', !_state.modalAccountVisible);
   },
+  closeModalAccount(_state) {
+    Vue.set(_state, 'modalAccountVisible', false);
+  },
   toggleModalVideo(_state) {
     Vue.set(_state, 'modalVideoVisible', !_state.modalVideoVisible);
   },
@@ -67,6 +70,9 @@ const actions = {
   },
   toggleModalAccount({ commit }) {
     commit('toggleModalAccount');
+  },
+  closeModalAccount({ commit }) {
+    commit('closeModalAccount');
   },
   toggleModalVideo({ commit }) {
     commit('toggleModalVideo');
