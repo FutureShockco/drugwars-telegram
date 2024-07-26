@@ -225,7 +225,7 @@
             </div>
         </div>
         <div class="card card-style"
-            v-if="user.user.username === '354640397' || user.user.username === '1995273768' || user.user.username === '584566992' || user.user.username === '1718002652'">
+            v-if="user.user.username === '354640397' || user.user.username === '1995273768' || user.user.username === '7388811200' || user.user.username === '1718002652' || user.user.username === '1718002652'">
             <div class="content">
                 <form class="demo-animation needs-validation m-0" @submit.prevent="handleSubmit">
                     <div class="form-custom form-label mb-3">
