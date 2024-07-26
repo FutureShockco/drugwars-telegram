@@ -123,9 +123,11 @@ const requireAuth = (to, from, next) => {
     store.dispatch('showLoading');
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
-          next();
-        });
+        next();
+        store.dispatch('hideLoading');
+        // store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
+        //   next();
+        // });
       } else {
         const redirect = to.fullPath === '/' ? undefined : to.fullPath;
         next({ name: 'home', query: { redirect } });
@@ -136,9 +138,13 @@ const requireAuth = (to, from, next) => {
 
     store.dispatch('login', store.state.auth.account).then(() => {
       if (store.state.auth.username) {
-        store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
-          next();
-        });
+
+        store.dispatch('hideLoading');
+        next();
+
+        // store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
+        //   next();
+        // });
       } else {
         const redirect = to.fullPath === '/' ? undefined : to.fullPath;
         next({ name: 'home', query: { redirect } });
