@@ -25,7 +25,7 @@
         </UiButton>
         <UiButton v-else :loading="isLoading || waitingConfirmation" 
           :disabled="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility')"
-          :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility') ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'"
+          :class="isLoading || waitingConfirmation || requireUpdate || !base || (tutorialStep === 1 && id === 'headquarters') || (tutorialStep === 1 && id !== 'headquarters') || (tutorialStep === 2 && id !== 'crackhouse') || (tutorialStep === 5 && id !== 'training_facility') ? 'border-red-dark color-red-dark' : 'border-yellow-dark color-yellow-dark'"
           @click="handleRequestPayment()" class="btn btn-full btn-xxs w-100">
           <span> Fast Upgrade
           </span>

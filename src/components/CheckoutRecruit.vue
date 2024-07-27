@@ -28,7 +28,7 @@
           Fast Recruit</span>
       </UiButton>
       <UiButton v-else :disabled="isLoading || !base" @click="handleRequestPayment()"
-        class="btn-full btn-xxs btn border-blue-dark color-blue-dark w-100">
+        class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
         <span>
           Fast Recruit</span>
       </UiButton>

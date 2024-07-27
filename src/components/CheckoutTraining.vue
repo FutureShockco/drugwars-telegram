@@ -18,7 +18,7 @@
       <div class="text-center w-100">Instant</div>
       <UiButton :disabled="isLoading || waitingConfirmation || requireUpdate || !base" @click="handleRequestPayment()"
         class="btn-full btn-xxs btn w-100"
-        :class="isLoading || waitingConfirmation || requireUpdate || !base ? 'border-red-dark color-red-dark' : 'border-blue-dark color-blue-dark'">
+        :class="isLoading || waitingConfirmation || requireUpdate || !base ? 'border-red-dark color-red-dark' : 'border-yellow-dark color-yellow-dark'">
         <span>
           Fast upgrade</span>
       </UiButton>

@@ -90,7 +90,6 @@
                 </div>
               </div>
               <Cost :drugsCost="drugsCost" :weaponsCost="weaponsCost" :alcoholsCost="alcoholsCost" :quantity="1" />
-              <div class="w-100" v-if="inProgress">End: {{ timeToWaitString }}</div>
 
             </div>
 
