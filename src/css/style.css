@@ -1518,9 +1518,9 @@ p {
 }
 
 .header-clear-medium {
-  padding-top: calc(55px + 40px);
-  padding-top: calc((55px + 40px) + constant(safe-area-inset-top) * 0.8) !important;
-  padding-top: calc((55px + 40px) + env(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc(55px + 23px);
+  padding-top: calc((55px + 23px) + constant(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc((55px + 23px) + env(safe-area-inset-top) * 0.8) !important;
 
   padding-bottom: calc(55px + 80px);
   padding-bottom: calc((55px + 80px) + constant(safe-area-inset-top) * 0.8) !important;

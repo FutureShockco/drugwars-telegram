@@ -1,7 +1,7 @@
 <template>
   <div>
     <RewardsTabs />
-    <div class="card mx-0 mb-3">
+    <div class="card mx-0 mb-1">
       <div class="content">
         <div class="d-flex">
           <div>
@@ -25,7 +25,7 @@
 
       </div>
     </div>
-    <div class="card mb-3">
+    <div class="card mb-1">
       <div class="content">
         <h3>Your referrals</h3>
 

@@ -12,7 +12,7 @@
                 <h2 v-else> You must build a research center first.</h2>
             </div> -->
     </div>
-    <div v-else class="card card-style anim-fade-in">
+    <div v-else class="card anim-fade-in">
       <div class="content">
         <h4 v-if="!ownBase" class="text-center">
           You must choose a location on the map first.
