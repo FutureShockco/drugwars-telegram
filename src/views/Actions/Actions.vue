@@ -23,7 +23,7 @@
         <UiButton class="button button-red mt-5" @click="openFarmList()">Cancel</UiButton>
       </div>
     </UiCenter>
-    <div class="card card-style anim-fade-in">
+    <div class="card mx-0 border-bottom-highlight mb-1 anim-fade-in">
       <div class="content">
         <div v-if="ownUnits.length > 0">
           <!-- <h3 class="mb-0 mt-0">Select your action type</h3>

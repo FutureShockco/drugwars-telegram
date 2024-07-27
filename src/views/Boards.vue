@@ -2,7 +2,7 @@
     <div>
         <RewardsTabs />
 
-        <div class="card card-style">
+        <div class="card mx-0 border-bottom-highlight mb-1">
             <div class="content">
                 <h6 class="font-700 mb-n1 color-highlight">Your next rival is there</h6>
                 <h1 class="pb-2">Leaderboard</h1>
