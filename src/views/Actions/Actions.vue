@@ -121,7 +121,7 @@
           <div v-if="action_type !== 'occupy' && target_type !== 'npc'">
             <h3>Type a nickname</h3>
             <div class="d-flex">
-              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-1" type="string"
+              <input :readonly="targetNickname === 'TommasoBuscetta'" class="input form-control mb-1" type="string"
                 placeholder="Nickname" v-model="targetNickname" />
               <UiButton class="button button-green" @click="getUserBase()">
                 <div class="fad fa-search"></div>
@@ -162,11 +162,11 @@
           <h3 class="mt-1">Or your target coordinates</h3>
           <div class="d-flex">
             <div class="col">
-              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-4" type="number"
+              <input :readonly="targetNickname === 'TommasoBuscetta'" class="input form-control mb-4" type="number"
                 placeholder="Territory" v-model="target" />
             </div>
             <div class="col">
-              <input :readonly="targetNickname === 'PixelVerse'" class="input form-control mb-4" type="number"
+              <input :readonly="targetNickname === 'TommasoBuscetta'" class="input form-control mb-4" type="number"
                 placeholder="Base" v-model="base" />
             </div>
           </div>

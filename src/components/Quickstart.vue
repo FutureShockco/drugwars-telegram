@@ -215,13 +215,13 @@
           <h5 v-if="this.$route.path === '/actions' && tutoDetail === 0"> "Click on the <span
               class="text-yellow">Spy</span> to add it to
             the selected army list. Send your
-            spy to gather intel on those bastard named <span class="text-yellow">PixelVerse</span>. Knowledge is
+            spy to gather intel on those traitor named <span class="text-yellow">TommasoBuscetta</span>. Knowledge is
             power, and we need to know everything about our enemies before we make a move."
           </h5>
           <h5 v-if="this.$route.path === '/actions' && tutoDetail === 1"> "Ok I already entered the informations of our
             rival. Next step for you is to click on the <span class="text-red">Attack</span> button"
           </h5>
-          <router-link v-if="this.$route.path !== '/actions'" to="/actions?type=attack&nickname=PixelVerse&message=tuto"
+          <router-link v-if="this.$route.path !== '/actions'" to="/actions?type=attack&nickname=TommasoBuscetta&message=tuto"
             class="btn mt-2 p-3 color-black gradient-green font-11 pt-3 d-inline-block float-end">Continue</router-link>
 
         </div>
@@ -230,7 +230,7 @@
     <div v-if="tutorialStep > 7 && tutoDetail === 2">
       <div class="d-flex p-3 pb-0">
         <div class="ms-auto">
-          <img v-if="this.$route.path === '/actions?type=attack&nickname=PixelVerse&message=tuto'"
+          <img v-if="this.$route.path === '/actions?type=attack&nickname=TommasoBuscetta&message=tuto'"
             src="/img/bella/talk.gif" width="80" class="rounded-s" alt="img">
           <img v-else src="/img/bella/show.gif" width="80" class="rounded-s" alt="img">
         </div>
