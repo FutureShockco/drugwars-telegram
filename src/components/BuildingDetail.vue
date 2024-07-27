@@ -24,7 +24,7 @@
 
       </div>
       <div class="item-content width-full">
-        <div v-for="level in nextLevels" :key="level" class="border-bottom mx-3">
+        <div v-for="level in nextLevels" :key="level" class="mb-1">
           <h5 class="mb-0 mt-0">Level {{ level }}</h5>
           <Cost :drugsCost="drugsCost(level)" :weaponsCost="weaponsCost(level)" :alcoholsCost="alcoholsCost(level)"
             :quantity="1" />
