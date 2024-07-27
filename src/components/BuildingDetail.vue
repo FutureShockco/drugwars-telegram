@@ -1,6 +1,6 @@
 <template>
 
-  <div class="card card-style">
+  <div class="card mx-0 border-bottom-highlight mb-1">
     <BuildingsTabs />
     <div class="content">
       <div class="d-flex">

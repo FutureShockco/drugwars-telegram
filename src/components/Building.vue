@@ -3,7 +3,7 @@
   <div v-else-if="building.id === 'pantheon' && !main"></div>
   <div v-else>
     <div :class="[tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox' : '', tutorialStep === 2 && building.id === 'crackhouse' ? 'tutobox' : '', tutorialStep === 3 && building.id === 'ammunition' ? 'tutobox' : '', tutorialStep === 4 && building.id === 't_distillery' ? 'tutobox' : '', tutorialStep === 5 && building.id === 'training_facility' ? 'tutobox' : '']">
-      <div class="card card-style mb-3"
+      <div class="card mx-0 border-bottom-highlight mb-1"
         :class="[hasNotEnough ? 'not-enough' : '']">
         <div class="content">
           <div class="d-flex">

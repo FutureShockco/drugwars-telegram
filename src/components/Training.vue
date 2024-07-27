@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-style mb-3">
+  <div class="card mx-0 border-bottom-highlight mb-1">
     <div class="content">
       <div class="d-flex">
         <div class="pt-1 ms-auto">
