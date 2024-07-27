@@ -1,5 +1,6 @@
 <template>
-  <div class="card mx-0 border-bottom-highlight mb-1" :class="unit.id === 'spy' && tutorialStep === 6 ? 'tutobox' : ''">
+  <div class="card card-style mx-0 mb-1" style="border-radius: 0px;"
+    :class="unit.id === 'spy' && tutorialStep === 6 ? 'tutobox' : ''">
     <div class="content">
       <div class="d-flex " style="position: relative;">
         <div class="pt-1 ms-auto">

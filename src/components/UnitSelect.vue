@@ -3,7 +3,7 @@
     :class="[tutorialStep === 7 && tutoDetail === 0 && unit.id === 'spy' ? 'tutobox' : '']">
     <div class="sunit" @click="handleClick">
       <div class="smalltitle">{{ unit.name }}</div>
-      <img class="preview unit small" :src="`/img/units/${unit.id}.png`" />
+      <img class="preview unit img-fluid" :src="`/img/units/${unit.id}.png`" />
     </div>
     <input class="input form-control mb-1 w-100" type="number" min="1" :max="item.amount" v-model="amount">
   </div>
@@ -69,7 +69,7 @@ input {
 }
 
 .smalltitle {
-  font-size: 8px;
+  font-size: 12px;
   color: #fbbd07;
 }
 </style>

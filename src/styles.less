@@ -534,10 +534,9 @@
 }
 
 .tutobox {
-  margin: 0px 15px 15px 15px;
   color: white;
+  overflow: hidden;
   text-shadow: 0 1px 0 #000;
-
   --border-angle: 0turn; // For animation.
   --main-bg: conic-gradient(from var(--border-angle),
       #0f1117,
@@ -547,7 +546,6 @@
 
   border: solid 5px transparent !important;
   --gradient-border: conic-gradient(from var(--border-angle), transparent 25%, rgb(0, 0, 0), rgb(255, 200, 0) 99%, transparent);
-  border-radius: 35px !important;
   background:
     // padding-box clip this background in to the overall element except the border.
     var(--main-bg) padding-box,
@@ -570,9 +568,6 @@
 }
 
 
-.tutobox .card {
-  margin: 0px 0px 0px 0px !important;
-}
 
 .list-style-none {
   list-style: none;

@@ -22,7 +22,7 @@
     </div>
     <div class="col-6">
       <div class="text-center w-100">Instant</div>
-      <UiButton v-if="tutorialStep < 9" :disabled="isLoading || notEnoughDWD || !base || (tutorialStep < 9 && id !== 'spy')" @click="handleSubmit('dwd')"
+      <UiButton v-if="tutorialStep < 9" :disabled="isLoading || !base || (tutorialStep < 9 && id !== 'spy')" @click="handleSubmit('dwd')"
         class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
         <span>
           Fast Recruit</span>
