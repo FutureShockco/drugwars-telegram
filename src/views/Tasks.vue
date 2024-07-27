@@ -1,7 +1,7 @@
 <template>
     <div>
         <RewardsTabs />
-        <div class="card card-style">
+        <div class="card mx-0 border-bottom-highlight mb-4">
             <div class="content">
                 <div class="d-flex">
                     <div>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <BootcampTabs />
-    <div class="card card-style">
+    <div class="card mb-1">
       <div class="card-body">
         <h3 class="text-uppercase pt-1">Priority of units in fight</h3>
         <div>Units with lowest number get hit first at each round following this order.</div>
@@ -11,7 +11,7 @@
         <div>Reminder : Knifers does not respect this.</div>
       </div>
     </div>
-    <div class="card card-style">
+    <div class="card">
       <div class="card-body">
         <h3 class="text-uppercase pt-1">Priority of npcs in fight</h3>
         <div>Units with lowest number get hit first at each round following this order.</div>

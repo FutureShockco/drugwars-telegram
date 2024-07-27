@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-style" :id="fight.fight_key.slice(0, 10)">
+  <div class="card mb-3" :id="fight.fight_key.slice(0, 10)">
     <div class="content d-flex text-center mb-0 pb-0">
       <div class="col-5">
         <div v-if="fight.attacker_nickname != user.nickname"

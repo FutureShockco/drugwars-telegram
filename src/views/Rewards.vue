@@ -1,16 +1,16 @@
 <template>
     <div>
         <RewardsTabs />
-        <router-link to="/help" class="card card-style shadow-card shadow-card-l bg-25" data-card-height="150"
-            style="height: 150px;">
+        <router-link to="/help" class="card card-style mb-0 mx-0 shadow-card shadow-card-l bg-25" data-card-height="150"
+            style="height: 150px;border-radius: 0px;">
             <div class="card-bottom pb-3 px-3">
                 <h3 class="color-white">DrugWars</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">FAQ: How to Get Paid to Rule Your World!</p>
             </div>
-            <div class="card-overlay bg-gradient-fade opacity-80"></div>
+            <div class="card-overlay bg-gradient-fade opacity-80" style="border-radius: 0px;"></div>
         </router-link>
         <Prize />
-        <div class="card card-style">
+        <div class="card">
             <div class="content">
                 <div class="d-flex">
                     <div>

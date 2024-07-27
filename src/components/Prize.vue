@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-style">
+  <div class="card mb-1">
     <div class="content">
       <div>
         <Countdown :starttime="now" :endtime="timeToWait" trans='{  

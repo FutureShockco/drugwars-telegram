@@ -1,5 +1,5 @@
 <template>
-  <div class="card card-style">
+  <div class="card">
     <div class="content">
       <h3>"I have an offer for you amigo!"</h3>
       <p>Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>

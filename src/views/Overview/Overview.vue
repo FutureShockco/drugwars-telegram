@@ -2,7 +2,7 @@
   <div>
     <BuildingsTabs />
     <div class="anim-fade-in" v-if="HQ && drugProductionRate">
-      <div class="card card-style">
+      <div class="card">
         <div class="content">
           <h4>DRUGS PRODUCTION</h4>
           <BuildingProductionCompact v-for="building in drug_buildings" :building="building" :key="building.id" />
