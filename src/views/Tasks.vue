@@ -117,7 +117,7 @@
                     class="offcanvas offcanvas-bottom rounded-m offcanvas-detached"
                     :class="modalVideoVisible ? 'show' : ''" :id="'menu-video-' + task.link">
                     <div class="content mt-n2">
-                        <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Watch {{ task.title }}</h1>
+                        <h1 class="font-800 font-22 mt-2 mb-0 pt-3">Share</h1>
                         <p>
                             Get some resources for free!
                         </p>
@@ -125,7 +125,7 @@
                             class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Share
                             on Telegram</div>
-                        <div @click="TWA.openLink(`https://twitter.com/share?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username} Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
+                        <div @click="TWA.openLink(`https://x.com/intent/post?text=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username} Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
                             class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight my-3">
                             Share on X (Twitter)</div>
 
