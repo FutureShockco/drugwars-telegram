@@ -1,6 +1,7 @@
 <template>
     <div>
         <RewardsTabs />
+        {{ dailyRefs }}
         <div class="card mx-0 border-bottom-highlight mb-4">
             <div class="content">
                 <div class="d-flex">
@@ -26,9 +27,10 @@
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
+
         <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
             :style="`background-image:url(/img/tasks/27.jpg`"
-            :class="dailyRewards.last_connect === dayCheck ? 'opacity-50' : ''">
+            :class="dailyRefs.last_connect === dayCheck ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
                     <h6 class="mb-n1 opacity-80 color-highlight">Level</h6>
@@ -96,6 +98,27 @@
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
+        <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
+            :style="`background-image:url(/img/tasks/22.jpg`"
+            :class="dailyRefs.paid === 1 ? 'opacity-50' : ''">
+            <div class="card-bottom pb-3 px-3">
+                <div class="text-end">
+                        <TaskResources :task="dailyResources" />
+                    </div>
+                <h3 class="color-white">Daily Referrals</h3>
+                <p class="color-white opacity-70 mb-0 mt-n1">Refer 3 friends per day and receive resources!</p>
+                <div v-if="dailyRefs.refs === 3 && dailyRefs.paid === 0" 
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                    Wait for your rewards</div>
+                    <div @click="TWA.openLink(`t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
+                    v-else-if="dailyRefs.refs < 3" class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-magenta">
+                        Invite  {{ 3 - dailyRefs.refs }} more friends</div>
+                <div v-else class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red">
+                    Come back tomorrow</div>
+            </div>
+
+            <div class="card-overlay bg-gradient-fade opacity-80"></div>
+        </div>
         <div v-for="(task, index) in tasks" :key="task.id">
             <div v-if="task.tasktype === 'share'" class="card card-style shadow-card shadow-card-l"
                 style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.jpg`">
@@ -121,7 +144,7 @@
                         <p>
                             Get some resources for free!
                         </p>
-                        <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
+                        <div @click="TWA.openLink(`t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
                             class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Share
                             on Telegram</div>
@@ -383,7 +406,9 @@ export default {
             units,
             buildings,
             bgs: [],
-            finishedWatching: false
+            finishedWatching: false,
+            dailyRefs:{refs:0, paid:0},
+            dailyResources: {rewardType:'resources', rewards:{drug:2500, weapon:7500, alcohol : 7500},user:{paid:0}},
         };
     },
     created() {
@@ -436,6 +461,9 @@ export default {
                     this.dailyRewards.current_day = 1
                     this.didReset = true
                 }
+                if(result[3][0])
+                this.dailyRefs = result[3][0]
+                this.dailyResources.user.paid = this.dailyRefs.paid
                 this.tasks.sort(function (a, b) { return a.completed - b.completed });
                 this.isLoading = false;
             });
