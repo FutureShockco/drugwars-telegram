@@ -9,7 +9,6 @@ import VueUi from '@vue/ui';
 import upperFirst from 'lodash/upperFirst';
 import camelCase from 'lodash/camelCase';
 import prettyMs from 'pretty-ms';
-import urlParse from 'url-parse';
 import moment from 'moment';
 import numeral from 'numeral';
 import client from '@/helpers/client';
@@ -18,6 +17,8 @@ import router from '@/router';
 import store from '@/store';
 import messages from '@/translation.json';
 import numberFormats from '@/number.json';
+
+
 if (window.Telegram && window.Telegram.WebApp)
   Vue.prototype.TWA = window.Telegram.WebApp
 if (process.env.VUE_APP_DEV && process.env.VUE_APP_DATA) {
@@ -37,7 +38,6 @@ setInterval(() => client.request('heartbeat', null), 10 * 1000);
 
 Vue.filter('date', value => moment(value, 'YYYY-MM-DD').format('MMM D, YYYY'));
 Vue.filter('ms', value => prettyMs(parseInt(value / 1000) * 1000));
-Vue.filter('parseUrl', value => urlParse(value).host);
 Vue.filter('amount', value => numeral(value).format('0.[00]a'));
 Vue.filter('tonamount', value => numeral(value).format('0.[0000]a'));
 Vue.filter('round', value => numeral(value).format('0a'));

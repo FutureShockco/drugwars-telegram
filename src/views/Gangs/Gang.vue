@@ -10,9 +10,6 @@
           <span>[{{ gang.ticker }}]</span>
         </h1>
 
-        <p v-if="gang.website" class="mb-2">
-          <a :href="gang.website" target="_blank">{{ gang.website | parseUrl }}</a>
-        </p>
         <p v-if="gang.about" class="mb-4">{{ gang.about }}</p>
         <router-link
           v-if="isBoss"

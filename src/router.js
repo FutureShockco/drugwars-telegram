@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
 import store from '@/store';
-import { isWeb } from '@/helpers/utils';
 import client from '@/helpers/client';
 
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
@@ -164,7 +163,7 @@ const requireAuth = (to, from, next) => {
 
 
 export default new Router({
-  mode: isWeb() ? 'history' : 'hash',
+  mode: 'history',
   scrollBehavior() {
     return { x: 0, y: 0 };
   },

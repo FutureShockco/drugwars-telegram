@@ -1,8 +1,5 @@
 import store from '@/store';
 
-const isElectron = () => navigator.userAgent.toLowerCase().indexOf('electron') > -1;
-const isWeb = () => !isElectron();
-
 function jsonParse(input) {
   try {
     return JSON.parse(input);
@@ -170,4 +167,4 @@ const unitValues = (unit, trainings) => {
   return values;
 };
 
-export { isElectron, isWeb, jsonParse, getBalances, unitValues };
+export { jsonParse, getBalances, unitValues };
