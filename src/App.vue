@@ -8,7 +8,7 @@
       <div class="page-content" :class="{
         content: showSidebar,
         'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
-      }" style="height: 100%; overflow: hidden">
+      }" style="height: 100vh; overflow-y: scroll">
         <router-view />
         <div @click="closeModalAccount(), toggleSidebarVisibility(), toggleModalPayment(),  setCurrentPayment(null)"
           :class="(username && showTutoOverlay) || modalWalletVisible || modalVideoVisible || modalPaymentVisible ? 'show' : 'd-none'"
