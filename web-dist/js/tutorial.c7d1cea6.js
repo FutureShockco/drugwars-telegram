@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["tutorial"],{c2bf:function(t,n,a){"use strict";a.r(n);var e=function(){var t=this,n=t.$createElement,a=t._self._c||n;return a("div",[a("NewsTabs"),a("div",{staticClass:"p-4 anim-fade-in"},[a("Quickstart")],1)],1)},s=[],i=a("2877"),c={},l=Object(i["a"])(c,e,s,!1,null,null,null);n["default"]=l.exports}}]);
+//# sourceMappingURL=tutorial.c7d1cea6.js.map

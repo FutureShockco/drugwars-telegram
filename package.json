@@ -12,9 +12,7 @@
         "serve": "vue-cli-service serve",
         "build": "vue-cli-service build",
         "lint": "vue-cli-service lint",
-        "start": "node start.js",
-        "heroku-postbuild": "npm install && npm run build",
-        "test:unit": "vue-cli-service test:unit"
+        "start": "node start.js"
     },
     "dependencies": {
         "@tonconnect/ui": "^2.0.5",
