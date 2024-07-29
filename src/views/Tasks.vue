@@ -109,7 +109,7 @@
                 <div v-if="dailyRefs.refs === 3 && dailyRefs.paid === 0" 
                     class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                     Wait for your rewards</div>
-                    <div @click="TWA.openLink(`t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
+                    <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
                     v-else-if="dailyRefs.refs < 3" class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-magenta">
                         Invite  {{ 3 - dailyRefs.refs }} more friends</div>
                 <div v-else class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red">
@@ -143,7 +143,7 @@
                         <p>
                             Get some resources for free!
                         </p>
-                        <div @click="TWA.openLink(`t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
+                        <div @click="TWA.openLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
                             class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                             Share
                             on Telegram</div>
