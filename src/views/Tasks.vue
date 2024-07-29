@@ -1,7 +1,6 @@
 <template>
     <div>
         <RewardsTabs />
-        {{ dailyRefs }}
         <div class="card mx-0 border-bottom-highlight mb-4">
             <div class="content">
                 <div class="d-flex">
@@ -27,10 +26,10 @@
             </div>
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
-
         <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
             :style="`background-image:url(/img/tasks/27.jpg`"
-            :class="dailyRefs.last_connect === dayCheck ? 'opacity-50' : ''">
+            
+            :class="dailyRewards.last_connect === dayCheck ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
                     <h6 class="mb-n1 opacity-80 color-highlight">Level</h6>
