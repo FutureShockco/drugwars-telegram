@@ -4,7 +4,7 @@
       <h3>"I have an offer for you amigo!"</h3>
       <p>Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>
       <div class="text-center">
-        <div class="pt-2">Total {{ pablo | amount }}</div>
+        <h5 class="pt-2">Reward for this week: {{ pablo | amount }}<Icon name="ton" size="18" /></h5>
         <div v-if="totalVest && ownHeistReward.percent" class="text-green">You: {{ totalVest | amount }} <span
             class="text-yellow">+{{ ownHeistReward.amount }}
             <Icon name="ton" size="18" /> ({{ ownHeistReward.percent | amount }}%)
@@ -49,9 +49,6 @@ export default {
     },
     totalVest() {
       return this.$store.state.game.user.heist[0] ? this.$store.state.game.user.heist[0].drugs : 0;
-    },
-    totalReward() {
-      return this.prizeProps.heist_percent;
     },
     user() {
       return this.$store.state.game.user.user;
@@ -125,8 +122,8 @@ export default {
       );
     },
     ownHeistReward() {
-      const percent = (100 / this.pablo) * this.totalVest || 0;
-      const amount = parseFloat((this.totalHeistDWD / 100) * percent).toFixed(3);
+      const percent = (100 / this.prizeProps.heist_pool) * this.totalVest || 0;
+      const amount = parseFloat((this.pablo / 100) * percent).toFixed(3);
       return {
         amount,
         percent,
