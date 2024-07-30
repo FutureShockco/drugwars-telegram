@@ -36,7 +36,9 @@ const actions = {
           .then(result => {
             commit('saveAccount', data)
             commit('saveUsername', user.id.toString());
+            if(user.username)
             commit('saveNickname', user.username.toString());
+            else commit('saveNickname', user.id.toString());
             resolve();
           })
           .catch(e => {
