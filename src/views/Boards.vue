@@ -9,7 +9,7 @@
             </div>
 
             <div class="tabs tabs-pill mx-3">
-                <div class="tab-controls p-1">
+                <div class="tab-controls">
                     <a @click="setTab('prod')" class="font-13" :aria-expanded="currenTab === 'prod'">Production</a>
                     <a @click="setTab('pablo')" class="font-13" :aria-expanded="currenTab === 'pablo'">Pablo</a>
                     <a @click="setTab('fight')" class="font-13" :aria-expanded="currenTab === 'fight'">Fight</a>
