@@ -43,7 +43,6 @@ export default {
     this.isLoading = true;
     client.requestAsync('get_heistboard', null).then(result => {
       this.users = result.players.sort((a,b) => {return b.drugs - a.drugs});
-      console.log(this.users)
       this.isLoading = false;
     });
   },
