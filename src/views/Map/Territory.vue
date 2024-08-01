@@ -33,7 +33,7 @@
         <div class="card-overlay bg-gradient-fade opacity-80"></div>
       </div>
     </div>
-    <div v-else id="territorybg" class="territorybg" style="height:100vw;width: 100vw;">
+    <div v-else id="territorybg" class="territorybg" style="height:100vw;width: 100vw;text-align:center;">
       <div :style="selectedTile ? 'display: block;' : 'display:none'" class="title" id="title">
         <h5>BASE {{ selectedTile }}</h5>
         <div class="mt-0">
@@ -78,10 +78,8 @@
           </UiButton>
         </div>
       </div>
-      <table id="table" style="position: relative;">
-        <div class="overlay"></div>
-        <canvas id="canvas" style="cursor: pointer;height:100vw;width: 100vw;"></canvas>
-      </table>
+      <div class="overlay"></div>
+      <canvas id="canvas" style="cursor: pointer;"></canvas>
 
 
     </div>
@@ -113,7 +111,7 @@ export default {
       x: 'no',
       y: 'no',
       maprng: null,
-      canvasWidth: 500
+      canvasWidth:0,
     };
   },
   watch: {
@@ -165,9 +163,10 @@ export default {
 
       width = bg.offsetWidth;
       height = bg.offsetWidth;
-      canvas_element.width = width;
-      canvas_element.height = height;
-      self.canvasWidth = width;
+
+      canvas_element.width = Math.floor(width / 10) * 10;
+      this.canvasWidth = canvas_element.width
+      canvas_element.height = canvas_element.width;
       function clearCanvas() {
         const ctx = canvas_element.getContext('2d');
         ctx.clearRect(0, 0, width, height);
@@ -230,6 +229,7 @@ export default {
           tiles_array[self.selectedTile - 1].fillColor = '#f6bb428f';
         } else if (self.selectedTile != null) {
           tiles_array[self.selectedTile - 1].fillColor = null;
+          clearCanvas();
         }
         // if (elementClickedId.job === self.job) {
         //   tiles_array[224].fillColor = '#ffc508';
@@ -241,7 +241,7 @@ export default {
         // } else {
         //   tiles_array[224].fillColor = 'gray';
         // }
-
+        
         self.selectedTile = elementClickedId.id;
         self.currentNickname = elementClickedId.nickname;
         self.currentHq = elementClickedId.hq;
@@ -253,7 +253,7 @@ export default {
           tiles_array[elementClickedId.id - 1].fillColor = '#ffc508';
         } else if (elementClickedId.nickname === self.nickname) {
           tiles_array[elementClickedId.id - 1].fillColor = 'green';
-        } else if (elementClickedId.nickname !== self.nickname) {
+        } else if (elementClickedId.nickname && elementClickedId.nickname !== self.nickname) {
           tiles_array[elementClickedId.id - 1].fillColor = '#ffc508';
         } else {
           tiles_array[elementClickedId.id - 1].fillColor = 'gray';
@@ -281,6 +281,8 @@ export default {
         } else if (elementClickedId.job) {
           visitTitle.style.display = 'none';
         }
+        clearCanvas();
+
         drawTiles();
       };
 
@@ -485,82 +487,46 @@ export default {
               context.drawImage(tiles, self.maprng[tile.id].x * 72, self.maprng[tile.id].y * 72, 72, 72, tile.x, tile.y, width / 10, width / 10);
             }
 
-            if (self.canvasWidth < 500) {
-              context.beginPath();
-              if (tile.fillColor) {
-                context.strokeStyle = tile.fillColor
-                context.fillStyle = 'rgba(5, 0, 0, 0.0)';
 
-              }
-              else {
-                context.fillStyle = 'rgba(5, 0, 0, 0.0)';
-                //context.rect(tile.x + 7, tile.y + 12, tile.width - 3, tile.height - 5);
-                context.strokeStyle = 'rgba(5, 0, 0, 0.0)';
-              }
-              if (tile.fillColor === 'green') {
-                //context.roundRect(tile.x + 4, tile.y + 4, tile.width - 8, tile.height - 8, [5, 5]);
-
-                context.drawImage(select, tile.x, tile.y, tile.width - 8, tile.height);
-              }
-              else if (tile.fillColor === 'red') {
-                //context.roundRect(tile.x + 4, tile.y + 4, tile.width - 8, tile.height - 8, [5, 5]);
-                context.strokeStyle = 'red';
-                context.drawImage(enemy, tile.x - 2, tile.y - 2, tile.width + 4, tile.height + 4);
-              }
-              else context.roundRect(tile.x + 6, tile.y + 6, tile.width - 20, tile.height - 20, [5, 5]);
-              context.lineWidth = 3;
-
-
-              context.stroke();
-              // context.strokeStyle = '#000';
-
-              context.fill();
-              context.textAlign = 'center';
-              context.font = "10px Arial";
-              context.fillStyle = '#fff';
-              context.strokeStyle = 'black';
-              context.strokeText(tile.id, tile.x + 20, tile.y + 25);
-              context.fillText(tile.id, tile.x + 20, tile.y + 25, tile.width);
+            context.beginPath();
+            if (tile.fillColor) {
+              context.strokeStyle = tile.fillColor
+              context.fillStyle = 'rgba(5, 0, 0, 0.0)';
 
             }
             else {
-              context.beginPath();
-              if (tile.fillColor) {
-                context.strokeStyle = tile.fillColor
-                context.fillStyle = 'rgba(5, 0, 0, 0.0)';
-
-              }
-              else {
-                context.fillStyle = 'rgba(5, 0, 0, 0.0)';
-                //context.rect(tile.x + 7, tile.y + 12, tile.width - 3, tile.height - 5);
-                context.strokeStyle = 'rgba(5, 0, 0, 0.0)';
-              }
-              if (tile.fillColor === 'green') {
-                //context.roundRect(tile.x + 4, tile.y + 4, tile.width - 8, tile.height - 8, [5, 5]);
-
-                context.drawImage(select, tile.x, tile.y, tile.width, tile.height);
-              }
-              else if (tile.fillColor === 'red') {
-                //context.roundRect(tile.x + 4, tile.y + 4, tile.width - 8, tile.height - 8, [5, 5]);
-                context.strokeStyle = 'red';
-                context.drawImage(enemy, tile.x - 2, tile.y - 2, tile.width + 4, tile.height + 4);
-              }
-              else context.roundRect(tile.x + 8, tile.y + 8, tile.width - 16, tile.height - 15, [5, 5]);
-              context.lineWidth = 3;
-
-
-              context.stroke();
-              // context.strokeStyle = '#000';
-
-              context.fill();
-              context.textAlign = 'center';
-              context.font = "10px Arial";
-              context.fillStyle = '#fff';
-              context.strokeStyle = 'black';
-              context.strokeText(tile.id, tile.x + 25, tile.y + 38);
-              context.fillText(tile.id, tile.x + 25, tile.y + 38, tile.width);
-
+              context.fillStyle = 'rgba(5, 0, 0, 0.0)';
+              //context.rect(tile.x + 7, tile.y + 12, tile.width - 3, tile.height - 5);
+              context.strokeStyle = 'rgba(5, 0, 0, 0.0)';
             }
+            if (tile.fillColor === 'gray') {
+              context.strokeStyle = 'blue';
+              context.roundRect(tile.x, tile.y, tile.width, tile.height, [5, 5]);
+
+              //context.drawImage(select, tile.x, tile.y, tile.width - 8, tile.height);
+            }
+            else if (tile.fillColor === 'red') {
+              //context.roundRect(tile.x + 4, tile.y + 4, tile.width - 8, tile.height - 8, [5, 5]);
+              context.strokeStyle = 'red';
+              context.drawImage(enemy, tile.x - 2, tile.y - 2, tile.width + 4, tile.height + 4);
+            }
+            else 
+            context.roundRect(tile.x, tile.y, tile.width, tile.height, [5, 5]);
+            context.lineWidth = 3;
+
+
+            context.stroke();
+            // context.strokeStyle = '#000';
+
+            context.fill();
+            context.textAlign = 'center';
+            context.font = "10px Arial";
+            context.fillStyle = '#fff';
+            context.strokeStyle = 'black';
+            context.strokeText(tile.id, tile.x + 20, tile.y + 25);
+            context.fillText(tile.id, tile.x + 20, tile.y + 25, tile.width);
+
+
 
           });
         };
@@ -737,6 +703,7 @@ export default {
 <style lang="less" scoped>
 .territorybg {
   overflow: hidden;
+  width: 100vw;
 }
 
 .overlay {

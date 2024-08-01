@@ -133,7 +133,6 @@ export default {
   methods: {
     ...mapActions(['investHeist']),
     handleSubmit() {
-      console.log('heyt')
       if (Number(this.amount) > 0) {
         this.isLoading = true;
         const payload = {
