@@ -81,8 +81,7 @@
                 </div>
                 <div v-if="ownItem.lvl">
                   <b>Next Safe:</b>
-                  {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) *
-                    4) /
+                  {{ ((10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1))*4) /
                     100
                     *
                     20 |
