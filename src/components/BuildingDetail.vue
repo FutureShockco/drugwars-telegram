@@ -30,7 +30,7 @@
             :quantity="1" />
           <div v-if="building.production_type" class="mb-2">
             <BuildingProduction :compactview="1" :production_type="building.production_type" :level="level"
-              :coeff="building.coeff" :production_rate="building.production_rate" />
+              :coeff="building.coeff" :production_rate="building.production_rate * 4" />
           </div>
           <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
             <div v-if="level">

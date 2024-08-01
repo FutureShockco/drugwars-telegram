@@ -2,9 +2,9 @@
   <div v-if="building.id === 'strategic_center' && !main"></div>
   <div v-else-if="building.id === 'pantheon' && !main"></div>
   <div v-else>
-    <div :class="[tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox' : '', tutorialStep === 2 && building.id === 'crackhouse' ? 'tutobox' : '', tutorialStep === 3 && building.id === 'ammunition' ? 'tutobox' : '', tutorialStep === 4 && building.id === 't_distillery' ? 'tutobox' : '', tutorialStep === 5 && building.id === 'training_facility' ? 'tutobox' : '']">
-      <div class="card mx-0 border-bottom-highlight mb-1"
-        :class="[hasNotEnough ? 'not-enough' : '']">
+    <div
+      :class="[tutorialStep === 1 && building.id === 'headquarters' ? 'tutobox' : '', tutorialStep === 2 && building.id === 'crackhouse' ? 'tutobox' : '', tutorialStep === 3 && building.id === 'ammunition' ? 'tutobox' : '', tutorialStep === 4 && building.id === 't_distillery' ? 'tutobox' : '', tutorialStep === 5 && building.id === 'training_facility' ? 'tutobox' : '']">
+      <div class="card mx-0 border-bottom-highlight mb-1" :class="[hasNotEnough ? 'not-enough' : '']">
         <div class="content">
           <div class="d-flex">
             <div class="pt-1 ms-auto">
@@ -54,16 +54,17 @@
               </div>
               <div v-if="building.production_type">
                 <BuildingProduction :compactview="0" :production_type="building.production_type" :level="ownItem.lvl"
-                  :coeff="building.coeff" :production_rate="building.production_rate" />
+                  :coeff="building.coeff" :production_rate="building.production_rate * 4" />
               </div>
               <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
                 <div v-if="ownItem.lvl">
                   <b>Current capacity:</b>
-                  {{ 10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl | amount }}
+                  {{ 10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl * 4 | amount }}
                 </div>
                 <div v-if="ownItem.lvl">
                   <b>Next capacity:</b>
-                  {{ 10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) |
+                  {{ 10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) * 4
+                    |
                     amount
                   }}
                 </div>
