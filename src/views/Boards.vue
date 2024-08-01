@@ -8,20 +8,20 @@
                 <h1 class="pb-2">Leaderboard</h1>
             </div>
 
-            <div class="tabs tabs-pill mx-3" id="tab-group-5">
+            <div class="tabs tabs-pill mx-3">
                 <div class="tab-controls p-1">
-                    <a class="font-13" data-bs-toggle="collapse" href="#tab-13" aria-expanded="true">Production</a>
-                    <a class="font-13" data-bs-toggle="collapse" href="#tab-14" aria-expanded="false">Pablo</a>
-                    <a class="font-13" data-bs-toggle="collapse" href="#tab-15" aria-expanded="false">Fight</a>
+                    <a @click="setTab('prod')" class="font-13" :aria-expanded="currenTab === 'prod'">Production</a>
+                    <a @click="setTab('pablo')" class="font-13" :aria-expanded="currenTab === 'pablo'">Pablo</a>
+                    <a @click="setTab('fight')" class="font-13" :aria-expanded="currenTab === 'fight'">Fight</a>
                 </div>
                 <div class="card card-style mx-0">
-                    <div class="collapse show" id="tab-13" data-bs-parent="#tab-group-5">
+                    <div class="collapse" :class="currenTab === 'prod' ? 'show':''">
                         <LeaderboardsProduction />
                     </div>
-                    <div class="collapse" id="tab-14" data-bs-parent="#tab-group-5">
+                    <div class="collapse" :class="currenTab === 'pablo' ? 'show':''">
                         <LeaderboardsPablo />
                     </div>
-                    <div class="collapse" id="tab-15" data-bs-parent="#tab-group-5">
+                    <div class="collapse" :class="currenTab === 'fight' ? 'show':''">
                         <LeaderboardsFight />
                     </div>
                 </div>
@@ -29,3 +29,21 @@
         </div>
     </div>
 </template>
+
+<script>
+import { mapActions } from 'vuex';
+export default {
+    data() {
+        return {
+            currenTab: "prod"
+        };
+    },
+    methods: {
+        ...mapActions(['init', 'login']),
+        setTab(value) {
+            this.currenTab = value
+        },
+
+    },
+};
+</script>

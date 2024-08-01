@@ -15,8 +15,8 @@
                   :src="`/img/buildings/${building.id}.jpg`" class="img-fluid rounded-s" width="100" height="100">
                 <div v-if="inProgress" style="text-align:center;position: absolute; top:0px; width:100%;z-index:10;">
                   <h5 class="color-highlight" style="padding:5px;background:#0000004d;border-radius: 0px 0px 5px 5px;">
-                    {{
-                      progress }}%</h5>
+                    <animated-number style="line-height: unset;" :value="progress" :formatValue="formatToPrice"
+                    :duration="500" /></h5>
                 </div>
                 <div v-if="inProgress" id="overlay2" style="left: 0px;
     position: absolute;
@@ -119,6 +119,7 @@
 <script>
 import { utils, upgrades } from 'drugwars';
 import { getBalances } from '@/helpers/utils';
+import AnimatedNumber from "animated-number-vue";
 
 export default {
   props: ['building'],
@@ -128,6 +129,14 @@ export default {
         this.waitingConfirmation = false;
       }
     },
+  },
+  components: {
+    AnimatedNumber
+  },
+  methods: {
+    formatToPrice(value) {
+      return `${parseFloat(value).toFixed(2)}%`;
+    }
   },
   computed: {
     tutorialStep() {

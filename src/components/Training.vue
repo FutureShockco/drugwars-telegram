@@ -3,8 +3,43 @@
     <div class="content">
       <div class="d-flex">
         <div class="pt-1 ms-auto">
-          <img class="img-fluid rounded-s" width="100" height="100" :src="`/img/trainings/${training.id}.png`" />
+          <div style="position: relative;overflow: hidden;height:100px;width:100px;    border-bottom: 1px solid red;"
+            class="rounded-s">
+            <img :style="inProgress ? 'filter: grayscale(1);' : ''" style="border: 1px solid #392828;    "
+              :src="`/img/trainings/${training.id}.png`" class="img-fluid rounded-s" width="100" height="100">
+            <div v-if="inProgress" style="text-align:center;position: absolute; top:0px; width:100%;z-index:10;">
+              <h5 class="color-highlight" style="padding:5px;background:#0000004d;border-radius: 0px 0px 5px 5px;">
+                <animated-number style="line-height: unset;" :value="progress" :formatValue="formatToPrice"
+                  :duration="500" />
+              </h5>
+            </div>
+            <div v-if="inProgress" id="overlay2" style="left: 0px;
+    position: absolute;
+    overflow: hidden;
+       background-position: bottom;
+    width: 100%;
+    z-index:50;
+    background-size: cover;
+    border-top: 1px solid green;
+    " :style="`top:${100 - progress}%;height:${progress}%!important;`">
+
+            </div>
+            <div v-if="inProgress" class="ocrloader">
+              <em></em>
+              <span></span>
+            </div>
+            <div id="overlay" class="rounded-s" style="left: 0px;
+    position: absolute;
+    overflow: hidden;
+       background-position: bottom;
+    width: 100%;
+    background-size: cover;
+
+    " :style="`top:${100 - progress}%;background-size:100%; height:${progress}%!important;background-image:url(/img/trainings/${training.id}.png)`">
+            </div>
+          </div>
         </div>
+
         <div class="ps-3 me-auto" style="width: 100%;">
           <!-- <div class="level">{{ ownItem.lvl }}</div> -->
           <div class="item-content width-full mr-3 mb-4">
@@ -46,9 +81,18 @@
 import { utils } from 'drugwars';
 import { getBalances } from '@/helpers/utils';
 import { units } from 'drugwars';
+import AnimatedNumber from "animated-number-vue";
 
 export default {
   props: ['training'],
+  components: {
+    AnimatedNumber
+  },
+  methods: {
+    formatToPrice(value) {
+      return `${parseFloat(value).toFixed(2)}%`;
+    }
+  },
   data() {
     return {
       training_modificator: {
@@ -182,6 +226,34 @@ export default {
     randomPickBkg() {
       const rnd = Math.floor(Math.random() * Math.floor(process.env.VUE_APP_COMMON_RND_BKG)) + 1;
       return rnd;
+    },
+    timeToWait() {
+      const training = this.$store.state.game.user.trainings.find(
+        b =>
+          b.training === this.training.id
+      );
+      if (training) {
+        if (training.pending_update) {
+          const nextUpdate = new Date(training.pending_update).getTime();
+          const now = this.$store.state.ui.timestamp;
+          const timeToWait = nextUpdate - now;
+          return timeToWait > 0 ? timeToWait : 0;
+        }
+
+        const nextUpdate = new Date(training.next_update).getTime();
+        const now = this.$store.state.ui.timestamp;
+        const timeToWait = nextUpdate - now;
+        return timeToWait > 0 ? timeToWait : 0;
+      }
+      return 0;
+    },
+    updateTime() {
+      return utils.calculateTimeToBuild(this.training.id, this.training.coeff, this.ownItem.lvl + 1, this.ownResearchCenter.lvl);
+    },
+    progress() {
+      if (this.timeToWait || this.updateTime)
+        return parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(2)
+      else return 100
     },
   },
 };
