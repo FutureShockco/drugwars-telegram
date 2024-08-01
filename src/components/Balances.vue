@@ -27,7 +27,9 @@
           </div>
         </div>
         <div class="balance py-2" :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
-          {{ balances.drugs | amount }}
+          <!-- {{ balances.drugs | amount }} -->
+          <animated-number style="line-height: unset;" :value="balances.drugs" :formatValue="formatToPrice"
+            :duration="500" />
         </div>
 
         <!-- <div class="detail">
@@ -60,7 +62,9 @@
           </div>
         </div>
         <div class="balance py-2" :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
-          {{ balances.weapons | amount }}
+          <!-- {{ balances.weapons | amount }} -->
+          <animated-number style="line-height: unset;" :value="balances.weapons" :formatValue="formatToPrice"
+            :duration="500" />
         </div>
         <!-- <div class="detail ">
           {{ HQ.weapon_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="weaponBonus">{{
@@ -97,7 +101,9 @@
           </div>
         </div>
         <div class="balance py-2" :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
-          {{ balances.alcohols | amount }}
+          <!-- {{ balances.alcohols | amount }} -->
+          <animated-number style="line-height: unset;" :value="balances.alcohols" :formatValue="formatToPrice"
+          :duration="500" />
         </div>
         <!-- <div class="detail">
           {{ HQ.alcohol_production_rate * 60 * 60 * 24 | amount }}+<span class="text-orange" v-if="alcoholBonus">{{
@@ -114,7 +120,7 @@
           <div>
             <h6 class="align-self-start">DWTOKEN</h6>
             <div class="detail">
-              <span class="text-yellow"> +0</span>/TODAY
+              <span class="text-yellow"> +{{ totalRewards.daily }}</span>
             </div>
           </div>
         </div>
@@ -136,10 +142,22 @@
 <script>
 import { getBalances } from '@/helpers/utils';
 import { mapActions } from 'vuex';
-
+import AnimatedNumber from "animated-number-vue";
+import numeral from 'numeral';
 export default {
+  data() {
+    return {
+      ts: this.$store.state.ui.timestamp - 6000
+    }
+  },
+  components: {
+    AnimatedNumber
+  },
   methods: {
-    ...mapActions(['toggleSidebarVisibility',  'toggleModalAccount']),
+    ...mapActions(['toggleSidebarVisibility', 'toggleModalAccount']),
+    formatToPrice(value) {
+      return `${numeral(value).format('0.[00]a')}`;
+    }
   },
   computed: {
     timeToWait() {
@@ -239,6 +257,7 @@ export default {
         distilleryLvl,
         this.$store.state.ui.timestamp,
       );
+
     },
     dailyRewards() {
       const { prizeProps } = this.$store.state.game;
