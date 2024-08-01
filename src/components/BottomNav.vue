@@ -4,7 +4,7 @@
     <router-link to="/home"><i class="fad fa-trophy font-20"></i><span>Home</span></router-link>
     <router-link to="/buildings"><i class="fad fa-building font-20"></i><span>HQ</span></router-link>
     <router-link to="/units"><i class="fad fa-campground font-20"></i><span>Camp</span></router-link>
-    <router-link to="/actions"><i class="fad fa-explosion font-20"></i><span>Fight</span></router-link>
+    <router-link to="/actions"><i class="fad fa-explosion font-20"></i><div class="count"> {{ activeFightsCount + activeIncFightsCount }}</div><span>Fight</span></router-link>
 
     <!-- <router-link v-if="hasBase" :to="'/map/territory?location=' + base.territory"><i
         class="fad fa-map-location-dot font-20"></i><span>Map</span></router-link>
@@ -138,14 +138,12 @@ export default {
       return this.$store.state.game.user.user.xp;
     },
     activeIncFightsCount() {
-      if (this.$store.state.game.fights_count) {
-        return this.$store.state.game.fights_count;
-      }
+      if (this.$store.state.game.fights_count) return this.$store.state.game.fights_count.inc;
       return 0;
     },
     activeFightsCount() {
-      if (this.$store.state.game.sent_fights_count) {
-        return this.$store.state.game.sent_fights_count;
+      if (this.$store.state.game.fights_count) {
+        return this.$store.state.game.fights_count.sent;
       }
       return 0;
     },
@@ -283,5 +281,14 @@ export default {
     --fa-primary-opacity: 1.0;
     --fa-secondary-opacity: 1.0;
   }
+}
+
+.count{
+  top:0px;
+  right: 30%;
+  position: absolute;
+  background: #0b0000;
+  padding: 0px 5px;
+  border-radius: 5px;
 }
 </style>

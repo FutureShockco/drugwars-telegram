@@ -21,61 +21,43 @@
         </div>
       </div>
     </td>
-    <td v-if="player.drug_production_rate" class="col">
+    <td v-if="board === 'prod'" class="col">
       <div>
-       
-        {{ player.drug_production_rate * 60 * 60 * 24 | amount }}  <Icon class="ms-1" name="drug" size="22" />
+        {{ player.drug_production_rate * 60 * 60 * 24 | amount }}
+        <Icon class="ms-1" name="drug" size="22" />
       </div>
-      <!-- <div>
-       
-        {{ player.weapon_production_rate * 60 * 60 * 24 | amount }}  <Icon class="ms-1" name="weapon" size="22" />
-      </div>
-      <div>
-      
-        {{ player.alcohol_production_rate * 60 * 60 * 24 | amount }}   <Icon class="ms-1" name="alcohol" size="22" />
-      </div> -->
     </td>
-    <td v-else-if="!cruelty" class="col">
+    <td v-if="board === 'prod'" class="col">
+      <div>
+
+        +{{ totalRewards.daily | amount }}
+        <Icon class="ms-1" name="dwd" size="22" />
+      </div>
+    </td>
+
+    <td v-if="board === 'pablo'" class="col">
       {{ player.drugs || 0 | amount }}
       <Icon class="ms-1" name="drug" size="22" />
-
     </td>
-    <td v-else-if="player && player.amount" class="col">
+    <td v-if="board === 'pablo'" class="col">
+      <div v-if="heist && ownHeistReward && ownHeistReward.amount > 0">
+        <span>+{{ ownHeistReward.amount | tonamount }}</span>
+        <Icon class="align-text-top ms-2" name="ton" size="18" />
+      </div>
+      <div v-else-if="heist && ownHeistReward">
+        +0
+        <Icon class="align-text-top ms-2" name="ton" size="18" />
+      </div>
+    </td>
+    <td v-if="board === 'fight'" class="col">
+      {{ player.supply || 0 }}
+      <Icon class="ms-1" name="dwd" size="22" />
+    </td>
+    <td v-if="board === 'fight'" class="col">
       +{{ player.amount }}
       <Icon class="ms-1" name="dwd" size="22" />
     </td>
-    <td v-else-if="player && player.ticket" class="col">
-      <div>{{ player.ticket }}</div>
-    </td>
-    <td v-if="player.drug_production_rate && totalRewards" class="col">
-      <div>
-       
-        +{{ totalRewards.daily | amount }}  <Icon class="ms-1" name="dwd" size="22" />
-      </div>
-    </td>
-    <td v-if="player && !cruelty" class="col">
-      <div v-if="heist && ownHeistReward && ownHeistReward.amount > 0">
-        <span>+{{ ownHeistReward.amount | tonamount }}</span>  <Icon class="align-text-top ms-2" name="ton" size="18" />
-      </div>
-      <div v-else-if="heist && ownHeistReward">
-        
-        +0 <Icon class="align-text-top ms-2" name="ton" size="18" />
-      </div>
-    </td>
-    <!-- <td class="col">
-      <div v-if="reward">
-        <div v-if="player && rank && rank < 26">
-          <Icon name="dwd" size="22" />
-          +{{ Math.round(reward / rank) || 0 | amount }}
-        </div>
-      </div>
-      <div v-else-if="!cruelty">
-        <div class="mr-3" v-if="player && rank && rank < 26">
-          {{ Math.round(10 / rank) || 0 | amount }}
-          <Icon name="dwd" size="22" />
-        </div>
-      </div>
-    </td> -->
+   
   </tr>
 </template>
 
@@ -84,7 +66,7 @@ import { mapActions } from 'vuex';
 import client from '@/helpers/client';
 
 export default {
-  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list', 'heist'],
+  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list', 'heist', 'board'],
   data() {
     return {
       isLoading: false,
@@ -147,12 +129,12 @@ export default {
       return this.$store.state.game.prizeProps;
     },
     total() {
-      const prizePops = this.$store.state.game.prizeProps;
-      return prizePops.daily_percent + prizePops.heist_percent;
+      const prizeProps = this.$store.state.game.prizeProps;
+      return prizeProps.daily_percent + prizeProps.heist_percent;
     },
     totalDailyDWD() {
-      const prizePops = this.$store.state.game.prizeProps;
-      return prizePops.daily_percent;
+      const prizeProps = this.$store.state.game.prizeProps;
+      return prizeProps.daily_percent;
     },
     totalRewards() {
       const daily = parseFloat(

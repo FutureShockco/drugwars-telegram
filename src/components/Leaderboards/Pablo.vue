@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <Player :heist="true" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+              <Player board="pablo" :heist="true" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
                 :rank="key + 1" />
 
             </tbody>
@@ -42,9 +42,20 @@ export default {
   created() {
     this.isLoading = true;
     client.requestAsync('get_heistboard', null).then(result => {
-      this.users = result.players;
+      this.users = result.players.sort((a,b) => {return b.drugs - a.drugs});
+      console.log(this.users)
       this.isLoading = false;
     });
   },
 };
 </script>
+
+<style scoped>
+.revolver_part::before {
+  background: #0f1117;
+}
+
+.revolver_part:after {
+  background: #0f1117;
+}
+</style>

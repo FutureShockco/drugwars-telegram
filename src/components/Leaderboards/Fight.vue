@@ -10,14 +10,13 @@
             <thead>
               <tr>
                 <th scope="col">Player</th>
-                <th scope="col">Killed pop.</th>
+                <th scope="col">Killed pop</th>
                 <th scope="col">Reward</th>
               </tr>
             </thead>
             <tbody>
-              <div class="mb-4">
-                <Player v-for="(user, key) in users" :player="user" :key="user.username" :rank="key + 1" />
-              </div>
+              <Player board="fight" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+                :rank="key + 1" />
             </tbody>
           </table>
         </div>

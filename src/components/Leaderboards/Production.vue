@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <Player class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+              <Player board="prod" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
                 :rank="key + currentRank + 1" :reward="50">
               </Player>
 
