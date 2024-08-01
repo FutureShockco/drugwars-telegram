@@ -216,13 +216,13 @@ export default {
       return this.balances.alcohols || 0;
     },
     drugProductionRate() {
-      return this.HQ.drug_production_rate * 4 || 1;
+      return this.HQ.drug_production_rate || 1;
     },
     weaponProductionRate() {
-      return this.HQ.weapon_production_rate * 4 || 1;
+      return this.HQ.weapon_production_rate || 1;
     },
     alcoholProductionRate() {
-      return this.HQ.alcohol_production_rate * 4 || 1;
+      return this.HQ.alcohol_production_rate || 1;
     },
     balances() {
       let ocLvl = 0;
