@@ -50,8 +50,7 @@
       </div>
     </td>
     <td v-if="board === 'fight'" class="col">
-      {{ player.supply || 0 }}
-      <Icon class="ms-1" name="dwd" size="22" />
+      {{ player.supply || 0 }}<i class="ms-2 fad fa-users font-12"></i>
     </td>
     <td v-if="board === 'fight'" class="col">
       +{{ player.amount }}

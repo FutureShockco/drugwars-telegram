@@ -59,11 +59,12 @@
               <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
                 <div v-if="ownItem.lvl">
                   <b>Current capacity:</b>
-                  {{ 10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl * 4 | amount }}
+                  {{ (10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl) / 100)) * ownItem.lvl) * 4 | amount }}
                 </div>
                 <div v-if="ownItem.lvl">
                   <b>Next capacity:</b>
-                  {{ 10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) * 4
+                  {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1)) *
+                    4
                     |
                     amount
                   }}
@@ -74,16 +75,18 @@
                 </div>
                 <div v-if="ownItem.lvl">
                   <b>Safe:</b>
-                  {{ (10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl)) / 100) * ownItem.lvl) / 100 * 20 | amount
+                  {{ ((10000 + (18000 * ownItem.lvl * (Math.sqrt(ownItem.lvl)) / 100) * ownItem.lvl) * 4) / 100 * 20 |
+                    amount
                   }}
                 </div>
                 <div v-if="ownItem.lvl">
                   <b>Next Safe:</b>
-                  {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1)) /
+                  {{ (10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1) *
+                    4) /
                     100
                     *
                     20 |
-                    amount }}
+                  amount }}
                 </div>
                 <div v-else>
                   <b>Safe:</b>
