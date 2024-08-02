@@ -35,11 +35,11 @@
           <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
             <div v-if="level">
               <b>Storage:</b>
-              {{ 10000 + (18000 * level * (Math.sqrt(level) / 100)) * level | amount }}
+              {{ (10000 + (18000 * level * (Math.sqrt(level) / 100)) * level) *4 | amount }}
             </div>
             <div v-if="level">
               <b>Safe:</b>
-              {{ (10000 + (18000 * level * (Math.sqrt(level)) / 100) * level) / 100 * 20 | amount }}
+              {{ ((10000 + (18000 * level * (Math.sqrt(level)) / 100) * level)) * 4 / 100 * 20 | amount }}
             </div>
             <div v-else>
               <b>Safe:</b>
