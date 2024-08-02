@@ -87,7 +87,7 @@
               <p>You need to select at least 1 unit.</p>
             </div>
             <div v-else-if="tutorialStep > 7">
-              <h5>Power : {{ offensivePower }}% - Timer : {{ timer | ms }} - Cost : {{ cost | amount }}</h5>
+              <h5>Power : {{ offensivePower }}% - Timer : {{ timer | ms }} - Cost : {{ cost | amount }} <Icon name="drug" size="16"/></h5>
               <UiButton class="btn btn-xxs gradient-red mb-2" @click="removeUnits()">Remove all</UiButton>
               <div v-if="action_type === 'transport'">
                 <div class="columns mt-4">
@@ -437,8 +437,8 @@ export default {
           cost += units[unit.key].move_cost * unit.amount;
         }
       });
-      if (self.action_type === 'attack') return (cost * distance) / 100;
-      return (cost * distance) / 200;
+      if (self.action_type === 'attack') return cost;
+      return cost ;
     },
     enemyRankName() {
       let rank = 10;
