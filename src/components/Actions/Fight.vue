@@ -16,17 +16,17 @@
           <div v-if="details && json && json.attacker && json.attacker.start_value">
             <ActionsValue :result="json.attacker.start_value" />
           </div>
-          <div class="mb-2 mt-2" v-if="json.attacker">
+          <div class="mb-2 ps-0 mt-2" v-if="json.attacker">
             <Army v-if="json.attacker.units" :units="json.attacker.units" :withDead="true" />
           </div>
           <div v-if="details && json && json.target && json.target.start_value">
             <ActionsValue :result="json.attacker.start_value" :lose="json.attacker.end_value" />
           </div>
           <h5 v-if="fight.attacker_reward && Number(fight.attacker_reward) > 0.001">REWARDS :</h5>
-          <div v-if="fight.attacker_reward && Number(fight.attacker_reward) > 0.001">{{ fight.attacker_reward }} DWD
+          <div v-if="fight.attacker_reward && Number(fight.attacker_reward) > 0.001">{{ fight.attacker_reward }} DW
           </div>
-          <h5 v-if="fight.attacker_elo">CRUELTY CHANGE :</h5>
-          <div v-if="fight.attacker_elo">{{ Number(fight.attacker_elo) / 1000 | amount }}</div>
+          <!-- <h5 v-if="fight.attacker_elo">CRUELTY CHANGE :</h5>
+          <div v-if="fight.attacker_elo">{{ Number(fight.attacker_elo) / 1000 | amount }}</div> -->
           <div v-if="fight.json.amount">{{ fight.json.amount }} Unit(s)</div>
           <Army v-if="fight.json.list" :units="fight.json.list" :withDead="false" />
           <!-- <div v-if="fight.json.list">{{fight.json.list}}</div> -->
@@ -36,8 +36,8 @@
       <div class="col-2">
         <div v-if="result">
           <div class="btn btn-xs gradient-green" v-if="result === 'win'">Win</div>
-          <div class="btn btn-xs" v-if="result === 'draw'">Draw</div>
-          <div class="btn btn-xs button-red" v-if="result === 'lost'">Lost</div>
+          <div class="btn btn-xs gradient-blue" v-if="result === 'draw'">Draw</div>
+          <div class="btn btn-xs gradient-red" v-if="result === 'lost'">Lost</div>
           <ActionsLoot class="mt-2" v-if="json.target.loot" :result="result" :stolenResources="json.target.loot"
             :number="0" />
         </div>
@@ -46,7 +46,7 @@
           Start in
           <div>{{ timeToWait | ms }}</div>
         </h5>
-        <h5 v-else-if="fight.is_stable">Ended</h5>
+        <h5 v-else-if="fight.is_stable"></h5>
         <h5 v-else>Preparation</h5>
         <Icon v-if="share" class="logo" name="logo" />
         <h4 v-if="share">JOIN US!</h4>
@@ -63,12 +63,12 @@
         <div v-if="fight.target_ticker" class="gang-label mb-4 mt-1">{{ fight.target_role }} of {{ fight.target_gang
           }}[{{
             fight.target_ticker }}]</div>
-        <div>
+        <div class="row d-inline-block">
           <div v-if="details && json && json.target && json.target.start_value">
             <b>Defender Start:</b>
             <ActionsValue :result="json.target.start_value" />
           </div>
-          <div v-if="json.target">
+          <div v-if="json.target" class="pe-0">
             <Army v-if="json.target.units" :units="json.target.units" :withDead="true" />
           </div>
           <div v-if="details && json && json.target && json.target.start_value">
@@ -76,9 +76,9 @@
           </div>
           <h5 v-if="fight.result === 3 && fight.defender_reward && Number(fight.defender_reward) > 0.001">REWARDS :</h5>
           <div v-if="fight.result === 3 && fight.defender_reward && Number(fight.defender_reward) > 0.001">
-            {{ fight.defender_reward }} DWD</div>
-          <h5 v-if="fight.defender_elo">CRUELTY CHANGE :</h5>
-          <div v-if="fight.defender_elo">{{ Number(fight.defender_elo) / 1000 | amount }}</div>
+            {{ fight.defender_reward }} DW</div>
+          <!-- <h5 v-if="fight.defender_elo">CRUELTY CHANGE :</h5>
+          <div v-if="fight.defender_elo">{{ Number(fight.defender_elo) / 1000 | amount }}</div> -->
         </div>
       </div>
     </div>
@@ -87,12 +87,12 @@
         <Troops v-if="json.target.detail && json.target.detail.units" :units="json.target.detail.units" />
         <ActionsDetail v-if="json && json.target && fight.target_nickname != user.nickname && json.target.detail"
           :detail="json.target.detail" />
-        <Share v-if="!timeToWait && (Number(fight.defender_reward) > 0.001 || Number(fight.attacker_reward) > 0.001)"
+        <!-- <Share v-if="!timeToWait && (Number(fight.defender_reward) > 0.001 || Number(fight.attacker_reward) > 0.001)"
           :fight="this.fight" :fight_key="this.fight.fight_key" />
         <div class="sharemessage"
           v-if="!timeToWait && (Number(fight.defender_reward) > 0.001 || Number(fight.attacker_reward) > 0.001)">Share
           your
-          victory on our forum and obtain a chance to get rewarded.</div>
+          victory on our forum and obtain a chance to get rewarded.</div> -->
       </div>
       <div v-if="details || fight.is_done === 0" class="text-center">
         <span v-if="!fight.is_stable" class="mr-2">(Waiting for confirmation)</span>

@@ -38,11 +38,11 @@
         </div>
         <div v-if="stolenResources.dwd && number">
             <span v-if="result ==='lost'">-</span>
-            <span v-else>+</span> {{ parseFloat(Number(stolenResources.dwd) + ((stolenResources.dwd/100*2.5)*number.length)).toFixed(3) }} DWD
+            <span v-else>+</span> {{ parseFloat(Number(stolenResources.dwd) + ((stolenResources.dwd/100*2.5)*number.length)).toFixed(3) }} DW
         </div>
         <div v-else-if="stolenResources.dwd">
             <span v-if="result ==='lost'">-</span>
-            <span v-else>+</span> {{ stolenResources.dwd | amount }} DWD
+            <span v-else>+</span> {{ stolenResources.dwd | amount }} DW
         </div>
          <div v-if="number" class="text-yellow">
              GANG BONUS +{{number.length*2.5}}%

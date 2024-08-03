@@ -1,18 +1,20 @@
 <template>
-    <div v-if="units">
-        <div v-for="unit in units" v-if="unit.amount !== 0" :key="unit.key" class="d-inline-block mx-1 my-1 text-center">
-            <img v-if="unit.key || unit.id" class="preview unit mini" style="border: 1px solid #392828;" width="50" :src="`/img/units/${unit.key || unit.id}.png`">
-            <img v-else class="preview unit mini" style="border: 1px solid #392828;" width="50" :src="`/img/units/${unit}.png`">
-            <div>
-                <span v-if="withDead && unit.dead">
-              <span :class="{ 'text-red' : unit.dead }">
-                {{ unit.dead || 0 }}
-              </span> /
-                </span>
-                {{ unit.amount }}
-            </div>
-        </div>
+  <div v-if="units">
+    <div v-for="unit in units" v-if="unit.amount !== 0" :key="unit.key" class="d-inline-block me-1 mb-1 text-center">
+      <img v-if="unit.key || unit.id" class="preview unit mini" style="border: 1px solid #392828;" width="50"
+        :src="`/img/units/${unit.key || unit.id}.png`">
+      <img v-else class="preview unit mini" style="border: 1px solid #392828;" width="50"
+        :src="`/img/units/${unit}.png`">
+      <div>
+        <span v-if="withDead && unit.dead">
+          <span :class="{ 'text-red': unit.dead }">
+            {{ unit.dead || 0 }}
+          </span> /
+        </span>
+        {{ unit.amount }}
+      </div>
     </div>
+  </div>
 </template>
 
 <script>

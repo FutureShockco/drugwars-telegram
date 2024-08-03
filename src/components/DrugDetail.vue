@@ -62,7 +62,7 @@
             </div> 
           </div> 
           <div class="px-4">
-            DRUGWARS DOLLARS (DWD) OR DRUGWARS {{drug.name.toUpperCase()}} (DW{{drug.name.substring(0,4).toUpperCase()}}) TOKENS ARE VIRTUAL CURRENCIES. 
+            DRUGWARS TOKEN (DW) OR DRUGWARS {{drug.name.toUpperCase()}} (DW{{drug.name.substring(0,4).toUpperCase()}}) TOKENS ARE VIRTUAL CURRENCIES. 
           </div>
     </div>
 </template>

@@ -69,7 +69,10 @@ input {
 }
 
 .smalltitle {
+  min-height: 24px;
   font-size: 12px;
   color: #fbbd07;
+  vertical-align: middle;
+  line-height: 12px;
 }
 </style>

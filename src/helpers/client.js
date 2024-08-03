@@ -82,7 +82,7 @@ function Sub(rawClient) {
       store.dispatch('init', { user: null, showLoading: false });
       store.dispatch('notify', {
         type: 'success',
-        message: 'You received your DWD Tokens!',
+        message: 'You received your DW Tokens!',
       });
     }
 
