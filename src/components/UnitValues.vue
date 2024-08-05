@@ -2,7 +2,7 @@
 
 	<div class="d-flex justify-content-between">
 		<div class="item-skill text-center">
-			<Icon :name="'skills/' + unit.dmg_type" size="18" />
+			<Icon name="skills/fire" size="18" />
 			<div class="ms-1 mt-0 mb-0 skill-detail">{{ modifiedValues.attack }}</div>
 		</div>
 
