@@ -58,8 +58,11 @@
       <div class="level">{{ ownItem.amount }}</div>
       <UnitValues :unit="unit" :modifiedValues="modifiedValues" :speed="speed" />
     </div>
-    <div v-if="!inProgress" class="mx-auto form-field form-name">
-      <input class="input form-control mb-1" type="number" v-model="quantity" min="1">
+    <div v-if="!inProgress" class="mx-auto d-flex form-field form-name">
+      <button @click="quantity--"  :disabled="quantity < 2" class="btn btn-xxs border" style="border-radius: 3px 0px 0px 3px;min-width: 30px;"> -</button>
+      <input class="input form-control" type="number" v-model="quantity" min="1">
+      <button @click="quantity++" class="btn btn-xxs border" style="border-radius: 0px;min-width: 30px;"> +</button>
+      <button @click="setMax()" class="btn btn-xxs border" style="border-radius: 0px 3px 3px 0px;min-width: 50px;"> Max</button>
     </div>
     <CheckoutRecruit :id="unit.id" :level="training_facility.lvl" :coeff="unit.coeff" :inProgress="inProgress"
       :price="(unit.drugs_cost / 1400000 + unit.weapons_cost / 1400000 + unit.alcohols_cost / 1400000)"
@@ -277,6 +280,13 @@ export default {
   methods: {
     formatToPrice(value) {
       return `${parseFloat(value).toFixed(2)}%`;
+    },
+    setMax() {
+      let maxD = this.balances.drugs / this.unit.drugs_cost
+      let maxW = this.balances.weapons / this.unit.weapons_cost
+      let maxA = this.balances.alcohols / this.unit.alcohols_cost
+      this.quantity = Math.floor(Math.min(maxD,maxW,maxA))
+     
     }
   },
 };

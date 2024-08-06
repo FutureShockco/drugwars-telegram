@@ -51,7 +51,27 @@ const actions = {
         resolve();
       }
     }),
-
+    updateNickname: async ({ commit },  data ) =>
+      new Promise(resolve => {
+        console.log(data)
+        const parsedData = window.Telegram.Utils.urlParseQueryString(data.user)
+        let user = JSON.parse(parsedData.user)
+        if (parsedData && user && user.id) {
+          client
+            .requestAsync('update_nickname', { user })
+            .then(result => {
+              resolve();
+            })
+            .catch(e => {
+              console.log(e);
+              window.location = '/';
+              resolve(e);
+            });
+        } else {
+          console.log('no access token');
+          resolve();
+        }
+      }),
   logout: () => {
 
     window.location = '/';

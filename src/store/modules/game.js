@@ -120,11 +120,12 @@ const actions = {
         await dispatch('login', payload);
       dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
 
+
       registeredUser = payload;
       let totalbases = 0;
       if (
         state.user &&
-        state.user.buildings &&
+        state.user.buildings && 
         state.user.buildings.find(b => b.building === 'headquarters')
       ) {
         totalbases = state.user.buildings.find(b => b.building === 'headquarters').length;
@@ -132,12 +133,13 @@ const actions = {
       if (registeredUser) {
         client
           .requestAsync('get_user', registeredUser)
-          .then(user => {
+          .then(async user => {
             dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
-            console.log(user)
             if (user && user.user && user.user.username) {
               dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
-
+              console.log(user.user.username,user.user.nickname,store.state.auth.username,store.state.auth.nickname)
+              if (user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname)
+                await dispatch('updateNickname', registeredUser);
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 dispatch('setLoadingPercentage', 80);
                 commit('savePrizeProps', prizeProps);
