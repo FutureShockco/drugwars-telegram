@@ -137,8 +137,7 @@ const actions = {
             dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
             if (user && user.user && user.user.username) {
               dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
-              console.log(user.user.username,user.user.nickname,store.state.auth.username,store.state.auth.nickname)
-              if (user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname)
+              if ((user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname) || store.state.auth.nickname !==  user.user.nickname)
                 await dispatch('updateNickname', registeredUser);
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 dispatch('setLoadingPercentage', 80);
