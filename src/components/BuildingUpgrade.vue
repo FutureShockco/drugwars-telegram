@@ -1,6 +1,6 @@
 <template>
         <div v-if="upgrade">
-        <h5 class="text-small mb-0 mt-1">{{upgrade.name}} </h5>
+        <h5 class="text-small mb-0 mt-1" style="min-height: 42px;">{{upgrade.name}} </h5>
            <!--  <Icon class="ml-0 mr-1" :size="18" :name="`${upgrade.production_type}_icon`"/>{{upgrade.desc}} -->
           <Cost :drugsCost="upgrade.drugs_cost" :special="upgrade.cost" :weaponsCost="0" :alcoholsCost="0" :quantity="1" />
           <div >
@@ -11,6 +11,11 @@
             <span><b>Next:</b></span> +{{ next | amount }}
             <span>/ DAY</span>
         </div>
+        <div>
+          <div>Produce: <span style="text-transform: capitalize;">{{ upgrade.production_type }}</span><Icon :name="upgrade.production_type+'_icon'" size="18"/></div>
+        <Checkout style="margin: 0px!important;" :id="upgrade.id" :level="1" :coeff="1" :hqLevel="1"
+        :inProgress="false" :price="1 / 150000" :notEnough="false" />
+      </div> 
         </div>
 </template>
 
