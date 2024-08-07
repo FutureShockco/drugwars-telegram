@@ -1,7 +1,7 @@
 <template>
   <div>
     <RewardsTabs />
-    <div class="card">
+    <div class="card" style="min-height: 100vh;">
       <div>
         <TransitionGroup class="row" v-if="topcat === 'all'" name="list">
           <!-- <li class="col-12">
