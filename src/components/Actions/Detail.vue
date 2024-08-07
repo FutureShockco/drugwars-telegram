@@ -30,9 +30,9 @@
 
     <h5 v-if="detail && detail.trainings && detail.trainings.length > 0">TRAININGS</h5>
     <ActionsTrainings class="mb-4" v-if="detail && detail.trainings" :items="detail.trainings" />
-    <div >
+    <!-- <div >
             <a @click="openInNewTab()">Open in the simulator</a>
-        </div>
+        </div> -->
   </div>
 </template>
 
