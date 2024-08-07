@@ -1518,13 +1518,13 @@ p {
 }
 
 .header-clear-medium {
-  padding-top: calc(55px + 23px);
-  padding-top: calc((55px + 23px) + constant(safe-area-inset-top) * 0.8) !important;
-  padding-top: calc((55px + 23px) + env(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc(55px + 18px);
+  padding-top: calc((55px + 18px) + constant(safe-area-inset-top) * 0.8) !important;
+  padding-top: calc((55px + 18px) + env(safe-area-inset-top) * 0.8) !important;
 
-  padding-bottom: calc(55px + 80px);
-  padding-bottom: calc((55px + 80px) + constant(safe-area-inset-top) * 0.8) !important;
-  padding-bottom: calc((55px + 80px) + env(safe-area-inset-top) * 0.8) !important;
+  padding-bottom: calc(55px + 66px);
+  padding-bottom: calc((55px + 66px) + constant(safe-area-inset-top) * 0.8) !important;
+  padding-bottom: calc((55px + 66px) + env(safe-area-inset-top) * 0.8) !important;
 }
 
 .header-clear-large {
