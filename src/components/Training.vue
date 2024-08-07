@@ -56,11 +56,11 @@
         <div v-if="unit === 'all' && !a.npc" v-for="a in units" :key="a.id" class="d-inline">
           <img class="preview unit mini mb-2 me-2 rounded-s" width="50" :src="`/img/units/${a.id}.png`">
         </div>
-        <div v-else-if="unit === 'melee' && m.type === 'Melee' && !m.npc" v-for="m in units" :key="m.id"
+        <div v-if="unit === 'melee' && m.type === 'Melee' && !m.npc" v-for="m in units" :key="m.id"
           class="d-inline">
           <img class="preview unit mini mb-2  me-2 rounded-s" width="50" :src="`/img/units/${m.id}.png`">
         </div>
-        <div v-else-if="unit === 'range' && r.type === 'Range' && !r.npc" v-for="r in units" :key="r.id"
+        <div v-if="unit === 'range' && r.type === 'Range' && !r.npc" v-for="r in units" :key="r.id"
           class="d-inline">
           <img class="preview unit mini mb-2  me-2 rounded-s" width="50" :src="`/img/units/${r.id}.png`">
         </div>

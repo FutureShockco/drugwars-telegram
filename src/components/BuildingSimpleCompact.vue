@@ -8,6 +8,11 @@
     </div>
 
   </div>
+  <div v-else class="w-100">
+    <div class="ms-auto" style="position: relative;">
+      <img class="img-fluid rounded-s" :src="`/img/buildings/${building.id}.jpg`">
+    </div>
+  </div>
 </template>
 
 <script>

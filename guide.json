@@ -38,7 +38,7 @@
             {
                 "bg": "30",
                 "category": "Ton Blockchain",
-                "title": "How to Link TON Wallet to DrugWars",
+                "title": "How to Link TON Wallet",
                 "text": "Choose from the list of available wallet apps, install it, and then complete the DrugWars profile link to your TON wallet."
             }
         ]
@@ -51,8 +51,8 @@
         "categories": [
             {
                 "bg": "31",
-                "category": "Interface",
-                "title": "Production Banner",
+                "category": "Top Menu",
+                "title": "Resources",
                 "text": "At the very top of the DrugWars app, there is a production banner that has information about your current production of resources.",
                 "description": [
                     {
@@ -168,6 +168,12 @@
                         "text": "Choose your main location and attack other players’ locations."
                     }
                 ]
+            },
+            {
+                "bg": "30",
+                "category": "General Menu (Coming soon!)",
+                "title": "Gang",
+                "text": "Manage and view gangs."
             }
         ]
     },
@@ -216,27 +222,51 @@
     {
         "category": "Gameplay",
         "bg": "37",
-        "title": "Main buildings",
-        "text": "In DrugWars, there are three main ways to earn rewards.",
+        "title": "Buildings",
+        "text": "Buildings are one of the most essential part of your empire.",
         "categories": [
             {
-                "category": "Rewards",
+                "category": "Buildings",
                 "bg": "36",
-                "title": "Daily Rewards",
-                "text": "Earn rewards daily based on the drug resources you produce. Rewards are distributed based on daily drug production and the payout table."
-            },
-            {
-                "category": "Rewards",
-                "bg": "36",
-                "title": "Pablo Selling",
-                "text": "Sell drugs to Pablo and receive TON coins. The system operates on a weekly cycle, and payouts are based on the drugs sold and the weekly leaderboard."
-            },
-            {
-                "category": "Rewards",
-                "bg": "36",
-                "title": "Leaderboard",
-                "text": "Compete in various leaderboards to earn rewards. Leaderboards include drug production, Pablo selling, and fight performance."
-            
+                "title": "Main buildings",
+                "text": "Main buildings do not produce anything but are, in a way, the most important ones to have and upgrade on a regular basis. Buildings have unique specialties and are necessary for other gameplay. Some of them are even required for other actions in the game and a player is not able to access the entire game without them. Each office building has the following info presented: name, a level that is over the image, cost for an slow upgrade in resources, description, the time needed for an upgrade with resources, and the cost in TON or DW token for fast upgrade.",
+                "description": [
+                    {
+                        "title": "Headquarters",
+                        "text": "Headquarters is the first building a player should upgrade and the most important building in the game. This building determines the levels of all other buildings which can not be higher than HQ. If a player has HQ level 4 like in the example above, all his other buildings can be upgraded up to level 4. They can not be upgraded to level 4 until headquarters is upgraded to level 5. The level of HQ also defines the time necessary for upgrades of other buildings and the higher its level, the shorter that time is.",
+                        "building": "headquarters"
+                    },
+                    {
+                        "title": "Training Facility",
+                        "text": "The training facility is the building that allows players to purchase units for battles. If this building is not at level one at least, a player will not be able to purchase units and attack other players. He will also be vulnerable when others battle against him because he will have no units to defend him. Once this building is built, each new level will reduce the time for purchasing units. If a player decides to purchase units with crypto more frequently than with resources, this building can stay at a low level because buying units with TON/DW is instant and not time-managed which means there is no need for upgrading the building to higher levels.",
+                        "building": "training_facility"
+                    },
+                    {
+                        "title": "Operation Center",
+                        "text": "The operation center is linked to all resource production buildings. It works in a simple way, all your income from drugs, weapons, and alcohol is raised by 0.5% with each level. Operation center does not influence any of the daily awards, it only raises your daily production of resources. For example, if a player has an operation center at level 1, his production will be bigger by 0% because 1 * 0.5 = 0%",
+                        "building": "operation_center"
+                    },
+                    {
+                        "title": "Pantheon",
+                        "text": "The building of the Pantheon of deities that governs the realms of dreams, illusions and celestial phenomena. They are venerated by those who seek knowledge, creativity and cosmic balance. Here you can find memories of the weapons, drugs and distilled spirits you have produced up to now, and of the units you have recruited to protect you up to now.",
+                        "building": "pantheon"
+                    },
+                    {
+                        "title": "Research Center",
+                        "text": "The Research Center is the building necessary for unit training. Besides simple purchasing of units, each player can train his units in various skills available in training. If a player does not have a Research Center on at least level 1, training will not be available. This building determines the level of every training in a way that the maximum level of each training must match the level of the Research Center. If a player, for example, if the Research Center is at level 5, training can only be upgraded up to level 5.",
+                        "building": "research_center"
+                    },
+                    {
+                        "title": "Bunker",
+                        "text": "The Bunker is a critical building for protecting and storing your units. It permits you to keep safe a part of your units, with the number of safe units defined by their supply and the level of the bunker. Each Bunker has a specified capacity, measured in supply, which serves as both a power multiplier and maintenance requirement. The larger the supply capacity, the more powerful and numerous the units it can store and protect. For example, if your Bunker has a capacity of 1000 supplies, it can accommodate units like the AH-64 Apache, which requires 10 supplies per unit. Upgrading your Bunker increases its size by 1000 supply, enhancing its defensive and storage capabilities, and allowing you to manage more powerful units effectively.",
+                        "building": "bunker"
+                    },
+                    {
+                        "title": "Strategic Center",
+                        "text": "The Strategic Center is essential for optimizing the efficiency of your operations. It decreases the waiting time for jobs, allowing you to complete tasks more quickly. The reset time for each job depends on the level of the Strategic Center. Upgrading this building will further reduce job waiting times, enhancing your overall productivity and strategic advantage in the game. The Strategic Center also decreases the time required to restart a job, making your workflow even more efficient.",
+                        "building": "strategic_center"
+                    }
+                ]
             }
         ]
     },
@@ -251,7 +281,7 @@
                 "bg": "36",
                 "title": "Type of Resource",
                 "text": "There are 3 types of resources in the game, drugs, weapons, and alcohol. Each resource is produced by its corresponding buildings. Each building has different amounts of resources needed for its production that rise with each level. When a player starts playing a game, he or she already has a small amount of each resource to start with. A player CAN NOT have infinite amounts of resources. The amounts of maximum resources are defined with storage buildings for every resource. The maximum level of any building is defined with the current level of headquarters. A building can not be upgraded to a level higher than the headquarters are currently. If headquarters are, for example, on level 5, all other buildings can go to level 5 and no higher until the HQ gets upgraded.",
-                "tip":"While there are many ways to approach strategy in DrugWars, a good starting point is a ratio of 1:2:2, meaning 1 DRUG to 2 WEAPON to 2 ALCOHOL. So if you are producing 100k drugs, you want to be around 200k each of both weapons and alcohol."
+                "tip": "While there are many ways to approach strategy in DrugWars, a good starting point is a ratio of 1:2:2, meaning 1 DRUG to 2 WEAPON to 2 ALCOHOL. So if you are producing 100k drugs, you want to be around 200k each of both weapons and alcohol."
             },
             {
                 "category": "Resources",
@@ -279,15 +309,18 @@
                 "description": [
                     {
                         "title": "Drug storage",
-                        "text": "Drug storage is the only drug building that does not produce drugs. This building has two functions, it stores drugs and it keeps them safe. A player CANNOT have an infinite amount of drugs. The maximum amount of drugs that a player may hold is defined with drug storage and by upgrading its level, the storage increases. There is a possibility that some other building requires more drugs than a player can have unless he upgrades the storage enough. For example, a building needs 500K drugs for the upgrade but the maximum that a player can have is 450K. He will not be able to collect that amount of drugs if he does not upgrade his drug storage accordingly. All drug production that is above the storage capacity is NOT saved anywhere and is going to waste upgrading your storage to make sure you are not producing drugs for nothing. The second function this building has is the safe. A certain amount of drugs are being kept safe in the building and can not be stolen in battles when a player loses. With each level, the amount that is safe from stealing increases so a player even when losing a battle will not lose all of his resources. Drug Storage is limited to the level of the Headquarters. If the Headquarters is level 10, Drug Storage can be up to level 10."
+                        "text": "Drug storage is the only drug building that does not produce drugs. This building has two functions, it stores drugs and it keeps them safe. A player CANNOT have an infinite amount of drugs. The maximum amount of drugs that a player may hold is defined with drug storage and by upgrading its level, the storage increases. There is a possibility that some other building requires more drugs than a player can have unless he upgrades the storage enough. For example, a building needs 500K drugs for the upgrade but the maximum that a player can have is 450K. He will not be able to collect that amount of drugs if he does not upgrade his drug storage accordingly. All drug production that is above the storage capacity is NOT saved anywhere and is going to waste upgrading your storage to make sure you are not producing drugs for nothing. The second function this building has is the safe. A certain amount of drugs are being kept safe in the building and can not be stolen in battles when a player loses. With each level, the amount that is safe from stealing increases so a player even when losing a battle will not lose all of his resources. Drug Storage is limited to the level of the Headquarters. If the Headquarters is level 10, Drug Storage can be up to level 10.",
+                        "building": "drug_storage"
                     },
                     {
                         "title": "Weapon Storage",
-                        "text": "Weapon storage is the only weapon building that does not produce weapons. This building has two functions, it stores weapons and it keeps them safe. A player CAN NOT have an infinite amount of weapons. The maximum amount of weapons that a player may hold is defined with weapons storage and by upgrading its level, the storage increases. There is a possibility that some other building requires more weapons than a player can have unless he upgrades the storage enough. For example, a building needs 500K weapons for the upgrade but the maximum that a player can have is 450K. He will not be able to collect that amount of weapons if he does not upgrade his weapons storage accordingly. All weapons production that is above the storage capacity is NOT saved anywhere and is going to waste, upgrade your storage to make sure you are not producing weapons for nothing. The second function this building has is the safe. A certain amount of weapons are being kept safe in the building and can not be stolen in battles when a player loses. With each level, the amount that is safe from stealing increases so a player even when losing a battle will not lose all of his resources. The example above shows the building that is currently under upgrade and will raise to level 1 in 1 hours 30 minutes and 3 seconds. Weapon Storage is limited to the level of the Headquarters. If the Headquarters is level 10, Weapon Storage can be up to level 10."
+                        "text": "Weapon storage is the only weapon building that does not produce weapons. This building has two functions, it stores weapons and it keeps them safe. A player CAN NOT have an infinite amount of weapons. The maximum amount of weapons that a player may hold is defined with weapons storage and by upgrading its level, the storage increases. There is a possibility that some other building requires more weapons than a player can have unless he upgrades the storage enough. For example, a building needs 500K weapons for the upgrade but the maximum that a player can have is 450K. He will not be able to collect that amount of weapons if he does not upgrade his weapons storage accordingly. All weapons production that is above the storage capacity is NOT saved anywhere and is going to waste, upgrade your storage to make sure you are not producing weapons for nothing. The second function this building has is the safe. A certain amount of weapons are being kept safe in the building and can not be stolen in battles when a player loses. With each level, the amount that is safe from stealing increases so a player even when losing a battle will not lose all of his resources. The example above shows the building that is currently under upgrade and will raise to level 1 in 1 hours 30 minutes and 3 seconds. Weapon Storage is limited to the level of the Headquarters. If the Headquarters is level 10, Weapon Storage can be up to level 10.",
+                        "building": "weapon_storage"
                     },
                     {
                         "title": "Alcohol Silo",
-                        "text": "Alcohol silo is the only alcohol building that does not produce alcohol. This building has two functions, it stores alcohol and it keeps it safe. A player CAN NOT have an infinite amount of alcohol. The maximum amount of alcohol that a player may hold is defined with alcohol silo and by upgrading its level, the storage increases. There is a possibility that some other building requires more alcohol than a player can have unless he upgrades the silo enough. For example, a building needs 500K alcohol for the upgrade but the maximum that a player can have is 450K. He will not be able to collect that amount of alcohol if he does not upgrade his alcohol silo accordingly. All alcohol production that is above the storage capacity is NOT saved anywhere and is going to waste, upgrade your storage to make sure you are not producing alcohol for nothing. The second function this building has is the safe. A certain amount of alcohol is being kept safe in the building and can not be stolen in battles when a player loses. With each level, the amount that is safe from stealing increases so a player even when losing a battle will not lose all of his resources. Alcohol Silo is limited to the level of the Headquarters. If the Headquarters is level 10, Alcohol Silo can be up to level 10."
+                        "text": "Alcohol silo is the only alcohol building that does not produce alcohol. This building has two functions, it stores alcohol and it keeps it safe. A player CAN NOT have an infinite amount of alcohol. The maximum amount of alcohol that a player may hold is defined with alcohol silo and by upgrading its level, the storage increases. There is a possibility that some other building requires more alcohol than a player can have unless he upgrades the silo enough. For example, a building needs 500K alcohol for the upgrade but the maximum that a player can have is 450K. He will not be able to collect that amount of alcohol if he does not upgrade his alcohol silo accordingly. All alcohol production that is above the storage capacity is NOT saved anywhere and is going to waste, upgrade your storage to make sure you are not producing alcohol for nothing. The second function this building has is the safe. A certain amount of alcohol is being kept safe in the building and can not be stolen in battles when a player loses. With each level, the amount that is safe from stealing increases so a player even when losing a battle will not lose all of his resources. Alcohol Silo is limited to the level of the Headquarters. If the Headquarters is level 10, Alcohol Silo can be up to level 10.",
+                        "building": "alcohol_storage"
                     }
                 ]
             }
@@ -304,7 +337,6 @@
                 "bg": "36",
                 "title": "Recruiting Units",
                 "text": "To recruit units, a player must have the necessary resources, which can vary between units, enter the quantity of units you wish to recruit in the white space and click on the green slow recruit button. If resources are missing, the green recruit button will be replaced by a red button indicating 'miss resources'. A player may, at any time, choose to recruit his units by paying for them with TON or DW, in which case resources are not required and the purchase is made instantly."
-                
             },
             {
                 "category": "Units",
@@ -313,40 +345,79 @@
                 "text": "To recruit units, a player must have the necessary resources, which can vary between units, enter the quantity of units you wish to recruit in the white space and click on the green slow recruit button. If resources are missing, the green recruit button will be replaced by a red button indicating 'miss resources'. A player may, at any time, choose to recruit his units by paying for them with TON or DW, in which case resources are not required and the purchase is made instantly.",
                 "description": [
                     {
-                        "title": "Cost",
-                        "text": "This is the cost of drugs, weapons, and alcohol to produce the number of units in the box."
+                        "title": "Spy",
+                        "text": "Spy is not a good choice for battles but an excellent one for spying. Before starting a normal attack, a player can send only a spy in battle and his spy will return with valuable information about the opponent such as buildings and number of units an opponent has. With knowing what units will wait for him, players can strategize and choose which units to send in battle more carefully.",
+                        "unit": "spy"
                     },
                     {
-                        "title": "Supply",
-                        "text": "This is a power multiplier and maintenance requirement. The larger the number, the more power the unit brings to attacks. This value is also used in the Bunker, each unit requires the specified number of storage spaces. For example, if your Bunker has a capacity of 1000, one AH-64 Apache will require 10 of that 1000 to protect."
+                        "title": "Hobo",
+                        "text": "Hobo is the cheapest unit to recruit and the only one that requires only one resource for purchase. This unit has no defense and will die if he meets his enemy at the end of the first round. Hobos are fairly slow and can not carry much which means they are not very good for sending resources to other players.",
+                        "unit": "hobo"
                     },
                     {
-                        "title": "Cluster",
-                        "text": "This is how many of the units will attack per iteration. If there is a cluster of 100 and you have 200 units, they will attack in 2 groups of 100."
+                        "title": "Rowdy",
+                        "text": "Rowdy is a unit that fights in groups of four so be sure to always send rowdies to battle in a number that can be divided by 4 to assure their maximum efficiency. Rowdy has no defense against fire and chemical weapons and can defend only against physical damage and bullets.",
+                        "unit": "rowdy"
                     },
                     {
-                        "title": "Attack",
-                        "text": "The strength of attack."
+                        "title": "Super Bouncer",
+                        "text": "Super bouncer is a medium strong unit for close combat but has a fairly weak defense. His special ability is his shield which he can use once and obtain +200 more health which makes him harder to kill in battles.",
+                        "unit": "bouncer"
                     },
                     {
-                        "title": "Carry",
-                        "text": "The amount of resources the unit can carry if it wins the fight."
+                        "title": "Big Mama",
+                        "text": "Big Mama is the only unit with healing abilities because she can heal up to 5 units for 200HP in every round. She is fairly slow but has medium offense and defense and is not an easy unit to kill.",
+                        "unit": "big_mama"
                     },
                     {
-                        "title": "Health",
-                        "text": "The hit points a unit can take before being killed."
+                        "title": "Knifer",
+                        "text": "Knifer is a solid unit when it comes to his skills in battle but be careful because this unit does not follow rules. This means that he does not follow priority in battles and can attack sooner or later than he is supposed to.",
+                        "unit": "knifer"
                     },
                     {
-                        "title": "Resistance",
-                        "text": "This body indicates the unit's defensive armor resistance."
+                        "title": "Gunman",
+                        "text": "Gunman is a pretty strong range unit that takes out melee units from a safe distance. His aim is almost perfect so his accuracy ensures bonus damage. His defense is low, however, because he is not very good at defending himself in close combat.",
+                        "unit": "gunman"
                     },
                     {
-                        "title": "Speed",
-                        "text": "The amount of time it takes to transport the unit. Transporting 1 unit takes this amount of time and transporting 100 of the same unit also takes this amount of time. Increasing or decreasing the number of the unit does not change the time requirement."
+                        "title": "Lawyer",
+                        "text": "Not all men are born for fighting, some have other useful skills. If you send a lawyer in battle, he will reduce the amount your opponent has in his safe by 0.01% which means you can steal even some resources that your opponent is not expecting you too, up to 5% that are in his safe. This unit is a genius in battle but will hide behind big mama to protect himself.",
+                        "unit": "lawyer"
                     },
                     {
-                        "title": "Move Cost",
-                        "text": "This is the cost, in Drugs, to move each unit. Moving one unit will cost the stated value. Moving 100 unites will cost the value * 100."
+                        "title": "Sniper",
+                        "text": "Sniper is an excellent choice for battles. He is a range unit that kills your opponents units from a distance with increases to his damage with each round. His damage will be greater by 1.5*x where x is the number of rounds which means he will deal the most damage in the last round.",
+                        "unit": "sniper"
+                    },
+                    {
+                        "title": "Hitman",
+                        "text": "Hitman is a strong range unit that a player can not go wrong with. This unit has a special ability of a multiple hit because he takes down two targets at once with his two guns, one in each hand. He is fast and with excellent offense and defense skills.",
+                        "unit": "hitman"
+                    },
+                    {
+                        "title": "Ninja",
+                        "text": "Ninja is the female unit. She has cat-like reflexes and you can say she has more than one life just as a cat. Ninja can dodge two deadly hits and it doesn't even matter how strong they are. This, in combination with her great offense skills, makes her quite powerful.",
+                        "unit": "ninja"
+                    },
+                    {
+                        "title": "Bazooka Guy",
+                        "text": "Bazooka guy is a good unit to have if you want to up your chances of winning a battle. This unit will hit not one, not two but 5 enemies at once and is generally very good with all his offense skills.",
+                        "unit": "bazooka"
+                    },
+                    {
+                        "title": "Biker",
+                        "text": "Biker goes super fast! Bikers are exceptionally fast units in DrugWars. They can quickly move across the battlefield, making them ideal for rapid attacks and swift maneuvers. Their speed can be a significant advantage in both offense and defense, allowing players to outmaneuver slower units and react quickly to changing battle conditions.",
+                        "unit": "biker"
+                    },
+                    {
+                        "title": "Mercenary",
+                        "text": "This unit has exceptional defense and offense skills and will help you win in battles. His unique skills is his bulletproof vest which helps him to obtain back 20HP when reaches 0 so just as your opponent will think your mercenary is dead, surprise, no he is not.",
+                        "unit": "mercenary"
+                    },
+                    {
+                        "title": "AH-64 Apache",
+                        "text": "AH-64 Apache is the most expensive unit but also the strongest one. The Apache can also carry the largest amount of resources, tied with the Occupation Troop.",
+                        "unit": "helicopter"
                     }
                 ]
             },
@@ -362,7 +433,7 @@
                     },
                     {
                         "title": "Supply",
-                        "text": "This is a power multiplier and maintenance requirement. The larger the number, the more power the unit brings to attacks. This value is also used in the Bunker, each unit requires the specified number of storage spaces. For example, if your Bunker has a capacity of 1000, one AH-64 Apache will require 10 of that 1000 to protect."
+                        "text": "The larger the number, the more space the unit takes. Supply is the primary value taken into count to calculate your attack power in a fight. This value is also used in the Bunker, each unit requires the specified number of storage spaces."
                     },
                     {
                         "title": "Cluster",
@@ -393,8 +464,80 @@
                         "text": "This is the cost, in Drugs, to move each unit. Moving one unit will cost the stated value. Moving 100 unites will cost the value * 100."
                     }
                 ]
+            },
+            {
+                "category": "Units",
+                "bg": "36",
+                "title": "Trainings",
+                "text": "Unit training is an option that every player can take advantage of. To be able to train their units, players first need to have the Research Center building and all training can go as much up in levels as the Research Center. If your Research Center is level 10, your training levels are limited to level 10. Some training affects all units while others are specifically designed for some or only specific type of units. Each training has the following information next to the image: name, description, unique advantage, cost in resources, images of units that can benefit, time required for time managed upgrades, to see the cost in TON or DW for the instant upgrade, you should click on “Fast Upgrade”.",
+                "description": [
+                    {
+                        "title": "Routing",
+                        "text": "Routing involves training all units to enhance their speed. With each level, the speed of all units increases by 0.5%.",
+                        "training": "routing"
+                    },
+                    {
+                        "title": "Close combat",
+                        "text": "Prepare your units to physical confrontations..",
+                        "training": "closecombat"
+                    },
+                    {
+                        "title": "Introduction to pistol rifle & shotgun",
+                        "text": " Each level increase the physical damage of your Range units by 1%.",
+                        "training": "firearms"
+                      },
+                    {
+                        "title": "Information procurement",
+                        "text": "Information procurement is training for all types of units that removes the fog of war.",
+                        "training": "information"
+                    },
+                    {
+                        "title": "Sniper trains",
+                        "text": "Sniper Trains is (as the name suggests) training for only snipers. With each level of training, snipers will get to give 1% more of physical damage to opponents.",
+                        "training": "sniping"
+                    },
+                    {
+                        "title": "Spirit wine",
+                        "text": "Spirit wine is training specifically designed for the Hobo unit. Since this unit is fairly weak and dies when he meets his enemy at the end of the round, training it seems logical. With each level of training Hobos will give 1% more physical damage to their opponents.",
+                        "training": "spiritwine"
+                    },
+                    {
+                        "title": "Coordination",
+                        "text": "Coordination is for all units. With each level of training, units will have increased offensive and defensive power by 1%.",
+                        "training": "coordination"
+                    },
+                    {
+                        "title": "Chemical training",
+                        "text": "Chemical training is for Mercenary and Knifer. With each level of training, units will produce greater chemical damage to their opponents by 1%.",
+                        "training": "chemical"
+                    },
+                    {
+                        "title": "Weapon master",
+                        "text": "Weapon master is training for Rowdy, Sniper, Gunman, and Biker. With each level of training, units will give greater weapon damage by 1% to their opponents.",
+                        "training": "weapon"
+                    },
+                    {
+                        "title": "Fire training",
+                        "text": "Fire training is for Gunman, and AH-64 Apache. This training will increase fire damage by 1%.",
+                        "training": "fire"
+                    },
+                    {
+                        "title": "Protection",
+                        "text": "Protection is training for all unit types. With each level of this training, all units will be better at defense by 1%.",
+                        "training": "protection"
+                    },
+                    {
+                        "title": "Bomb construction",
+                        "text": "Bomb construction is training specifically for the Bazooka unit. With each level of training Bazookas will give 1% more damage to their opponents.",
+                        "training": "bomb"
+                    },
+                    {
+                        "title": "Psychological training",
+                        "text": "Psychological training is specifically designed for Elite units (Big Mama, Knifer, Ninja, and Mercenary). With each level, damage that Elite units produce will be higher by 0.5%.",
+                        "training": "psychological"
+                    }
+                ]
             }
-           
         ]
     },
     {
@@ -452,7 +595,14 @@
                 "bg": "36",
                 "title": "Battle rewards",
                 "text": "The winner of the battle gets to loot the loser. The amount of resources the winner can loot is defined with how much of those resources the loser has and is not in the safe just as it is defined with the winning units that have survived. Each unit has a carry capacity and only surviving units can carry loot back home. For example, Super Bouncer can carry 400 and if there are 5 alive after battle, they can carry 2000 resources. Winner can loot all 3 resources, drugs, weapons, and alcohol.",
-                "tip":"All units can carry resources, but if you plan to carry larger amounts, like 50k-100k+, you really want to utilize the AH-64 Apache unit which can carry up to 30k combined resources."
+                "tip": "All units can carry resources, but if you plan to carry larger amounts, like 50k-100k+, you really want to utilize the AH-64 Apache unit which can carry up to 30k combined resources."
+            },
+            {
+                "category": "Battles",
+                "bg": "36",
+                "title": "Battle Simulator",
+                "text": "When a battle ends, or if you sent a spy to an opponent you can simply go on the fight details and click to open the simulator.",
+                "tip": "Play with the simulator to obtain different result."
             }
         ]
     },
@@ -460,60 +610,62 @@
         "category": "Frequently asked questions",
         "bg": "36",
         "title": "FAQ",
-        "text": "Battling against other players is the key feature of the DrugWars game. By attacking other players and by defending themselves against attacks, players can get rewarded in more than one way. Each battle will assure that some amount of resources from the opponent goes to the winner of the fight and based on how much he reduced the DrugWars population, players will receive additional daily reward in crypto.",
+        "text": "The most frequently asked questions by our players",
         "categories": [
             {
-                "category": "Battles",
+                "category": "FAQ",
                 "bg": "36",
-                "title": "Preparing for a battle",
-                "text": "A player can not attack other players if there are no units to go to that attack. To be able to attack, there first need to be units present. In order to have a bigger chance of victory, those units can be trained and the target should be chosen carefully. Additionally, there is a fight simulator that can help players see in advance how the fight is going to look like. If the opponent does not change his unit number and defensive buildings in the meantime, the attacker can expect the battle to go as the simulator predicted.",
-                "description": [
-                    {
-                        "title": "Unit production and training",
-                        "text": "To be able to participate in battles, players need to produce their units and train them if they want to assure their skills are even better. Unit production can be at every single base while unit training is the same for all bases. To learn more about unit production and training, read Units."
-                    },
-                    {
-                        "title": "Choosing targets",
-                        "text": "The best way to assure your target is not too strong for you is to spy on it with the unit Spy. This unit will bring you back a lot of valuable information about how many units your opponent has and some other useful info. If that player does not produce more units in the meantime, you can assume he has what your Spy told you. Simply attack a player with the Spy unit and wait for it to return. To attack a player, you need to enter the location of his base you will attack or find the base on the map and attack from there."
-                    }
-                ]
+                "title": "Are bots allowed in the game?",
+                "text": "DrugWars does not tolerate any bot automating any action in the game. This gives unfair advantage to some players and exploits the game. Bot usage is strictly monitored. Abusers will be banned immediately upon being flagged for abuse. You have the right to one appeal as to why you were flagged to explain why it may be false. After, if the infraction is the same, you are banned."
             },
             {
-                "category": "Battles",
+                "category": "FAQ",
                 "bg": "36",
-                "title": "Battle process",
-                "text": "The battle takes place in rounds and it ends either when all the units from one side are dead or until all rounds are finished. Attacking units can only attack one of the opposing team's groups per round and both the attack and the defending side units are in the battle based on their unit order. At each round the unit may lose its HP based on its defense and the attacker strength on it. For example, a lawyer with 2000 HP and 50 DEF can take 450 DMG from Big Mamma and his HP will drop to 1550 HP. If there are 5 Big Mammas, they will deal 5*450=2250 DMG and the lawyer will be dead.",
-                "description": [
-                    {
-                        "title": "Unit order and grouping",
-                        "text": "When starting a fight, a player needs to know how there is an attack order among units. That order can be seen in the “help” section under Camp - it goes like this: Spy, Hobo, Rowdy, Super Bouncer, Big Mamma, Knifer, Ninja, Gunman, Lawyer, Hitman, Biker, Sniper, Bazooka, Mercenary, Apache. This means that Bouncers, for example, will always attack before Gunman and so on. Reminder : Knifer does not respect this. The same units are grouped together, they fight together and their progress in the simulator is shown one after another. If a player goes into battle with 2 Super Bouncers, those 2 Super Bouncers will attack together and their information will be presented one line at a time."
-                    },
-                    {
-                        "title": "Damage goes both ways",
-                        "text": "Since damage goes both ways, be sure that lawyer units will  be protected by Big Mamma units. He will assign 120 DMG to Big Mamma and get her HP from 21000 to 20880. To simplify, let us see what happens with one Lawyer and one Big Mamma:"
-                    },
-                    {
-                        "title": "",
-                        "text": "Lawyer: HP 2000, attack 200, and defense 50 Big Mamma: HP 21000, attack 500, and defence 80"
-                    },
-                    {
-                        "title": "",
-                        "text": "Big Mamma attacks Lawyer with an attack of strength 500 but since he has a defense of 50, the attack he gets is 450 which means his HP gets from 2000 to 1550. At the same time, while defending himself, he deals Big Mamma damage of 200 but since Big Mamma has defence of 80, she gets 120 damage (because 200-80=120) and her HP is now 20880."
-                    },
-                    {
-                        "title": "",
-                        "text": "Each round can be seen as the attack on one defending unit where the attacking units take turns at attacking while the defending unit gives them some damage during his defending. For example, if there are 2 Bouncers, 2 Big Mammas and 1 Knifer attacking 5 Rowdies and 5 Lawyers, one round will be the attack on Rowdies and another round will be the attack on Lawyers. All Bouncers, Big Mammas and Knifer will attack Rowdies and assign damage, Rowdies will give them damage during defense. All Bouncers, Big Mammas and Knifer will attack Lawyers and assign damage, Lawyers will give them damage during defense. If there are units still left alive, the process continues. This, of course, depends on the training of the units too since different training will help units be better at attacking and defending themselves."
-                    }
-                ]
+                "title": "Is being in the gang better than playing solo?",
+                "text": "The answer depends on what kind of style a player prefers. Gang members play together and socialize more, offer protection and go on missions together. Individual players can enjoy the game and play it but some features of the game are only available to gangs since they are specifically designed for them and require more players."
             },
             {
-                "category": "Battles",
+                "category": "FAQ",
                 "bg": "36",
-                "title": "Battle rewards",
-                "text": "The winner of the battle gets to loot the loser. The amount of resources the winner can loot is defined with how much of those resources the loser has and is not in the safe just as it is defined with the winning units that have survived. Each unit has a carry capacity and only surviving units can carry loot back home. For example, Super Bouncer can carry 400 and if there are 5 alive after battle, they can carry 2000 resources. Winner can loot all 3 resources, drugs, weapons, and alcohol.",
-                "tip":"All units can carry resources, but if you plan to carry larger amounts, like 50k-100k+, you really want to utilize the AH-64 Apache unit which can carry up to 30k combined resources."
+                "title": "Why are daily rewards going up and down?",
+                "text": "Daily rewards are dependent on investments from all players when they purchase instant upgrades with crypto. There will be days when a lot of players will purchase upgrades and the prize will get bigger just as there will be days when more players will purchase upgrades with resources and the prize will be smaller."
+            },
+            {
+                "category": "FAQ",
+                "bg": "36",
+                "title": "My daily rewards are dependent on which base?",
+                "text": "You will get your daily prize based on your total drug production which is calculated by adding drug productions from all the bases. You can see your total drug production in the Overview."
+            },
+            {
+                "category": "FAQ",
+                "bg": "36",
+                "title": "How do I know which base I am currently on?",
+                "text": "There is information under your logo image and in the upper right corner of the main screen. Read Player location on the map"
+            },
+            {
+                "category": "FAQ",
+                "bg": "36",
+                "title": "Why are my resources in red and will not go higher than a certain amount?",
+                "text": "You can not have unlimited amounts of resources. The capacity of each resource is determined with the storage building for that resource. Higher levels will allow you bigger storage just as they will allow you bigger safe storage. Upgrade your storage buildings and you will be able to store more resources."
+            },
+            {
+                "category": "FAQ",
+                "bg": "36",
+                "title": "Can someone steal my base?",
+                "text": "No. Players can attack bases and steal resources but they can not destroy bases."
+            },
+            {
+                "category": "FAQ",
+                "bg": "36",
+                "title": "Why didn't I get any resources after winning a battle?",
+                "text": "If your opponent had no resources then you had nothing to steal. Keep in mind that each battle has a small time delas and a notification to your opponent. In this time, your opponent has the chance to prepare for the battle, get more units, relocate or spend his resources."
+            },
+            {
+                "category": "FAQ",
+                "bg": "36",
+                "title": "Do I have to battle other players?",
+                "text": "You do not have to attack other players if you do not want to but you will have to defend yourself if they attack you, so have enough units ready. You can keep upgrading your buildings and receiving rewards based on your production but keep in mind that battles are a way to get more of those resources by looting."
             }
         ]
     }
-    
 ]
