@@ -473,22 +473,22 @@
                 "description": [
                     {
                         "title": "Routing",
-                        "text": "Routing involves training all units to enhance their speed. With each level, the speed of all units increases by 0.5%.",
+                        "text": "Routing involves training all units to enhance their speed. Your units will learn the process of selecting a path. With each level, the speed of all units increases by 0.5%.",
                         "training": "routing"
                     },
                     {
                         "title": "Close combat",
-                        "text": "Prepare your units to physical confrontations..",
+                        "text": "Prepare your units to physical confrontations and make them more efficient in battles as melee. Each level increase the physical damage of your Melee units by 1%.",
                         "training": "closecombat"
                     },
                     {
                         "title": "Introduction to pistol rifle & shotgun",
-                        "text": " Each level increase the physical damage of your Range units by 1%.",
+                        "text": "Prepare your range units to make a better use of their firearms during battles. Each level of this training increase the physical damage of your Range units by 1%.",
                         "training": "firearms"
-                      },
+                    },
                     {
                         "title": "Information procurement",
-                        "text": "Information procurement is training for all types of units that removes the fog of war.",
+                        "text": "Improve the efficience of your spies and give you more informations about your opponent! Information procurement is training for all types of units but mostly for your spies when and their report after a battle.",
                         "training": "information"
                     },
                     {
@@ -503,32 +503,32 @@
                     },
                     {
                         "title": "Coordination",
-                        "text": "Coordination is for all units. With each level of training, units will have increased offensive and defensive power by 1%.",
+                        "text": "By working together your units tend to keep their role as core! Coordination is for all units. With each level of training, units will have increased offensive and defensive power by 1%.",
                         "training": "coordination"
                     },
                     {
                         "title": "Chemical training",
-                        "text": "Chemical training is for Mercenary and Knifer. With each level of training, units will produce greater chemical damage to their opponents by 1%.",
+                        "text": "Chemical training is for Mercenary and Knifer. Use chemicals formulated to inflict death or harm on opponents! With each level of training, units will produce greater chemical damage to their opponents by 1%.",
                         "training": "chemical"
                     },
                     {
                         "title": "Weapon master",
-                        "text": "Weapon master is training for Rowdy, Sniper, Gunman, and Biker. With each level of training, units will give greater weapon damage by 1% to their opponents.",
+                        "text": "Weapon master is training for Rowdy, Sniper, Gunman, and Biker. Use weapons to inflict death or harm on opponents! With each level of training, units will give greater weapon damage by 1% to their opponents.",
                         "training": "weapon"
                     },
                     {
                         "title": "Fire training",
-                        "text": "Fire training is for Gunman, and AH-64 Apache. This training will increase fire damage by 1%.",
+                        "text": "Fire training is only for Gunman, and AH-64 Apache. Those units use fire to inflict death or harm the opponents! This training will increase fire damage by 1%.",
                         "training": "fire"
                     },
                     {
                         "title": "Protection",
-                        "text": "Protection is training for all unit types. With each level of this training, all units will be better at defense by 1%.",
+                        "text": "Tired of losing your units? offers them some level of protection. Protection is training for all unit types. With each level of this training, all units will be better at defense by 1%.",
                         "training": "protection"
                     },
                     {
                         "title": "Bomb construction",
-                        "text": "Bomb construction is training specifically for the Bazooka unit. With each level of training Bazookas will give 1% more damage to their opponents.",
+                        "text": "More powder for more explosions! Bomb construction is training specifically for the Bazooka unit. With each level of training Bazookas will give 1% more damage to their opponents.",
                         "training": "bomb"
                     },
                     {
