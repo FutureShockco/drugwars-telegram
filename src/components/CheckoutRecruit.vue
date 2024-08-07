@@ -1,6 +1,6 @@
 <template>
-  <div class="row mx-3 mb-3 g-3">
-    <div class="col-6">
+  <div class="row mx-3 mb-3 g-3 mt-0">
+    <div class="col-6 mt-1">
       <div class="text-center w-100" v-if="pendingAmount">{{ new Date().getTime() + (timeToWait) | end }}</div>
       <div class="text-center w-100" v-else>{{ updateTime | ms }}</div>
       <UiButton :loading="isLoading"
@@ -20,7 +20,7 @@
         </template>
       </UiButton>
     </div>
-    <div class="col-6">
+    <div class="col-6 mt-1">
       <div class="text-center w-100">Instant</div>
       <UiButton v-if="tutorialStep < 9" :disabled="isLoading || !base || (tutorialStep < 9 && id !== 'spy')" @click="handleSubmit('dwd')"
         class="btn-full btn-xxs btn border-yellow-dark color-yellow-dark w-100">
