@@ -103,11 +103,12 @@
         <div v-if="(building.id === 'strategic_center' && ownItem.lvl > 204)">Max level reached</div>
         <Checkout v-else :id="building.id" :level="ownItem.lvl + 1" :coeff="building.coeff" :hqLevel="ownHq.lvl"
           :inProgress="inProgress" :price="drugsCost / 150000" :notEnough="hasNotEnough" />
-        <!-- <div class="item-content width-full mr-3">
-      <div v-if="buildingupgrades" v-for="item in buildingupgrades" :key="item.id">
-        <BuildingUpgrade class="column col-6 p-0" :upgrade="item" />
-      </div>
-    </div> -->
+     <!-- <div class="row p-3">
+      <div class="col-6" v-if="buildingupgrades" v-for="item in buildingupgrades" :key="item.id">
+        <BuildingUpgrade :upgrade="item" />
+    </div>
+     </div> -->
+  
       </div>
 
     </div>

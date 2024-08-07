@@ -30,9 +30,9 @@
 
     <h5 v-if="detail && detail.trainings && detail.trainings.length > 0">TRAININGS</h5>
     <ActionsTrainings class="mb-4" v-if="detail && detail.trainings" :items="detail.trainings" />
-    <!-- <div >
+    <div >
             <a @click="openInNewTab()">Open in the simulator</a>
-        </div> -->
+        </div>
   </div>
 </template>
 
@@ -129,8 +129,9 @@ export default {
         );
         if (allenemybuildings && allenemybuildings.length > 0) toOpen += `,${allenemybuildings}`;
       }
-      const win = window.open(`${url}?${toOpen}`, '_blank');
-      win.focus();
+      this.$router.push({ path: `/simulator/${toOpen}` });
+      //const win = window.open(`${url}?${toOpen}`, '_blank');
+      //win.focus(); 
     },
     serialize(obj) {
       const str = [];

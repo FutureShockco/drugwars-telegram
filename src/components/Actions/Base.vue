@@ -2,8 +2,8 @@
   <div v-if="items">
     <h5>BUILDINGS</h5>
     <div class="d-flex">
-      <div class="col-3 px-2 text-left" v-for="item in items"
-        v-if="item && item.lvl !== 0 && item.placeholder.type !== 'defense' && !item.placeholder.production_rate"
+      <div class="col-2 px-2 text-left" v-for="item in items"
+        v-if="item && item.placeholder &&  item.lvl !== 0 && item.placeholder.type !== 'defense' && !item.placeholder.production_rate"
         :key="item.building">
         <BuildingSimpleCompact :item="item" :building="item.placeholder" />
       </div>
@@ -11,8 +11,8 @@
     <div class="mt-3">
       <h5>PRODUCTION</h5>
       <div class="d-flex">
-        <div class="col-3 px-2 text-left" v-for="item in items"
-          v-if="item && item.lvl !== 0 && item.placeholder.type !== 'defense' && item.placeholder.production_rate"
+        <div class="col-2 px-2 text-left" v-for="item in items"
+          v-if="item &&  item.placeholder && item.lvl !== 0 && item.placeholder.type !== 'defense' && item.placeholder.production_rate"
           :key="item.building + 'prod'">
           <BuildingSimpleCompact :item="item" :building="item.placeholder" />
         </div>
@@ -43,7 +43,7 @@ export default {
       placeholder_buildings: buildings,
     };
   },
-  mounted() {
+  created() {
     this.items.forEach(element => {
       element.placeholder = this.placeholder_buildings[element.building]
     })

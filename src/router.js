@@ -6,6 +6,7 @@ import client from '@/helpers/client';
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
 const Boards = () => import(/* webpackChunkName: "boards" */ '@/views/Boards.vue');
 
+const Simulator = () => import(/* webpackChunkName: "simulator" */ '@/views/Simulator.vue');
 
 const Jobs = () => import(/* webpackChunkName: "jobs" */ '@/views/Jobs/Jobs.vue');
 const GangJobs = () => import(/* webpackChunkName: "gangjobs" */ '@/views/Jobs/GangJobs.vue');
@@ -172,6 +173,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/simulator/:values',
+      name: 'simulator',
+      component: Simulator
     },
     {
       path: '/home',
