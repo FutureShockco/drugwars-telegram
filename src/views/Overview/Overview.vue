@@ -8,17 +8,17 @@
           <BuildingProductionCompact v-for="building in drug_buildings" :building="building" :key="building.id" />
           <div class="d-flex w-100 mt-3">
             <div class="col-7">
-              <div class="text-orange">+{{ drugProductionRate * 60 * 60 * 24 | amount }}/Day <span class="text-yellow"
+              <div class="text-yellow">+{{ drugProductionRate * 60 * 60 * 24 | amount }}/Day <span class="text-yellow"
                   v-if="booster">booster x2</span></div>
               <div>+{{ drugProductionRate * 60 * 60 | amount }}/Hour</div>
-              <div class="text-orange">+{{ drugBonus | amount }}/Day <span class="text-yellow" v-if="booster">booster
+              <div class="text-green">+{{ drugBonus | amount }}/Day <span class="text-yellow" v-if="booster">booster
                   x2</span></div>
               <div>
                 OP. CENTER:
-                <span class="text-orange">{{ (drugProductionRate * 60 * 60 * 24) * ownOc * 0.005 | amount }}</span> -
+                <span class="text-green">{{ (drugProductionRate * 60 * 60 * 24) * ownOc * 0.005 | amount }}</span> -
                 SC.
                 LAB:
-                <span class="text-orange">{{ (drugProductionRate * 60 * 60 * 24) * ownLab * 0.0025 | amount }}</span>
+                <span class="text-green">{{ (drugProductionRate * 60 * 60 * 24) * ownLab * 0.0025 | amount }}</span>
               </div>
             </div>
             <div class="col-5 text-right">
@@ -51,16 +51,16 @@
           <BuildingProductionCompact v-for="building in weapon_buildings" :building="building" :key="building.id" />
           <div class="d-flex w-100 mt-3">
             <div class="col-7">
-              <div class="text-orange"> +{{ weaponProductionRate * 60 * 60 * 24 | amount }}/Day <span
+              <div class="text-yellow"> +{{ weaponProductionRate * 60 * 60 * 24 | amount }}/Day <span
                   class="text-yellow" v-if="booster">booster x2</span></div>
               <div>+{{ weaponProductionRate * 60 * 60 | amount }}/Hour</div>
-              <div class="text-orange">{{ weaponBonus | amount }}/Day <span class="text-yellow" v-if="booster">booster
+              <div class="text-yellow">{{ weaponBonus | amount }}/Day <span class="text-yellow" v-if="booster">booster
                   x2</span></div>
               <div>
                 OP. CENTER:
-                <span class="text-orange">{{ (weaponProductionRate * 60 * 60 * 24) * ownOc * 0.005 | amount }}</span> -
+                <span class="text-green">{{ (weaponProductionRate * 60 * 60 * 24) * ownOc * 0.005 | amount }}</span> -
                 WEAP. CENTER:
-                <span class="text-orange">{{ (weaponProductionRate * 60 * 60 * 24) * ownWC * 0.005 | amount }}</span>
+                <span class="text-green">{{ (weaponProductionRate * 60 * 60 * 24) * ownWC * 0.005 | amount }}</span>
               </div>
             </div>
             <div class="col-5  text-right">
@@ -95,18 +95,18 @@
           <BuildingProductionCompact v-for="building in alcohol_buildings" :building="building" :key="building.id" />
           <div class="d-flex w-100 mt-3">
             <div class="col-6">
-              <div class="text-orange">{{ alcoholProductionRate * 60 * 60 * 24 | amount }}/Day
+              <div class="text-yellow">{{ alcoholProductionRate * 60 * 60 * 24 | amount }}/Day
                 <span class="text-yellow" v-if="booster">booster x2</span>
               </div>
               <div>{{ alcoholProductionRate * 60 * 60 | amount }}/Hour</div>
 
-              <div class="text-orange">{{ alcoholBonus | amount }}/Day <span class="text-yellow" v-if="booster">booster
+              <div class="text-yellow">{{ alcoholBonus | amount }}/Day <span class="text-yellow" v-if="booster">booster
                   x2</span></div>
               <div>
                 OP. CENTER:
-                <span class="text-orange">{{ (alcoholProductionRate * 60 * 60 * 24) * ownOc * 0.005 | amount }}</span> -
+                <span class="text-green">{{ (alcoholProductionRate * 60 * 60 * 24) * ownOc * 0.005 | amount }}</span> -
                 DIST. SCHOOL:
-                <span class="text-orange">{{ (alcoholProductionRate * 60 * 60 * 24) * ownDS * 0.005 | amount }}</span>
+                <span class="text-green">{{ (alcoholProductionRate * 60 * 60 * 24) * ownDS * 0.005 | amount }}</span>
               </div>
             </div>
             <div class="col-6 text-right">

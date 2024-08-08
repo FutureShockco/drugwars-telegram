@@ -14,15 +14,15 @@
       <div class="row mt-3">
         <div class="col">
           <div @click="handleSubmit()" :disabled="isLoading || Number(balances.drugs) < Number(amount)" type="submit"
-            class="btn-full btn-xs  btn border border-green-dark color-green-dark">
+            class="btn-full btn-xxs  btn border border-green-dark color-green-dark">
             <span v-if="!isLoading">Sell</span>
             <SmallLoading v-else />
           </div>
-        </div>
+        </div> 
         <div class="col">
           <div :disabled="isLoading" @click="handleFullSubmit()"
-            class="btn-full btn-xs btn border-mint-dark color-mint-dark">
-            Set all</div>
+            class="btn-full btn-xxs btn border-mint-dark color-mint-dark">
+            Set Max</div>
         </div>
       </div>
 
