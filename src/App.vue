@@ -10,7 +10,7 @@
         'content--nav-open': sidebarVisible, 'header-clear-medium': !isHome
       }" style="height: 100vh; overflow-y: scroll">
         <router-view />
-        <div @click="closeModalAccount(), toggleSidebarVisibility(), toggleModalPayment(),  setCurrentPayment(null)"
+        <div @click="closeModalAccount(), toggleSidebarVisibility(), toggleModalPayment(), setCurrentPayment(null)"
           :class="(username && showTutoOverlay) || modalWalletVisible || modalVideoVisible || modalPaymentVisible ? 'show' : 'd-none'"
           class="offcanvas-backdrop fade">
         </div>
@@ -55,16 +55,17 @@ export default {
     const self = this;
     setTimeout(() => {
       setInterval(function () {
-        if (this.username && client.ws.readyState === 3)
+        if (this.username && client.ws.readyState === 3 && this.$route.path !== '/banner')
           self.checkWS()
       }, 5000);
     }, 5000);
-    self.checkWS()
+    if (this.$route.path !== '/banner')
+      self.checkWS()
     if (this.TWA && this.TWA.expand)
       this.TWA.expand()
   },
   methods: {
-    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount','closeModalAccount', 'toggleModalPayment', 'setCurrentPayment']),
+    ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount', 'closeModalAccount', 'toggleModalPayment', 'setCurrentPayment']),
     checkWS() {
       if (this.TWA && this.TWA.initData)
         client.restart();

@@ -7,6 +7,7 @@ const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
 const Boards = () => import(/* webpackChunkName: "boards" */ '@/views/Boards.vue');
 
 const Simulator = () => import(/* webpackChunkName: "simulator" */ '@/views/Simulator.vue');
+const CreateBanner = () => import(/* webpackChunkName: "createbanner" */ '@/views/CreateBanner.vue');
 
 const Jobs = () => import(/* webpackChunkName: "jobs" */ '@/views/Jobs/Jobs.vue');
 const GangJobs = () => import(/* webpackChunkName: "gangjobs" */ '@/views/Jobs/GangJobs.vue');
@@ -118,7 +119,12 @@ setInterval(() => {
 
 
 const requireAuth = (to, from, next) => {
-  if (client.ws.readyState === 3 && store.state.auth.account) {
+  if(to.path === '/banner' || from.path === '/banner')
+  {
+    store.dispatch('hideLoading');
+    next({ name: 'banner' })
+  }
+  else if (client.ws.readyState === 3 && store.state.auth.account) {
     client.restart()
     store.dispatch('showLoading');
     store.dispatch('login', store.state.auth.account).then(() => {
@@ -173,6 +179,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: Home
+    },
+    {
+      path: '/banner',
+      name: 'banner',
+      component: CreateBanner
     },
     {
       path: '/simulator/:values',

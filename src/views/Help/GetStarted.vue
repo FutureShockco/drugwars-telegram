@@ -3,7 +3,7 @@
     <RewardsTabs />
     <div class="card" style="min-height: 100vh;">
       <div>
-        <TransitionGroup class="row" v-if="topcat === 'all'" name="list">
+        <TransitionGroup class="row g-2" v-if="topcat === 'all'" name="list">
           <!-- <li class="col-12">
             <div @click="f = 'Introduction'" class="card card-style mb-0 mx-0 shadow-card shadow-card-l rounded-0 bg-23"
               style="height:150px">
@@ -14,7 +14,7 @@
               <div class="card-overlay bg-gradient-fade rounded-0"></div>
             </div>
           </li> -->
-          <div class="col-6 mb-3" v-for="(item, index) in guide" :key="index">
+          <div class="col-6" v-for="(item, index) in guide" :key="index">
             <div @click="subcat = null, topcat = item.title"
               class="card card-style mb-0 mx-0 shadow-card shadow-card-l rounded-0 bg-23" style="height:150px"
               :style="`background-image:url(/img/guide/${item.bg}.png`">
@@ -81,7 +81,7 @@
           <div class="card-overlay bg-gradient-fade rounded-0"></div>
         </div> -->
         <div v-else @click="topcat = 'all'" class="card overflow-visible mt-4 mb-0 pb-0"
-          :style="`background-image:url(/img/guide/${currentCat.bg}.png`">
+          >
           <div class="row">
             <div class="col-3">
               <h2 class="ms-4 color-white"><i class="fad fa-undo" /> Back </h2>

@@ -1,7 +1,7 @@
 [
     {
         "category": "General",
-        "bg": "24",
+        "bg": "1",
         "title": "Introduction",
         "text": "DrugWars is an online game built on blockchain technology that combines IDLE, MMORPG, and MMORTS into one PvP gaming experience that provides monetized prizes. Players receive cryptocurrency for their achievements in the game. Playing the game is currently completely free of charge although there are options of payment to speed up various game components and increase the chances of receiving a bigger payout at the end of the day. The player can choose in which cryptocurrency he or she will receive the prize while the default currency is set on one of the DrugWars games.\n\nThe DrugWars game, brought to you by Futureshock, has already enjoyed significant success. We are now launching a new version of DrugWars directly on the Telegram application, following the success of the initial web version.",
         "categories": [
@@ -45,7 +45,7 @@
     },
     {
         "category": "Interface",
-        "bg": "26",
+        "bg": "5",
         "title": "Appearance",
         "text": "DrugWars is available at https://t.me/drugwars_bot. Once you start DrugWars, the bot will launch the game, and the Guide will assist you in getting started. The Guide is mandatory so you must complete it to be able to play the game.",
         "categories": [
@@ -179,7 +179,7 @@
     },
     {
         "category": "Rewards",
-        "bg": "36",
+        "bg": "2",
         "title": "Rewards System",
         "text": "In DrugWars, there are three main ways to earn rewards.",
         "categories": [
@@ -221,7 +221,7 @@
     },
     {
         "category": "Gameplay",
-        "bg": "37",
+        "bg": "6",
         "title": "Buildings",
         "text": "Buildings are one of the most essential part of your empire.",
         "categories": [
@@ -272,7 +272,7 @@
     },
     {
         "category": "Gameplay",
-        "bg": "37",
+        "bg": "3",
         "title": "Resources",
         "text": "Every player can produce two categories of things in the game: RESOURCES and UNITS. Resources are produced by buildings and used to upgrade those buildings or to produce (buy and train) units for battles. Both resources and units can be produced in a time-managed way or instantly if a player decides to pay for faster production.",
         "categories": [
@@ -328,7 +328,7 @@
     },
     {
         "category": "Gameplay",
-        "bg": "38",
+        "bg": "7",
         "title": "Units",
         "text": "Once you have the Training Facility building, you will see all the units when you click on Camp in the menu. Each Unit has the following info: name, type, cost, supply, description, offensive and resistance characteristics, the time needed for recruitment, and the cost for instant recruitment. Instant recruit is paid with token and does not use your resources. Upgrading your Training Facility buildings lets you have a shorter time for recruitment. In order to recruit any unit, simply put the number of wanted units in the white space and either click on the green button to pay for them with resources or click on the yello button to pay for them with token. To get specific info on how to produce units click here: Producing Units, and to get the info about units that will come in handy for battles, click here: Unit production.",
         "categories": [
@@ -542,7 +542,7 @@
     },
     {
         "category": "Gameplay",
-        "bg": "36",
+        "bg": "4",
         "title": "Battles",
         "text": "Battling against other players is the key feature of the DrugWars game. By attacking other players and by defending themselves against attacks, players can get rewarded in more than one way. Each battle will assure that some amount of resources from the opponent goes to the winner of the fight and based on how much he reduced the DrugWars population, players will receive additional daily reward in crypto.",
         "categories": [
@@ -608,7 +608,7 @@
     },
     {
         "category": "Frequently asked questions",
-        "bg": "36",
+        "bg": "8",
         "title": "FAQ",
         "text": "The most frequently asked questions by our players",
         "categories": [
