@@ -40,12 +40,12 @@
                   <Icon name="ton" size="18"/>
                 </td>
               </tr>
-              <tr>
+              <!-- <tr>
                 <td><strong>Next week</strong></td>
                 <td> {{  (treasury - pablo) / 100 * 2 | amount }}
                   <Icon name="ton" size="18"/>
                 </td>
-              </tr>
+              </tr> -->
             </tbody>
           </table>
         </div>
