@@ -1,9 +1,20 @@
 <template>
   <div class="card">
     <div class="content">
-      <h3>"I have an offer for you amigo!"</h3>
-      <p class="mb-2">Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>
-      <div class="text-center">
+      <Countdown :showdays="true" :starttime="now" :endtime="timeToWait" trans='{  
+             "day":"Day",
+             "hours":"Hours",
+             "minutes":"Minutes",
+             "seconds":"Seconds",
+             "expired":"Payments are gone!.",
+             "running":"Till the weekly payments.",
+             "status": {
+                "expired":"Expired",
+                "running":"Running",
+                "upcoming":"Future"
+               }}' />
+               <div class="text-center">
+        
         <div class="border border-yellow-dark rounded-s overflow-hidden">
           <table class="table color-theme border-yellow-dark mb-0">
             <thead class="rounded-s bg-yellow-dark border-l">
@@ -64,6 +75,8 @@
             Set Max</div>
         </div>
       </div>
+      </div>
+      
 
 
     </div>
@@ -83,6 +96,13 @@ export default {
     };
   },
   computed: {
+    now() {
+      return new Date();
+    },
+    timeToWait() {
+      const midnight = this.getNextSunday().setUTCHours(24, 0, 0, 0);
+      return midnight;
+    },
     prizeProps() {
       return this.$store.state.game.prizeProps;
     },
@@ -175,6 +195,21 @@ export default {
   },
   methods: {
     ...mapActions(['investHeist']),
+    getNextSunday() {
+      const today = new Date();
+      const nextSunday = new Date(today);
+
+      // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+      const dayOfWeek = today.getDay();
+
+      // Calculate how many days to add to get to the next Sunday
+      const daysUntilNextSunday = (7 - dayOfWeek) % 7;
+
+      // If today is Sunday, we want the next Sunday, so add 7 days
+      nextSunday.setDate(today.getUTCDate() + daysUntilNextSunday + (daysUntilNextSunday === 0 ? 7 : 0));
+
+      return nextSunday;
+    },
     handleSubmit() {
       if (Number(this.amount) > 0) {
         this.isLoading = true;
