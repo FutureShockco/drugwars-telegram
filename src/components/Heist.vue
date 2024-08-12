@@ -2,13 +2,52 @@
   <div class="card">
     <div class="content">
       <h3>"I have an offer for you amigo!"</h3>
-      <p>Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>
+      <p class="mb-2">Sell your DRUGS to Pablo, and convert them into TON coins with a weekly payment.</p>
       <div class="text-center">
-        <h5 class="pt-2">Reward for this week: {{ pablo | amount }}<Icon name="ton" size="18" /></h5>
-        <div v-if="totalVest && ownHeistReward.percent" class="text-green">You: {{ totalVest | amount }} <span
-            class="text-yellow">+{{ ownHeistReward.amount }}
-            <Icon name="ton" size="18" /> ({{ ownHeistReward.percent | amount }}%)
-          </span></div>
+        <div class="border border-yellow-dark rounded-s overflow-hidden">
+          <table class="table color-theme border-yellow-dark mb-0">
+            <thead class="rounded-s bg-yellow-dark border-l">
+              <tr class="color-black">
+                <th scope="col">
+                  <h5 class="color-black font-15 mb-0">Treasury</h5>
+                </th>
+                <th scope="col">
+                  <h5 class="color-black font-15 mb-0">Rewards</h5>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td>{{ treasury | amount }}
+                  <Icon name="ton" size="18" />
+                </td>
+              </tr>
+              <tr>
+                <td><strong>This week</strong></td>
+                <td> {{ pablo | amount }}
+                  <Icon name="ton" size="18"/>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>Next week</strong></td>
+                <td> {{  (treasury - pablo) / 100 * 2 | amount }}
+                  <Icon name="ton" size="18"/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- <h5 class="pt-2">Pablo's treasury:  {{ treasury | amount }}<Icon name="ton" size="18" /></h5>
+        <h5 >Reward for this week: {{ pablo | amount }}<Icon name="ton" size="18" /></h5>
+        <h5 >Reward for next week: {{ treasury / 100 * 2 | amount }}<Icon name="ton" size="18" /></h5> -->
+
+        <div v-if="totalVest && ownHeistReward.percent" class="text-green">You sold {{ totalVest | amount }} <Icon name="drug" size="18" />
+          ({{ ownHeistReward.percent | amount }}%) this week </div>
+         <div  v-if="totalVest && ownHeistReward.percent"
+            class="text-yellow"> You will receive {{ ownHeistReward.amount }}
+            <Icon name="ton" size="18" /> 
+          </div>
       </div>
       <input class="input form-control input-block mb-2" v-model="amount" type="number" min="0">
       <div class="row mt-3">
@@ -128,6 +167,10 @@ export default {
         amount,
         percent,
       };
+    },
+    treasury() {
+      const { prizeProps } = this.$store.state.game;
+      return prizeProps.balance / 1000000000;
     },
   },
   methods: {
