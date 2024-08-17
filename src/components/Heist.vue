@@ -199,14 +199,14 @@ export default {
   const today = new Date();
   const nextSunday = new Date(today);
 
-  // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-  const dayOfWeek = today.getDay();
+  // Get the current day of the week in UTC (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  const dayOfWeek = today.getUTCDay();
 
   // Calculate how many days to add to get to the next Sunday
   const daysUntilNextSunday = (7 - dayOfWeek) % 7 || 7;
 
-  // Add the calculated number of days to the current date
-  nextSunday.setDate(today.getDate() + daysUntilNextSunday);
+  // Add the calculated number of days to the current UTC date
+  nextSunday.setUTCDate(today.getUTCDate() + daysUntilNextSunday);
 
   return nextSunday;
 },
