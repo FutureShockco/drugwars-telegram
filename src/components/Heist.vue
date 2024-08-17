@@ -195,21 +195,21 @@ export default {
   },
   methods: {
     ...mapActions(['investHeist']),
-    getNextSunday() {
-      const today = new Date();
-      const nextSunday = new Date(today);
+  getNextSunday() {
+  const today = new Date();
+  const nextSunday = new Date(today);
 
-      // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
-      const dayOfWeek = today.getDay();
+  // Get the current day of the week (0 = Sunday, 1 = Monday, ..., 6 = Saturday)
+  const dayOfWeek = today.getDay();
 
-      // Calculate how many days to add to get to the next Sunday
-      const daysUntilNextSunday = (7 - dayOfWeek) % 7;
+  // Calculate how many days to add to get to the next Sunday
+  const daysUntilNextSunday = (7 - dayOfWeek) % 7 || 7;
 
-      // If today is Sunday, we want the next Sunday, so add 7 days
-      nextSunday.setDate(today.getUTCDate() + daysUntilNextSunday + (daysUntilNextSunday === 0 ? 7 : 0));
+  // Add the calculated number of days to the current date
+  nextSunday.setDate(today.getDate() + daysUntilNextSunday);
 
-      return nextSunday;
-    },
+  return nextSunday;
+},
     handleSubmit() {
       if (Number(this.amount) > 0) {
         this.isLoading = true;
