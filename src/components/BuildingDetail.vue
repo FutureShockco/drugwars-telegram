@@ -25,7 +25,7 @@
       </div>
       <div class="item-content width-full">
         <div v-for="level in nextLevels" :key="level" class="mb-1">
-          <h5 class="mb-0 mt-0">Level {{ level }}</h5>
+          <h5 class="mb-0 mt-0">Level {{ level + 1 }}</h5>
           <Cost :drugsCost="drugsCost(level)" :weaponsCost="weaponsCost(level)" :alcoholsCost="alcoholsCost(level)"
             :quantity="1" />
           <div v-if="building.production_type" class="mb-2">
@@ -35,7 +35,7 @@
           <div v-if="['drug_storage', 'weapon_storage', 'alcohol_storage'].includes(building.id)" class="mb-2">
             <div v-if="level">
               <b>Storage:</b>
-              {{ (10000 + (18000 * level * (Math.sqrt(level) / 100)) * level) *4 | amount }}
+              {{ (10000 + (18000 * level * (Math.sqrt(level) / 100)) * level) * 4 | amount }}
             </div>
             <div v-if="level">
               <b>Safe:</b>

@@ -73,7 +73,7 @@
           </div>
         </div>
         <div v-if="!boxes.length">
-          <p>You have nothign to claim yet.</p>
+          <p>You have nothing to claim yet.</p>
           Start referring now and obtain drop boxes!
         </div>
       </div>

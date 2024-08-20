@@ -1,7 +1,7 @@
 <template>
     <div>
         <RewardsTabs />
-        
+
         <div class="card mx-0 border-bottom-highlight mb-4">
             <div class="content">
                 <div class="d-flex">
@@ -29,7 +29,6 @@
         </div>
         <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
             :style="`background-image:url(/img/tasks/27.jpg`"
-            
             :class="dailyRewards.last_connect === dayCheck ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
@@ -99,20 +98,20 @@
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
         <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
-            :style="`background-image:url(/img/tasks/22.jpg`"
-            :class="dailyRefs.paid === 1 ? 'opacity-50' : ''">
+            :style="`background-image:url(/img/tasks/22.jpg`" :class="dailyRefs.paid === 1 ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
-                        <TaskResources :task="dailyResources" />
-                    </div>
+                    <TaskResources :task="dailyResources" />
+                </div>
                 <h3 class="color-white">Daily Referrals</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Refer 3 friends per day and receive resources!</p>
-                <div v-if="dailyRefs.refs === 3 && dailyRefs.paid === 0" 
+                <div v-if="dailyRefs.refs === 3 && dailyRefs.paid === 0"
                     class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                     Wait for your rewards</div>
-                    <div @click="TWA.openTelegramLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
-                    v-else-if="dailyRefs.refs < 3" class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-magenta">
-                        Invite  {{ 3 - dailyRefs.refs }} more friends</div>
+                <div @click="TWA.openTelegramLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
+                    v-else-if="dailyRefs.refs < 3"
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-magenta">
+                    Invite {{ 3 - dailyRefs.refs }} more friends</div>
                 <div v-else class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red">
                     Come back tomorrow</div>
             </div>
@@ -217,6 +216,28 @@
                         @click="verifyTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                         Verify and get paid now</div>
+                </div>
+                <div class="card-overlay bg-gradient-fade opacity-80"></div>
+            </div>
+
+            <div v-if="task.tasktype === 'upgrade'" class="card card-style shadow-card shadow-card-l"
+                style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.jpg`"
+                :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
+                <div class="card-bottom pb-3 px-3">
+                    <div class="text-end">
+                        <TaskResources :task="task" />
+
+                    </div>
+                    <h3 class="color-white">{{ task.name }}</h3>
+                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
+                    <div v-if="!task.user && task.completed === 0 && upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
+                        @click="completeTask({ id: task.id }), refreshTask()"
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        Claim your rewards</div>
+                    <div v-if="!task.user && task.completed === 0 && !upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
+                        Upgrade your {{ buildings[task.upgradeType.building].name }} to level {{ task.upgradeType.level }}</div>
+                        
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
@@ -407,10 +428,11 @@ export default {
             buildings,
             bgs: [],
             finishedWatching: false,
-            dailyRefs:{refs:0, paid:0},
-            dailyResources: {rewardType:'resources', rewards:{drug:2500, weapon:7500, alcohol : 7500},user:{paid:0}},
+            dailyRefs: { refs: 0, paid: 0 },
+            dailyResources: { rewardType: 'resources', rewards: { drug: 2500, weapon: 7500, alcohol: 7500 }, user: { paid: 0 } },
         };
     },
+
     created() {
         for (let index = 0; index < 40; index++) {
             this.bgs.push(index + 1);
@@ -461,8 +483,8 @@ export default {
                     this.dailyRewards.current_day = 1
                     this.didReset = true
                 }
-                if(result[3][0])
-                this.dailyRefs = result[3][0]
+                if (result[3][0])
+                    this.dailyRefs = result[3][0]
                 this.dailyResources.user.paid = this.dailyRefs.paid
                 this.tasks.sort(function (a, b) { return a.completed - b.completed });
                 this.isLoading = false;
@@ -504,7 +526,16 @@ export default {
         async claimDaily() {
             await this.completeDay({})
             this.load_tasks()
-        }
+        },
+        upgradeTaskComplete(building, level) {
+            const b = this.$store.state.game.user.buildings.find(
+                b =>
+                    b.building === building
+            )
+            if (b && b.lvl >= level)
+                return true
+            else return false
+        },
     },
     computed: {
 

@@ -16,7 +16,8 @@
                 <div v-if="inProgress" style="text-align:center;position: absolute; top:0px; width:100%;z-index:10;">
                   <h5 class="color-highlight" style="padding:5px;background:#0000004d;border-radius: 0px 0px 5px 5px;">
                     <animated-number style="line-height: unset;" :value="progress" :formatValue="formatToPrice"
-                    :duration="500" /></h5>
+                      :duration="500" />
+                  </h5>
                 </div>
                 <div v-if="inProgress" id="overlay2" style="left: 0px;
     position: absolute;
@@ -50,7 +51,10 @@
               </router-link>
               <!-- <div class="mb-2" v-html="building.desc"></div> -->
               <div v-if="building.feature">
-                <div>{{ building.feature }}</div>
+                <div v-if="building.id === 'pantheon'">A way to honor the greatest: <span v-for="p in pantheoners"
+                    class="text-yellow me-2">{{ p.nickname }}</span></div>
+
+                <div v-else>{{ building.feature }}</div>
               </div>
               <div v-if="building.production_type">
                 <BuildingProduction :compactview="0" :production_type="building.production_type" :level="ownItem.lvl"
@@ -81,7 +85,8 @@
                 </div>
                 <div v-if="ownItem.lvl">
                   <b>Next Safe:</b>
-                  {{ ((10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl + 1))*4) /
+                  {{ ((10000 + (18000 * (ownItem.lvl + 1) * (Math.sqrt((ownItem.lvl + 1)) / 100)) * (ownItem.lvl +
+                    1)) * 4) /
                     100
                     *
                     20 |
@@ -103,12 +108,12 @@
         <div v-if="(building.id === 'strategic_center' && ownItem.lvl > 204)">Max level reached</div>
         <Checkout v-else :id="building.id" :level="ownItem.lvl + 1" :coeff="building.coeff" :hqLevel="ownHq.lvl"
           :inProgress="inProgress" :price="drugsCost / 150000" :notEnough="hasNotEnough" />
-     <!-- <div class="row p-3">
+        <!-- <div class="row p-3">
       <div class="col-6" v-if="buildingupgrades" v-for="item in buildingupgrades" :key="item.id">
         <BuildingUpgrade :upgrade="item" />
     </div>
      </div> -->
-  
+
       </div>
 
     </div>
@@ -139,6 +144,10 @@ export default {
     }
   },
   computed: {
+    pantheoners() {
+      const { prizeProps } = this.$store.state.game;
+      return prizeProps.pantheoners;
+    },
     tutorialStep() {
       return this.$store.state.game.user.user.tutorial
     },
