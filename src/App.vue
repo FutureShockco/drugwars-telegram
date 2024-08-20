@@ -62,7 +62,11 @@ export default {
     if (this.$route.path !== '/banner')
       self.checkWS()
     if (this.TWA && this.TWA.expand)
+    {
+      this.TWA.disableVerticalSwipes()
       this.TWA.expand()
+
+    }
   },
   methods: {
     ...mapActions(['toggleSidebarVisibility', 'init', 'login', 'toggleModalAccount', 'closeModalAccount', 'toggleModalPayment', 'setCurrentPayment']),

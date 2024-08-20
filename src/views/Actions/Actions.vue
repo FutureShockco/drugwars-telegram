@@ -692,6 +692,8 @@ export default {
       const amount = parseInt(payload.amount);
       const selectedUnitsObj = {};
       const ownUnit = this.ownUnits.find(unit => unit.key === payload.key);
+      if(this.TWA && this.TWA.HapticFeedback)
+      this.TWA.HapticFeedback.impactOccurred("medium");
 
       this.selectedUnits.forEach(unit => {
         selectedUnitsObj[unit.key] = unit.amount;

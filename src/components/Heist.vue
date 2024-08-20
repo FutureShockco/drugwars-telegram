@@ -100,7 +100,7 @@ export default {
       return new Date();
     },
     timeToWait() {
-      const midnight = this.getNextSunday().setUTCHours(0, 0, 0, 0);
+      const midnight = this.getNextSunday().setUTCHours(24, 0, 0, 0);
       return midnight;
     },
     prizeProps() {
