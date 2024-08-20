@@ -74,7 +74,8 @@
         <div class="col">
           <div :disabled="isLoading" @click="handleFullSubmit()"
             class="btn-full btn-xxs btn border-mint-dark color-mint-dark">
-            Set Max</div>
+            Set Max
+          </div>
         </div>
       </div>
     </div>
