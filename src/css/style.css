@@ -3901,7 +3901,7 @@ input[type=password]:focus,
 input[type=email]:focus {
   outline-color: rgba(74, 137, 220, 0.35);
   box-shadow: 0px 0px 0px 0px rgba(74, 137, 220, 0.35) !important;
-  background-color: white;
+  background-color: rgb(0, 0, 0);
 }
 
 input::placeholder,
