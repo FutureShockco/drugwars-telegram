@@ -1,6 +1,10 @@
 <template>
     <div class="countdown row">
         <div class="d-flex" v-show="statusType !== 'expired'">
+          <div class="col hour" v-if="showdays">
+                <div class="format">Days</div>
+                <span class="number">{{ days }}</span>
+            </div>
             <div class="col hour">
                 <div class="format">Hours</div>
                 <span class="number">{{ hours }}</span>
@@ -9,7 +13,7 @@
                 <div class="format">Minutes</div>
                 <span class="number">{{ minutes }}</span>
             </div>
-            <div class="col sec">
+            <div class="col sec" v-if="!showdays">
                 <div class="format">Seconds</div>
                 <span class="number">{{ seconds }}</span>
             </div>
@@ -21,7 +25,7 @@
 
 <script>
 export default {
-  props: ['starttime', 'endtime', 'trans'],
+  props: ['starttime', 'endtime', 'trans','showdays'],
   data() {
     return {
       timer: '',
