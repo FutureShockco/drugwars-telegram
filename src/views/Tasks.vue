@@ -220,8 +220,9 @@
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
 
-            <div v-if="task.tasktype === 'upgrade'" class="card card-style shadow-card shadow-card-l"
-                style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.jpg`"
+            <div v-if="task.tasktype === 'upgrade' && task.upgradeType"
+                class="card card-style shadow-card shadow-card-l" style="min-height: 120px;"
+                :style="`background-image:url(/img/tasks/${task.bg}.jpg`"
                 :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
                 <div class="card-bottom pb-3 px-3">
                     <div class="text-end">
@@ -236,8 +237,9 @@
                         Claim your rewards</div>
                     <div v-if="!task.user && task.completed === 0 && !upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
                         class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
-                        Upgrade your {{ buildings[task.upgradeType.building].name }} to level {{ task.upgradeType.level }}</div>
-                        
+                        Upgrade your {{ buildings[task.upgradeType.building].name }} to level {{ task.upgradeType.level
+                        }}</div>
+
                 </div>
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
@@ -268,6 +270,40 @@
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
         </div>
+        <div class="card card-style shadow-card shadow-card-l" style="min-height: 120px;"
+            :style="`background-image:url(/img/tasks/3.jpg`"
+            :class="airdrop && airdrop.last_claim === 1 ? 'opacity-50' : ''">
+            <div class="card-bottom pb-3 px-3">
+                <div class="text-end">
+                    <TaskResources v-if="!airdrop" :task="{ rewardType: 'dwtoken', rewards: { dwtoken: -1 } }" />
+                    <TaskResources v-else :task="{ rewardType: 'dwtoken', rewards: { dwtoken: airdrop.amount } }" />
+                </div>
+                <h3 class="color-white">DrugWars Airdrop</h3>
+                <p v-if="!airdrop" class="color-white opacity-70 mb-0 mt-n1">Paste your code here! Only for the OG's.
+                </p>
+                <p v-else-if="!airdrop.last_claim" class="color-white opacity-70 mb-0 mt-n1">Claim your DW token, you
+                    surely deserve it!</p>
+
+                <div v-if="!airdrop" class="form-custom form-label mb-3">
+                    <input v-model="code" type="text" class="form-control rounded-xs" id="c4"
+                        placeholder="31e9e14b-2018-4453-9acb-b01e3267d2a2">
+                </div>
+                <button v-if="!airdrop" :disabled="!code" @click="sendCode({ code }), refreshTask()"
+                    class="btn btn-full w-100 btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                    Submit your code</button>
+                <div v-else-if="airdrop && (!airdrop.last_claim || new Date(airdrop.last_claim).getTime() < $store.state.ui.timestamp)"
+                    @click="claimAirdrop({}), refreshTask()"
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                    Claim now
+                </div>
+                <div v-else
+                    class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
+                    Next claim in: {{ (new Date(airdrop.last_claim).getTime()) - $store.state.ui.timestamp | ms }}
+                </div>
+            </div>
+            <div class="card-overlay bg-gradient-fade opacity-80"></div>
+        </div>
+
         <div class="card card-style"
             v-if="user.user.username === '354640397' || user.user.username === '1995273768' || user.user.username === '7388811200' || user.user.username === '1718002652' || user.user.username === '1718002652'">
             <div class="content">
@@ -423,10 +459,12 @@ export default {
             dailyRewards: [],
             percentage: 0,
             timer: 0,
+            code: '',
             didReset: false,
             units,
             buildings,
             bgs: [],
+            airdrop: null,
             finishedWatching: false,
             dailyRefs: { refs: 0, paid: 0 },
             dailyResources: { rewardType: 'resources', rewards: { drug: 2500, weapon: 7500, alcohol: 7500 }, user: { paid: 0 } },
@@ -441,7 +479,7 @@ export default {
         this.load_tasks()
     },
     methods: {
-        ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeDay', 'completeTask', 'verifyTask']),
+        ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeDay', 'completeTask', 'verifyTask', 'sendCode', 'claimAirdrop']),
         load_tasks() {
             this.usertasks = [];
             const params = { user: { id: this.$store.state.auth.username } }
@@ -483,8 +521,10 @@ export default {
                     this.dailyRewards.current_day = 1
                     this.didReset = true
                 }
-                if (result[3][0])
+                if (result[3] && result[3][0])
                     this.dailyRefs = result[3][0]
+                if (result[4] && result[4][0])
+                    this.airdrop = result[4][0]
                 this.dailyResources.user.paid = this.dailyRefs.paid
                 this.tasks.sort(function (a, b) { return a.completed - b.completed });
                 this.isLoading = false;
@@ -496,6 +536,10 @@ export default {
         },
 
         getHoursDifference(date1, date2) {
+            const diffMs = date2 - date1;
+            return diffMs / (1000 * 60 * 60);
+        },
+        getClaimTimeToWait(date1, date2) {
             const diffMs = date2 - date1;
             return diffMs / (1000 * 60 * 60);
         },

@@ -12,7 +12,8 @@
             <Icon name="alcohol" size="14" />{{ task.rewards.alcohol }}
         </h3>
         <h3 class="d-inline-block ms-3" v-if="task.rewardType === 'dwtoken' && task.rewards.dwtoken">
-            <Icon name="dwd" size="14" />{{ task.rewards.dwtoken }}
+            <Icon name="dwd" size="14" /><span v-if="task.rewards.dwtoken === -1">???</span><span v-else>{{
+                task.rewards.dwtoken }}</span>
         </h3>
         <h3 v-if="task.rewardType === 'unit' && task.rewards.unit.amount"> <img
                 :src="`/img/units/${task.rewards.unit.name}.png`" class="img-fluid rounded-s mx-2" width="32"

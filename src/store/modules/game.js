@@ -125,7 +125,7 @@ const actions = {
       let totalbases = 0;
       if (
         state.user &&
-        state.user.buildings && 
+        state.user.buildings &&
         state.user.buildings.find(b => b.building === 'headquarters')
       ) {
         totalbases = state.user.buildings.find(b => b.building === 'headquarters').length;
@@ -137,7 +137,7 @@ const actions = {
             dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
             if (user && user.user && user.user.username) {
               dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
-              if ((user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname) || store.state.auth.nickname !==  user.user.nickname)
+              if ((user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname) || store.state.auth.nickname !== user.user.nickname)
                 await dispatch('updateNickname', registeredUser);
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
                 dispatch('setLoadingPercentage', 80);
@@ -849,6 +849,46 @@ const actions = {
               message: result,
             });
           })
+          return resolve(result);
+        }
+        return reject();
+      });
+    }),
+  sendCode: ({ rootState }, payload) =>
+    new Promise((resolve, reject) => {
+      const { username } = rootState.auth;
+      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.type = 'dw-send-code'; // eslint-disable-line no-param-reassign
+      return dwsocial(username, payload, result => {
+        if (result) {
+          Promise.delay(1000).then(() => {
+            store.dispatch('init', { user: null, showLoading: true });
+            store.dispatch('notify', {
+              type: 'success',
+              message: result,
+            });
+          })
+
+          return resolve(result);
+        }
+        return reject();
+      });
+    }),
+  claimAirdrop: ({ rootState }, payload) =>
+    new Promise((resolve, reject) => {
+      const { username } = rootState.auth;
+      payload.username = username; // eslint-disable-line no-param-reassign
+      payload.type = 'dw-claim-airdrop'; // eslint-disable-line no-param-reassign
+      return dwsocial(username, payload, result => {
+        if (result) {
+          Promise.delay(1000).then(() => {
+            store.dispatch('init', { user: null, showLoading: true });
+            store.dispatch('notify', {
+              type: 'success',
+              message: result,
+            });
+          })
+
           return resolve(result);
         }
         return reject();
