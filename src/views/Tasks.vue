@@ -310,7 +310,7 @@
                 <form class="demo-animation needs-validation m-0" @submit.prevent="handleSubmit">
                     <div class="form-custom form-label mb-3">
                         <input v-model="newTask.name" type="text" class="form-control rounded-xs" id="c1"
-                            placeholder="Task Name" pattern="[A-Za-z ]{1,32}">
+                            placeholder="Task Name">
                         <label for="c1" class="color-theme form-label-active">Task Name</label>
                     </div>
                     <div class="form-custom form-label mb-3">
@@ -365,7 +365,7 @@
                                 {{ building.id }}</option>
                         </select>
                         <input v-model="newTask.upgradeType.level" type="number" class="form-control rounded-xs" id="c1"
-                            placeholder="Level" pattern="{1,32}">
+                            placeholder="Level">
                         <label for="c1" class="color-theme form-label-active">Level</label>
                     </div>
                     <div v-if="newTask.tasktype === 'win' || newTask.tasktype === 'production'"
