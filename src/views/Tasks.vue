@@ -118,6 +118,32 @@
 
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
+
+        <div v-for="(task, index) in upgradeTasks" :key="task.id + 'hep'">
+            <div v-if="task.tasktype === 'upgrade' && task.upgradeType"
+                class="card card-style shadow-card shadow-card-l" style="min-height: 120px;"
+                :style="`background-image:url(/img/tasks/${task.bg}.jpg`"
+                :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
+                <div class="card-bottom pb-3 px-3">
+                    <div class="text-end">
+                        <TaskResources :task="task" />
+
+                    </div>
+                    <h3 class="color-white">{{ task.name }}</h3>
+                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
+                    <div v-if="!task.user && task.completed === 0 && upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
+                        @click="completeTask({ id: task.id }), refreshTask()"
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                        Claim your rewards</div>
+                    <div v-if="!task.user && task.completed === 0 && !upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
+                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
+                        Upgrade your {{ buildings[task.upgradeType.building].name }} to level {{ task.upgradeType.level
+                        }}</div>
+
+                </div>
+                <div class="card-overlay bg-gradient-fade opacity-80"></div>
+            </div>
+        </div>
         <div v-for="(task, index) in tasks" :key="task.id">
             <div v-if="task.tasktype === 'share'" class="card card-style shadow-card shadow-card-l"
                 style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.jpg`">
@@ -220,29 +246,7 @@
                 <div class="card-overlay bg-gradient-fade opacity-80"></div>
             </div>
 
-            <div v-if="task.tasktype === 'upgrade' && task.upgradeType"
-                class="card card-style shadow-card shadow-card-l" style="min-height: 120px;"
-                :style="`background-image:url(/img/tasks/${task.bg}.jpg`"
-                :class="task.user && task.completed === 1 ? 'opacity-50' : ''">
-                <div class="card-bottom pb-3 px-3">
-                    <div class="text-end">
-                        <TaskResources :task="task" />
 
-                    </div>
-                    <h3 class="color-white">{{ task.name }}</h3>
-                    <p class="color-white opacity-70 mb-0 mt-n1">{{ task.description }}</p>
-                    <div v-if="!task.user && task.completed === 0 && upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
-                        @click="completeTask({ id: task.id }), refreshTask()"
-                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
-                        Claim your rewards</div>
-                    <div v-if="!task.user && task.completed === 0 && !upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
-                        class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
-                        Upgrade your {{ buildings[task.upgradeType.building].name }} to level {{ task.upgradeType.level
-                        }}</div>
-
-                </div>
-                <div class="card-overlay bg-gradient-fade opacity-80"></div>
-            </div>
 
             <div v-if="hasTwitter && task.tasktype === 'follow'" class="card card-style shadow-card shadow-card-l"
                 style="min-height: 120px;" :style="`background-image:url(/img/tasks/${task.bg}.jpg`"
@@ -455,6 +459,7 @@ export default {
         return {
             newTask: { bg: 26, link: '', tasktype: 'watch', rewardType: 'resources', upgradeType: { building: 'headquarters', level: 0 }, rewards: { drug: 0, weapon: 0, alcohol: 0, dwtoken: 0, unit: { name: "spy", amount: 0 } } },
             tasks: [],
+            upgradeTasks: [],
             userTasks: [],
             dailyRewards: [],
             percentage: 0,
@@ -483,16 +488,17 @@ export default {
         load_tasks() {
             this.usertasks = [];
             const params = { user: { id: this.$store.state.auth.username } }
-            console.log(params)
+            //console.log(params)
             client.requestAsync('get_tasks', params).then(result => {
-                console.log(result)
+                //console.log(result)
                 if (result[0])
-                    console.log(result[0])
-                result[0].forEach(element => {
-                    element.rewards = JSON.parse(element.rewards)
-                    element.upgradeType = JSON.parse(element.upgradeType)
-                });
+                    //console.log(result[0])
+                    result[0].forEach(element => {
+                        element.rewards = JSON.parse(element.rewards)
+                        element.upgradeType = JSON.parse(element.upgradeType)
+                    });
                 this.tasks = result[0]
+
                 if (result[1]) {
                     this.usertasks = result[1];
                     this.tasks.forEach(element => {
@@ -511,6 +517,34 @@ export default {
                         }
                     });
                 }
+                const seen = new Set();
+                const upgradeTasks = this.tasks
+                upgradeTasks.sort((a, b) => {
+                    const levelA = parseInt(a.upgradeType.level, 10) || 0;
+                    const levelB = parseInt(b.upgradeType.level, 10) || 0;
+                    return levelA - levelB;
+                });
+                const uniqueTasks = upgradeTasks.filter(task => {
+                    // Ensure tasktype and upgradeType.building are valid strings
+                    const tasktype = task.tasktype || '';
+                    const building = task.upgradeType && task.upgradeType.building || '';
+
+                    // Create a unique key based on tasktype and building
+                    const key = `${tasktype}-${building}`;
+
+                    // Check if the key has been seen before
+                    if (seen.has(key)) {
+                        return false;
+                    }
+                    if (task.tasktype === 'upgrade' && task.completed !== 1) {
+                        seen.add(key);
+                        return true;
+                    }
+                    else return false
+
+                });
+                if (uniqueTasks)
+                    this.upgradeTasks = uniqueTasks
                 const rewards = result[2][0]
                 this.dailyRewards = rewards
                 this.dailyRewards.rewards = JSON.parse(this.dailyRewards.rewards)

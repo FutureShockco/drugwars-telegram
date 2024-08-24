@@ -163,6 +163,7 @@ const actions = {
                   );
 
                 dispatch('refresh_fights_count');
+                dispatch('refresh_sent_fights');
                 //dispatch('refresh_transport_count');
                 //dispatch('refresh_station_count');
                 dispatch('setLoadingPercentage', 90);
@@ -243,7 +244,7 @@ const actions = {
       client
         .requestAsync('get_sent_fights', { username, start, end })
         .then(fights => {
-          console.log(fights)
+          //console.log(fights)
           commit('saveSentFights', fights);
           return resolve();
         })

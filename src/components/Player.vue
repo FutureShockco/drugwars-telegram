@@ -9,7 +9,8 @@
           <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
             player.nickname
           }}</div>
-          <div v-else class="username text-magenta">{{ player.nickname }}</div>
+          <div v-else class="username" :class="`text-${attacked(player.nickname)}`">
+            {{ player.nickname }}</div>
           <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
         </router-link>
         <div v-else>
@@ -56,7 +57,7 @@
       +{{ player.amount }}
       <Icon class="ms-1" name="dwd" size="22" />
     </td>
-   
+
   </tr>
 </template>
 
@@ -161,6 +162,34 @@ export default {
   },
   methods: {
     ...mapActions(['startFight']),
+    attacked(usernameToCheck) {
+      let status;
+      const findUser = this.$store.state.game.sent_fights.find(obj => obj.target_nickname === usernameToCheck);
+      if (findUser) {
+        // Get current time in seconds
+        const currentTime = Math.floor(Date.now() / 1000);
+
+        // Get timestamp_start from the found object
+        const timestampStart = findUser.timestamp_start;
+
+        // Calculate time difference
+        const timeDiff = currentTime - timestampStart;
+
+        // Determine status
+        if (timeDiff > 24 * 3600) { // More than 24 hours
+          status = 'blue';
+        } else if (timeDiff > 6 * 3600) { // More than 6 hours but within 24 hours
+          status = 'orange';
+        } else { // Within the last 6 hours
+          status = 'red';
+        }
+
+        console.log(`Status for ${usernameToCheck}: ${status}`);
+      } else {
+        status = "magenta"
+      }
+      return status
+    },
     async handleSubmit() {
       this.isLoading = true;
       const payload = {

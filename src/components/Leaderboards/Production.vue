@@ -16,7 +16,7 @@
               </tr>
             </thead>
             <tbody>
-              <Player board="prod" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
+              <Player board="prod" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username" 
                 :rank="key + currentRank + 1" :reward="50">
               </Player>
 
@@ -54,7 +54,9 @@ export default {
     this.isLoading = true;
     this.load_leaders(1);
   },
+
   methods: {
+
     load_leaders(start) {
       this.users = [];
       this.currentRank = (start - 1) * 50;

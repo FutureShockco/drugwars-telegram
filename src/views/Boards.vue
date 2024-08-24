@@ -15,16 +15,22 @@
                     <a @click="setTab('fight')" class="font-13" :aria-expanded="currenTab === 'fight'">Fight</a>
                 </div>
                 <div class="card card-style mx-0">
-                    <div class="collapse" :class="currenTab === 'prod' ? 'show':''">
+                    <div class="collapse" :class="currenTab === 'prod' ? 'show' : ''">
                         <LeaderboardsProduction />
                     </div>
-                    <div class="collapse" :class="currenTab === 'pablo' ? 'show':''">
+                    <div class="collapse" :class="currenTab === 'pablo' ? 'show' : ''">
                         <LeaderboardsPablo />
                     </div>
-                    <div class="collapse" :class="currenTab === 'fight' ? 'show':''">
+                    <div class="collapse" :class="currenTab === 'fight' ? 'show' : ''">
                         <LeaderboardsFight />
                     </div>
                 </div>
+            </div>
+            <div class="content d-flex mt-0">
+                <div class="me-2"><span class="text-red">Hot</span> (0-6h)</div>
+                <div class="mx-2"><span class="text-orange">Warm</span> (6h-24h)</div>-
+                <div class="mx-2"><span class="text-blue">Cold</span> (24h+)</div>-
+                <div class="mx-2"><span class="text-magenta">None</span> </div>
             </div>
         </div>
     </div>
