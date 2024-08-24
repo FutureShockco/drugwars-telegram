@@ -3,11 +3,17 @@
         <RewardsTabs />
 
         <div class="card mx-0 border-bottom-highlight mb-1">
-            <div class="content">
+            <div class="content mb-1">
                 <h6 class="font-700 mb-n1 color-highlight">Your next rival is there</h6>
-                <h1 class="pb-2">Leaderboard</h1>
+                <h1 class="pb-1">Leaderboard</h1>
             </div>
-
+            <div class="content d-flex mt-0 mb-1">
+                <div class="me-1">Legend:</div>
+                <div class="me-1"><span class="text-red">Hot</span> (0-6h)</div>-
+                <div class="mx-1"><span class="text-orange">Warm</span> (6h-24h)</div>-
+                <div class="mx-1"><span class="text-blue">Cold</span> (24h+)</div>-
+                <div class="ms-1"><span class="text-magenta">None</span> </div>
+            </div>
             <div class="tabs tabs-pill mx-3">
                 <div class="tab-controls">
                     <a @click="setTab('prod')" class="font-13" :aria-expanded="currenTab === 'prod'">Production</a>
@@ -26,12 +32,7 @@
                     </div>
                 </div>
             </div>
-            <div class="content d-flex mt-0">
-                <div class="me-2"><span class="text-red">Hot</span> (0-6h)</div>
-                <div class="mx-2"><span class="text-orange">Warm</span> (6h-24h)</div>-
-                <div class="mx-2"><span class="text-blue">Cold</span> (24h+)</div>-
-                <div class="mx-2"><span class="text-magenta">None</span> </div>
-            </div>
+
         </div>
     </div>
 </template>
