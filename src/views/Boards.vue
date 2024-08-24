@@ -12,7 +12,7 @@
                 <div class="me-1"><span class="text-red">Hot</span> (0-6h)</div>-
                 <div class="mx-1"><span class="text-orange">Warm</span> (6h-24h)</div>-
                 <div class="mx-1"><span class="text-blue">Cold</span> (24h+)</div>-
-                <div class="ms-1"><span class="text-magenta">None</span> </div>
+                <div class="ms-1"><span class="text-magenta">NA</span> (Never?)</div>
             </div>
             <div class="tabs tabs-pill mx-3">
                 <div class="tab-controls">
