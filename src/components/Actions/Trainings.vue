@@ -6,7 +6,7 @@
       :key="item.training"
       class="d-inline-block mx-1 my-1 text-center"
     >
-      <img width="50" :src="`/img/trainings/${item.training}.jpg`" />
+      <img width="50" :src="`/img/trainings/${item.training}.png`" />
       <div>
         {{ item.lvl }}
         <div>
