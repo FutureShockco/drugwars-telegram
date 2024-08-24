@@ -9,10 +9,10 @@
             </div>
             <div class="content d-flex mt-0 mb-1">
                 <div class="me-1">Last visit:</div>
-                <div class="me-1"><span class="text-red">Hot</span> (0-6h)</div>-
-                <div class="mx-1"><span class="text-orange">Warm</span> (6h-24h)</div>-
-                <div class="mx-1"><span class="text-blue">Cold</span> (24h+)</div>-
-                <div class="ms-1"><span class="text-magenta">NA</span> (Never?)</div>
+                <div class="me-1"><span class="text-red">0-6h</span></div>-
+                <div class="mx-1"><span class="text-orange">6h-24h</span></div>-
+                <div class="mx-1"><span class="text-blue">24h+</span></div>-
+                <div class="ms-1"><span class="text-magenta">NA</span></div>
             </div>
             <div class="tabs tabs-pill mx-3">
                 <div class="tab-controls">
