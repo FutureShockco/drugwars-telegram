@@ -8,7 +8,7 @@
                 <h1 class="pb-1">Leaderboard</h1>
             </div>
             <div class="content d-flex mt-0 mb-1">
-                <div class="me-1">Legend:</div>
+                <div class="me-1">Last visit:</div>
                 <div class="me-1"><span class="text-red">Hot</span> (0-6h)</div>-
                 <div class="mx-1"><span class="text-orange">Warm</span> (6h-24h)</div>-
                 <div class="mx-1"><span class="text-blue">Cold</span> (24h+)</div>-
