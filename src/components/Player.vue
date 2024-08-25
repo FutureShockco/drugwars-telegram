@@ -152,7 +152,9 @@ export default {
       return prizeProps.pool.find((p) => p.pool === "pablo").reward / 1000000000;
     },
     ownHeistReward() {
-      const percent = (100 / this.prizeProps.heist_pool) * this.player.drugs;
+      let percent = (100 / this.prizeProps.heist_pool) * this.player.drugs;
+      if (percent > 100)
+        percent = 100
       const amount = parseFloat((this.pablo / 100) * percent).toFixed(4) || 0;
       return {
         amount: amount || 0,
