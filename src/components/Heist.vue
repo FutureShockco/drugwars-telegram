@@ -99,8 +99,10 @@ export default {
       return new Date();
     },
     timeToWait() {
-      const midnight = this.getNextSunday().setUTCHours(24, 0, 0, 0);
-      return midnight;
+      if(new Date().getUTCDay() === 0)
+        return new Date().setUTCHours(24, 0, 0, 0);
+      else
+      return this.getNextSunday().setUTCHours(24, 0, 0, 0);;
     },
     prizeProps() {
       return this.$store.state.game.prizeProps;
