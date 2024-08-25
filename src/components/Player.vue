@@ -22,7 +22,7 @@
         </div>
       </div>
     </td>
-    <td v-if="board === 'prod'" class="col">
+    <td v-if="board === 'prod' || board === 'target'" class="col">
       <div>
         {{ player.drug_production_rate * 60 * 60 * 24 | amount }}
         <Icon class="ms-1" name="drug" size="22" />
@@ -66,7 +66,7 @@ import { mapActions } from 'vuex';
 import client from '@/helpers/client';
 
 export default {
-  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list', 'heist', 'board'],
+  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list', 'heist', 'board', 'target'],
   data() {
     return {
       isLoading: false,
@@ -186,7 +186,6 @@ export default {
           status = 'red';
         }
 
-        console.log(`Status for ${usernameToCheck}: ${status}`);
       } else {
         status = "magenta"
       }
