@@ -100,15 +100,7 @@ export default {
     user() {
       return this.$store.state.game.user.user;
     },
-    modifiedValues() {
-      if (this.user && this.$store.state.game.user.trainings) {
-        const trainings = this.$store.state.game.user.trainings;
-        if (trainings.length > 0) {
-          return unitValues(this.unit, trainings);
-        }
-      }
-      return this.unit;
-    },
+  
     speed() {
       let routing = 0;
       if (this.$store.state.game.user.trainings.find(b => b.training === 'routing'))
@@ -276,8 +268,19 @@ export default {
         return parseFloat(100 - (this.timeToWait / this.updateTime) * 100).toFixed(2)
       else return 100
     },
+    modifiedValues() {
+      if (this.user && this.$store.state.game.user.trainings) {
+        const trainings = this.$store.state.game.user.trainings;
+        if (trainings.length > 0) {
+          const value = unitValues(this.unit, trainings)
+          return value
+        }
+      }
+      return this.unit;
+    },
   },
   methods: {
+
     formatToPrice(value) {
       return `${parseFloat(value).toFixed(2)}%`;
     },

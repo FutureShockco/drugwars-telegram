@@ -96,8 +96,8 @@ const unitValues = (unit, trainings) => {
 
   const protection = trainings.find(b => b.training === 'protection');
   const giant = trainings.find(b => b.training === 'giant');
-  if (protection) unit.health = health + (unit.health /100) * protection.lvl;
-  if (giant) unit.health = health + (unit.health / 100) * giant.lvl; // eslint-disable-line no-param-reassign
+  if (protection) health = unit.health + ((unit.health /100) * protection.lvl);
+  if (giant) health = unit.health + ((unit.health / 100) * giant.lvl); // eslint-disable-line no-param-reassign
   if (unit.type === 'Melee') {
     const closecombat = trainings.find(b => b.training === 'closecombat');
     if (closecombat) attack += (unit.attack / 100) * closecombat.lvl; // eslint-disable-line no-param-reassign

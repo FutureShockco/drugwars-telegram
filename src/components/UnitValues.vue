@@ -3,7 +3,8 @@
 	<div class="d-flex justify-content-between">
 		<div class="item-skill text-center">
 			<Icon name="skills/fire" size="18" />
-			<div class="ms-1 mt-0 mb-0 skill-detail">{{ modifiedValues.attack }}</div>
+			<div class="ms-1 mt-0 mb-0 skill-detail">{{ modifiedValues.attack }} <span class="text-blue font-8" v-if="modifiedValues.attack - unit.attack > 0">({{ unit.attack }}+{{modifiedValues.attack - unit.attack}})</span> </div>
+
 		</div>
 
 		<div class="item-skill text-center">
@@ -12,12 +13,14 @@
 		</div>
 		<div class="item-skill text-center">
 			<Icon name="skills/health" size="18" />
-			<div class="ms-1 mt-0 mb-0 skill-detail">{{ modifiedValues.health }}</div>
+			<div class="ms-1 mt-0 mb-0 skill-detail">{{ modifiedValues.health }} <span class="text-blue font-8" v-if="modifiedValues.health - unit.health > 0">({{ unit.health }}+{{modifiedValues.health - unit.health}})</span> </div>
+
 		</div>
 
 		<div class="item-skill text-center">
 			<Icon name="skills/physical" size="18" />
-			<div class="ms-1 mt-0 mb-0 skill-detail">{{ modifiedValues.defense }}</div>
+			<div class="ms-1 mt-0 mb-0 skill-detail">{{ modifiedValues.defense }} <span class="text-blue font-8" v-if="modifiedValues.defense - unit.defense > 0">({{ unit.defense }}+{{modifiedValues.defense - unit.defense}})</span> </div>
+
 		</div>
 		<div class="item-skill text-center">
 			<Icon name="skills/speed" size="18" />
