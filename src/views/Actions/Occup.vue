@@ -77,7 +77,7 @@ export default {
       return this.$store.state.game.user.user;
     },
     sent_fights() {
-      return this.$store.state.game.sent_fights;
+      return this.$store.state.game.sent_fights.actions;
     },
     nickname() {
       return this.$store.state.game.user.user.nickname;

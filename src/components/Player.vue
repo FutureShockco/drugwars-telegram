@@ -70,8 +70,21 @@ export default {
   data() {
     return {
       isLoading: false,
+      foundUsers: {},
       waitingConfirmation: false,
     };
+  },
+  created() {
+    this.$store.state.game.sent_fights.actions.forEach(element => {
+      if (!this.foundUsers[element.target_nickname] || this.foundUsers[element.target_nickname] < element.timestamp_start) {
+        this.foundUsers[element.target_nickname] = element.timestamp_start
+      }
+    });
+    this.$store.state.game.sent_fights.latest.forEach(element => {
+      if (!this.foundUsers[element.target_nickname] || this.foundUsers[element.target_nickname] < element.timestamp_start) {
+        this.foundUsers[element.target_nickname] = element.timestamp_start
+      }
+    });
   },
   computed: {
     user() {
@@ -166,23 +179,23 @@ export default {
     ...mapActions(['startFight']),
     attacked(usernameToCheck) {
       let status;
-      const findUser = this.$store.state.game.sent_fights.find(obj => obj.target_nickname === usernameToCheck);
-      if (findUser) {
+      if (this.foundUsers[usernameToCheck]) {
         // Get current time in seconds
-        const currentTime = Math.floor(Date.now() / 1000);
-
+        const currentTime = new Date().getTime() / 1000;
         // Get timestamp_start from the found object
-        const timestampStart = findUser.timestamp_start;
+        const timestampStart = this.foundUsers[usernameToCheck];
 
         // Calculate time difference
         const timeDiff = currentTime - timestampStart;
 
-        // Determine status
+
         if (timeDiff > 24 * 3600) { // More than 24 hours
           status = 'blue';
         } else if (timeDiff > 6 * 3600) { // More than 6 hours but within 24 hours
           status = 'orange';
-        } else { // Within the last 6 hours
+        }
+
+        else { // Within the last 6 hours
           status = 'red';
         }
 

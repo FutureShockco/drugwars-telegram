@@ -244,7 +244,6 @@ const actions = {
       client
         .requestAsync('get_sent_fights', { username, start, end })
         .then(fights => {
-          //console.log(fights)
           commit('saveSentFights', fights);
           return resolve();
         })

@@ -40,10 +40,10 @@ export default {
   },
   computed: {
     fights() {
-      return orderBy(this.$store.state.game.sent_fights, 'end_date', 'desc');
+      return orderBy(this.$store.state.game.sent_fights.actions, 'end_date', 'desc');
     },
     sent() {
-      if (this.$store.state.game.sent_fights) return this.$store.state.game.sent_fights.all;
+      if (this.$store.state.game.sent_fights.actions) return this.$store.state.game.sent_fights.all;
       return 0;
     },
   },

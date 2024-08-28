@@ -66,7 +66,6 @@ export default {
       const params = { start, end };
       client.requestAsync('get_props', params).then(result => {
         this.users = result.players;
-        console.log(result)
         this.count = result.count[0]['COUNT(*)'];
         this.isLoading = false;
       });

@@ -445,8 +445,8 @@ export default {
       return this.$store.state.game.user.units.length > 0;
     },
     mission7() {
-      if (this.$store.state.game.sent_fights)
-        return this.$store.state.game.sent_fights.find(f => f.attacker_nickname === this.nickname);
+      if (this.$store.state.game.sent_fights.actions)
+        return this.$store.state.game.sent_fights.actions.find(f => f.attacker_nickname === this.nickname);
       return false;
     },
   },

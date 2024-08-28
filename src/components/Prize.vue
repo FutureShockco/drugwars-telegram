@@ -82,7 +82,9 @@
             {{ parseFloat(totalLottery).toFixed(3) }}
           </div>
         </div> -->
-        <div class="popdetail mb-0 mt-3">POPULATION : {{ this.prizeProps.fight_supply | amount }} = Total units x supply
+        <div class="popdetail mb-0 mt-3">Population: <span class="text-yellow">{{ this.prizeProps.fight_supply | amount }}</span> (Units X Supply)
+        </div>
+        <div class="popdetail mb-0">Fights in the last 24H: <span class="text-yellow">{{ this.prizeProps.totalFights[0].count | amount }}+</span> 
         </div>
       </div>
     </div>

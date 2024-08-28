@@ -309,7 +309,7 @@ export default {
       return this.$store.state.game.mainbase;
     },
     sent_fights() {
-      return this.$store.state.game.sent_fights;
+      return this.$store.state.game.sent_fights.actions;
     },
     allbase() {
       return this.$store.state.game.user.buildings || null;
