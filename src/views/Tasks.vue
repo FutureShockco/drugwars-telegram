@@ -1,7 +1,6 @@
 <template>
     <div>
         <RewardsTabs />
-
         <div class="card mx-0 border-bottom-highlight mb-4">
             <div class="content">
                 <div class="d-flex">
@@ -98,18 +97,18 @@
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
         <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
-            :style="`background-image:url(/img/tasks/22.jpg`" :class="dailyRefs.paid === 1 ? 'opacity-50' : ''">
+            :style="`background-image:url(/img/tasks/22.jpg`" :class="dailyRefs && dailyRefs.paid === 1 ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
                     <TaskResources :task="dailyResources" />
                 </div>
                 <h3 class="color-white">Daily Referrals</h3>
                 <p class="color-white opacity-70 mb-0 mt-n1">Refer 3 friends per day and receive resources!</p>
-                <div v-if="dailyRefs.refs === 3 && dailyRefs.paid === 0"
+                <div v-if="dailyRefs && dailyRefs.refs === 3 && dailyRefs.paid === 0"
                     class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                     Wait for your rewards</div>
                 <div @click="TWA.openTelegramLink(`https://t.me/share/url?url=https://t.me/drugwars_bot/drugwars/start?startapp=${$store.state.auth.username}&text= Join Drugwars using my referral link, claim your free resources, and become a vital part of my gang as we dominate and rule the world together!`)"
-                    v-else-if="dailyRefs.refs < 3"
+                    v-else-if="dailyRefs && dailyRefs.refs < 3"
                     class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-magenta">
                     Invite {{ 3 - dailyRefs.refs }} more friends</div>
                 <div v-else class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-red">
@@ -134,7 +133,8 @@
                     <div v-if="!task.user && task.completed === 0 && upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
                         @click="completeTask({ id: task.id }), refreshTask()"
                         class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
-                        Claim your rewards</div>
+                        Claim your rewards for level {{ task.upgradeType.level
+                        }} {{ buildings[task.upgradeType.building].name }} </div>
                     <div v-if="!task.user && task.completed === 0 && !upgradeTaskComplete(task.upgradeType.building, task.upgradeType.level)"
                         class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight opacity-80">
                         Upgrade your {{ buildings[task.upgradeType.building].name }} to level {{ task.upgradeType.level
@@ -458,22 +458,13 @@ export default {
     data() {
         return {
             newTask: { bg: 26, link: '', tasktype: 'watch', rewardType: 'resources', upgradeType: { building: 'headquarters', level: 0 }, rewards: { drug: 0, weapon: 0, alcohol: 0, dwtoken: 0, unit: { name: "spy", amount: 0 } } },
-            tasks: [],
-            upgradeTasks: [],
-            userTasks: [],
-            dailyRewards: [],
             percentage: 0,
             timer: 0,
             code: '',
-            didReset: false,
             units,
             buildings,
             bgs: [],
-            airdrop: null,
-            finishedWatching: false,
-            dailyRefs: { refs: 0, paid: 0 },
-            dailyResources: { rewardType: 'resources', rewards: { drug: 2500, weapon: 7500, alcohol: 7500 }, user: { paid: 0 } },
-        };
+            finishedWatching: false        };
     },
 
     created() {
@@ -481,89 +472,10 @@ export default {
             this.bgs.push(index + 1);
 
         }
-        this.load_tasks()
     },
     methods: {
-        ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeDay', 'completeTask', 'verifyTask', 'sendCode', 'claimAirdrop']),
-        load_tasks() {
-            this.usertasks = [];
-            const params = { user: { id: this.$store.state.auth.username } }
-            //console.log(params)
-            client.requestAsync('get_tasks', params).then(result => {
-                //console.log(result)
-                if (result[0])
-                    //console.log(result[0])
-                    result[0].forEach(element => {
-                        element.rewards = JSON.parse(element.rewards)
-                        element.upgradeType = JSON.parse(element.upgradeType)
-                    });
-                this.tasks = result[0]
-
-                if (result[1]) {
-                    this.usertasks = result[1];
-                    this.tasks.forEach(element => {
-                        element.completed = 0;
-                        element.paid = 0;
-                        element.user = false;
-                        element.time = new Date()
-                            .toISOString()
-                            .slice(0, 19)
-                            .replace('T', ' ');
-                        if (this.usertasks.find(u => u.task_id === element.id)) {
-                            element.user = true;
-                            element.time = this.usertasks.find(u => u.task_id === element.id).time;
-                            element.completed = this.usertasks.find(u => u.task_id === element.id).completed;
-                            element.paid = this.usertasks.find(u => u.task_id === element.id).paid;
-                        }
-                    });
-                }
-                const seen = new Set();
-                const upgradeTasks = this.tasks
-                upgradeTasks.sort((a, b) => {
-                    const levelA = parseInt(a.upgradeType.level, 10) || 0;
-                    const levelB = parseInt(b.upgradeType.level, 10) || 0;
-                    return levelA - levelB;
-                });
-                const uniqueTasks = upgradeTasks.filter(task => {
-                    // Ensure tasktype and upgradeType.building are valid strings
-                    const tasktype = task.tasktype || '';
-                    const building = task.upgradeType && task.upgradeType.building || '';
-
-                    // Create a unique key based on tasktype and building
-                    const key = `${tasktype}-${building}`;
-
-                    // Check if the key has been seen before
-                    if (seen.has(key)) {
-                        return false;
-                    }
-                    if (task.tasktype === 'upgrade' && task.completed !== 1) {
-                        seen.add(key);
-                        return true;
-                    }
-                    else return false
-
-                });
-                if (uniqueTasks)
-                    this.upgradeTasks = uniqueTasks
-                const rewards = result[2][0]
-                this.dailyRewards = rewards
-                this.dailyRewards.rewards = JSON.parse(this.dailyRewards.rewards)
-                const lastConnectDate = this.parseDate(this.dailyRewards.last_connect);
-                const now = new Date();
-                const diffHours = this.getHoursDifference(lastConnectDate, now);
-                if (diffHours >= 48) {
-                    this.dailyRewards.current_day = 1
-                    this.didReset = true
-                }
-                if (result[3] && result[3][0])
-                    this.dailyRefs = result[3][0]
-                if (result[4] && result[4][0])
-                    this.airdrop = result[4][0]
-                this.dailyResources.user.paid = this.dailyRefs.paid
-                this.tasks.sort(function (a, b) { return a.completed - b.completed });
-                this.isLoading = false;
-            });
-        },
+        ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeDay', 'loadTasks', 'completeTask', 'verifyTask', 'sendCode', 'claimAirdrop']),
+      
         parseDate(dateStr) {
             const [day, month, year] = dateStr.split('-').map(Number);
             return new Date(year, month - 1, day);
@@ -584,7 +496,7 @@ export default {
         async refreshTask() {
             const self = this;
             setTimeout(() => {
-                self.load_tasks()
+                self.loadTasks()
             }, 3000);
 
         },
@@ -603,7 +515,7 @@ export default {
         },
         async claimDaily() {
             await this.completeDay({})
-            this.load_tasks()
+            this.loadTasks()
         },
         upgradeTaskComplete(building, level) {
             const b = this.$store.state.game.user.buildings.find(
@@ -616,7 +528,31 @@ export default {
         },
     },
     computed: {
-
+        airdrop() {
+            return this.$store.state.game.userTasks.airdrop
+        },
+        tasks() {
+            return this.$store.state.game.userTasks.tasks
+        },
+        dailyRefs() {
+            return this.$store.state.game.userTasks.dailyRefs
+        },
+        upgradeTasks() {
+            return this.$store.state.game.userTasks.upgradeTasks
+        },
+        userTasks() {
+            return this.$store.state.game.userTasks.userTasks
+        },
+        dailyRewards() {
+            console.log(this.$store.state.game.userTasks.dailyRewards)
+            return this.$store.state.game.userTasks.dailyRewards
+        },
+        didReset() {
+            return this.$store.state.game.userTasks.didReset
+        },
+        dailyResources() {
+            return this.$store.state.game.userTasks.dailyResources
+        },
         now() {
             return new Date(this.$store.state.ui.timestamp)
                 .toISOString()

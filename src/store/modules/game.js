@@ -32,7 +32,8 @@ const state = {
   steemengine: null,
   force_sent_fights_refresh: true,
   server: JSON.parse(localStorage.getItem('server')) || { api: process.env.VUE_APP_API, name: 'Chicago', number: 1 },
-  tutoDetail: 0
+  tutoDetail: 0,
+  userTasks: { tasks: [], dailyRewards: [] }
 };
 
 const mutations = {
@@ -102,6 +103,9 @@ const mutations = {
   setCurrentLink(_state, payload) {
     Vue.set(_state, 'currentLink', payload);
   },
+  setUserTasks(_state, payload) {
+    Vue.set(_state, 'userTasks', payload);
+  },
 };
 
 let registeredUser = null;
@@ -140,6 +144,8 @@ const actions = {
               if ((user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname) || store.state.auth.nickname !== user.user.nickname)
                 await dispatch('updateNickname', registeredUser);
               Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
+                dispatch('loadTasks', 60);
+
                 dispatch('setLoadingPercentage', 80);
                 commit('savePrizeProps', prizeProps);
                 commit('saveUser', user);
@@ -364,7 +370,7 @@ const actions = {
       client
         .requestAsync('get_tasks', { token })
         .then(tasks => {
-          commit('saveStations', tasks);
+          //commit('saveStations', tasks);
           return resolve();
         })
         .catch(err => {
@@ -913,6 +919,102 @@ const actions = {
         return reject();
       });
     }),
+  loadTasks: ({ commit, dispatch }) =>
+    new Promise((resolve, reject) => {
+      const token = authToken();
+
+      client
+        .requestAsync('get_tasks', { token })
+        .then(result => {
+          const allTasks = {};
+          allTasks.dailyResources = { rewardType: 'resources', rewards: { drug: 2500, weapon: 7500, alcohol: 7500 }, user: { paid: 0 } }
+          allTasks.dailyRefs = { refs: 0, paid: 0 }
+          if (result[0]) {
+            result[0].forEach(element => {
+              element.rewards = JSON.parse(element.rewards)
+              element.upgradeType = JSON.parse(element.upgradeType)
+            });
+            allTasks.tasks = result[0]
+          }
+
+          if (result[1]) {
+            allTasks.usertasks = result[1];
+            allTasks.tasks.forEach(element => {
+              element.completed = 0;
+              element.paid = 0;
+              element.user = false;
+              element.time = new Date()
+                .toISOString()
+                .slice(0, 19)
+                .replace('T', ' ');
+              if (allTasks.usertasks.find(u => u.task_id === element.id)) {
+                element.user = true;
+                element.time = allTasks.usertasks.find(u => u.task_id === element.id).time;
+                element.completed = allTasks.usertasks.find(u => u.task_id === element.id).completed;
+                element.paid = allTasks.usertasks.find(u => u.task_id === element.id).paid;
+              }
+            });
+          }
+          const seen = new Set();
+          const upgradeTasks = allTasks.tasks
+          upgradeTasks.sort((a, b) => {
+            const levelA = parseInt(a.upgradeType.level, 10) || 0;
+            const levelB = parseInt(b.upgradeType.level, 10) || 0;
+            return levelA - levelB;
+          });
+          const uniqueTasks = upgradeTasks.filter(task => {
+            // Ensure tasktype and upgradeType.building are valid strings
+            const tasktype = task.tasktype || '';
+            const building = task.upgradeType && task.upgradeType.building || '';
+
+            // Create a unique key based on tasktype and building
+            const key = `${tasktype}-${building}`;
+
+            // Check if the key has been seen before
+            if (seen.has(key)) {
+              return false;
+            }
+            if (task.tasktype === 'upgrade' && task.completed !== 1) {
+              seen.add(key);
+              return true;
+            }
+            else return false
+
+          });
+          if (uniqueTasks)
+            allTasks.upgradeTasks = uniqueTasks
+          const rewards = result[2][0]
+          allTasks.dailyRewards = rewards
+
+          allTasks.dailyRewards.rewards = JSON.parse(allTasks.dailyRewards.rewards)
+          const [day, month, year] = allTasks.dailyRewards.last_connect.split('-').map(Number);
+
+          const lastConnectDate = new Date(year, month - 1, day);
+          const now = new Date();
+          const diffMs = lastConnectDate - now;
+          
+          const diffHours = diffMs / (1000 * 60 * 60);
+          if (diffHours >= 48) {
+            allTasks.dailyRewards.current_day = 1
+            allTasks.didReset = true
+          }
+          if (result[3] && result[3][0])
+            allTasks.dailyRefs = result[3][0]
+          if (result[4] && result[4][0])
+            allTasks.airdrop = result[4][0]
+
+          allTasks.dailyResources.user.paid = allTasks.dailyRefs.paid
+          allTasks.tasks = allTasks.tasks.sort(function (a, b) { return a.completed - b.completed });
+          commit('setUserTasks', allTasks);
+          return resolve();
+        })
+        .catch(err => {
+          console.log(err);
+          handleError(dispatch, err, 'Loading sent fights failed');
+          return reject(err);
+        });
+    }),
+  
   claimBox: ({ rootState }, payload) =>
     new Promise((resolve, reject) => {
       const { username } = rootState.auth;
