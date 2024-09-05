@@ -61,7 +61,7 @@ export default {
   width: 19px;
   height: 24px;
   top: 0px;
-  right: 16%;
+  right: 12%;
   position: absolute;
   background: #d84558;
   padding: 0px 6px;
