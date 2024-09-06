@@ -36,6 +36,7 @@ export default {
           units.push({
             key: u.key,
             amount: u.amount,
+            dead:u.dead
           });
       })
       return units;
