@@ -11,7 +11,7 @@
                 <div class="me-1">Last visit:</div>
                 <div class="me-1"><span class="text-red">0h-6h</span></div>-
                 <div class="mx-1"><span class="text-orange">6h-24h</span></div>-
-                <div class="mx-1"><span class="text-blue">24h+</span></div>-
+                <div class="mx-1"><span class="text-blue">72h+</span></div>-
                 <div class="ms-1"><span class="text-magenta">NA</span></div>
             </div>
             <div class="tabs tabs-pill mx-3">

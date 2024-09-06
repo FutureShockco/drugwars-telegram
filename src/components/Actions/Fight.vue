@@ -139,12 +139,11 @@
             <UiButton class="button btn-xxs gradient-green ml-1" @click="saveFarm()">Save</UiButton>
           </div>
         </UiCenter>
-        <div v-if="!details" class="text-center mb-3">
-          <UiButton class="btn btn-xxs gradient-blue" @click="showDetails()">Show details</UiButton>
+        <div class="text-center mb-3">
+          <UiButton class="btn btn-xxs gradient-yellow me-2" @click="gotoSimulator()">Go to simulator</UiButton>
+          <UiButton v-if="!details" class="btn btn-xxs gradient-blue" @click="showDetails()">Show details</UiButton>
           <!-- <UiButton v-if="!alreadylisted" class="button button-red ml-1" @click="listPopup()">Add to list</UiButton> -->
-        </div>
-        <div v-else class="text-center">
-          <UiButton class="btn btn-xxs gradient-blue" @click="hideDetails()">Hide details</UiButton>
+          <UiButton v-else class="btn btn-xxs gradient-blue" @click="hideDetails()">Hide details</UiButton>
         </div>
       </div>
     </div>
@@ -153,6 +152,7 @@
 
 <script>
 import { jsonParse } from '@/helpers/utils';
+import drugwars from 'drugwars';
 
 export default {
   props: ['fight'],
@@ -224,6 +224,77 @@ export default {
     },
   },
   methods: {
+    gotoSimulator() {
+      let toOpen = 'player,';
+      let myarmy = this.$store.state.game.user.units
+      myarmy = myarmy.map(unit =>
+        this.serialize({
+          p: 1,
+          key: unit.unit,
+          n: unit.amount,
+        }),
+      );
+      toOpen += myarmy;
+      const mytraining = this.$store.state.game.user.trainings.map(training =>
+        this.serialize({
+          p: 1,
+          key: training.training,
+          lvl: training.lvl,
+        }),
+      );
+      if (mytraining && mytraining.length > 0) toOpen += `,${mytraining}`;
+      console.log(this.json.target.detail)
+      if (this.json.target.detail.units.length > 0) {
+        const enemyarmy = this.json.target.detail.units.map(unit =>
+          this.serialize({
+            p: 2,
+            key: unit.unit,
+            n: unit.amount,
+          }),
+        );
+        if (enemyarmy && enemyarmy.length > 0) toOpen += `,${enemyarmy}`;
+      }
+
+      if (this.json.target.detail.trainings.length > 0) {
+        const enemytraining = this.json.target.detail.trainings.map(training =>
+          this.serialize({
+            p: 2,
+            key: training.training,
+            lvl: training.lvl,
+          }),
+        );
+        if (enemytraining && enemytraining.length > 0) toOpen += `,${enemytraining}`;
+      }
+      const enemybuildings = [];
+      this.json.target.detail.buildings.forEach(element => {
+        if (
+          element &&
+          drugwars.buildings[element.building] &&
+          drugwars.buildings[element.building].type === 'defense'
+        )
+          enemybuildings.push(element);
+      });
+      
+      if (enemybuildings.length > 0) {
+        const allenemybuildings = enemybuildings.map(building =>
+          this.serialize({
+            p: 'def',
+            key: building.building,
+            lvl: building.lvl,
+          }),
+        );
+        if (allenemybuildings && allenemybuildings.length > 0) toOpen += `,${allenemybuildings}`;
+      }
+      this.$router.push({ path: `/units/simulator/${toOpen}` });
+    },
+    serialize(obj) {
+      const str = [];
+      for (const p in obj)
+        if (obj.hasOwnProperty(p)) {
+          str.push(`${encodeURIComponent(p)}=${encodeURIComponent(obj[p])}`);
+        }
+      return str.join('&');
+    },
     showDetails() {
       this.details = true;
     },

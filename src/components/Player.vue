@@ -189,7 +189,7 @@ export default {
         const timeDiff = currentTime - timestampStart;
 
 
-        if (timeDiff > 24 * 3600) { // More than 24 hours
+        if (timeDiff > 24 * 3 * 3600) { // More than 24 hours
           status = 'blue';
         } else if (timeDiff > 6 * 3600) { // More than 6 hours but within 24 hours
           status = 'orange';

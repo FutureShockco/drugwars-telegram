@@ -6,7 +6,7 @@ import client from '@/helpers/client';
 const Home = () => import(/* webpackChunkName: "home" */ '@/views/Home.vue');
 const Boards = () => import(/* webpackChunkName: "boards" */ '@/views/Boards.vue');
 
-const Simulator = () => import(/* webpackChunkName: "simulator" */ '@/views/Simulator.vue');
+const Simulator = () => import(/* webpackChunkName: "simulator" */ '@/views/Bootcamp/Simulator.vue');
 const CreateBanner = () => import(/* webpackChunkName: "createbanner" */ '@/views/CreateBanner.vue');
 
 const Jobs = () => import(/* webpackChunkName: "jobs" */ '@/views/Jobs/Jobs.vue');
@@ -186,7 +186,7 @@ export default new Router({
       component: CreateBanner
     },
     {
-      path: '/simulator/:values',
+      path: '/units/simulator/:values',
       name: 'simulator',
       component: Simulator
     },

@@ -2,8 +2,8 @@
   <div class="sunit text-center"
     :class="[tutorialStep === 7 && tutoDetail === 0 && unit.id === 'spy' ? 'tutobox' : '']">
     <div class="sunit" @click="handleClick">
-      <div class="smalltitle">{{ unit.name }}</div>
       <img class="preview unit img-fluid" :src="`/img/units/${unit.id}.png`" />
+      <div class="smalltitle mt-1">{{ unit.name }}</div>
     </div>
     <input class="input form-control mb-1 w-100" type="number" min="1" :max="item.amount" v-model="amount">
   </div>

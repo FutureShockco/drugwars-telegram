@@ -58,17 +58,16 @@ export default {
 
 <style lang="less" scoped>
 .count {
-  width: 19px;
-  height: 24px;
+  height: 20px;
   top: 0px;
-  right: 3%;
+  right: 0%;
   position: absolute;
   background: #d84558;
   padding: 0px 6px;
   border-radius: 5px;
   z-index: 2;
   pointer-events: none;
-  line-height: 24px;
+  line-height: 20px;
   font-weight: 500;
   color: white !important;
 }
