@@ -3,7 +3,7 @@
         <BootcampTabs />
         <div class="mt-2">
             <div class="row">
-                <div class="col-6 border-red-dark card shadow-card shadow-card-l">
+                <div class="col-6 card shadow-card shadow-card-l">
                     <div class="row mx-0">
                         <h3 class="text-red mb-2">UNITS</h3>
                         <div class="col-4 unitname px-1" v-if="unit.key !== 'occupation_troop'" v-for="unit in attacker"
@@ -22,17 +22,17 @@
                             <input v-model="training.lvl" type="number" class="form-control mb-2" /></input>
                         </div>
                         <div class="col mt-2 d-flex">
-                            <button @click="handleResetMyUnits" class="btn btn-xs me-2 border-blue-dark mb-2">
+                            <button @click="handleResetMyUnits" class="btn btn-xs me-2  mb-2">
                                 Reset
                             </button>
-                            <button @click="handleLoadMyUnits" class="btn btn-xs border-blue-dark mb-2">
+                            <button @click="handleLoadMyUnits" class="btn btn-xs  mb-2">
                                 Reload
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-6 border border-blue-dark card shadow-card shadow-card-l">
+                <div class="col-6 card shadow-card shadow-card-l">
                     <div class="row  mx-0">
                         <h3 class="text-right text-blue mb-2">UNITS
                             <!-- <div class="float-right">
@@ -84,7 +84,7 @@
             </div>
         </div>
         <div v-if="result.result" class="row mx-0 result">
-            <div class="col col-6 px-2 py-4 attacker text-center card mx-0 border-red-dark border-bottom-0">
+            <div class="col col-6 px-2 py-4 attacker text-center card mx-0">
                 <div>
                     <h5>Attacker Start</h5>
                     <div v-if="result.attacker.start_value">
@@ -123,7 +123,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col col-6 px-2 py-4 defender text-center card mx-0 border-blue-dark border-bottom-0">
+            <div class="col col-6 px-2 py-4 defender text-center card mx-0">
                 <div>
                     <h5>Defender Start</h5>
                     <div v-if="result.target.start_value">
@@ -166,7 +166,7 @@
         <div v-if="result.result" class="row mx-0 px-0">
             <div class="row mx-0 px-0">
                 <div v-for="(army) in ['attacker', 'target']" class="card col-6 mx-0 px-0 border-top-0 border-bottom-0"
-                    :class="army === 'attacker' ? 'border-red-dark' : 'border-blue-dark'">
+                    >
                     <div class="row mx-0 px-0">
                         <div style="position: relative;" class="col-4 mx-0 px-1 mb-2 text-center"
                             v-for="unit in result[army].units" v-if="unit.amount > 0">
@@ -203,7 +203,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card col-6 p-2 attacker text-center border-red-dark border-top-0">
+            <div class="card col-6 p-2 attacker text-center ">
                 <div>
                     <h5>Attacker End:</h5>
                     <div v-if="result.attacker.end_value">
@@ -243,7 +243,7 @@
                     </div>
                 </div>
             </div>
-            <div class="card col-6 p-2 defender text-center border-blue-dark border-top-0">
+            <div class="card col-6 p-2 defender text-center ">
                 <div>
                     <h5>Defender End:</h5>
                     <div v-if="result.target.end_value">
