@@ -63,7 +63,7 @@
 		<div>
 			<div v-if="details" class="text-center">
 				<h5 v-if="fight.attacker_reward">REWARDS :</h5>
-				<div v-if="fight.attacker_reward">{{ fight.attacker_reward }} DW</div>
+				<div  class="text-yellow" v-if="fight.attacker_reward">{{ fight.attacker_reward }} DW</div>
 				<Troops v-if="json.target.detail && json.target.detail.units" :units="json.target.detail.units" />
 				<ActionsDetail
 					v-if="json && json.target && fight.target_nickname != user.nickname && json.target.detail"

@@ -23,7 +23,7 @@
             <ActionsValue :result="json.attacker.start_value" :lose="json.attacker.end_value" />
           </div>
           <h5 v-if="fight.attacker_reward && Number(fight.attacker_reward) > 0.001">REWARDS :</h5>
-          <div v-if="fight.attacker_reward && Number(fight.attacker_reward) > 0.001">{{ fight.attacker_reward }} DW
+          <div class="text-yellow" v-if="fight.attacker_reward && Number(fight.attacker_reward) > 0.001">{{ fight.attacker_reward }} DW
           </div>
           <!-- <h5 v-if="fight.attacker_elo">CRUELTY CHANGE :</h5>
           <div v-if="fight.attacker_elo">{{ Number(fight.attacker_elo) / 1000 | amount }}</div> -->
@@ -75,7 +75,7 @@
             <ActionsValue :result="json.target.start_value" :lose="json.target.end_value" />
           </div>
           <h5 v-if="fight.result === 3 && fight.defender_reward && Number(fight.defender_reward) > 0.001">REWARDS :</h5>
-          <div v-if="fight.result === 3 && fight.defender_reward && Number(fight.defender_reward) > 0.001">
+          <div class="text-yellow" v-if="fight.result === 3 && fight.defender_reward && Number(fight.defender_reward) > 0.001">
             {{ fight.defender_reward }} DW</div>
           <!-- <h5 v-if="fight.defender_elo">CRUELTY CHANGE :</h5>
           <div v-if="fight.defender_elo">{{ Number(fight.defender_elo) / 1000 | amount }}</div> -->
