@@ -196,7 +196,7 @@ const actions = {
           })
           .catch(err => {
             console.log(err);
-            handleError(dispatch, err, 'Loading account failed');
+            handleError(dispatch, err, 'Loading account failed. Reason: ' + err);
             return reject(err);
           });
       }
