@@ -26,9 +26,9 @@
             </div>
           </div>
         </div>
-        <div class="balance py-2" :class="{ 'text-red': balances.drugs >= HQ.drug_storage }">
+        <div class="balance py-2" >
           <!-- {{ balances.drugs | amount }} -->
-          <animated-number style="line-height: unset;" :value="balances.drugs" :formatValue="formatToPrice"
+          <animated-number :class="{ 'text-red': balances.drugs >= HQ.drug_storage }" style="line-height: unset;" :value="balances.drugs" :formatValue="formatToPrice"
             :duration="500" />
         </div>
 
@@ -61,9 +61,9 @@
             </div>
           </div>
         </div>
-        <div class="balance py-2" :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }">
+        <div class="balance py-2" >
           <!-- {{ balances.weapons | amount }} -->
-          <animated-number style="line-height: unset;" :value="balances.weapons" :formatValue="formatToPrice"
+          <animated-number :class="{ 'text-red': balances.weapons >= HQ.weapon_storage }" style="line-height: unset;" :value="balances.weapons" :formatValue="formatToPrice"
             :duration="500" />
         </div>
         <!-- <div class="detail ">
@@ -100,9 +100,9 @@
             </div>
           </div>
         </div>
-        <div class="balance py-2" :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }">
+        <div class="balance py-2" >
           <!-- {{ balances.alcohols | amount }} -->
-          <animated-number style="line-height: unset;" :value="balances.alcohols" :formatValue="formatToPrice"
+          <animated-number :class="{ 'text-red': balances.alcohols >= HQ.alcohol_storage }" style="line-height: unset;" :value="balances.alcohols" :formatValue="formatToPrice"
           :duration="500" />
         </div>
         <!-- <div class="detail">
