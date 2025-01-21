@@ -116,9 +116,11 @@ Vue.use(Router);
 setInterval(() => {
   store.dispatch('updateTimestamp');
 }, 1000);
+export let lastRoute = null;
 
 
 const requireAuth = (to, from, next) => {
+  lastRoute = from;
   if(to.path === '/banner' || from.path === '/banner')
   {
     store.dispatch('hideLoading');

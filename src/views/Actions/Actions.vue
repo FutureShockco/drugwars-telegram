@@ -54,7 +54,11 @@
           >STATION</UiButton> -->
           </div>
           <div v-if="tutorialStep > 6">
-            <h3>Select your army composition</h3>
+            <div class="d-flex">
+              <UiButton style="margin-right: 10px;" v-if="lastRo" class="btn gradient-gray color-black btn-xs mb-3" @click="goBack()">Back
+              </UiButton>
+              <h3 class="float-right">Select your army composition</h3>
+            </div>
             <div class="row d-flex" v-if="ownUnits.length > 0">
               <UnitSelect v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base"
                 class="col-3" v-if="ownUnit.amount > 0" :item="ownUnit" @select="addUnit" />
@@ -87,7 +91,9 @@
               <p>You need to select at least 1 unit.</p>
             </div>
             <div v-else-if="tutorialStep > 7">
-              <h5>Power : {{ offensivePower }}% - Timer : {{ timer | ms }} - Cost : {{ cost | amount }} <Icon name="drug" size="16"/></h5>
+              <h5>Power : {{ offensivePower }}% - Timer : {{ timer | ms }} - Cost : {{ cost | amount }}
+                <Icon name="drug" size="16" />
+              </h5>
               <UiButton class="btn btn-xxs gradient-red mb-2" @click="removeUnits()">Remove all</UiButton>
               <div v-if="action_type === 'transport'">
                 <div class="columns mt-4">
@@ -258,6 +264,7 @@ import client from '@/helpers/client';
 import { units } from 'drugwars';
 import Promise from 'bluebird';
 import draggable from 'vuedraggable';
+import { lastRoute } from '@/router';
 
 export default {
   data() {
@@ -299,6 +306,9 @@ export default {
     }
   },
   computed: {
+    lastRo() {
+      return lastRoute.path === "/boards"
+    },
     tutorialStep() {
       return this.$store.state.game.user.user.tutorial
     },
@@ -438,7 +448,7 @@ export default {
         }
       });
       if (self.action_type === 'attack') return cost;
-      return cost ;
+      return cost;
     },
     enemyRankName() {
       let rank = 10;
@@ -550,6 +560,9 @@ export default {
     },
     removeUnits() {
       this.selectedUnits = [];
+    },
+    goBack() {
+      this.$router.go(-1)
     },
     async handleSubmit() {
       this.setTutoDetail(2)
@@ -692,8 +705,8 @@ export default {
       const amount = parseInt(payload.amount);
       const selectedUnitsObj = {};
       const ownUnit = this.ownUnits.find(unit => unit.key === payload.key);
-      if(this.TWA && this.TWA.HapticFeedback)
-      this.TWA.HapticFeedback.impactOccurred("medium");
+      if (this.TWA && this.TWA.HapticFeedback)
+        this.TWA.HapticFeedback.impactOccurred("medium");
 
       this.selectedUnits.forEach(unit => {
         selectedUnitsObj[unit.key] = unit.amount;
