@@ -266,7 +266,7 @@ $small-screen-height: 450px;
       .vb-content {
         width: calc(100vw - #{2 * $maximized-padding});
         max-width: 1200px;
-        height: calc(100vh -200px);
+        height: calc(100vh - 200px);
         max-height: calc(100vh - 46px);
         overflow: auto;
       }
