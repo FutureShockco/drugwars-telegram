@@ -16,19 +16,23 @@
             </div>
             <div class="tabs tabs-pill mx-3">
                 <div class="tab-controls">
-                    <a @click="setTab('prod')" class="font-13" :aria-expanded="currenTab === 'prod'">Production</a>
+                    <a @click="setTab('production')" class="font-13" :aria-expanded="currenTab === 'production'">Production</a>
                     <a @click="setTab('pablo')" class="font-13" :aria-expanded="currenTab === 'pablo'">Pablo</a>
-                    <a @click="setTab('fight')" class="font-13" :aria-expanded="currenTab === 'fight'">Fight</a>
+                    <a @click="setTab('fights')" class="font-13" :aria-expanded="currenTab === 'fights'">Fight</a>
+                    <!-- <a @click="setTab('contracts')" class="font-13" :aria-expanded="currenTab === 'contracts'">Contract</a> -->
                 </div>
                 <div class="card card-style mx-0">
-                    <div class="collapse" :class="currenTab === 'prod' ? 'show' : ''">
+                    <div class="collapse" :class="currenTab === 'production' ? 'show' : ''">
                         <LeaderboardsProduction />
                     </div>
                     <div class="collapse" :class="currenTab === 'pablo' ? 'show' : ''">
                         <LeaderboardsPablo />
                     </div>
-                    <div class="collapse" :class="currenTab === 'fight' ? 'show' : ''">
+                    <div class="collapse" :class="currenTab === 'fights' ? 'show' : ''">
                         <LeaderboardsFight />
+                    </div>
+                    <div class="collapse" :class="currenTab === 'contracts' ? 'show' : ''">
+                        <LeaderboardsContracts />
                     </div>
                 </div>
             </div>
@@ -39,10 +43,11 @@
 
 <script>
 import { mapActions } from 'vuex';
+
 export default {
     data() {
         return {
-            currenTab: "prod"
+            currenTab:  this.$route.meta.base
         };
     },
     methods: {

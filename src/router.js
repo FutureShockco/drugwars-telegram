@@ -121,8 +121,7 @@ export let lastRoute = null;
 
 const requireAuth = (to, from, next) => {
   lastRoute = from;
-  if(to.path === '/banner' || from.path === '/banner')
-  {
+  if (to.path === '/banner' || from.path === '/banner') {
     store.dispatch('hideLoading');
     next({ name: 'banner' })
   }
@@ -216,6 +215,37 @@ export default new Router({
       component: Boards,
       beforeEnter: requireAuth,
       meta: {
+        base: "production",
+        hideSidebar: true,
+      },
+    },
+    {
+      path: '/boards/pablo',
+      name: 'boards',
+      component: Boards,
+      beforeEnter: requireAuth,
+      meta: {
+        base: "pablo",
+        hideSidebar: true,
+      },
+    },
+    {
+      path: '/boards/fights',
+      name: 'boards',
+      component: Boards,
+      beforeEnter: requireAuth,
+      meta: {
+        base: "fights",
+        hideSidebar: true,
+      },
+    },
+    {
+      path: '/boards/contracts',
+      name: 'boards',
+      component: Boards,
+      beforeEnter: requireAuth,
+      meta: {
+        base: "contracts",
         hideSidebar: true,
       },
     },

@@ -3388,7 +3388,7 @@ divider:after {
 .tabs-pill a[aria-expanded=true] {
   background-color: #4A89DC;
   border-color: #4A89DC;
-  color: #FFF !important;
+  color: #000 !important;
 }
 
 .tabs-links .tab-controls {
@@ -4592,3 +4592,6 @@ input[type=range] {
   border: none;
 }
 
+table {
+  font-size: 13px;
+}

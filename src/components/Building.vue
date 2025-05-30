@@ -51,13 +51,18 @@
               </router-link>
               <!-- <div class="mb-2" v-html="building.desc"></div> -->
               <div v-if="building.feature">
-                <div v-if="building.id === 'pantheon'">For the few who rose above...<div v-for="p,index in pantheoners"
+                <div v-if="building.id === 'pantheon'">For the few who rose above...<div v-for="p, index in pantheoners"
                     class="text-yellow me-2">
-                  
-                    <i v-if="index === 0" style="--fa-primary-color: #ffd700;  --fa-secondary-color: white;" class="fad color-silver fa-medal me-2"></i>
-                    <i v-if="index === 1" style="--fa-primary-color: #c0c0c0;  --fa-secondary-color: white;" class="fad color-silver fa-medal me-2"></i>
-                    <i v-if="index === 2" style="--fa-primary-color: #cd7f32;  --fa-secondary-color: white;" class="fad color-silver fa-medal me-2"></i>
-                    <strong>  {{ p.nickname }}  </strong></div></div>
+
+                    <i v-if="index === 0" style="--fa-primary-color: #ffd700;  --fa-secondary-color: white;"
+                      class="fad color-silver fa-medal me-2"></i>
+                    <i v-if="index === 1" style="--fa-primary-color: #c0c0c0;  --fa-secondary-color: white;"
+                      class="fad color-silver fa-medal me-2"></i>
+                    <i v-if="index === 2" style="--fa-primary-color: #cd7f32;  --fa-secondary-color: white;"
+                      class="fad color-silver fa-medal me-2"></i>
+                    <strong> {{ p.nickname }} </strong>
+                  </div>
+                </div>
                 <div v-else>{{ building.feature }}</div>
               </div>
               <div v-if="building.production_type">
@@ -94,7 +99,7 @@
                     100
                     *
                     20 |
-                  amount }}
+                    amount }}
                 </div>
                 <div v-else>
                   <b>Safe:</b>

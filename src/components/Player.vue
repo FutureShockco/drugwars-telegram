@@ -5,7 +5,7 @@
         <!-- <Avatar :size="20" :username="player.nickname" :rank="rank" :rankname="rankname"
           picture="https://www.enableds.com/products/duo/v30/images/avatars/2s.png" :reputation="player.reputation"
           :xp="player.xp" /> -->
-        <router-link v-if="player.nickname !== user.nickname" :to="'/actions?type=attack&nickname=' + player.nickname">
+        <router-link class="d-inline-flex" v-if="player.nickname !== user.nickname" :to="'/actions?type=attack&nickname=' + player.nickname">
           <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
             player.nickname
           }}</div>
@@ -51,13 +51,29 @@
       </div>
     </td>
     <td v-if="board === 'fight'" class="col">
-      {{ player.supply || 0 }}<i class="ms-2 fad fa-users font-12"></i>
+      {{ player.supply || 0 | amount }}<i class="ms-2 fad fa-users font-12"></i>
     </td>
-    <td v-if="board === 'fight'" class="col">
-      +{{ player.amount }}
+    <td v-if="board === 'fight' && board !== 'contract'" class="col">
+      +{{ player.amount | amount }}
       <Icon class="ms-1" name="dwd" size="22" />
     </td>
-
+    <td v-if="contract" class="col">
+      {{ player.dwd}}
+      <Icon class="ms-1" name="dwd" size="22" />
+    </td>
+    <td v-if="contract" class="col">
+      {{ player.drug}}
+      <Icon class="ms-1" name="drug" size="22" />
+      {{ player.weapon}}
+      <Icon class="ms-1" name="weapon" size="22" />
+      {{ player.alcohol}}
+      <Icon class="ms-1" name="alcohol" size="22" />
+    </td>
+    <td v-if="contract" class="col">
+      {{ player.supply}}
+      <i class="ms-2 fad fa-users font-12"></i>
+      
+    </td>
   </tr>
 </template>
 
@@ -66,7 +82,7 @@ import { mapActions } from 'vuex';
 import client from '@/helpers/client';
 
 export default {
-  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list', 'heist', 'board', 'target'],
+  props: ['player', 'rank', 'reputation', 'reward', 'cruelty', 'list', 'heist', 'board', 'target', 'wanted', 'contract'],
   data() {
     return {
       isLoading: false,

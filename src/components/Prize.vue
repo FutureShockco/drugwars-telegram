@@ -38,27 +38,33 @@
             </thead>
             <tbody>
               <tr>
-                <td><strong>Production</strong></td>
+                <td><router-link class="color-white" to="boards"><strong>Production</strong></router-link></td>
                 <td>{{ totalDaily | amount }}
                   <Icon name="dwd" />
                 </td>
                 <td>Daily</td>
               </tr>
               <tr>
-                <td><strong>Pablo</strong></td>
+                <td><router-link class="color-white" to="boards/pablo"><strong>Pablo</strong></router-link></td>
                 <td>{{ pablo | amount }}
                   <Icon name="ton" size="18" />
                 </td>
                 <td>Weekly</td>
               </tr>
               <tr>
-                <td><strong>Fight</strong></td>
+                <td><router-link class="color-white" to="boards/fights"><strong>Fights</strong></router-link></td>
                 <td> {{ totalFight + prizeProps.free_dwd - prizeProps.daily_rewards | amount }}
                   <Icon name="dwd" />
                 </td>
                 <td>Instant</td>
               </tr>
-
+              <!-- <tr>
+                <td><router-link class="color-white" to="boards/contracts"><strong>Contracts</strong></router-link></td>
+                <td> {{ totalFight + prizeProps.free_dwd - prizeProps.daily_rewards | amount }}
+                  <Icon name="dwd" />
+                </td>
+                <td>Instant</td>
+              </tr> -->
             </tbody>
           </table>
         </div>

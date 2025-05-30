@@ -41,6 +41,9 @@ export default {
   max-width: 100%;
 }
 
+
+
+
 center img {
   max-width: 100% !important;
 }

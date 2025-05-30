@@ -12,11 +12,10 @@
                 <th scope="col">Player</th>
                 <th scope="col">Prod/Day</th>
                 <th scope="col">Reward</th>
-                <!-- <th scope="col">Bonus</th> -->
               </tr>
             </thead>
             <tbody>
-              <Player board="prod" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username" 
+              <Player board="prod" class="leaders" v-for="(user, key) in users" :player="user" :key="user.username"
                 :rank="key + currentRank + 1" :reward="50">
               </Player>
 

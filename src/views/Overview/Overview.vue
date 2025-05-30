@@ -45,7 +45,7 @@
           </div>
         </div>
       </div>
-      <div class="card card-style">
+      <div class="card">
         <div class="content">
           <h4>WEAPONS PRODUCTION</h4>
           <BuildingProductionCompact v-for="building in weapon_buildings" :building="building" :key="building.id" />
@@ -88,7 +88,7 @@
           </div>
         </div>
       </div>
-      <div class="card card-style">
+      <div class="card">
         <div class="content">
           <h5>ALCOHOL PRODUCTION</h5>
 

@@ -70,22 +70,13 @@
 //   pointer-events: none;
 //   white-space: nowrap;
 // }
-// .gang-label{
-//   font-family: @heading-font;
-//   text-transform: uppercase;
-//   transform: translate(-50%,-50%) skew(-24deg) rotate(-10deg);
-//   width: 160px;
-//   left:50%;
-//   text-align: center;
-//   margin: 0;
-//   line-height: 15px;
-//   position: relative;
-//   text-rendering: optimizeLegibility;
-//   font-weight: 900;
-//   color: #db2828;
-//   text-shadow: 1px 4px 6px #000, 0 0 0 #0b0b0b, 1px 4px 6px #101010;
-//   top:-5px;
-// }
+.gang-label {
+  font-family: @heading-font;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
 .preview.unit {
   width: 100%;
   height: auto;
@@ -586,12 +577,6 @@
   padding: 6px 12px !important;
 }
 
-@property --border-angle {
-  syntax: "<angle>";
-  inherits: true;
-  initial-value: 0turn;
-}
-
 .btn.gradient-red:disabled {
   i {
     --fa-primary-color: white;
@@ -617,3 +602,14 @@
 .float-right {
   float: right;
 }
+
+.full-height {
+  min-height: 70vh;
+}
+
+@property --border-angle {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0turn;
+}
+
