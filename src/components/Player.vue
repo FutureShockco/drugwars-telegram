@@ -13,8 +13,8 @@
             {{ player.nickname }}</div>
           <div class="gang-label" v-if="player.ticker">[{{ player.ticker }}]</div>
         </router-link>
-        <div v-else>
-          <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
+        <div v-else class="d-inline-flex">
+          <div v-if="player.gang" class="username" :class="{ 'text-yellow': player.gang === user.gang }">{{
             player.nickname
           }}</div>
           <div v-else class="username text-yellow">{{ player.nickname }}</div>
