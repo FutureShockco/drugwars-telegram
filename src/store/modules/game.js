@@ -487,17 +487,20 @@ const actions = {
       payload.username = username; // eslint-disable-line no-param-reassign
       payload.type = 'dw-units'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
-        if (result) {
-          setTimeout(() => {
-            store.dispatch('init');
-          }, 1000);
+        if (result && result.type && result.type === 'error') {
           store.dispatch('notify', {
-            type: 'success',
+            type: 'error',
             message: result,
           });
           return resolve(result);
         }
-
+        else if (result) {
+          store.dispatch('init'); 
+          store.dispatch('notify', {
+            type: 'success',
+            message: result,
+          });
+        }
         return reject();
       });
     }),
@@ -559,7 +562,10 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           if (result && result.type && result.type === 'error') {
-            console.log('error');
+            store.dispatch('notify', {
+              type: 'error',
+              message: result.message,
+            });
           } else {
             store.dispatch('notify', {
               type: 'success',
