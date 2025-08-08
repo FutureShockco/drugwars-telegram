@@ -142,6 +142,10 @@ const actions = {
           .then(async user => {
             dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
             if (user && user.user && user.user.username) {
+              if (store.state.ui.firstLoad) {
+                dispatch('refreshPrizeProps');
+                dispatch('refreshUser', 60);
+              }
               dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
               if ((user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname) || store.state.auth.nickname !== user.user.nickname)
                 await dispatch('updateNickname', registeredUser);
@@ -165,10 +169,7 @@ const actions = {
                       b.building === 'headquarters',
                   ),
                 );
-              if (store.state.ui.firstLoad) {
-                dispatch('refreshPrizeProps');
-                dispatch('refreshUser', 60);
-              }
+
               //dispatch('refresh_transport_count');
               //dispatch('refresh_station_count');
               dispatch('setLoadingPercentage', 90);
