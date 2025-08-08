@@ -51,8 +51,6 @@ function Sub(rawClient) {
     if (message[1].body && message[1].body.type === 'start_attack') {
       store.dispatch('refresh_fights_count');
       store.dispatch('refresh_sent_fights');
-      store.dispatch('refresh_transport_count');
-      store.dispatch('init', { user: null, showLoading: false });
       store.dispatch('notify', {
         type: 'success',
         icon: 'target',

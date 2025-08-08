@@ -35,9 +35,7 @@ export default {
   components: {
     Paginate,
   },
-  created() {
-    this.load_fights(1);
-  },
+
   computed: {
     fights() {
       return orderBy(this.$store.state.game.sent_fights.actions, 'end_date', 'desc');
@@ -48,7 +46,7 @@ export default {
     },
   },
   methods: {
-    ...mapActions(['init', 'notify', 'refresh_sent_fights', 'force_sent_fights_refresh']),
+    ...mapActions(['notify', 'refresh_sent_fights', 'force_sent_fights_refresh']),
     load_fights(start) {
       let end = 25;
       end = start * 25;

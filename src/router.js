@@ -132,9 +132,7 @@ const requireAuth = (to, from, next) => {
       if (store.state.auth.username) {
         next();
         store.dispatch('hideLoading');
-        // store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
-        //   next();
-        // });
+
       } else {
         const redirect = to.fullPath === '/' ? undefined : to.fullPath;
         next({ name: 'home', query: { redirect } });
@@ -149,9 +147,6 @@ const requireAuth = (to, from, next) => {
         store.dispatch('hideLoading');
         next();
 
-        // store.dispatch('init', { user: store.state.auth.account, showLoading: true }).then(() => {
-        //   next();
-        // });
       } else {
         const redirect = to.fullPath === '/' ? undefined : to.fullPath;
         next({ name: 'home', query: { redirect } });

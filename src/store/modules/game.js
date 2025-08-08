@@ -119,8 +119,11 @@ const actions = {
         dispatch('showLoading');
       if (!payload && registeredUser)
         payload = registeredUser
-      if (!store.state.auth.username)
+      if (!store.state.auth.username) {
         await dispatch('login', payload);
+      }
+
+
       dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
 
 
@@ -142,51 +145,49 @@ const actions = {
               dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
               if ((user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname) || store.state.auth.nickname !== user.user.nickname)
                 await dispatch('updateNickname', registeredUser);
-              Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
-                dispatch('loadTasks', 60);
-
-                dispatch('setLoadingPercentage', 80);
-                commit('savePrizeProps', prizeProps);
-                commit('saveUser', user);
-                commit('saveConnected', true);
+              dispatch('setLoadingPercentage', 80);
+              commit('saveUser', user);
+              commit('saveConnected', true);
+              commit(
+                'saveBase',
+                user.buildings.find(b => b.main === 1 && b.territory != 0 && b.base != 0),
+              );
+              if (
+                totalbases !== user.buildings.find(b => b.building === 'headquarters').length
+              )
                 commit(
-                  'saveBase',
-                  user.buildings.find(b => b.main === 1 && b.territory != 0 && b.base != 0),
+                  'saveMainBase',
+                  user.buildings.find(
+                    b =>
+                      b.main === 1 &&
+                      b.territory !== 0 &&
+                      b.base !== 0 &&
+                      b.building === 'headquarters',
+                  ),
                 );
-                if (
-                  totalbases !== user.buildings.find(b => b.building === 'headquarters').length
-                )
-                  commit(
-                    'saveMainBase',
-                    user.buildings.find(
-                      b =>
-                        b.main === 1 &&
-                        b.territory !== 0 &&
-                        b.base !== 0 &&
-                        b.building === 'headquarters',
-                    ),
-                  );
+              if (store.state.ui.firstLoad) {
+                dispatch('refreshPrizeProps');
+                dispatch('refreshUser', 60);
+              }
+              //dispatch('refresh_transport_count');
+              //dispatch('refresh_station_count');
+              dispatch('setLoadingPercentage', 90);
+              Promise.delay(100).then(() => {
+                dispatch('setLoadingPercentage', 100);
 
-                dispatch('refresh_fights_count');
-                dispatch('refresh_sent_fights');
-                //dispatch('refresh_transport_count');
-                //dispatch('refresh_station_count');
-                dispatch('setLoadingPercentage', 90);
-                Promise.delay(1000).then(() => {
-                  dispatch('setLoadingPercentage', 100);
+                dispatch('hideLoading');
+                dispatch('setFirstLoad', false);
+                dispatch('setLoadingPercentage', 0);
 
-                  dispatch('hideLoading');
-                  dispatch('setFirstLoad', false);
-                  dispatch('setLoadingPercentage', 0);
-                  if (user.user.tutorial < 9)
-                    store.dispatch('showTutorial')
-                  return resolve("success");
+                if (user.user.tutorial < 9)
+                  store.dispatch('showTutorial')
+                return resolve("success");
 
-                });
               });
+
             } else {
               dispatch('signup').then(() => {
-                Promise.delay(2000).then(() => {
+                Promise.delay(1000).then(() => {
                   // window.location = '/home';
                   resolve()
                 });
@@ -199,6 +200,20 @@ const actions = {
             return reject(err);
           });
       }
+    }),
+  refreshPrizeProps: ({ commit, dispatch }, payload) =>
+    new Promise(async (resolve, reject) => {
+      client.requestAsync('get_prize_props', null).then(prizeProps => {
+        commit('savePrizeProps', prizeProps);
+        return resolve("success");
+      });
+    }),
+  refreshUser: ({ commit, dispatch }, payload) =>
+    new Promise(async (resolve, reject) => {
+      dispatch('loadTasks', 60);
+      dispatch('refresh_fights_count');
+      dispatch('refresh_sent_fights');
+      return resolve("success");
     }),
   refresh_inc_fights: ({ commit, dispatch }, limit) =>
     new Promise((resolve, reject) => {
@@ -406,7 +421,6 @@ const actions = {
       payload.type = 'dw-upgrades'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result && result.type !== 'error') {
-          console.log(result);
           store.dispatch('init');
           store.dispatch('notify', {
             type: 'success',
@@ -414,10 +428,19 @@ const actions = {
           });
           return resolve(result);
         }
+        else if (result) {
+          store.dispatch('notify', {
+            type: 'error',
+            message: result,
+          });
+          return resolve();
+        }
         else {
-
+          store.dispatch('notify', {
+            type: 'error',
+            message: 'Building upgrade failed',
+          });
           return reject();
-
         }
 
       });
@@ -469,16 +492,28 @@ const actions = {
       payload.username = username; // eslint-disable-line no-param-reassign
       payload.type = 'dw-trainings'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
-        if (result) {
+        if (result && result.type && result.type === 'error') {
+          store.dispatch('notify', {
+            type: 'error',
+            message: result,
+          });
+          return resolve(result);
+        }
+        else if (result) {
           store.dispatch('init');
           store.dispatch('notify', {
             type: 'success',
             message: result,
           });
-          return resolve(result);
+          return resolve();
         }
-
-        return reject();
+        else {
+          store.dispatch('notify', {
+            type: 'error',
+            message: 'Training upgrade failed',
+          });
+          return reject();
+        }
       });
     }),
   recruitUnit: ({ rootState }, payload) =>
@@ -519,6 +554,7 @@ const actions = {
       return dwsocial(username, payload, result => {
         if (result) {
           store.dispatch('init', { user: null, showLoading: true });
+          store.dispatch('refreshPrizeProps');
           store.dispatch('notify', {
             type: 'success',
             message: result,
@@ -577,9 +613,6 @@ const actions = {
             store.dispatch('notify', {
               type: 'success',
               message: result,
-            });
-            Promise.delay(3000).then(() => {
-              store.dispatch('init');
             });
             return resolve(result);
 

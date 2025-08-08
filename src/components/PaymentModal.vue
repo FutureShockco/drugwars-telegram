@@ -55,7 +55,14 @@ export default {
             return this.$store.state.game.user.user.tutorial
         },
         notEnoughDWD() {
-            return this.currentPayment.price > this.$store.state.game.user.user.dwd;
+            const user = this.$store.state.game.user;
+            if (!user || !user.user) return true;
+            
+            const userDwd = parseFloat(user.user.dwd) || 0;
+            const price = parseFloat(this.currentPayment && this.currentPayment.price) || 0;
+            
+            console.log('DWD Check:', { userDwd, price, hasEnough: userDwd >= price });
+            return price > userDwd;
         },
     },
     methods: {

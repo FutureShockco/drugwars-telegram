@@ -3857,16 +3857,17 @@ divider:after {
 .notification-bar-top {
   opacity: 1 !important;
   position: fixed;
-  top: calc(140px + env(safe-area-inset-top) * 1.1);
-  left: 0px;
+  top: calc(80px + env(safe-area-inset-top) * 1.1);
+  left: 10px;
   right: 0px;
   transform: translateY(-120%);
   transition: all 250ms ease;
   z-index: 100 !important;
 }
 
-.notification-bar .toast-header {
-  background-color: transparent !important;
+.notification-bar-top .toast-header {
+  border-radius: 10px;
+  background: #000000e0 !important;
 }
 
 .notification-bar.detached {

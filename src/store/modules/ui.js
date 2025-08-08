@@ -58,6 +58,20 @@ const mutations = {
   notify(_state, payload) {
     const timestamp = parseInt(new Date().getTime() / 1000);
     _state.notifications.push({ ...payload, timestamp });
+    
+    // Remove old notifications (older than 50 seconds)
+    _state.notifications = _state.notifications.filter(
+      notification => timestamp < notification.timestamp + 5
+    );
+  },
+  removeNotification(_state, index) {
+    _state.notifications.splice(index, 1);
+  },
+  cleanupOldNotifications(_state) {
+    const currentTimestamp = parseInt(new Date().getTime() / 1000);
+    _state.notifications = _state.notifications.filter(
+      notification => currentTimestamp < notification.timestamp + 5
+    );
   },
   setFirstLoad(_state, payload) {
     Vue.set(_state, 'firstLoad', payload);
@@ -97,9 +111,13 @@ const actions = {
   },
   updateTimestamp({ commit }) {
     commit('updateTimestamp');
+    commit('cleanupOldNotifications');
   },
   notify({ commit }, payload) {
     commit('notify', payload);
+  },
+  removeNotification({ commit }, index) {
+    commit('removeNotification', index);
   },
   setLoadingPercentage({ commit }, payload) {
     commit('setLoadingPercentage', payload);
