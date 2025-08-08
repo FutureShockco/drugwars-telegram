@@ -119,9 +119,9 @@ const actions = {
         dispatch('showLoading');
       if (!payload && registeredUser)
         payload = registeredUser
-      if (!store.state.auth.username) {
+      if (!store.state.auth.username)
         await dispatch('login', payload);
-      }
+
 
 
       dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
@@ -142,53 +142,54 @@ const actions = {
           .then(async user => {
             dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
             if (user && user.user && user.user.username) {
-              if (store.state.ui.firstLoad) {
-                dispatch('refreshPrizeProps');
-                dispatch('refreshUser', 60);
-              }
               dispatch('setLoadingPercentage', store.state.ui.loadingPercentage + 20);
               if ((user.user.username === user.user.nickname && store.state.auth.username !== store.state.auth.nickname) || store.state.auth.nickname !== user.user.nickname)
                 await dispatch('updateNickname', registeredUser);
-              dispatch('setLoadingPercentage', 80);
-              commit('saveUser', user);
-              commit('saveConnected', true);
-              commit(
-                'saveBase',
-                user.buildings.find(b => b.main === 1 && b.territory != 0 && b.base != 0),
-              );
-              if (
-                totalbases !== user.buildings.find(b => b.building === 'headquarters').length
-              )
+              Promise.all([client.requestAsync('get_prize_props', null)]).then(([prizeProps]) => {
+                dispatch('loadTasks', 60);
+                dispatch('setLoadingPercentage', 80);
+                commit('savePrizeProps', prizeProps);
+                commit('saveUser', user);
+                commit('saveConnected', true);
                 commit(
-                  'saveMainBase',
-                  user.buildings.find(
-                    b =>
-                      b.main === 1 &&
-                      b.territory !== 0 &&
-                      b.base !== 0 &&
-                      b.building === 'headquarters',
-                  ),
+                  'saveBase',
+                  user.buildings.find(b => b.main === 1 && b.territory != 0 && b.base != 0),
                 );
+                if (
+                  totalbases !== user.buildings.find(b => b.building === 'headquarters').length
+                )
+                  commit(
+                    'saveMainBase',
+                    user.buildings.find(
+                      b =>
+                        b.main === 1 &&
+                        b.territory !== 0 &&
+                        b.base !== 0 &&
+                        b.building === 'headquarters',
+                    ),
+                  );
 
-              //dispatch('refresh_transport_count');
-              //dispatch('refresh_station_count');
-              dispatch('setLoadingPercentage', 90);
-              Promise.delay(100).then(() => {
-                dispatch('setLoadingPercentage', 100);
+                dispatch('refresh_fights_count');
+                dispatch('refresh_sent_fights');
+                //dispatch('refresh_transport_count');
+                //dispatch('refresh_station_count');
+                dispatch('setLoadingPercentage', 90);
+                Promise.delay(1000).then(() => {
+                  dispatch('setLoadingPercentage', 100);
 
-                dispatch('hideLoading');
-                dispatch('setFirstLoad', false);
-                dispatch('setLoadingPercentage', 0);
+                  dispatch('hideLoading');
+                  dispatch('setFirstLoad', false);
+                  dispatch('setLoadingPercentage', 0);
+                  if (user.user.tutorial < 9)
+                    store.dispatch('showTutorial')
+                  return resolve("success");
 
-                if (user.user.tutorial < 9)
-                  store.dispatch('showTutorial')
-                return resolve("success");
-
+                });
               });
 
             } else {
               dispatch('signup').then(() => {
-                Promise.delay(1000).then(() => {
+                Promise.delay(2000).then(() => {
                   // window.location = '/home';
                   resolve()
                 });
@@ -202,6 +203,7 @@ const actions = {
           });
       }
     }),
+
   refreshPrizeProps: ({ commit, dispatch }, payload) =>
     new Promise(async (resolve, reject) => {
       client.requestAsync('get_prize_props', null).then(prizeProps => {
