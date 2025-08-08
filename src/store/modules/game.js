@@ -415,7 +415,7 @@ const actions = {
           return resolve(result);
         }
         else {
-        
+
           return reject();
 
         }
@@ -495,13 +495,20 @@ const actions = {
           return resolve(result);
         }
         else if (result) {
-          store.dispatch('init'); 
+          store.dispatch('init');
           store.dispatch('notify', {
             type: 'success',
             message: result,
           });
+          return resolve();
         }
-        return reject();
+        else {
+          store.dispatch('notify', {
+            type: 'error',
+            message: 'Recruiting failed',
+          });
+          return reject();
+        }
       });
     }),
   investHeist: ({ rootState }, payload) =>
@@ -540,7 +547,6 @@ const actions = {
       payload.type = 'transport'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
         if (result) {
-          console.log(result);
           store.dispatch('init', { user: null, showLoading: true });
           store.dispatch('refresh_sent_fights');
           store.dispatch('refresh_transport_count');
@@ -566,7 +572,8 @@ const actions = {
               type: 'error',
               message: result.message,
             });
-          } else {
+            return reject();
+          } else if (result) {
             store.dispatch('notify', {
               type: 'success',
               message: result,
@@ -574,10 +581,16 @@ const actions = {
             Promise.delay(3000).then(() => {
               store.dispatch('init');
             });
+            return resolve(result);
+
           }
-          return resolve(result);
+          else {
+            store.dispatch('notify', {
+              type: 'error',
+              message: 'Could not send transaction',
+            });
+          }
         }
-        return reject();
       });
     }),
   missions: ({ rootState }, payload) =>
