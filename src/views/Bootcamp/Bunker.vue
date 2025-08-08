@@ -2,77 +2,133 @@
   <div>
     <div v-if="ownBase">
       <BootcampTabs />
-      <div v-if="ownBase && !bunker || !bunker.lvl" class="p-4 container-lg clearfix anim-fade-in text-center">
-        <h2> You must build a bunker first.</h2>
+      <div v-if="ownBase && !bunker || !bunker.lvl" class="card mx-0 border-bottom-highlight mb-1 anim-fade-in">
+        <div class="content">
+          <h4 class="text-center">
+            You must build a bunker first.
+            <h2>
+              <router-link :to="`/buildings`" class="text-yellow">Click here to build a bunker.</router-link>
+            </h2>
+          </h4>
+        </div>
       </div>
-      <div v-else class="p-4 container-lg clearfix anim-fade-in text-center">
-        <div v-if="ownUnits.length > 0 && !defenders || defenders.length < 1" class="p-2 text-center">Your bunker is
-          empty.
-        </div>
-        <div v-else class="mt-4 mb-2">
-          <h3>Units in the bunker</h3>
-          <ArmyToSend :units="defenders" :disableicon="true" />
-          <h5 class="mt-0">Army Value</h5>
-          <h5 class="mt-0">Drugs: {{ defendercost.drugs | amount }} - Weapons: {{ defendercost.weapons | amount }} -
-            Alcohol:
-            {{ defendercost.alcohol | amount }}</h5>
-          <h5 class="mt-0">Power: {{ defenderOffensivePower }}%</h5>
-          <h5 class="mt-0">Supply: {{ defendersupply | amount }} / {{ maxSupply | amount }}</h5>
-          <UiButton :disabled="!defenders || isLoading" class="button button-large button-red mb-5 "
-            @click="handleRelease()">
-            <SmallLoading v-if="isLoading" />
-            <span v-else>Release units</span>
-          </UiButton>
-        </div>
-        <div v-if="ownUnits.length > 0" class="column col-12 flex-md-items-start mt-0">
-          <h3 class="mb-0 mt-0">Select units to hide</h3>
-          <div v-if="showUnits && ownUnits && ownUnits.length > 0">
-            <div v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base">
-              <UnitSelect v-if="ownUnit.amount > 0" :item="ownUnit" @click="addUnit" />
+      <div v-else class="anim-fade-in">
+        <div v-if="ownUnits.length > 0 && !defenders || defenders.length < 1" class="card mx-0 border-bottom-highlight mb-1 anim-fade-in">
+          <div class="content">
+            <div class="d-flex">
+              <div>
+                <h3>Your bunker is empty</h3>
+              </div>
+              <div class="align-self-center ms-auto">
+                <i class="fad fa-shield font-24 color-red-dark"></i>
+              </div>
             </div>
+            <p>Your bunker is empty. Hide units here to protect them from attacks.</p>
           </div>
-          <div v-else>You must buy troops</div>
         </div>
-        <UiButton v-if="ownUnits.length > 0" class="button button-green mt-2 mb-2" :disabled="ownUnits.length === 0"
-          @click="autoFill()">AutoFill</UiButton>
+        <div v-else class="card mx-0 border-bottom-highlight mb-1 anim-fade-in">
+          <div class="content">
+            <div class="d-flex">
+              <div>
+                <h6 class="mb-n1 opacity-80 color-highlight">Hidden Units</h6>
+                <h3>Units in the bunker</h3>
+              </div>
+              <div class="align-self-center ms-auto">
+                <i class="fad fa-shield font-24 color-green-dark"></i>
+              </div>
+            </div>
+            <ArmyToSend :units="defenders" :disableicon="true" />
+            <div class="row mt-3">
+              <div class="col-12">
+                <h5 class="mb-1">Army Value</h5>
+                <p class="mb-2">Drugs: <Icon name="drug" /> {{ defendercost.drugs | amount }} - Weapons: <Icon name="weapon" /> {{ defendercost.weapons | amount }} - Alcohol: <Icon name="alcohol" /> {{ defendercost.alcohol | amount }}</p>
+                <h5 class="mb-1">Power: {{ defenderOffensivePower }}% - Supply: {{ defendersupply | amount }} / {{ maxSupply | amount }}</h5>
+              </div>
+            </div>
+            <UiButton :disabled="!defenders || isLoading" class="btn w-100 btn-l gradient-red text-uppercase font-600 mb-3"
+              @click="handleRelease()">
+              <SmallLoading v-if="isLoading" />
+              <span v-else>Release units</span>
+            </UiButton>
+          </div>
+        </div>
+        <div v-if="ownUnits.length > 0" class="card mx-0 border-bottom-highlight mb-1 anim-fade-in">
+          <div class="content">
+            <div class="d-flex">
+              <div>
+                <h6 class="mb-n1 opacity-80 color-highlight">Select Units</h6>
+                <h3>Choose units to hide</h3>
+              </div>
+              <div class="align-self-center ms-auto">
+                <i class="fad fa-users font-24 color-blue-dark"></i>
+              </div>
+            </div>
+            <div v-if="showUnits && ownUnits && ownUnits.length > 0" class="row d-flex">
+              <div v-for="ownUnit in ownUnits" :key="ownUnit.key + ownBase.territory + ownBase.base" class="col-3">
+                <UnitSelect v-if="ownUnit.amount > 0" :item="ownUnit" @select="addUnit" />
+              </div>
+            </div>
+            <div v-else class="alert alert-warning">
+              <p class="mb-0">You must buy troops first</p>
+            </div>
+            <UiButton v-if="ownUnits.length > 0" class="btn-full w-100 btn-xxs btn border-mint-dark color-mint-dark mt-3" 
+              :disabled="ownUnits.length === 0" @click="autoFill()">
+              AutoFill
+            </UiButton>
+          </div>
+        </div>
 
-        <div v-if="ownUnits.length > 0" class="column col-12">
-          <div class="mb-2">
-            <h3 class="mb-2">Your selected army</h3>
-            <ArmyToSend :units="selectedUnits" />
-          </div>
-          <div class="mb-0 form width-full">
-            <div v-if="selectedUnits.length === 0">
-              <p>You need to select at least 1 unit to defend this base.</p>
+        <div v-if="ownUnits.length > 0" class="card mx-0 border-bottom-highlight mb-1 anim-fade-in">
+          <div class="content">
+            <div class="d-flex">
+              <div>
+                <h6 class="mb-n1 opacity-80 color-highlight">Selected Army</h6>
+                <h3>Units to hide</h3>
+              </div>
+              <div class="align-self-center ms-auto">
+                <i class="fad fa-shield font-24 color-yellow-dark"></i>
+              </div>
             </div>
-            <div v-else>
-              <h5 class="mt-0">Defenders Value</h5>
-              <h5 class="mt-0">Drugs: {{ cost.drugs | amount }} - Weapons: {{ cost.weapons | amount }} - Alcohol:
-                {{ cost.alcohol | amount }}</h5>
-              <h5 class="mt-0">Power: {{ offensivePower }}%</h5>
-              <h5 class="mt-0">Supply: {{ supply | amount }} / {{ maxSupply | amount }}</h5>
-              <UiButton class="button button-blue mb-2" @click="removeUnits()">Remove all</UiButton>
+            <div class="mt-3">
+              <ArmyToSend :units="selectedUnits" />
+            </div>
+            <div v-if="selectedUnits.length === 0" class="alert alert-info mt-3">
+              <p class="mb-0">You need to select at least 1 unit to hide in this bunker.</p>
+            </div>
+            <div v-else class="mt-3">
+              <h5 class="mb-1">Units Value</h5>
+              <p class="mb-2"><Icon name="drug" /> Drugs: {{ cost.drugs | amount }} - <Icon name="weapon" /> Weapons: {{ cost.weapons | amount }} - <Icon name="alcohol" /> Alcohol: {{ cost.alcohol | amount }}</p>
+              <h5 class="mb-1">Power: {{ offensivePower }}% - Supply: {{ supply | amount }} / {{ maxSupply | amount }}</h5>
+              <UiButton class="btn w-100 mt-3 btn-m gradient-yellow text-uppercase font-600 mb-3" @click="removeUnits()">
+                Remove all
+              </UiButton>
+            </div>
+            <div v-if="defenders && defenders.length > 0" class="alert alert-warning mb-3">
+              <p class="mb-0">Please release your hidden units before adding new units.</p>
+            </div>
+            <UiButton :disabled="defenders.length > 0 || tooMuchSupply || selectedUnits.length === 0 || isLoading"
+              class="btn w-100 btn-m gradient-mint text-uppercase font-600 mb-3" @click="handleSave()">
+              <SmallLoading v-if="isLoading" />
+              <span v-else>Hide units</span>
+            </UiButton>
+            <div v-if="errorMessage" class="alert alert-danger">
+              <p class="mb-0">{{ errorMessage }}</p>
             </div>
           </div>
-          <div v-if="defenders && defenders.length > 0" class="mb-3">Please release your units before adding new units.
-          </div>
-          <UiButton :disabled="defenders.length > 0 || tooMuchSupply || selectedUnits.length === 0 || isLoading"
-            class="button button-large button-red mb-5 " @click="handleSave()">
-            <SmallLoading v-if="isLoading" />
-            <span v-else>Save</span>
-          </UiButton>
-
-          <p class="text-red text-left" v-if="errorMessage">{{ errorMessage }}</p>
         </div>
-        <h2 class="text-center" v-else>
-          You don't have any unit.
-          <div>
-            <router-link :to="`/units`" class="text-yellow">Click here to start to recruit</router-link>
+        <div v-else class="card anim-fade-in">
+          <div class="content">
+            <h4 class="text-center">
+              You don't have any unit.
+              <h2>
+                <router-link :to="`/units`" class="text-yellow">Click here to start recruiting</router-link>
+              </h2>
+            </h4>
           </div>
-        </h2>
+        </div>
       </div>
     </div>
-    <div v-else class="card card-style anim-fade-in">
+    <div v-else class="card anim-fade-in">
       <div class="content">
         <h4 class="text-center">
           You must choose a location on the map first.
@@ -162,6 +218,7 @@ export default {
           element.base === this.ownBase.base &&
           element.amount > 0
         )
+        if(element.unit !== 'spy' && element.unit !== 'occupation_troop' && element.unit !== 'hobo')
           units.push({
             key: element.unit,
             amount: element.amount,
@@ -289,29 +346,65 @@ export default {
       });
     },
     autoFill() {
-      const fillunits = [];
-      this.ownUnits.forEach(element => {
-        if (element.key !== 'spy' && element.key !== 'occupation_troop' && element.key !== 'hobo') {
-          fillunits.push(element);
-        }
-      });
-      fillunits.forEach(element => {
-        if (
-          !this.selectedUnits.find(u => u.key === element.key) &&
-          this.supply < (this.maxSupply / 100) * 85
-        ) {
-          let amount = Math.floor(this.maxSupply / fillunits.length / units[element.key].supply);
-          if (amount > element.amount) {
-            amount = element.amount;
-          }
-          this.selectedUnits.push({
-            key: element.key,
-            amount,
+      
+      // Clear existing selections first
+      this.selectedUnits = [];
+      
+      // Get units that can be hidden (exclude spy, occupation_troop, hobo)
+      const availableUnits = this.ownUnits.filter(element => 
+        element.key !== 'spy' && 
+        element.key !== 'occupation_troop' && 
+        element.key !== 'hobo'
+      );
+
+      console.log('Available units:', availableUnits);
+      console.log('Max supply:', this.maxSupply);
+
+      if (availableUnits.length === 0) {
+        console.log('No available units to hide');
+        return;
+      }
+
+      // Fill up to 85% of bunker capacity
+      const targetSupply = Math.floor(this.maxSupply * 0.85);
+      let currentSupplyUsed = 0;
+      const selectedUnits = [];
+
+      console.log('Target supply (85%):', targetSupply);
+
+      // Sort units by supply cost (add smaller units first for better distribution)
+      const sortedUnits = [...availableUnits].sort((a, b) => 
+        units[a.key].supply - units[b.key].supply
+      );
+
+      for (const unit of sortedUnits) {
+        const unitSupply = units[unit.key].supply || 1; // Fallback to 1 if supply is 0
+        const remainingSupply = targetSupply - currentSupplyUsed;
+        
+        if (remainingSupply <= 0) break;
+
+        // Calculate how many of this unit we can add
+        const maxUnitsForSupply = Math.floor(remainingSupply / unitSupply);
+        const maxUnitsAvailable = unit.amount;
+        
+        // Take the minimum of what we can fit and what we have
+        const amountToAdd = Math.min(maxUnitsForSupply, maxUnitsAvailable);
+        
+        console.log(`Unit ${unit.key}: supply=${unitSupply}, available=${maxUnitsAvailable}, canFit=${maxUnitsForSupply}, adding=${amountToAdd}`);
+        
+        if (amountToAdd > 0) {
+          selectedUnits.push({
+            key: unit.key,
+            amount: amountToAdd,
           });
-          fillunits.splice(0, 1);
+          
+          currentSupplyUsed += amountToAdd * unitSupply;
+          console.log(`Current supply used: ${currentSupplyUsed}/${targetSupply}`);
         }
-      });
-      this.autoFill();
+      }
+
+      console.log('Final selected units:', selectedUnits);
+      this.selectedUnits = selectedUnits;
     },
     resetForm() {
       this.target = null;
@@ -383,6 +476,7 @@ export default {
       return !this.errorMessage;
     },
     addUnit(payload) {
+      console.log('Adding unit:', payload);
       const amount = parseInt(payload.amount);
       const selectedUnitsObj = {};
       const ownUnit = this.ownUnits.find(unit => unit.key === payload.key);
@@ -471,23 +565,29 @@ export default {
 
 
 <style scoped lang="less">
-.width-full {
-  max-width: 100%;
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
 }
 
-.vue-ui-modal {
-  background: rgba(0, 0, 0, 0.7);
-  overflow-y: scroll;
+.alert-info {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
 }
 
-.farm {
-  background: rgba(0, 0, 0, 0.9);
+.alert-warning {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
 }
 
-@media screen and (min-width: 399px) and (max-width: 1119px) {
-  .column.b {
-    width: 100% !important;
-  }
+.alert-danger {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
 }
 
 .dropdown {

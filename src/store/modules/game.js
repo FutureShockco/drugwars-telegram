@@ -13,7 +13,6 @@ const handleError = (dispatch, error, message = defaultErrorMessage) => {
     type: 'error',
     message: error.error_description || error.error || message,
   });
-  console.error(error);
 };
 
 const state = {
@@ -406,7 +405,7 @@ const actions = {
       payload.username = username; // eslint-disable-line no-param-reassign
       payload.type = 'dw-upgrades'; // eslint-disable-line no-param-reassign
       return dwsocial(username, payload, result => {
-        if (result) {
+        if (result && result.type !== 'error') {
           console.log(result);
           store.dispatch('init');
           store.dispatch('notify', {
@@ -415,8 +414,12 @@ const actions = {
           });
           return resolve(result);
         }
+        else {
+        
+          return reject();
 
-        return reject();
+        }
+
       });
     }),
   upgradeGangBuilding: ({ rootState }, payload) =>
@@ -930,10 +933,6 @@ const actions = {
           allTasks.dailyResources = { rewardType: 'resources', rewards: { drug: 2500, weapon: 7500, alcohol: 7500 }, user: { paid: 0 } }
           allTasks.dailyRefs = { refs: 0, paid: 0 }
           if (result[0]) {
-            result[0].forEach(element => {
-              element.rewards = JSON.parse(element.rewards)
-              element.upgradeType = JSON.parse(element.upgradeType)
-            });
             allTasks.tasks = result[0]
           }
 
@@ -986,13 +985,13 @@ const actions = {
           const rewards = result[2][0]
           allTasks.dailyRewards = rewards
 
-          allTasks.dailyRewards.rewards = JSON.parse(allTasks.dailyRewards.rewards)
+          allTasks.dailyRewards.rewards = allTasks.dailyRewards.rewards
           const [day, month, year] = allTasks.dailyRewards.last_connect.split('-').map(Number);
 
           const lastConnectDate = new Date(year, month - 1, day);
           const now = new Date();
           const diffMs = lastConnectDate - now;
-          
+
           const diffHours = diffMs / (1000 * 60 * 60);
           if (diffHours >= 48) {
             allTasks.dailyRewards.current_day = 1
@@ -1014,7 +1013,7 @@ const actions = {
           return reject(err);
         });
     }),
-  
+
   claimBox: ({ rootState }, payload) =>
     new Promise((resolve, reject) => {
       const { username } = rootState.auth;

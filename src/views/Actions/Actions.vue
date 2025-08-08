@@ -513,9 +513,10 @@ export default {
     getUserBase() {
       const self = this;
       self.bases = null;
-
+      console.log('getUserBase', self.targetNickname);
       client.requestAsync('get_user_bases', self.targetNickname).then(result => {
-        self.bases = result[0];
+        console.log('getUserBase result', result);
+        self.bases = result;
         console.log(self.bases[0])
         self.chooseBase(self.bases[0].territory, self.bases[0].base, self.bases[0].custom)
         self.enemyProd = result[1][0].prod_rate;

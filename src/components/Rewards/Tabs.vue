@@ -44,7 +44,6 @@ export default {
         if (!element.completed)
           count++
       });
-      console.log(this.$store.state.game.userTasks)
       return count
     },
     dayCheck() {

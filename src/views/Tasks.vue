@@ -544,7 +544,6 @@ export default {
             return this.$store.state.game.userTasks.userTasks
         },
         dailyRewards() {
-            console.log(this.$store.state.game.userTasks.dailyRewards)
             return this.$store.state.game.userTasks.dailyRewards
         },
         didReset() {

@@ -4,7 +4,7 @@
     <UiTabs>
       <UiTab to="/units">Units</UiTab>
       <UiTab to="/units/training">Training</UiTab>
-      <!-- <UiTab to="/units/bunker">Bunker</UiTab> -->
+      <UiTab to="/units/bunker">Bunker</UiTab>
       <!-- <UiTab to="/units/settings">Settings</UiTab> -->
       <UiTab to="/units/help">Help</UiTab>
       <UiTab :to="`/units/simulator/${link}`">Simulator</UiTab>

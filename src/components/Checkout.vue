@@ -171,7 +171,6 @@ export default {
           this.isLoading = false;
         })
         .catch(e => {
-          console.error('Failed', e);
           this.isLoading = false;
         });
     },
