@@ -111,7 +111,7 @@ export default {
       x: 'no',
       y: 'no',
       maprng: null,
-      canvasWidth:0,
+      canvasWidth: 0,
     };
   },
   watch: {
@@ -241,7 +241,7 @@ export default {
         // } else {
         //   tiles_array[224].fillColor = 'gray';
         // }
-        
+
         self.selectedTile = elementClickedId.id;
         self.currentNickname = elementClickedId.nickname;
         self.currentHq = elementClickedId.hq;
@@ -510,8 +510,8 @@ export default {
               context.strokeStyle = 'red';
               context.drawImage(enemy, tile.x - 2, tile.y - 2, tile.width + 4, tile.height + 4);
             }
-            else 
-            context.roundRect(tile.x, tile.y, tile.width, tile.height, [5, 5]);
+            else
+              context.roundRect(tile.x, tile.y, tile.width, tile.height, [5, 5]);
             context.lineWidth = 3;
 
 
@@ -576,7 +576,7 @@ export default {
     async validateFormFree() {
       this.errorMessage = null;
       const base = this.selectedTile;
-      const territory = this.location;
+      const territory = Number(this.location);
       const params = { base, territory };
       if (this.$store.state.game.user.buildings.find((b) => b.main === 1 && b.territory !== 0)) {
         this.errorMessage = 'You already have a main base!';
@@ -585,17 +585,16 @@ export default {
       if (!base || !territory) {
         this.errorMessage = 'Please choose a location and a base';
       }
-      const now = new Date();
-      const isPunished = new Date(Date.parse(this.$store.state.game.user.user.punished));
-      if (isPunished > now) {
-        this.errorMessage = `Hmm Bad talks are not appropriated in GoldWars, try again after ${isPunished.toLocaleString()}`;
+      if (base < 1 || base > 100) {
+        this.errorMessage = 'Base number must be between 1 and 100';
       }
 
       if (!this.errorMessage)
         try {
-          const base = await client.requestAsync('check_base', params);
-          if (base) {
-            this.errorMessage = `Base number '${base}' is already taken`;
+          const validBase = await client.requestAsync('check_base', params);
+          console.log(validBase);
+          if (validBase > 0) {
+            this.errorMessage = `Base number '${validBase}' is already taken`;
           }
           return !this.errorMessage;
         } catch (e) {
@@ -604,6 +603,7 @@ export default {
           return false;
         }
       if (this.errorMessage) {
+        console.log(this.errorMessage);
         return false;
       }
       return !this.errorMessage;
