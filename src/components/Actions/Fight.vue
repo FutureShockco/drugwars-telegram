@@ -243,12 +243,11 @@ export default {
         }),
       );
       if (mytraining && mytraining.length > 0) toOpen += `,${mytraining}`;
-      console.log(this.json.target.detail)
-      if (this.json.target.detail.units.length > 0) {
-        const enemyarmy = this.json.target.detail.units.map(unit =>
+      if (this.json.target.units.length > 0) {
+        const enemyarmy = this.json.target.units.map(unit =>
           this.serialize({
             p: 2,
-            key: unit.unit,
+            key: unit.key,
             n: unit.amount,
           }),
         );
