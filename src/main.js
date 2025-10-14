@@ -37,7 +37,17 @@ requireComponent.keys().forEach(fileName => {
 setInterval(() => client.request('heartbeat', null), 10 * 1000);
 
 Vue.filter('date', value => moment(value, 'YYYY-MM-DD').format('MMM D, YYYY'));
-Vue.filter('ms', value => prettyMs(parseInt(value / 1000) * 1000));
+Vue.filter('ms', value => {
+  // Protect against undefined/NaN/Infinity values that break pretty-ms
+  if (value === null || value === undefined) return 'Now';
+  const n = Number(value);
+  if (!isFinite(n) || isNaN(n) || n <= 0) return 'Now';
+  try {
+    return prettyMs(Math.floor(n / 1000) * 1000);
+  } catch (e) {
+    return 'Now';
+  }
+});
 Vue.filter('amount', value => numeral(value).format('0.[00]a'));
 Vue.filter('tonamount', value => numeral(value).format('0.[0000]a'));
 Vue.filter('round', value => numeral(value).format('0a'));
