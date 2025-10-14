@@ -37,13 +37,10 @@ requireComponent.keys().forEach(fileName => {
 setInterval(() => client.request('heartbeat', null), 10 * 1000);
 
 Vue.filter('date', value => moment(value, 'YYYY-MM-DD').format('MMM D, YYYY'));
+
 Vue.filter('ms', value => {
-  // Protect against undefined/NaN/Infinity values that break pretty-ms
-  if (value == null) return 'Now'; // handles both null and undefined
-  const n = Number(value);
-  if (!isFinite(n) || n < 0) return 'Now'; // isFinite handles NaN and Infinity
   try {
-    return prettyMs(Math.max(0, Math.floor(n / 1000) * 1000));
+    return prettyMs(parseInt(value / 1000) * 1000);
   } catch (e) {
     return 'Now';
   }
