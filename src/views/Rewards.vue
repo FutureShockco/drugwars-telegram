@@ -19,14 +19,23 @@
                     </div>
                 </div>
                 <p>Every day, players can earn up to 1,000+ DW TOKEN as part of their daily drug production. This reward
-                    accumulates automatically based on your in-game production capabilities. The rewards pool automatically increase by 100 tokens for every additional 1000 active players.
+                    accumulates automatically based on your in-game production capabilities. The rewards pool
+                    automatically increase by 100 tokens for every additional 1000 active players.
                 </p>
                 <h3>Pablo Rewards</h3>
-                <p>Each week, players can earn TON tokens by selling their DRUG <Icon class="mx-1" name="drug"/> to Pablo. These rewards are funded by the game treasury and by user purchases. Each purchase contributes to the pool, which is redistributed at a rate of 1% per week.
+                <p>Each week, players can earn TON tokens by selling their DRUG
+                    <Icon class="mx-1" name="drug" /> to Pablo. These rewards are funded by the game treasury and by
+                    user purchases. Each purchase contributes to the pool, which is redistributed at a rate of 1% per
+                    week.
                 </p>
                 <h3>Fight Rewards</h3>
                 <p>After each fight, you may earn DW TOKEN instantly. These rewards are given immediately upon the
-                    conclusion of each fight, and the number of units killed, reflecting your combat prowess. Rewards for battles increase automatically based on the in-game population and units.
+                    conclusion of each fight, and the number of units killed, reflecting your combat prowess. Rewards
+                    for battles increase automatically based on the in-game population and units.
+                </p>
+                <h3>Help</h3>
+                <p>Find help and more details about the rewards system in the
+                    <router-link to="/faq" class="color-highlight">Faq Section</router-link>. For units and fights you can also check <router-link to="/units/help" class="color-highlight">Help Section</router-link>.
                 </p>
             </div>
         </div>
