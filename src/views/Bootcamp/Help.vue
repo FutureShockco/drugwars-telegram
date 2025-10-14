@@ -57,6 +57,12 @@
         </div>
       </div>
     </div>
+    <div class="card">
+      <div class="card-body">
+        <h3 class="text-uppercase pt-1">Debug User Data</h3>
+        {{ this.TWA.initData }}
+      </div>
+    </div>
   </div>
 </template>
 
