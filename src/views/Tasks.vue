@@ -97,7 +97,8 @@
             <div class="card-overlay bg-gradient-fade opacity-80"></div>
         </div>
         <div class="card card-style shadow-card shadow-card-l show" style="min-height: 120px;"
-            :style="`background-image:url(/img/tasks/22.jpg`" :class="dailyRefs && dailyRefs.paid === 1 ? 'opacity-50' : ''">
+            :style="`background-image:url(/img/tasks/22.jpg`"
+            :class="dailyRefs && dailyRefs.paid === 1 ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
                     <TaskResources :task="dailyResources" />
@@ -276,7 +277,7 @@
         </div>
         <div class="card card-style shadow-card shadow-card-l" style="min-height: 120px;"
             :style="`background-image:url(/img/tasks/3.jpg`"
-            :class="airdrop && airdrop.last_claim === 1 ? 'opacity-50' : ''">
+            :class="airdrop && airdrop.last_claim === 1 || airdrop && airdrop.claim_count === 26 ? 'opacity-50' : ''">
             <div class="card-bottom pb-3 px-3">
                 <div class="text-end">
                     <TaskResources v-if="!airdrop" :task="{ rewardType: 'dwtoken', rewards: { dwtoken: -1 } }" />
@@ -295,6 +296,10 @@
                 <button v-if="!airdrop" :disabled="!code" @click="sendCode({ code }), refreshTask()"
                     class="btn btn-full w-100 btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
                     Submit your code</button>
+                <div v-else-if="airdrop && airdrop.claim_count === 26"
+                    class="btn btn-full w-100 btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
+                    You have claimed all airdrops!
+                </div>
                 <div v-else-if="airdrop && (!airdrop.last_claim || new Date(airdrop.last_claim).getTime() < $store.state.ui.timestamp)"
                     @click="claimAirdrop({}), refreshTask()"
                     class="btn btn-full btn-xs shadow-l rounded-s text-uppercase font-600 gradient-highlight">
@@ -464,7 +469,8 @@ export default {
             units,
             buildings,
             bgs: [],
-            finishedWatching: false        };
+            finishedWatching: false
+        };
     },
 
     created() {
@@ -475,7 +481,7 @@ export default {
     },
     methods: {
         ...mapActions(['init', 'login', 'closeModalVideo', 'toggleModalVideo', 'setCurrentLink', 'addTask', 'completeDay', 'loadTasks', 'completeTask', 'verifyTask', 'sendCode', 'claimAirdrop']),
-      
+
         parseDate(dateStr) {
             const [day, month, year] = dateStr.split('-').map(Number);
             return new Date(year, month - 1, day);
