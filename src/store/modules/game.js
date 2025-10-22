@@ -991,7 +991,7 @@ const actions = {
         .requestAsync('get_tasks', { token })
         .then(result => {
           const allTasks = {};
-          allTasks.dailyResources = { rewardType: 'resources', rewards: { drug: 2500, weapon: 7500, alcohol: 7500 }, user: { paid: 0 } }
+          allTasks.dailyResources = { rewardType: 'resources', rewards: { drug: 2500, weapon: 7500, alcohol: 7500, dwtoken: 100 }, user: { paid: 0 } }
           allTasks.dailyRefs = { refs: 0, paid: 0 }
           if (result[0]) {
             allTasks.tasks = result[0]
