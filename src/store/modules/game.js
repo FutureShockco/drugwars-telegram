@@ -678,7 +678,8 @@ const actions = {
     }),
   requestPayment: async ({ rootState, dispatch }, { memo, amount }) => {
     const message = `${memo}`
-    const url = `ton://transfer/UQDly7PmuRxpYft6dUKOc6Lpn5SbDKTknOsGb-vodwTcqwMF?${message}`;
+    const address = 'UQArdJUxdQA-2KXeDUrGk8Zmn8el-3xoaQFa8xfhRlptuvap';
+    const url = 'ton://transfer/' + address + '?amount=' + (amount) + '&text=' + encodeURIComponent(message);
     const fUrl = "https://apitelegram.drugwars.io/convert/" + message;
     const options = {
       method: "GET",
@@ -709,18 +710,20 @@ const actions = {
             const result = await window.tonConnectUI.sendTransaction(transaction);
             console.log(result)
           } catch (e) {
+
+            const win = window.open(
+              url.split('+').join('_'),
+              '_blank',
+              'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
+            );
+            if(win)
+            win.focus();
             store.dispatch('notify', {
               type: 'error',
               message: "Your purchase didn't went through. Let try another way...",
               icon: 'stop',
             });
             console.error(e);
-            const win = window.open(
-              url.split('+').join('_'),
-              '_blank',
-              'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
-            );
-            win.focus();
           }
         }
         else if (window.Telegram.WebApp) {
@@ -731,6 +734,7 @@ const actions = {
               '_blank',
               'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
             );
+            if(win)
             win.focus();
           }
         }
@@ -740,6 +744,7 @@ const actions = {
             '_blank',
             'toolbar=yes,scrollbars=yes,resizable=yes,top=300,left=500,width=600,height=600',
           );
+          if(win)
           win.focus();
         }
       });
