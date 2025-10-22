@@ -108,7 +108,7 @@ export default {
       return parseFloat((this.price * amount) / this.$store.state.game.prizeProps.steemprice).toFixed(4)
     },
     priceInDWD() {
-      return parseFloat(this.priceInSteem * 50 / 100 * (100 - this.progress)).toFixed(4);
+      return parseFloat(this.priceInSteem * 50 / 100 * (100 - this.progress)).toFixed(5);
     },
     priceInTon() {
       return parseFloat((this.priceInSteem) / 100 * (100 - this.progress)).toFixed(5);

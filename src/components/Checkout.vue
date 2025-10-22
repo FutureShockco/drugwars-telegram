@@ -67,10 +67,10 @@ export default {
       return utils.calculateTimeToBuild(this.id, this.coeff, this.level, this.hqLevel);
     },
     priceInSteem() {
-      return parseFloat(this.price / this.$store.state.game.prizeProps.steemprice).toFixed(4);
+      return parseFloat(this.price / this.$store.state.game.prizeProps.steemprice).toFixed(5);
     },
     priceInDWD() {
-      return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(4);
+      return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(5);
     },
     priceInTon() {
       return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(5);

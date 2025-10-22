@@ -68,7 +68,7 @@ export default {
       return price * this.priceInDWD * this.$store.state.game.prizeProps.steemprice;
     },
     priceInDWD() {
-      return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(4);
+      return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(5);
     },
     priceInTon() {
       return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(5);
