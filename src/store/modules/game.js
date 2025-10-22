@@ -677,9 +677,10 @@ const actions = {
         });
     }),
   requestPayment: async ({ rootState, dispatch }, { memo, amount }) => {
+    console.log( parseFloat(amount).toFixed(0), memo);
     const message = `${memo}`
     const address = 'UQArdJUxdQA-2KXeDUrGk8Zmn8el-3xoaQFa8xfhRlptuvap';
-    const url = 'ton://transfer/' + address + '?amount=' + (amount) + '&text=' + encodeURIComponent(message);
+    const url = 'ton://transfer/' + address + '?amount=' + (parseFloat(amount).toFixed(0).toString()) + '&text=' + encodeURIComponent(message);
     const fUrl = "https://apitelegram.drugwars.io/convert/" + message;
     const options = {
       method: "GET",
