@@ -105,7 +105,7 @@ export default {
       let amount = this.quantity
       if (this.pendingAmount > 0)
         amount = this.pendingAmount
-      return parseFloat((this.price * amount) / this.$store.state.game.prizeProps.steemprice).toFixed(4)
+      return parseFloat((this.price * amount) / this.$store.state.game.prizeProps.steemprice).toFixed(5)
     },
     priceInDWD() {
       return parseFloat(this.priceInSteem * 50 / 100 * (100 - this.progress)).toFixed(5);

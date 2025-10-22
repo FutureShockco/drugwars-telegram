@@ -9,11 +9,11 @@
             <div class="d-flex px-4">
                 <div class="col-6 text-center">
                     <UiButton class="btn border-blue-dark" @click="handleRequestPayment(), toggleModalPayment()"
-                        :disabled="tutorialStep < 9 || currentPayment.ton.amount / 1000000000 < 0.0001">
+                        :disabled="tutorialStep < 9 || currentPayment.ton.amount / 1000000000 < 0.00001">
                         <Icon name="ton" size="50" />
                     </UiButton>
                     <span class="d-block font-10 color-theme font-600 text-uppercase pt-1">{{
-                        parseFloat(currentPayment.ton.amount / 1000000000).toFixed(4)
+                        parseFloat(currentPayment.ton.amount / 1000000000).toFixed(5)
                         }} TON</span>
                 </div>
                 <div class="col-6 text-center">
