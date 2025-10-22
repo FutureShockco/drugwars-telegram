@@ -1,7 +1,8 @@
 <template>
   <div>
     <router-link :to="`/actions?type=attack&nickname=${member.nickname}`">
-      <GangImage :image="member.picture" size="40" class="mr-2" /> {{ member.nickname }} {{ member.role }} <span
+      <!-- <GangImage :image="member.picture" size="40" class="mr-2" /> -->
+       {{ member.nickname }} {{ member.role }} <span
         v-if="isCapo || isBoss"><i :class="'iconfont icon-check ' + isActive(member.active)"></i> </span>
     </router-link>
     <UiButton @click="handleKick(member.nickname)" class="button button-red float-right"
