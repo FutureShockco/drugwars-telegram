@@ -111,7 +111,7 @@ export default {
       return parseFloat(this.priceInSteem * 50 / 100 * (100 - this.progress)).toFixed(4);
     },
     priceInTon() {
-      return parseFloat((this.priceInSteem) / 100 * (100 - this.progress)).toFixed(4);
+      return parseFloat((this.priceInSteem) / 100 * (100 - this.progress)).toFixed(5);
     },
     timeToWait() {
       const unit = this.$store.state.game.user.units.find(
@@ -205,7 +205,7 @@ export default {
         memo: `unit:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
         )},amount:${this.quantity}`,
-        amount: `${this.priceInTon * 1000000000}`,
+        amount: `${this.priceInTon * 100000000}`,
       }
       this.setCurrentPayment({ type: "unit", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()

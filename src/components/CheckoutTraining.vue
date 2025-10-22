@@ -71,7 +71,7 @@ export default {
       return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(4);
     },
     priceInTon() {
-      return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(4);
+      return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(5);
     },
     timeToWait() {
       const training = this.$store.state.game.user.trainings.find(b => b.training === this.id);
@@ -165,7 +165,7 @@ export default {
       };
       const ton = {
         memo: `training:${this.id},territory:${Number(this.base.territory)},base:${Number(this.base.base)}`,
-        amount: `${this.priceInTon * 1000000000}`,
+        amount: `${this.priceInTon * 100000000}`,
       }
       this.setCurrentPayment({ type: "training", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()

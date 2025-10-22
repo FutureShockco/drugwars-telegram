@@ -73,7 +73,7 @@ export default {
       return parseFloat((this.priceInSteem * 50) / 100 * (100 - this.percentage)).toFixed(4);
     },
     priceInTon() {
-      return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(4);
+      return parseFloat((this.priceInSteem) / 100 * (100 - this.percentage)).toFixed(5);
     },
     notEnoughDWD() {
       return this.priceInDWD > this.$store.state.game.user.user.dwd;
@@ -186,7 +186,7 @@ export default {
         memo: `upgrade:${this.id},territory:${Number(this.base.territory)},base:${Number(
           this.base.base,
         )}`,
-        amount: `${this.priceInTon * 1000000000}`,
+        amount: `${this.priceInTon * 100000000}`,
       }
       this.setCurrentPayment({ type: "building", dwd, ton, price: this.priceInDWD })
       this.toggleModalPayment()
