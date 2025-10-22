@@ -16,7 +16,7 @@
     <!-- <router-link to="/rewards"><i class="fad fa-award font-20"></i><span>Rewards</span></router-link> -->
     <!-- <router-link to="/leaderboards"><i class="fad fa-trophy font-20"></i><span>Board</span></router-link> -->
 
-    <!-- <router-link to="/gangs"><i class="fad fa-people-group font-20"></i><span>Gang</span></router-link> -->
+    <router-link to="/gangs"><i class="fad fa-people-group font-20"></i><span>Gang</span></router-link>
   </div>
   <!-- <div>
     <ul class="bottomnav d-flex list-style-none text-center">

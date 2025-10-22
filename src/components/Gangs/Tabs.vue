@@ -3,15 +3,15 @@
     <UiTabs>
       <UiTab to="/gangs">Gangs</UiTab>
       <UiTab v-if="!user.gang" to="/gangs/create">
-        Create gang
+        Create Gang
       </UiTab>
       <UiTab :to="`/gangs/gang/${user.gang}`" v-if="user.gang">
         {{ user.ticker }}
       </UiTab>
-      <UiTab :to="`/gangs/gang/${user.gang}/buildings`" v-if="user.gang">
+      <!-- <UiTab :to="`/gangs/gang/${user.gang}/buildings`" v-if="user.gang">
         Office
-      </UiTab>
-      <UiTab :to="`/gangs/gang/${user.gang}/diplomacy`" v-if="user.gang">
+      </UiTab> -->
+      <!-- <UiTab :to="`/gangs/gang/${user.gang}/diplomacy`" v-if="user.gang">
         State
       </UiTab>
       <UiTab :to="`/gangs/gang/${user.gang}/deposit`" v-if="user.gang">
@@ -19,7 +19,7 @@
       </UiTab>
       <UiTab :to="`/gangs/gang/${user.gang}/fights`" v-if="user.gang">
         Fights
-      </UiTab>
+      </UiTab> -->
     </UiTabs>
   </Header>
 </template>
