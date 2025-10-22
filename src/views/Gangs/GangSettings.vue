@@ -204,13 +204,13 @@ export default {
       this.isLoading = true;
 
       const settings = {};
-      if (this.name) settings.name = this.name;
-      if (this.image) settings.image = this.image;
-      if (this.website) settings.website = this.website;
-      if (this.about) settings.about = this.about;
+      settings.name = this.name ? this.name : '';
+      settings.image = this.image ? this.image : '';
+      settings.website = this.website ? this.website : '';
+      settings.about = this.about ? this.about : '';
 
       const payload = { gang: this.id, settings, type: 'gang-update' };
-
+      console.log('Submitting gang settings update', payload);
       this.send(payload)
         .then(() => {
           this.isLoading = false;
