@@ -10,7 +10,6 @@
             'height': `${size}px`,
            }" />
            
-        <span class="avatar-border" />
     </div>
 </template>
 
@@ -35,7 +34,6 @@ export default {
     background-repeat: no-repeat;
     background-position: 50% 50%;
     border-radius: 50%;
-    border: 1px solid rgba(255, 255, 255, 0.4);
     background: rgb(15, 15, 15);
   }
   .level {
