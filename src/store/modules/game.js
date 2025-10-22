@@ -701,7 +701,7 @@ const actions = {
             messages: [
               {
                 address: "0:2b74953175003ed8a5de0d4ac693c6669fc7a5fb7c6869015af317e1465a6dba",
-                amount: amount,
+                amount: parseFloat(amount).toFixed(0).toString(),
                 payload: data
               }
             ]
