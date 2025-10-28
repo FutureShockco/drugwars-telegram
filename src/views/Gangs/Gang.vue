@@ -107,7 +107,7 @@
 
         <!-- Application Form Card -->
         <div
-          v-if="user.gang !== id && gang && gang.is_stable === 1"
+          v-if="!user.gang && user.gang !== id && gang && gang.is_stable === 1"
           class="card mx-0 border-bottom-highlight mb-1 anim-fade-in"
         >
           <div class="content">
