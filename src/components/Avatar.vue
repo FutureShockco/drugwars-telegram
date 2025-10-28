@@ -5,12 +5,14 @@
       class="avatar"
       :style="{'width': `${size}px`,'height': `${size}px`,}"
     >
-      <div
+      <div v-if="picture && !picture.includes('multiavatar')"
         class="avatar-img"
-        :style="{'background-image': `url(${picture}`,'background-size':`contain!important`,'width': `${size}px`,'height': `${size}px`,}"
+        :style="{'background-image': `url(${picture})`,'background-size':`contain!important`,'width': `${size}px`,'height': `${size}px`,}"
       />
-      <span v-if="rank && rank <4" :class="'avatar-border' + rank" />
-      <span v-else class="avatar-border" />
+      <div v-else
+        class="avatar-img"
+        :style="{'background-image': `url(https://api.dicebear.com/7.x/avataaars/svg?seed=${username})`,'background-size':`contain!important`,'width': `${size}px`,'height': `${size}px`,}"
+      />
     </router-link>
   </div>
 </template>

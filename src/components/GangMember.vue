@@ -5,7 +5,7 @@
       <div class="flex-grow-1">
         <div class="d-flex align-items-center mb-2">
           <div class="member-avatar me-3">
-            <i class="fad fa-user-circle font-32 color-highlight"></i>
+            <Avatar :username="member.nickname" :picture="member.picture" size="50" />
           </div>
           <div>
             <h5 class="mb-0">
