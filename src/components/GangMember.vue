@@ -164,17 +164,26 @@ export default {
       return Math.floor(Math.random() * 10) + 1;
     },
     isActive(activedate) {
-      const now = new Date(activedate);
-      const day = now.getUTCDate();
-      const month = now.getUTCMonth() + 1;
-      const year = now.getUTCFullYear();
-      const date = `${day}-${month}-${year}`;
-      if (date === activedate) return 'text-green';
-      else if (
-        month === Number(activedate.split('-')[1]) &&
-        year === Number(activedate.split('-')[2])
-      )
-        return 'text-orange';
+      if (!activedate) return 'text-red';
+      
+      const now = new Date();
+      const activeTimestamp = new Date(activedate);
+      
+      // Check if active today
+      const isToday = 
+        now.getUTCFullYear() === activeTimestamp.getUTCFullYear() &&
+        now.getUTCMonth() === activeTimestamp.getUTCMonth() &&
+        now.getUTCDate() === activeTimestamp.getUTCDate();
+      
+      if (isToday) return 'text-green';
+      
+      // Check if active this month
+      const isThisMonth = 
+        now.getUTCFullYear() === activeTimestamp.getUTCFullYear() &&
+        now.getUTCMonth() === activeTimestamp.getUTCMonth();
+      
+      if (isThisMonth) return 'text-orange';
+      
       return 'text-red';
     },
     handleKick(soldier) {

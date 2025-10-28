@@ -2,9 +2,9 @@
   <tr>
     <td class="col">
       <div class="d-flex">
-        <!-- <Avatar :size="20" :username="player.nickname" :rank="rank" :rankname="rankname"
-          picture="https://www.enableds.com/products/duo/v30/images/avatars/2s.png" :reputation="player.reputation"
-          :xp="player.xp" /> -->
+        <Avatar :size="20" class="me-2" :username="player.nickname" :rank="rank" :rankname="rankname"
+          :picture="player.picture" :reputation="player.reputation"
+          :xp="player.xp" />
         <router-link class="d-inline-flex" v-if="player.nickname !== user.nickname" :to="'/actions?type=attack&nickname=' + player.nickname">
           <div v-if="player.gang" class="username" :class="{ 'text-blue': player.gang === user.gang }">{{
             player.nickname
