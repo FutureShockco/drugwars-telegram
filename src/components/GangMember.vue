@@ -1,42 +1,105 @@
 <template>
-  <div>
-    <router-link :to="`/actions?type=attack&nickname=${member.nickname}`">
-      <!-- <GangImage :image="member.picture" size="40" class="mr-2" /> -->
-       {{ member.nickname }} {{ member.role }} <span
-        v-if="isCapo || isBoss"><i :class="'iconfont icon-check ' + isActive(member.active)"></i> </span>
-    </router-link>
-    <UiButton @click="handleKick(member.nickname)" class="button button-red float-right"
-      :disabled="isLoading || member.nickname === user.nickname && isBoss" v-if="isBoss">
-      <span v-if="!isLoading">Kick {{ member.role }}</span>
-      <SmallLoading v-else />
-    </UiButton>
-    <UiButton @click="handleSetBoss(member.nickname)" class="button button-green float-right mr-2"
-      :disabled="isLoadingCapo" v-if="member.role === 'capo' && isBoss">
-      <span v-if="!isLoadingCapo">Give boss role</span>
-      <SmallLoading v-else />
-    </UiButton>
-    <UiButton @click="handleAddCapo(member.nickname)" class="button button-green float-right mr-2"
-      :disabled="isLoadingCapo" v-if="member.role === 'soldier' && isBoss">
-      <span v-if="!isLoadingCapo">Promote to capo</span>
-      <SmallLoading v-else />
-    </UiButton>
-    <UiButton @click="handleDemoteCapo(member.nickname)" class="button button-orange float-right mr-2"
-      :disabled="isLoadingCapo" v-if="member.role === 'capo' && isBoss">
-      <span v-if="!isLoadingDemoteCapo">Demote to soldier</span>
-      <SmallLoading v-else />
-    </UiButton>
-    <UiButton @click="handleLeave()" class="button button-red float-right mr-2" :disabled="isLoading || isBoss"
-      v-if="member.nickname === user.nickname && !isBoss">
-      <span v-if="!isLoading">Leave gang</span>
-      <SmallLoading v-else />
-    </UiButton>
-    <!-- <router-link :to="`/actions?type=transport&nickname=${member.nickname}`">
-      <UiButton class="button button-blue float-right mr-2" :disabled="isLoading"
-        v-if="member.nickname !== user.nickname">
-        <span v-if="!isLoading">Transport</span>
-        <SmallLoading v-else />
-      </UiButton>
-    </router-link> -->
+  <div class="gang-member-card p-3 border rounded mb-2">
+    <div class="d-flex align-items-center">
+      <!-- Member Info Section -->
+      <div class="flex-grow-1">
+        <div class="d-flex align-items-center mb-2">
+          <div class="member-avatar me-3">
+            <i class="fad fa-user-circle font-32 color-highlight"></i>
+          </div>
+          <div>
+            <h5 class="mb-0">
+              <router-link :to="`/actions?type=attack&nickname=${member.nickname}`" class="text-decoration-none">
+                {{ member.nickname }}
+              </router-link>
+            </h5>
+            <div class="d-flex align-items-center">
+              <span class="badge me-2" :class="getRoleBadgeClass(member.role)">
+                <i :class="getRoleIcon(member.role)" class="me-1"></i>
+                {{ member.role }}
+              </span>
+              <span v-if="isCapo || isBoss" class="activity-indicator">
+                <i :class="'fad fa-circle ' + isActive(member.active)" class="me-1"></i>
+                <small class="opacity-80">{{ getActivityText(member.active) }}</small>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons Section -->
+      <div class="member-actions d-flex flex-wrap gap-2 ">
+        <!-- Leave Gang Button (for current user, non-boss) -->
+        <UiButton v-if="member.nickname === user.nickname && !isBoss" @click="handleLeave()"
+          class="btn btn-sm gradient-red" :disabled="isLoading">
+          <SmallLoading v-if="isLoading" />
+          <span v-else><i class="fad fa-sign-out-alt me-1"></i>Leave</span>
+        </UiButton>
+
+        <!-- Boss Actions -->
+        <template v-if="isBoss && member.nickname !== user.nickname">
+          <!-- Promote to Capo -->
+          <UiButton v-if="member.role === 'soldier'" @click="handleAddCapo(member.nickname)"
+            class="btn btn-sm gradient-green" :disabled="isLoadingCapo">
+            <SmallLoading v-if="isLoadingCapo" />
+            <span v-else><i class="fad fa-arrow-up me-1"></i>Promote</span>
+          </UiButton>
+
+          <!-- Demote Capo -->
+          <UiButton v-if="member.role === 'capo'" @click="handleDemoteCapo(member.nickname)"
+            class="btn btn-sm gradient-orange" :disabled="isLoadingDemoteCapo">
+            <SmallLoading v-if="isLoadingDemoteCapo" />
+            <span v-else><i class="fad fa-arrow-down me-1"></i>Demote</span>
+          </UiButton>
+
+          <!-- Give Boss Role -->
+          <UiButton v-if="member.role === 'capo'" @click="handleSetBoss(member.nickname)"
+            class="btn btn-sm gradient-purple" :disabled="isLoadingCapo">
+            <SmallLoading v-if="isLoadingCapo" />
+            <span v-else><i class="fad fa-crown me-1"></i>Boss</span>
+          </UiButton>
+
+          <!-- Kick Member -->
+          <UiButton @click="handleKick(member.nickname)" class="btn btn-sm gradient-red" :disabled="isLoading">
+            <SmallLoading v-if="isLoading" />
+            <span v-else><i class="fad fa-user-times me-1"></i>Kick</span>
+          </UiButton>
+        </template>
+
+        <!-- Boss Self (cannot be kicked) -->
+        <template v-if="isBoss && member.nickname === user.nickname">
+          <span class="badge bg-warning">
+            <i class="fad fa-crown me-1"></i>Gang Leader
+          </span>
+        </template>
+
+        <!-- Attack Action (for other members) -->
+        <router-link v-if="member.nickname !== user.nickname" :to="`/actions?type=attack&nickname=${member.nickname}`"
+          class="btn btn-sm gradient-red text-decoration-none">
+          <i class="fad fa-sword me-1"></i>Attack
+        </router-link>
+      </div>
+    </div>
+
+    <!-- Additional Info Row -->
+    <div v-if="(isCapo || isBoss) && member.nickname !== user.nickname" class="mt-2 pt-2 border-top">
+      <div class="row text-center">
+        <div class="col-4">
+          <small class="text-muted d-block">Activity</small>
+          <span :class="'badge ' + getActivityBadgeClass(member.active)">
+            {{ getActivityText(member.active) }}
+          </span>
+        </div>
+        <div class="col-4">
+          <small class="text-muted d-block">Role</small>
+          <span class="font-weight-bold">{{ member.role }}</span>
+        </div>
+        <div class="col-4">
+          <small class="text-muted d-block">Fights (Last 24h)</small>
+          <span class="font-weight-bold">{{ member.fights_24h }}</span>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -68,8 +131,40 @@ export default {
     resetForm() {
       this.message = null;
     },
+    getRoleBadgeClass(role) {
+      switch (role) {
+        case 'boss': return 'bg-warning text-dark';
+        case 'capo': return 'bg-info';
+        case 'soldier': return 'bg-secondary';
+        default: return 'bg-secondary';
+      }
+    },
+    getRoleIcon(role) {
+      switch (role) {
+        case 'boss': return 'fad fa-crown';
+        case 'capo': return 'fad fa-star';
+        case 'soldier': return 'fad fa-user';
+        default: return 'fad fa-user';
+      }
+    },
+    getActivityBadgeClass(activedate) {
+      const activityClass = this.isActive(activedate);
+      if (activityClass === 'text-green') return 'bg-success';
+      if (activityClass === 'text-orange') return 'bg-warning';
+      return 'bg-danger';
+    },
+    getActivityText(activedate) {
+      const activityClass = this.isActive(activedate);
+      if (activityClass === 'text-green') return 'Today';
+      if (activityClass === 'text-orange') return 'This Month';
+      return 'Inactive';
+    },
+    getActionCount() {
+      // Placeholder for action count - could be expanded with real data
+      return Math.floor(Math.random() * 10) + 1;
+    },
     isActive(activedate) {
-      const now = new Date();
+      const now = new Date(activedate);
       const day = now.getUTCDate();
       const month = now.getUTCMonth() + 1;
       const year = now.getUTCFullYear();
@@ -173,3 +268,48 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.gang-member-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: all 0.3s ease;
+}
+
+.gang-member-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
+  transform: translateY(-2px);
+}
+
+.member-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+}
+
+.member-actions {
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.activity-indicator {
+  display: flex;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .member-actions {
+    margin-top: 1rem;
+    justify-content: flex-start;
+  }
+
+  .gang-member-card {
+    padding: 1rem;
+  }
+}
+</style>

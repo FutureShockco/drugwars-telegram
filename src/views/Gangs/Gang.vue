@@ -73,9 +73,9 @@
                 class="border rounded p-3 mb-3"
               >
                 <div class="d-flex align-items-center mb-2">
-                  <Avatar :username="apply.username" size="40" class="me-3" />
+                  <Avatar :username="apply.nickname" size="40" class="me-3" />
                   <div class="flex-grow-1">
-                    <h5 class="mb-0">{{ apply.username }}</h5>
+                    <h5 class="mb-0">{{ apply.nickname }}</h5>
                     <small class="opacity-80">Applying as Soldier</small>
                   </div>
                   <div class="d-flex gap-2">
@@ -235,6 +235,7 @@ export default {
       promises.push(client.requestAsync('get_gang_applies', this.id));
     }
     Promise.all(promises).then(result => {
+      console.log('Fetched gang data', result);
       [[this.gang], this.members, this.applies] = result;
       this.isInit = false;
     });
