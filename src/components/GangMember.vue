@@ -52,12 +52,6 @@
             <span v-else><i class="fad fa-arrow-down me-1"></i>Demote</span>
           </UiButton>
 
-          <!-- Give Boss Role -->
-          <UiButton v-if="member.role === 'capo'" @click="handleSetBoss(member.nickname)"
-            class="btn btn-sm gradient-purple" :disabled="isLoadingCapo">
-            <SmallLoading v-if="isLoadingCapo" />
-            <span v-else><i class="fad fa-crown me-1"></i>Boss</span>
-          </UiButton>
 
           <!-- Kick Member -->
           <UiButton @click="handleKick(member.nickname)" class="btn btn-sm gradient-red" :disabled="isLoading">
@@ -74,11 +68,21 @@
         </template>
 
         <!-- Attack Action (for other members) -->
-        <router-link v-if="member.nickname !== user.nickname" :to="`/actions?type=attack&nickname=${member.nickname}`"
+        <router-link v-if="member.nickname !== user.nickname && member.gang !== user.gang" :to="`/actions?type=attack&nickname=${member.nickname}`"
           class="btn btn-sm gradient-red text-decoration-none">
           <i class="fad fa-sword me-1"></i>Attack
         </router-link>
+
+        <!-- Give Boss Role -->
+        <UiButton v-if="member.role === 'capo'" @click="handleSetBoss(member.nickname)" class="btn btn-sm gradient-blue"
+          :disabled="isLoadingCapo">
+          <SmallLoading v-if="isLoadingCapo" />
+          <span v-else><i class="fad fa-crown me-1"></i>Make Boss</span>
+        </UiButton>
       </div>
+
+
+
     </div>
 
     <!-- Additional Info Row -->
@@ -165,25 +169,25 @@ export default {
     },
     isActive(activedate) {
       if (!activedate) return 'text-red';
-      
+
       const now = new Date();
       const activeTimestamp = new Date(activedate);
-      
+
       // Check if active today
-      const isToday = 
+      const isToday =
         now.getUTCFullYear() === activeTimestamp.getUTCFullYear() &&
         now.getUTCMonth() === activeTimestamp.getUTCMonth() &&
         now.getUTCDate() === activeTimestamp.getUTCDate();
-      
+
       if (isToday) return 'text-green';
-      
+
       // Check if active this month
-      const isThisMonth = 
+      const isThisMonth =
         now.getUTCFullYear() === activeTimestamp.getUTCFullYear() &&
         now.getUTCMonth() === activeTimestamp.getUTCMonth();
-      
+
       if (isThisMonth) return 'text-orange';
-      
+
       return 'text-red';
     },
     handleKick(soldier) {
